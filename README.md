@@ -3,14 +3,14 @@ GeoVisualization
 
 ## Referatsthemen
 
-* NodeJS und Java Script auf dem Server
-* Client side Java Script/HTML5/CSS
-* Visualization Libraries (Leaflet, D3.js)
-* Usability von Webseiten
-* Real-Time Visualization
-* GitHub as publishing platform 
-* Open Data Sources (dbpedia, freebase, open-gov)
-* Closed Data Sources (twitter, facebook)
+1. NodeJS und Java Script auf dem Server
+2. Client side Java Script/HTML5/CSS
+3. Visualization Libraries (Leaflet, D3.js)
+4. Usability von Webseiten
+5. Real-Time Visualization
+6. GitHub as publishing platform 
+7. Open Data Sources (dbpedia, freebase, open-gov)
+8. Closed Data Sources (twitter, facebook)
 
 ## Vorbereitungen
 
