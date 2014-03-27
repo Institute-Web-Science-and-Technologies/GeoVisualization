@@ -8,7 +8,7 @@ GeoVisualization
 3. Visualization Libraries (Leaflet, D3.js)
 4. Usability von Webseiten
 5. Real-Time Visualization
-6. GitHub as publishing platform 
+6. GitHub as publishing platform
 7. Open Data Sources (dbpedia, freebase, open-gov)
 8. Closed Data Sources (twitter, facebook)
 
