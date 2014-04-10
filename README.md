@@ -5,7 +5,7 @@ GeoVisualization
 
 1. NodeJS und Java Script auf dem Server (@Schegi, Nils G.)  
    Server push mit NodeJS / Websockets
-2. Client side Java Script/HTML5/CSS (@Schegi, Patrick G.)
+2. Client side Java Script/HTML5/CSS (@Schegi, Patrick G.)  
    Many Ressources on the web available. cf. Quora, Google, Stack Overflow.
 3. Visualization Libraries (@HeinrichHartmann, Jonas L.)  
    Übersicht und Einführung in die relevanten JS libraries, insbesondere [d3.js](http://d3js.org) und [Leaflet.js](http://leafletjs.com/)
