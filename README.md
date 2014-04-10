@@ -16,8 +16,10 @@ GeoVisualization
    Wie publiziert und verwaltet man Texte online?  
    Relevante Technologien: git, github, github-pages, markdown, java script (e.g. deck.js).  
    Best practice bei spiel [Benjamin Erb](http://berb.github.io/diploma-thesis/)
-6. Data Sources I (dbpedia, freebase, open-gov, twitter, facebook) (@Schegi, Martin G.)
-7. Data Sources II (@Schegi, Malte K.)
+6. Open Data Sources (@Schegi, Martin G.)  
+   dbpedia, freebase, open-gov
+7. Closed Data Sources (@Schegi, Malte K.)  
+   twitter, facebook 
 
 ## Vorbereitungen
 
