@@ -6,7 +6,8 @@ GeoVisualization
 1. NodeJS und Java Script auf dem Server (Nils G. - Heinrich)  
    Server push mit NodeJS / Websockets
 2. Client side Java Script/HTML5/CSS (Patrick G. - Schegi)  
-   Many Ressources on the web available. cf. Quora, Google, Stack Overflow.
+   Many Ressources on the web available. cf. Quora, Google, Stack Overflow.  
+   Fokus on interaction with the DOM.
 3. Visualization Libraries (Jonas L. - Heinrich)  
    Übersicht und Einführung in die relevanten JS libraries, insbesondere [d3.js](http://d3js.org) und [Leaflet.js](http://leafletjs.com/)
    Real-Time Visualization [Quora](http://www.quora.com/What-s-a-good-real-time-data-visualization-framework)
