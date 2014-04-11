@@ -27,6 +27,13 @@ GeoVisualization
 Einführende Kurse in Java Script:
 * http://eloquentjavascript.net/contents.html
 * JavaScript - The good parts. https://www.youtube.com/watch?v=hQVTIJBZook
+* Auch sehr zu empfehlen sind die Videos von und mit Douglas Crockford, seines Zeichens Mitentwickler von Javascript.
+* Zusätzlich ist es natürlich auch hilfreich sich in dem Zusammenhang auch mal mit funktionaler Programmierung auseinander zu setzen. 
+
+Offline Editoren:
+
+* Eine sehr empfehlenwerte und gelungene IDE für die Javascriptentwicklung ist Webstorm (http://www.jetbrains.com/webstorm) allerdings kostet die was. 29$ Academic meine ich, die ist die IDE aber allemal wert. Es gibt wohl auch ne gratis Version für Opensource Projecte, allerdings hab ich mich noch nicht mit den Lizensbedingungen auseinander gesetzt.
+* Weitere empfehlenswerte Tools zur Webentwicklung. Sind die F12 Dev tools von Microsoft, mit VisualStudio Integration usw, von Mozilla gibt es meines Wissens ähnliche Dev Tools.
 
 Online Editors:
 * http://codepen.io/
