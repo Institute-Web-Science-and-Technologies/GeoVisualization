@@ -14,7 +14,7 @@ GeoVisualization
 4. Usability von Webseiten (Alexandra K. - Heinrich)  
    Quelle: Steve Krug - Don't make me think ([UB](http://aleph1.uni-koblenz.de/F?func=find-b&find_code=WRD&request=make+me+think))
 5. GitHub as publishing platform  (Philipp L. - Heinrich)  
-   Wie publiziert und verwaltet man Texte online?  
+   Wie publiziert und verwaltet man Texte online mit Hilfe von Github?  
    Relevante Technologien: git, github, github-pages, markdown, java script (e.g. deck.js).  
    Best practice bei spiel [Benjamin Erb](http://berb.github.io/diploma-thesis/)
 6. Open Data Sources (Martin G. - Schegi)  
