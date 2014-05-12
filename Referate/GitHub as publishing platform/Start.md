@@ -1,1 +1,3 @@
-[Start der Präsentation] (https://github.com/Institute-Web-Science-and-Technologies/GeoVisualization/blob/master/Referate/GitHub%20as%20publishing%20platform/deck.js/index.html)
+[Start der Präsentation]  (http://PhilippLambracht.github.io/Publishing-with-Github/)
+
+[Boilerpalte Blog] (http://philipplambracht.github.io/jekyll-blog-test/)
