@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Github as publishing platform</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/web-2.0.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h1>Github as publishing platform</h1>
+	  <p> powerd by deck.js & github</p>
+	  <p> präsentiert von Philipp Lambracht</p>
+    </section>
+
+    <section class="slide" id="inhalt">
+      <h2>Inhalt</h2>
+	  <ol>
+		<li class="slide" id="was_ist_github">
+			Was ist Github?
+			<ul> 
+			<li class="slide" id="unterschiede_zu_svn">
+				Unterschiede zu SVN
+				
+			</li>
+			<li class="slide" id="was github bereitstellt">
+				Was github bereitstellt
+				<ol>
+					<li> git</li>
+					<li> github-pages</li>
+					<li> wiki</li>
+					<li> Release des Projekts</li>
+					<li> Markdown Editor</li>
+				</ol>
+			</li>	
+			<li class="slide" id="github for windows demo"> 
+				Arbeiten mit Github for Windows (demo)
+			</li>
+			</ul>
+		</li>
+		<li class="slide" id="technologien publizierung">
+			Mögliche Technologien für Publizierung
+			<ul>
+				<li class="slide" id=" Docs">
+					Dokumentation
+					<ol>
+						<li> SmartComments</li>
+						<li>Verschiedene Doc Generatoren im Vergleich</li>
+					</ol>
+				</li>
+				<li class="slide" id="praktikumsbericht">Praktikumsbericht</li>
+				<li class="slide" id="webpraesentation">
+					Webpräsentation des Projekts
+					<ol>
+						<li>deck.js</li>
+						<li>impress.js</li>
+					</ol>
+				</li>
+			</ul>
+		</li>
+	  </ol>  
+    </section>
+
+    <section class="slide">
+      <h2>Was ist Github?</h2>
+	  <ul> 
+		<li class="slide" id="host-dienst">Hosting-Dienst für Softwarentwicklung</li>
+		<li class="slide" id="webbasiert">webbasiert</li>
+		<li class="slide" id="verwendet git">Git als Versionsverwaltungssystem</li>
+	  </ul>
+    </section>
+
+	<section class="slide"> 
+		<h2> Unterschiede zu SVN </h2>
+		<ol> 
+			<li class="slide" id="dez_work">dezentrales arbeiten</li>
+			<li class="slide" id="para_work">paralleles arbeiten an einer Datei</li>
+			<li class="slide" id="web_2_0">Web2.0 Elemente</>
+		</ol>
+	</section>
+	
+	<section class="slide"> 
+	<h2> Was Github bereitstellt</h2>
+		<ol>
+			<li> git</li>
+			<li> github-pages</li>
+			<li> wiki</li>
+			<li> Release des Projekts</li>
+			<li> Markdown Editor</li>
+		</ol>
+	</section>
+	
+	<section class="slide">
+	<h2> git </h2>
+		<ol>
+			<li class="slide" id="git_backbone">"Rückrat" von Git</li>
+			<li class="slide" id="git_backbone">Entwickelt für Linux-Kernel</li>
+			<li class="slide" id="git_fork">
+				fork
+				<ul> 
+					<li>komplette Kopie des Repository</li>
+					<li>selbst weiterentwickeln und verbreiten</li>
+					<li>Änderungen/Erweiterungen zurückfließen lassen</li>
+				</ul>
+			</li>
+			<li class="slide" id="git_branch">
+				branch
+				<ul> 
+					<li>ermöglicht verschiedene Versionen</li>
+					<li>Webpage hosten (gh-pages)</li>
+					<li>Aufnahme in master-branch möglich</li>
+				</ul>
+			</li>
+			<li class="slide" id="git_pr">
+				pull request
+				<ul> 
+					<li>Anfrage um Änderung/Erweiterung aufzunehmen</li>
+					<li>kommentierung möglich</li>
+					<li>wird von der zuständigen Person genehmigt oder abgelehnt</li>
+				</ul>
+			</li>
+		</ol>
+	</section>
+
+	<section class="slide">
+	<h2> github-pages </h2>
+		<ul>
+			<li class="slide" id="gp_static">hosten von "statischen" Webseiten</li>
+			<li class="slide" id="gp_static">Präsentation für Projekt</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+	<h2> wiki</h2>
+		<ul>
+			<li class="slide" id="workcoord">Arbeitskoordinierung</li>
+			<li class="slide" id="pro_state">Festhalten des Projektstands</li>
+			<li class="slide" id="workcoord">Dokumentationsmöglichkeit während Entwicklung</li>
+		</ul>
+	</section>
+		
+	<section class="slide">
+	<h2> Release des Projekts </h2>
+		<ul>
+			<li class="slide" id="not_nec">für diese Projekt nicht benötig</li>
+			<li class="slide" id="not_nec">Bereitstellung des Ergebnisses</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+	<h2> Markdown Editor</h2>
+		<ul>
+			<li class="slide" id="form_syn">vereinfachte Auszeichnungsprache</li>
+			<li class="slide" id="github_flav"> "github flavored"</li>
+			<li class="slide" id="conv_html">konvertierbar nach html <a href="http://johnmacfarlane.net/pandoc/">(Pandoc)</a> </li>
+			<li class="slide" id="md_ex"> <a href="https://github.com/PhilippLambracht/Publishing-with-Github/tree/gh-pages/md_test">Beispiel</a> </li>
+			
+		</ul>
+	</section>
+	
+	<section class="slide">
+	<h2> Arbeiten mit Github for Windows (Demo) </h2>
+		<p>DEMO</p>
+	</section>
+	
+	<section class="slide">
+	<h2> Mögliche Technologien für Publizierung </h2>
+		<ul>
+			<li>Dokumentation</li>
+			<li>Praktikumsbericht</li>
+			<li>Webpräsentation</li>
+		</ul>
+	</section>
+	
+	<section class="slide">
+	<h2> Dokumentation </h2>
+		<ul>
+			<li class="slide" id="smartCom">SmartComments</li>
+			<li class="slide" id="docsgens">
+				Verschiedene Doc Generatoren im Vergleich
+				<ol> 
+					<li>YUIDoc</li>
+					<li>Docco</li>
+					<li>JSDoc</li>
+				</ol>
+			</li>
+			
+			
+		</ul>
+	</section>
+	
+	<section class="slide"> 
+	<h2>SmartComments<h2>
+		<p><a href="http://smartcomments.github.io/">DEMO</a></p>
+	</section>
+	
+	<section class="slide"> 
+	<h2> YUIDoc </h2>
+		<ul>
+			<li>Standardmäßig mit Suchfunktion</li>
+			<li>unterstützt jede Bib oder Sprache mit /*  */</li>
+			<li>benötigt strukturierte Syntax</li>
+			<li>
+				<a href="http://static.fusioncharts.com/samples/articles/js-documentation-generators/yuidoc/docs/classes/Graph.html">Beispiel</a>
+			</li>
+			
+		</ul>
+	</section>
+	
+	
+	<section class="slide">
+	<h2> Docco </h2>
+		<ul>
+			<li>keine Suchfunktion</li>
+			<li>benötigt keine strukturierte Syntax</li>
+			<li>
+				<a href="http://static.fusioncharts.com/samples/articles/js-documentation-generators/docco/docs/source-docco.html">Beispiel</a>
+			</li>
+			
+		</ul>
+	</section>
+	
+	
+	<section class="slide"> 
+	<h2> JSDoc </h2>
+		<ul>
+			<li>Suchfunktion nicht Standartmäßig, aber möglich</li>
+			<li>benötigt strukturierte Syntax</li>
+			<li>parsen des completten Sourch-Code</li>
+			<li>
+				<a href="http://static.fusioncharts.com/samples/articles/js-documentation-generators/jsdoc/docs/Graph.html">Beispiel ohne Docstraps</a>
+			</li>
+			<li>
+				<a href="http://static.fusioncharts.com/samples/articles/js-documentation-generators/jsdoc/docs-docstrap/Graph.html">Beispiel mit Docstraps</a>
+			</li>
+		</ul>
+	</section>
+	
+	
+	<section class="slide">
+	<h2>Praktikumsbericht</h2>
+		<ul>
+			<li>github-wiki?</li>
+			<li>Blog über Entwicklungsfortschirt (<a href="http://jekyllrb.com/">Jekyll</a>)</li>
+			<ol> 
+			<li class="slide" id="jekyllstaticsidegen"> "static site generator"</li>
+			<li class="slide" id="jekyllmkuse"> Generierung aus Markdown dateien</li>
+			<li class="slide" id="jekyllgithubint"> integriert in Github</li>
+			<li class="slide" id="jekyllbsp"><a href="https://github.com/PhilippLambracht/jekyll-blog-test">Beispiel</a></li>
+			</ol>
+		</ul>
+		
+
+	</section>
+	
+	<section class="slide">
+	<h2> Webpräsentation des Projekts</h2>
+		<ul> 
+			<li class="slide" id="deckjs_webpraes">
+				deck.js
+				<ol> 
+					<li>Diese Präsentation</li>
+					<li> <a href="http://imakewebthings.com/deck.js">deck.js</a> </li>
+				</ol>
+			</li>
+			<li class="slide" id="impressjs_webpraes">
+				impress.js
+				<ol> 
+					<li> <a href="http://bartaz.github.io/impress.js/#/bored">impress.js</a> </li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+	
+	 <section class="slide">
+      <h1>Ende</h1>
+    </section>
+	
+	<section class="slide"> 
+		<h2>Quellen</h2>
+		<ul> 
+			<li> <a href="http://t3n.de/news/eigentlich-github-472886/">http://t3n.de/news/eigentlich-github-472886/</a> </li>
+			<li> <a href="http://de.wikipedia.org/wiki/Github">http://de.wikipedia.org/wiki/Github</a> </li>
+			<li> <a href="http://cocoate.com/de/jdevde/git">http://cocoate.com/de/jdevde/git</a> </li>
+			<li> <a href= "http://blog.fusioncharts.com/2013/12/jsdoc-vs-yuidoc-vs-doxx-vs-docco-choosing-a-javascript-documentation-generator/">http://blog.fusioncharts.com/2013/12/jsdoc-vs-yuidoc-vs-doxx-vs-docco-choosing-a-javascript-documentation-generator/</a></li>
+			<li> <a href="https://github.com/">https://github.com/</a> </li>
+			<li> <a href="http://imakewebthings.com/deck.js/">http://imakewebthings.com/deck.js/</a> </li>
+			<li> <a href="http://www.lsauer.com/2013/05/javascript-documentation-generator.html">http://www.lsauer.com/2013/05/javascript-documentation-generator.html</a></li>
+			<li> <a href="http://smartcomments.github.io/">http://smartcomments.github.io/</a> </li>
+			<li> <a href="http://jekyllrb.com/docs/home/">http://jekyllrb.com/docs/home/</a> </li>
+			<li> <a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html">http://jekyllbootstrap.com/lessons/jekyll-introduction.html</a> </li>
+			
+		</ul>
+	</section>
+		
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+</body>
+</html>
