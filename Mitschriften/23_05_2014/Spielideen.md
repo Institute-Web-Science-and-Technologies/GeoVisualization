@@ -3,9 +3,9 @@
 * mehrerer Teams
 * Die Spieler werden zu GPS-Koordinaten (z.B. Sehenswürdigkeiten) geschickt
 * Es gibt einen RUndkurs oder Randompunkte
-* * Alle Teammitglieder müssen bei der Koordinate sein
-* * Es werden zu dem Ortspezifische Fragen und Wissensfragen gestellt
-* * z.B. 4
+* Alle Teammitglieder müssen bei der Koordinate sein
+* Es werden zu dem Ortspezifische Fragen und Wissensfragen gestellt
+ * z.B. 4
 * Es gibt Bonuszeit bei richtig beantwortet
 * (optional) Monster verfolgt Teams
 * (optional) Random Events zwischen den Punkten für kurze Zeit(Bonus)
@@ -15,13 +15,13 @@
 
 Verschiedene Spielmodi
 * Storymode
-* * z.B.mit Wissenfragen soll eine Bombe entschärft werden. 
+ * z.B.mit Wissenfragen soll eine Bombe entschärft werden. 
 
 Technik
 * nodeJS
-* Entwicklungs als "Website"
+* Entwicklung als "Website"
 * Website für Smartphones
 
 Usecase
-Schulklassen bei Stadtbesuch
-Neue Studenten in der Stadt
+* Schulklassen bei Stadtbesuch
+* Neue Studenten in der Stadt
