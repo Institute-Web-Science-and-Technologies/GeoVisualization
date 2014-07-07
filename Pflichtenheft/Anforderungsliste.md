@@ -2,32 +2,39 @@
 
 
 ###1. Client (C)
-C1.1  Der Nutzer meldet sich für eine Session an und bekommt eine ID zugewiesen.
+C1.1 Darstellung der Kartendaten
 
-C1.2 Der Nutzer kann sich mit anderern Nutzern zu einem Team zusammenschließen
+C1.2 Abfragen von GPS-Koordinaten des Aufenthaltsortes
 
-C1.3 Der Client nutzt die GPS-Informationen des Smartphones um eigenen Standort zu vermitteln.
+C1.3 Darstellung des Quizmoduls mit Fragen und Antworten
 
-C1.4 Der Client bekommt vom Server eine Aufgabe mit GPS-Informationen zugewiesen.
+C1.4 Darstellung von Storyinhalten
 
-C1.5 Mit den eigenen GPS-Informationen und denen der Aufgabe wird dem Nutzer ein Weg zu Aufgabe angezeigt.
+C1.5 Anzeige des Timers
 
-C1.6 Ist das Ziel erreicht wird die Aufgabe eingeblendet und muss von Nutzer gelöst werden.
+C1.6 Darstellung der Highscoreliste
 
 
 
 ###2. Server (S)
-S2.1 Der Server verwaltet angemeldete Nutzer.
+S2.1 Quizmodul
+* S2.1.1 Bereitstellung der Fragen an den Client
+  
+* S2.1.2 Server nimmt die gwählte Antwort entgegen und wertet diese aus (Antwort an den Client / Punktevergabe)
+  
+S2.2 Der Server stellt die Kartendaten für den Client bereit
 
-S2.2 Der Server verwaltet angemeldete Gruppen.
+S2.3 Bereistellung der GPS-Koordinaten von Zielen (Denkmäler/Sehenswürdigkeiten) und Powerups
 
-S2.3 Der Server greift auf Datenbank zu und holt sich Aufgaben.
+S2.4 Verarbeitung der Aufnhame von Powerups durch den Client
 
-S2.4 Aufgaben mit GPS-Informationen werden an das Smartphone übermittelt.
+
 
 
 ###3. Datenbank (D)
 
-D3.1 Aufgaben mit GPS-Informationen sind in der Datenbank abgelegt.
+D3.1 Die Datenbank enthält die Fragen und die Antworten, die vom Quizmodul verarbeitet werden.
 
-D3.2 Erweiterung der Datensätze ist mit einem noch festzulegenden Format möglich ohne direkt auf Datenbank zuzugreifen. 
+D3.2 Die Datenbaj enthält die GPS-Koordinaten der Ziele (Denkmäler / Sehenswürdigkeiten)
+
+D3.2 Die Datenbank enthält eine Highscoreliste mit Gruppennamen und Punktzahl
