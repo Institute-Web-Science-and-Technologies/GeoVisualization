@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="GeoViz" company="" webLink="http://" view-date="2014-10-31" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.0" locale="de_DE">
+    <description/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Vorgang" width="57" order="0"/>
+        <field id="tpd4" name="Anfang" width="21" order="1"/>
+        <field id="tpd5" name="Ende" width="21" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Ressource" width="50" order="0"/>
+        <field id="1" name="Rolle" width="50" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <only-show-weekends value="false"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Komm zw. 2 Geräten" color="#8cb6ce" meeting="false" start="2014-07-28" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Kommunikation unter 2 Geräten möglich]]></notes>
+            <depend id="6" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="6" name="Komm zw. bel Geräten" color="#8cb6ce" meeting="false" start="2014-08-15" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Kommunikation zwischen beliebig vielen geräten Möglich]]></notes>
+            <depend id="9" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="9" name="Teamchat" color="#8cb6ce" meeting="false" start="2014-09-04" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Kommunikations in Teamchats möglich]]></notes>
+            <depend id="32" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="32" name="Übert. GPS" color="#8cb6ce" meeting="false" start="2014-09-15" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Übermittlung von GPS Koordinaten anderer Spieler]]></notes>
+            <depend id="28" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="17" name="Karte" color="#8cb6ce" meeting="false" start="2014-07-28" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Anzeigen einer Karte]]></notes>
+            <depend id="18" type="2" difference="0" hardness="Strong"/>
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="18" name="HUD" color="#8cb6ce" meeting="false" start="2014-08-06" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Einblenden eines Headupdisplays auf der Karte (Chat, Interaktionsbutton, Inventar,...)]]></notes>
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="22" name="Eigene Pos" color="#8cb6ce" meeting="false" start="2014-08-06" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Anzeigen der Eigenen Position auf der Karte]]></notes>
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+            <depend id="28" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="67" name="Distanzmessung" color="#8cb6ce" meeting="false" start="2014-10-14" duration="14" complete="0" expand="true">
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="25" name="Virt. Objekte" color="#8cb6ce" meeting="false" start="2014-08-15" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Anzeigen von virtuellen Objekten(Basen,Flaggen,Powerups,....)]]></notes>
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
+            <depend id="39" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="37" name="Einehmen" color="#8cb6ce" meeting="false" start="2014-11-03" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Einnehmen von Gebieten (Basen,...)]]></notes>
+            <depend id="44" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="39" name="Aufn./Verw." color="#8cb6ce" meeting="false" start="2014-09-04" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Aufnehmen von virtuellen Objekten(Flaggen, Power-ups....)]]></notes>
+            <depend id="44" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="44" name="CTF" color="#8cb6ce" meeting="false" start="2014-11-21" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Impelementierung des Capture the Flag Modus]]></notes>
+            <depend id="46" type="2" difference="0" hardness="Strong"/>
+            <depend id="47" type="2" difference="0" hardness="Strong"/>
+            <depend id="73" type="2" difference="0" hardness="Strong"/>
+            <depend id="76" type="2" difference="0" hardness="Strong"/>
+            <depend id="78" type="2" difference="0" hardness="Strong"/>
+            <depend id="84" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="47" name="Geschwindigkeit" color="#0d9927" meeting="false" start="2014-12-11" duration="14" complete="0" expand="true"/>
+        <task id="28" name="Andere Spieler" color="#8cb6ce" meeting="false" start="2014-10-03" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Anzeigen der Positionen von anderen Spielern]]></notes>
+            <depend id="67" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="46" name="Klassen" color="#0d9927" meeting="false" start="2014-12-11" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Wahl zwischen verschieden Klassen]]></notes>
+            <depend id="41" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="41" name="Ameise" color="#0d9927" meeting="false" start="2014-12-22" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Modus Ameisenrunde]]></notes>
+            <depend id="58" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="84" name="Area Control" color="#0d9927" meeting="false" start="2014-12-11" duration="7" complete="0" expand="true"/>
+        <task id="73" name="Navigationspfeil" color="#0d9927" meeting="false" start="2014-12-11" duration="14" complete="0" expand="true"/>
+        <task id="76" name="Sonarscan" color="#0d9927" meeting="false" start="2014-12-11" duration="14" complete="0" expand="true"/>
+        <task id="78" name="Powerups" color="#0d9927" meeting="false" start="2014-12-11" duration="7" complete="0" expand="true"/>
+        <task id="58" name="Mauer plazieren" color="#0d9927" meeting="false" start="2015-01-09" duration="7" complete="0" expand="true">
+            <depend id="60" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="60" name="Mauerwand ziehen" color="#0d9927" meeting="false" start="2015-01-20" duration="7" complete="0" expand="true">
+            <depend id="61" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="61" name="Kollisionsabfrage" color="#0d9927" meeting="false" start="2015-01-29" duration="14" complete="0" expand="true">
+            <depend id="82" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="82" name="Mauerbau" color="#0d9927" meeting="false" start="2015-02-18" duration="7" complete="0" expand="true">
+            <depend id="65" type="2" difference="0" hardness="Strong"/>
+            <depend id="66" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="65" name="Pingen" color="#0d9927" meeting="false" start="2015-02-27" duration="7" complete="0" expand="true"/>
+        <task id="66" name="Positionen Einblenden" color="#0d9927" meeting="false" start="2015-02-27" duration="7" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd3" order="0" width="199" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="75" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="75" visible="true"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
