@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project name="GeoViz" company="" webLink="http://" view-date="2014-07-28" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.0" locale="de_DE">
     <description/>
-    <view zooming-state="default:4" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="57" order="0"/>
-        <field id="tpd4" name="Anfang" width="21" order="1"/>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Vorgang" width="67" order="0"/>
+        <field id="tpd4" name="Anfang" width="10" order="1"/>
         <field id="tpd5" name="Ende" width="21" order="2"/>
     </view>
     <view id="resource-table">
@@ -69,7 +69,7 @@
             <depend id="67" type="2" difference="0" hardness="Strong"/>
             <depend id="91" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="91" name="Integ. Kartenkomp. Testen" color="#8cb6ce" meeting="false" start="2014-08-05" duration="3" complete="0" expand="true">
+        <task id="91" name="Integ. Kartenkomp. testen" color="#8cb6ce" meeting="false" start="2014-08-05" duration="3" complete="0" expand="true">
             <notes><![CDATA[Integrieren der Kartenkomponenten und test]]></notes>
             <depend id="28" type="2" difference="0" hardness="Strong"/>
             <depend id="39" type="2" difference="0" hardness="Strong"/>
@@ -77,40 +77,68 @@
         <task id="39" name="Aufn./Verw." color="#8cb6ce" meeting="false" start="2014-08-08" duration="7" complete="0" expand="true">
             <notes><![CDATA[Aufnehmen von virtuellen Objekten(Flaggen, Power-ups....)]]></notes>
             <depend id="47" type="2" difference="0" hardness="Strong"/>
+            <depend id="73" type="2" difference="0" hardness="Strong"/>
+            <depend id="76" type="2" difference="0" hardness="Strong"/>
+            <depend id="78" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="37" name="Einehmen" color="#8cb6ce" meeting="false" start="2014-08-08" duration="7" complete="0" expand="true">
             <notes><![CDATA[Einnehmen von Gebieten (Basen,...)]]></notes>
         </task>
-        <task id="28" name="Andere Spieler" color="#8cb6ce" meeting="false" start="2014-08-25" duration="7" complete="0" expand="true">
+        <task id="28" name="Andere_Spieler" color="#8cb6ce" meeting="false" start="2014-08-25" duration="7" complete="0" expand="true">
             <notes><![CDATA[Anzeigen der Positionen von anderen Spielern]]></notes>
             <depend id="44" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="93" name="Dokumentation" color="#8cb6ce" meeting="false" start="2014-11-03" duration="37" complete="0" expand="true"/>
         <task id="67" name="Distanzmessung" color="#8cb6ce" meeting="false" start="2014-08-05" duration="7" complete="0" expand="true">
             <notes><![CDATA[Distanzmessung]]></notes>
         </task>
-        <task id="44" name="CTF impl." color="#8cb6ce" meeting="false" start="2014-09-03" duration="7" complete="0" expand="true">
+        <task id="44" name="CTF_impl." color="#8cb6ce" meeting="false" start="2014-09-03" duration="7" complete="0" expand="true">
             <notes><![CDATA[Impelementierung des Capture the Flag Modus]]></notes>
             <depend id="113" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="113" name="CTF testen" color="#8cb6ce" meeting="false" start="2014-09-12" duration="2" complete="0" expand="true"/>
-        <task id="47" name="Geschwindigkeit" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
-        <task id="46" name="Klassen" color="#0d9927" meeting="false" start="2014-12-12" duration="7" complete="0" expand="true">
+        <task id="113" name="CTF_testen" color="#8cb6ce" meeting="false" start="2014-09-12" duration="2" complete="0" expand="true">
+            <depend id="46" type="2" difference="0" hardness="Strong"/>
+            <depend id="58" type="2" difference="0" hardness="Strong"/>
+            <depend id="60" type="2" difference="0" hardness="Strong"/>
+            <depend id="61" type="2" difference="0" hardness="Strong"/>
+            <depend id="65" type="2" difference="0" hardness="Strong"/>
+            <depend id="66" type="2" difference="0" hardness="Strong"/>
+            <depend id="84" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="84" name="Area_Control_impl." color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true">
+            <depend id="118" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="118" name="Area_Control_testen" color="#0d9927" meeting="false" start="2014-09-25" duration="3" complete="0" expand="true"/>
+        <task id="46" name="Klassen" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true">
             <notes><![CDATA[Wahl zwischen verschieden Klassen]]></notes>
+            <depend id="41" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="41" name="Ameise" color="#0d9927" meeting="false" start="2014-12-23" duration="14" complete="0" expand="true">
+        <task id="41" name="Ameise_impl." color="#0d9927" meeting="false" start="2014-09-25" duration="7" complete="0" expand="true">
             <notes><![CDATA[Modus Ameisenrunde]]></notes>
+            <depend id="126" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="84" name="Area Control" color="#0d9927" meeting="false" start="2014-12-12" duration="7" complete="0" expand="true"/>
-        <task id="73" name="Navigationspfeil" color="#0d9927" meeting="false" start="2014-12-12" duration="14" complete="0" expand="true"/>
-        <task id="76" name="Sonarscan" color="#0d9927" meeting="false" start="2014-12-12" duration="14" complete="0" expand="true"/>
-        <task id="78" name="Powerups" color="#0d9927" meeting="false" start="2014-12-12" duration="7" complete="0" expand="true"/>
-        <task id="58" name="Mauer plazieren" color="#0d9927" meeting="false" start="2015-01-12" duration="7" complete="0" expand="true"/>
-        <task id="60" name="Mauerwand ziehen" color="#0d9927" meeting="false" start="2015-01-21" duration="7" complete="0" expand="true"/>
-        <task id="61" name="Kollisionsabfrage" color="#0d9927" meeting="false" start="2015-01-30" duration="14" complete="0" expand="true"/>
-        <task id="82" name="Mauerbau" color="#0d9927" meeting="false" start="2015-02-19" duration="7" complete="0" expand="true"/>
-        <task id="65" name="Pingen" color="#0d9927" meeting="false" start="2015-03-02" duration="7" complete="0" expand="true"/>
-        <task id="66" name="Positionen Einblenden" color="#0d9927" meeting="false" start="2015-03-02" duration="7" complete="0" expand="true"/>
+        <task id="126" name="Ameise_testen" color="#0d9927" meeting="false" start="2014-10-06" duration="5" complete="0" expand="true">
+            <notes><![CDATA[testen des Ameisenmodus]]></notes>
+        </task>
+        <task id="47" name="Geschwindigkeit" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
+        <task id="73" name="Navigationspfeil" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
+        <task id="76" name="Sonarscan" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
+        <task id="78" name="Powerups" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
+        <task id="58" name="Mauer_plazieren" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true"/>
+        <task id="60" name="Mauerwand_ziehen" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true">
+            <depend id="82" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="61" name="Kollisionsabfrage" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true">
+            <depend id="82" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="65" name="Pingen" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Pingen von interessanten Positionen für das Team]]></notes>
+        </task>
+        <task id="66" name="Positionen_Einblenden" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true"/>
+        <task id="82" name="Mauerbau_impl." color="#0d9927" meeting="false" start="2014-09-25" duration="3" complete="0" expand="true">
+            <depend id="144" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="144" name="Mauerbau_testen" color="#0d9927" meeting="false" start="2014-09-30" duration="3" complete="0" expand="true"/>
+        <task id="93" name="Dokumentation" color="#8cb6ce" meeting="false" start="2014-11-03" duration="37" complete="0" expand="true"/>
         <task id="85" name="Abgabe" color="#8cb6ce" meeting="true" start="2014-12-24" duration="0" complete="0" expand="true"/>
         <task id="88" name="Korektur &amp; Präsentattion" color="#8cb6ce" meeting="true" start="2015-01-15" duration="0" complete="0" expand="true"/>
     </tasks>
@@ -127,8 +155,8 @@
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="199" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="75" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="236" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="38" visible="true"/>
         <displaycolumn property-id="tpd5" order="2" width="75" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
