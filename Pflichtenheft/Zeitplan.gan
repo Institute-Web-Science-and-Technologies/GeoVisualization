@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="GeoViz" company="" webLink="http://" view-date="2014-10-31" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.0" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="GeoViz" company="" webLink="http://" view-date="2014-07-28" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.0" locale="de_DE">
     <description/>
-    <view zooming-state="default:3" id="gantt-chart">
+    <view zooming-state="default:7" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="57" order="0"/>
         <field id="tpd4" name="Anfang" width="21" order="1"/>
         <field id="tpd5" name="Ende" width="21" order="2"/>
@@ -65,13 +65,14 @@
             <depend id="25" type="2" difference="0" hardness="Strong"/>
             <depend id="28" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="67" name="Distanzmessung" color="#8cb6ce" meeting="false" start="2014-10-14" duration="14" complete="0" expand="true">
-            <depend id="37" type="2" difference="0" hardness="Strong"/>
-        </task>
         <task id="25" name="Virt. Objekte" color="#8cb6ce" meeting="false" start="2014-08-15" duration="14" complete="0" expand="true">
             <notes><![CDATA[Anzeigen von virtuellen Objekten(Basen,Flaggen,Powerups,....)]]></notes>
             <depend id="37" type="2" difference="0" hardness="Strong"/>
             <depend id="39" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="91" name="Testen" meeting="false" start="2014-07-28" duration="1" complete="0" expand="true"/>
+        <task id="67" name="Distanzmessung" color="#8cb6ce" meeting="false" start="2014-10-14" duration="14" complete="0" expand="true">
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="37" name="Einehmen" color="#8cb6ce" meeting="false" start="2014-11-03" duration="14" complete="0" expand="true">
             <notes><![CDATA[Einnehmen von Gebieten (Basen,...)]]></notes>
@@ -122,6 +123,8 @@
         </task>
         <task id="65" name="Pingen" color="#0d9927" meeting="false" start="2015-02-27" duration="7" complete="0" expand="true"/>
         <task id="66" name="Positionen Einblenden" color="#0d9927" meeting="false" start="2015-02-27" duration="7" complete="0" expand="true"/>
+        <task id="85" name="Abgabe" color="#8cb6ce" meeting="true" start="2014-12-24" duration="0" complete="0" expand="true"/>
+        <task id="88" name="Korektur &amp; Präsentattion" color="#8cb6ce" meeting="true" start="2015-01-15" duration="0" complete="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>
