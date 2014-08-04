@@ -69,19 +69,20 @@
             <depend id="67" type="2" difference="0" hardness="Strong"/>
             <depend id="91" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="91" name="Integ. Kartenkomp. testen" color="#8cb6ce" meeting="false" start="2014-08-05" duration="3" complete="0" expand="true">
+        <task id="91" name="Integ. Kartenkomp. testen" color="#8cb6ce" meeting="false" start="2014-08-05" duration="5" complete="0" expand="true">
             <notes><![CDATA[Integrieren der Kartenkomponenten und test]]></notes>
             <depend id="28" type="2" difference="0" hardness="Strong"/>
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
             <depend id="39" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="39" name="Aufn./Verw." color="#8cb6ce" meeting="false" start="2014-08-08" duration="7" complete="0" expand="true">
+        <task id="39" name="Aufn./Verw." color="#8cb6ce" meeting="false" start="2014-08-12" duration="7" complete="0" expand="true">
             <notes><![CDATA[Aufnehmen von virtuellen Objekten(Flaggen, Power-ups....)]]></notes>
             <depend id="47" type="2" difference="0" hardness="Strong"/>
             <depend id="73" type="2" difference="0" hardness="Strong"/>
             <depend id="76" type="2" difference="0" hardness="Strong"/>
             <depend id="78" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="37" name="Einehmen" color="#8cb6ce" meeting="false" start="2014-08-08" duration="7" complete="0" expand="true">
+        <task id="37" name="Einehmen" color="#8cb6ce" meeting="false" start="2014-08-12" duration="7" complete="0" expand="true">
             <notes><![CDATA[Einnehmen von Gebieten (Basen,...)]]></notes>
         </task>
         <task id="28" name="Andere_Spieler" color="#8cb6ce" meeting="false" start="2014-08-25" duration="7" complete="0" expand="true">
@@ -119,10 +120,10 @@
         <task id="126" name="Ameise_testen" color="#0d9927" meeting="false" start="2014-10-06" duration="5" complete="0" expand="true">
             <notes><![CDATA[testen des Ameisenmodus]]></notes>
         </task>
-        <task id="47" name="Geschwindigkeit" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
-        <task id="73" name="Navigationspfeil" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
-        <task id="76" name="Sonarscan" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
-        <task id="78" name="Powerups" color="#0d9927" meeting="false" start="2014-08-19" duration="7" complete="0" expand="true"/>
+        <task id="47" name="Geschwindigkeit" color="#0d9927" meeting="false" start="2014-08-21" duration="7" complete="0" expand="true"/>
+        <task id="73" name="Navigationspfeil" color="#0d9927" meeting="false" start="2014-08-21" duration="7" complete="0" expand="true"/>
+        <task id="76" name="Sonarscan" color="#0d9927" meeting="false" start="2014-08-21" duration="7" complete="0" expand="true"/>
+        <task id="78" name="Powerups" color="#0d9927" meeting="false" start="2014-08-21" duration="7" complete="0" expand="true"/>
         <task id="58" name="Mauer_plazieren" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true"/>
         <task id="60" name="Mauerwand_ziehen" color="#0d9927" meeting="false" start="2014-09-16" duration="7" complete="0" expand="true">
             <depend id="82" type="2" difference="0" hardness="Strong"/>
