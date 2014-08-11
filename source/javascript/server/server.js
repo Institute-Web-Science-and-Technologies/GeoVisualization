@@ -1,10 +1,11 @@
 var app = require('express')();
 
-clientID = 0;
+
 
 function Game() {
     this.clients = [];
     this.messages = [];
+    this.clientID = 0;
 }
 
 Game.prototype.addClient = function(name) {
@@ -15,7 +16,7 @@ Game.prototype.addClient = function(name) {
             console.log("name " + name + " already used");
             return -1;
         }
-    var id = clientID++;
+    var id = this.clientID++;
     this.clients.push(new Client(name, id));
     console.log("new client connected : " + name + ", #" + id);
     return id;
@@ -42,7 +43,8 @@ function Message(sender, text) {
 
 app.get('/createplayer', function(req, res) {
     var id = (games[0].addClient(req.query.name));
-    res.status(id).end();
+    //res.status(id).end();
+    res.send(""+id);
 });
 
 app.get('/msg', function(req, res) {
@@ -51,12 +53,12 @@ app.get('/msg', function(req, res) {
 });
 
 app.get('/update', function(req, res) {
-    var c = JSON.stringify(games[0].clients),
-        m = JSON.stringify(games[0].messages);
-    res.send(c + m);
+    var c = JSON.stringify(games[0]);
+    res.send(c);
 });
 
 app.get('/', function(req, res) {
+	console.log("test");
     res.send("Hello Client!");
 });
 
