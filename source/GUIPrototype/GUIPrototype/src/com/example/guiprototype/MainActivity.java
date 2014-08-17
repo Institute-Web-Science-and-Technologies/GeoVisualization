@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 	public final static String EXTRA_USER="com.example.guiprototype";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,10 @@ public class MainActivity extends Activity {
     	
     }
     public void start (View view){
-    	//Hier erst mal die Karte rein
+    	Intent intent = new Intent (this, MapScreen.class);
+    	EditText editText= (EditText) findViewById(R.id.editUsername);
+    	String username= editText.getText().toString();
+    	intent.putExtra(EXTRA_USER, username);
+    	startActivity(intent);
     }
 }
