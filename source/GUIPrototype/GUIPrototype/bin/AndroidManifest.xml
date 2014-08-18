@@ -32,6 +32,10 @@
             android:name=".MapScreen"
             android:label="@string/title_activity_map_screen" >
         </activity>
+        <activity
+            android:name=".BackPackScreen"
+            android:label="@string/title_activity_back_pack_screen" >
+        </activity>
     </application>
 
 </manifest>

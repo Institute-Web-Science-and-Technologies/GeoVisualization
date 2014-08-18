@@ -11,5 +11,6 @@
     <string name="chat_send">send</string>
     <string name="chatMessage">Message</string>
     <string name="title_activity_map_screen">MapScreen</string>
+    <string name="title_activity_back_pack_screen">BackPackScreen</string>
 
 </resources>
