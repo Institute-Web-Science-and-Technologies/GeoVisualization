@@ -16,7 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:configChanges="keyboardHidden|orientation|screenSize">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,8 @@
         </activity>
         <activity
             android:name=".MapScreen"
-            android:label="@string/title_activity_map_screen" >
+            android:label="@string/title_activity_map_screen" 
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".BackPackScreen"

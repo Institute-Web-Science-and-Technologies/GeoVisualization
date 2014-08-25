@@ -25,16 +25,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/startbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="start"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"
-        android:text="@string/startbutton" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -47,13 +37,12 @@
         android:textSize="@dimen/abc_action_bar_stacked_max_height" />
 
     <Button
-        android:id="@+id/chatstub"
+        android:id="@+id/startbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/startbutton"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
-        android:onClick="openChat"
-        android:text="Chat" />
+        android:onClick="start"
+        android:text="@string/startbutton" />
 
 </RelativeLayout>
