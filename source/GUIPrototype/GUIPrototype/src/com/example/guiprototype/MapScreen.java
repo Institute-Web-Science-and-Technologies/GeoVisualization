@@ -6,10 +6,12 @@ import java.util.Calendar;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -43,6 +45,10 @@ public class MapScreen extends ActionBarActivity {
 	public void sendMessage(View view){
 		localSend();
 	}
+	
+	/**
+	 * Ein und ausblenden des Chatfensters
+	 */
 	public void showChat(View view){
 		LinearLayout layoutChatM= (LinearLayout) findViewById(R.id.linearLayoutChatM);
 		LinearLayout layoutChatS= (LinearLayout) findViewById(R.id.linearLayoutChatScreen);
@@ -54,7 +60,17 @@ public class MapScreen extends ActionBarActivity {
 		if(layoutChatS.getVisibility()==View.VISIBLE) {
 			layoutChatS.setVisibility(View.INVISIBLE); 
 		} else layoutChatS.setVisibility(View.VISIBLE);
-			
+	}
+	/**
+	 * Ein und ausblenden der Items
+	 */
+	public void showItems (View view){
+		
+		HorizontalScrollView horizonScrVItm = (HorizontalScrollView) findViewById(R.id.horizontalScrollViewItems);
+		
+		if(horizonScrVItm.getVisibility()==View.VISIBLE) {
+			horizonScrVItm.setVisibility(View.INVISIBLE); 
+		} else horizonScrVItm.setVisibility(View.VISIBLE);
 		
 	}
 	/**
@@ -72,5 +88,9 @@ public class MapScreen extends ActionBarActivity {
 		scrollTv.append(message);
 		sv.fullScroll(View.FOCUS_DOWN);
 		editText.setText("");
+	}
+	
+	public void activateItem() {
+		
 	}
 }
