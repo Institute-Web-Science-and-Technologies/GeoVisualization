@@ -71,15 +71,16 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
         mMap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.setMyLocationEnabled(true);
        
-        if (servicesConnected() && mLocationClient.isConnected()) {
-        	mCurrentLocation = mLocationClient.getLastLocation();
-        	LatLng currentLocation = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+//        if (servicesConnected() && mLocationClient.isConnected()) {
+        	
+        	
+        	
             
-            mMap.addMarker(new MarkerOptions()
-            	.position(currentLocation)
-            	.title("you are here")
-            );	
-        }
+//            mMap.addMarker(new MarkerOptions()
+//            	.position(currentLocation)
+//            	.title("you are here")
+//            );	
+//        }
         
         
         
@@ -210,6 +211,14 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     public void onConnected(Bundle dataBundle) {
         // Display the connection status
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+        mCurrentLocation = mLocationClient.getLastLocation();
+    	LatLng currentLocation = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+    	Log.d("Location Updates",
+    			currentLocation.toString());
+    	mMap.addMarker(new MarkerOptions()
+    	.position(currentLocation)
+    	.title("you are here")
+    	);
     }
     
     /*
