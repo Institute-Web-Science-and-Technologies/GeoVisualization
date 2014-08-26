@@ -67,6 +67,15 @@
         </FrameLayout>
     </LinearLayout>
 
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayoutInteractB"
+        android:layout_below="@+id/linearLayoutScore"
+        android:layout_toLeftOf="@+id/linearLayoutRightSide" />
+
     <LinearLayout
         android:id="@+id/linearLayoutInteractB"
         android:layout_width="match_parent"
@@ -211,8 +220,8 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/backpack_24x24" 
-                android:onClick="showItems"/>
+                android:onClick="showItems"
+                android:src="@drawable/backpack_24x24" />
         </FrameLayout>
     </LinearLayout>
 
