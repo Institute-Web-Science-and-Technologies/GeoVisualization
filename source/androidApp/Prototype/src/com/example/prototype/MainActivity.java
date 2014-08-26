@@ -117,6 +117,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 			@Override
 		public boolean onMarkerClick(Marker arg0) {
 //				arg0.setSnippet("Lat: " + position.latitude  + "\n" + "Lng: " + position.longitude);
+//				hallo();
 				if(markerClicked){
 				      
 				      if(polygon != null){
