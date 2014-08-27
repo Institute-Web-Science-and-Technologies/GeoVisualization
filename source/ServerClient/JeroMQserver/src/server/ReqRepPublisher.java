@@ -12,12 +12,13 @@ public class ReqRepPublisher {
 		ZMQ.Poller items = new ZMQ.Poller(2);
 		items.register(replier, ZMQ.Poller.POLLIN);
 		items.register(publisher, ZMQ.Poller.POLLIN);
+		
 		while (!Thread.currentThread().isInterrupted()) {
 			byte[] message;
 			items.poll();
 			if (items.pollin(0)) {
 				message = replier.recv(0);
-				System.out.println("Process task");
+				System.out.println(new String(message));
 				replier.send("".getBytes(), 0);
 				publisher.send(message);
 			}
@@ -29,6 +30,6 @@ public class ReqRepPublisher {
 		replier.close();
 		publisher.close();
 		context.term();
-
+		
 	}
 }
