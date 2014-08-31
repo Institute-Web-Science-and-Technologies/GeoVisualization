@@ -263,9 +263,9 @@ int id action_settings 0x7f050059
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id beginning 0x7f050011
-int id buttonChat 0x7f05004d
-int id buttonInteract 0x7f05004b
-int id buttonPowerUp 0x7f05004c
+int id buttonChat 0x7f05004e
+int id buttonInteract 0x7f05004c
+int id buttonPowerUp 0x7f05004d
 int id chatLog 0x7f050042
 int id chatMessage 0x7f05003f
 int id chatbutton 0x7f050040
@@ -292,10 +292,10 @@ int id imageView2 0x7f050057
 int id imageViewBomb 0x7f05003c
 int id imageViewGhost 0x7f05003e
 int id imageViewWS1 0x7f05003d
-int id linearLayoutChatM 0x7f05004e
-int id linearLayoutChatScreen 0x7f05004f
+int id linearLayoutChatM 0x7f05004f
+int id linearLayoutChatScreen 0x7f050050
 int id linearLayoutInteractB 0x7f05004a
-int id linearLayoutRightSide 0x7f050050
+int id linearLayoutRightSide 0x7f05004b
 int id linearLayoutScore 0x7f050046
 int id listMode 0x7f050001
 int id list_item 0x7f050029

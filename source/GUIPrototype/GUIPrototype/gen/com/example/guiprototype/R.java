@@ -1108,9 +1108,9 @@ containing a value of this type.
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int buttonChat=0x7f05004d;
-        public static final int buttonInteract=0x7f05004b;
-        public static final int buttonPowerUp=0x7f05004c;
+        public static final int buttonChat=0x7f05004e;
+        public static final int buttonInteract=0x7f05004c;
+        public static final int buttonPowerUp=0x7f05004d;
         public static final int chatLog=0x7f050042;
         public static final int chatMessage=0x7f05003f;
         public static final int chatbutton=0x7f050040;
@@ -1137,10 +1137,10 @@ containing a value of this type.
         public static final int imageViewBomb=0x7f05003c;
         public static final int imageViewGhost=0x7f05003e;
         public static final int imageViewWS1=0x7f05003d;
-        public static final int linearLayoutChatM=0x7f05004e;
-        public static final int linearLayoutChatScreen=0x7f05004f;
+        public static final int linearLayoutChatM=0x7f05004f;
+        public static final int linearLayoutChatScreen=0x7f050050;
         public static final int linearLayoutInteractB=0x7f05004a;
-        public static final int linearLayoutRightSide=0x7f050050;
+        public static final int linearLayoutRightSide=0x7f05004b;
         public static final int linearLayoutScore=0x7f050046;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
