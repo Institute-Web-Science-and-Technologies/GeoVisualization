@@ -3,10 +3,14 @@ package com.example.guiprototype;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.zeromq.ZMQ;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +26,27 @@ public class MapScreen extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_screen);
+	 	
+		new Thread(new Runnable(){
+			public void run() {
+				ZMQ.Context context = ZMQ.context(1);
+				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
+				subscriber.connect("tcp://141.26.71.201:5558");
+				subscriber.subscribe("".getBytes());
+				while (true) {
+					final String msg=new String(subscriber.recv(0));
+					MapScreen.this.runOnUiThread(new Runnable(){
+						public void run(){
+							ScrollView sv= (ScrollView) findViewById(R.id.scrollView1);
+							TextView scrollTv = (TextView) findViewById(R.id.chatLog);
+							scrollTv.append(msg);
+							sv.fullScroll(View.FOCUS_DOWN);
+						}
+					});
+					
+					}
+				}
+		}).start();
 	}
 
 	@Override
@@ -43,7 +68,7 @@ public class MapScreen extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	public void sendMessage(View view){
-		localSend();
+		send();
 	}
 	
 	/**
@@ -76,18 +101,32 @@ public class MapScreen extends ActionBarActivity {
 	/**
 	 * Hier ein lokaler test des Textfeldes
 	 */
-	public void localSend(){
+	
+	public void send(){
 		EditText editText= (EditText) findViewById(R.id.chatMessage);
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		String fdate= sdf.format(c.getTime());
 		Intent intent= getIntent();
-		String message="<"+ fdate + ">" +intent.getStringExtra(MainActivity.EXTRA_USER) + ": " + editText.getText().toString() + "\n";
-		ScrollView sv= (ScrollView) findViewById(R.id.scrollView1);
-		TextView scrollTv = (TextView) findViewById(R.id.chatLog);
-		scrollTv.append(message);
-		sv.fullScroll(View.FOCUS_DOWN);
-		editText.setText("");
+		final String msg ="<"+ fdate + ">" +intent.getStringExtra(MainActivity.EXTRA_USER) + ": " + editText.getText().toString() + "\n";
+      	new Thread(new Runnable(){
+      		
+  			@Override
+  			public void run() {
+  				ZMQ.Context context = ZMQ.context(1);
+  				final ZMQ.Socket requester = context.socket(ZMQ.REQ);
+  				requester.connect("tcp://141.26.71.201:5557");
+  				
+  					requester.send(msg.getBytes(),0);
+  					
+  					requester.recv(0);
+  				
+  				requester.close();
+  				context.term();
+  				
+  			}
+          	
+          }).start();
 	}
 	
 	public void activateItem() {
