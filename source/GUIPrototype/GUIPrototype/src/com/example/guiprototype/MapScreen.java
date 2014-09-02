@@ -5,6 +5,12 @@ import java.util.Calendar;
 
 import org.zeromq.ZMQ;
 
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,17 +27,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MapScreen extends ActionBarActivity {
+	
+	public static FragmentManager fragmentManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_screen);
-	 	
+		fragmentManager = getSupportFragmentManager();
+//		initFragment(new Map(((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap()));
 		new Thread(new Runnable(){
 			public void run() {
 				ZMQ.Context context = ZMQ.context(1);
 				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
-				subscriber.connect("tcp://141.26.71.201:5558");
+				subscriber.connect("tcp://141.26.71.46:5558");
 				subscriber.subscribe("".getBytes());
 				while (true) {
 					final String msg=new String(subscriber.recv(0));
@@ -48,6 +57,13 @@ public class MapScreen extends ActionBarActivity {
 				}
 		}).start();
 	}
+	
+	protected void initFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.map, fragment);
+        fragmentTransaction.commit();
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,7 +131,7 @@ public class MapScreen extends ActionBarActivity {
   			public void run() {
   				ZMQ.Context context = ZMQ.context(1);
   				final ZMQ.Socket requester = context.socket(ZMQ.REQ);
-  				requester.connect("tcp://141.26.71.201:5557");
+  				requester.connect("tcp://141.26.71.46:5557");
   				
   					requester.send(msg.getBytes(),0);
   					

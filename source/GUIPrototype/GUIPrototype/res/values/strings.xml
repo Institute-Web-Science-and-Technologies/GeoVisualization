@@ -3,7 +3,7 @@
 
     <string name="app_name">GUIPrototype</string>
     <string name="hello_world">Hello world!</string>
-    <string name="verdammt">Verdammt...</string>
+    <string name="verdammt">Test</string>
     <string name="username">Username</string>
     <string name="startbutton">START</string>
     <string name="title_activity_chat_screen">ChatScreenActivity</string>

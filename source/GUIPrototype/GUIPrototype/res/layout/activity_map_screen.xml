@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.guiprototype.MapScreen" >
+    tools:context="com.example.guiprototype.MapScreen" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/linearLayoutScore"
@@ -66,15 +66,6 @@
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
-
-    <!--  fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayoutInteractB"
-        android:layout_below="@+id/linearLayoutScore"
-        android:layout_toLeftOf="@+id/linearLayoutRightSide" /-->
 
     <LinearLayout
         android:id="@+id/linearLayoutInteractB"
@@ -223,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="showItems"
                 android:src="@drawable/backpack_24x24" />
+
         </FrameLayout>
     </LinearLayout>
 
@@ -261,5 +253,21 @@
                 android:src="@drawable/holidays_ghost_icon_24x24" />
         </LinearLayout>
     </HorizontalScrollView>
+
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/horizontalScrollViewItems"
+        android:layout_alignLeft="@+id/linearLayoutScore"
+        android:layout_alignRight="@+id/horizontalScrollViewItems"
+        android:layout_below="@+id/linearLayoutScore"
+        app:cameraTargetLat="50.3511528"
+        app:cameraTargetLng="7.5951959"
+        app:cameraZoom="14" />
 
 </RelativeLayout>
