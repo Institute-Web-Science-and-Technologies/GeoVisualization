@@ -115,7 +115,7 @@ public class MapScreen extends ActionBarActivity {
 		
 	}
 	/**
-	 * Hier ein lokaler test des Textfeldes
+	 * Hier ist der Chat über den Server
 	 */
 	
 	public void send(){

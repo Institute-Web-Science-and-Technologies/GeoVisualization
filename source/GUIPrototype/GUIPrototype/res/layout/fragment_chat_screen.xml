@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.guiprototype.MapScreen" >
+
+    <LinearLayout
+        android:id="@+id/linearLayoutChatScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayoutChatM"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:scrollbars="vertical" >
+
+            <TextView
+                android:id="@+id/chatLog"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutChatM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <EditText
+            android:id="@+id/chatMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/chatMessage" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/chatbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="sendMessage"
+            android:text="@string/chat_send" />
+    </LinearLayout>
+
+</RelativeLayout>

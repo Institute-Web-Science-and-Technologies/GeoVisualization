@@ -45,4 +45,14 @@
         android:onClick="start"
         android:text="@string/startbutton" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startbutton"
+        android:layout_alignRight="@+id/startbutton"
+        android:onClick="swipeScreen"
+        android:text="SwipeScreen" 
+        />
+
 </RelativeLayout>
