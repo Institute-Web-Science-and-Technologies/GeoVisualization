@@ -10,30 +10,7 @@
     tools:context="com.example.guiprototype.MapScreen" >
 
     <LinearLayout
-        android:id="@+id/linearLayoutChatScreen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayoutChatM"
-        android:gravity="left"
-        android:orientation="horizontal"
-        android:visibility="visible" >
-
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:scrollbars="vertical" >
-
-            <TextView
-                android:id="@+id/chatLog"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutChatM"
+        android:id="@+id/fragmentLinearLayoutChatM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -43,7 +20,7 @@
         android:visibility="visible" >
 
         <EditText
-            android:id="@+id/chatMessage"
+            android:id="@+id/fragmentChatMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -53,11 +30,35 @@
         </EditText>
 
         <Button
-            android:id="@+id/chatbutton"
+            android:id="@+id/fragmentChatbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="sendMessage"
             android:text="@string/chat_send" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragmentLinearLayoutChatScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fragmentLinearLayoutChatM"
+        android:layout_alignLeft="@+id/fragmentLinearLayoutChatM"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <ScrollView
+            android:id="@+id/fragmentScrollView1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:scrollbars="vertical" >
+
+            <TextView
+                android:id="@+id/fragmentChatLog"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
     </LinearLayout>
 
 </RelativeLayout>

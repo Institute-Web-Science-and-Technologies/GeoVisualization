@@ -9,7 +9,7 @@
     tools:context="com.example.guiprototype.MapScreen" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/linearLayoutScore"
+        android:id="@+id/fragmentLinearLayoutScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content" >
 
             <ProgressBar
-                android:id="@+id/progressHaer"
+                android:id="@+id/fragmentProgressHaer"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content" >
 
             <ProgressBar
-                android:id="@+id/progressFana"
+                android:id="@+id/fragmentProgressFana"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -68,7 +68,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayoutInteractB"
+        android:id="@+id/fragmentLinearLayoutInteractB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -77,7 +77,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonInteract"
+            android:id="@+id/fragmentButtonInteract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="interact" >
@@ -85,7 +85,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayoutRightSide"
+        android:id="@+id/fragmentLinearLayoutRightSide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -94,13 +94,13 @@
         android:orientation="vertical" >
 
         <FrameLayout
-            android:id="@+id/FrameLayoutPowUp"
+            android:id="@+id/fragmentFrameLayoutPowUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center" >
 
             <ImageView
-                android:id="@+id/imagePowUp"
+                android:id="@+id/fragmentImagePowUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -108,7 +108,7 @@
                 android:src="@drawable/placeholder_24x24" />
 
             <ProgressBar
-                android:id="@+id/progressBarPowUp"
+                android:id="@+id/fragmentProgressBarPowUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </FrameLayout>
@@ -120,13 +120,13 @@
             android:visibility="invisible" />
 
         <FrameLayout
-            android:id="@+id/FrameLayoutPassive"
+            android:id="@+id/fragmentFrameLayoutPassive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/fragmentImageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/placeholder_24x24" />

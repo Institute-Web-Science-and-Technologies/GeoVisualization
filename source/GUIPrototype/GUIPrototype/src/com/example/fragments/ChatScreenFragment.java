@@ -26,7 +26,7 @@ public class ChatScreenFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_chat_screen, container, false);
 		return rootView;
 	}
-	
+	/*
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class ChatScreenFragment extends Fragment {
 			public void run() {
 				ZMQ.Context context = ZMQ.context(1);
 				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
-				subscriber.connect("tcp://141.26.71.46:5558");
+				subscriber.connect("tcp://192.168.2.108:5558");
 				subscriber.subscribe("".getBytes());
 				while (true) {
 					final String msg=new String(subscriber.recv(0));
@@ -56,10 +56,12 @@ public class ChatScreenFragment extends Fragment {
 	public void sendMessage(View view){
 		send();
 	}
+	*/
 	
 	/**
 	 * Senden der der Chatnachrichten über den Server
 	 */
+	/*
 	public void send(){
 		EditText editText= (EditText) getView().findViewById(R.id.chatMessage);
 		Calendar c = Calendar.getInstance();
@@ -73,7 +75,7 @@ public class ChatScreenFragment extends Fragment {
   			public void run() {
   				ZMQ.Context context = ZMQ.context(1);
   				final ZMQ.Socket requester = context.socket(ZMQ.REQ);
-  				requester.connect("tcp://141.26.71.46:5557");
+  				requester.connect("tcp://192.168.2.108:5557");
   				
   					requester.send(msg.getBytes(),0);
   					
@@ -86,6 +88,6 @@ public class ChatScreenFragment extends Fragment {
           	
           }).start();
 	}
-	
+	*/
 	
 }

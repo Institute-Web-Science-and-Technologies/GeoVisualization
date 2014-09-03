@@ -1,5 +1,10 @@
 package com.example.guiprototype;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.zeromq.ZMQ;
+
 import com.example.adapter.TabsPagerAdapter;
 
 import android.support.v4.app.FragmentActivity;
@@ -8,9 +13,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class SwipeScreen extends FragmentActivity implements ActionBar.TabListener {
 	private ViewPager viewPager;
@@ -23,7 +33,26 @@ public class SwipeScreen extends FragmentActivity implements ActionBar.TabListen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_screen);
-		
+		new Thread(new Runnable(){
+			public void run() {
+				ZMQ.Context context = ZMQ.context(1);
+				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
+				subscriber.connect("tcp://192.168.2.108:5558");
+				subscriber.subscribe("".getBytes());
+				while (true) {
+					final String msg=new String(subscriber.recv(0));
+					SwipeScreen.this.runOnUiThread(new Runnable(){
+						public void run(){
+							ScrollView sv= (ScrollView) findViewById(R.id.fragmentScrollView1);
+							TextView scrollTv = (TextView) findViewById(R.id.fragmentChatLog);
+							scrollTv.append(msg);
+							sv.fullScroll(View.FOCUS_DOWN);
+						}
+					});
+					
+					}
+				}
+		}).start();
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar=getActionBar();
@@ -58,6 +87,7 @@ public class SwipeScreen extends FragmentActivity implements ActionBar.TabListen
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+       
 	}
 	
 	
@@ -98,5 +128,54 @@ public class SwipeScreen extends FragmentActivity implements ActionBar.TabListen
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void sendMessage(View view){
+		send();
+		//localSend();
+	}
+	
+	
+	/**
+	 * Senden der der Chatnachrichten über den Server
+	 */
+	
+	public void send(){
+		EditText editText= (EditText) findViewById(R.id.fragmentChatMessage);
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		String fdate= sdf.format(c.getTime());
+		Intent intent= getIntent();
+		final String msg ="<"+ fdate + ">" +intent.getStringExtra(MainActivity.EXTRA_USER) + ": " + editText.getText().toString() + "\n";
+      	new Thread(new Runnable(){
+      		
+  			@Override
+  			public void run() {
+  				ZMQ.Context context = ZMQ.context(1);
+  				final ZMQ.Socket requester = context.socket(ZMQ.REQ);
+  				requester.connect("tcp://192.168.2.108:5557");
+  				
+  					requester.send(msg.getBytes(),0);
+  					
+  					requester.recv(0);
+  				
+  				requester.close();
+  				context.term();
+  				
+  			}
+          	
+          }).start();
+	}
+	public void localSend(){
+		EditText editText= (EditText) findViewById(R.id.fragmentChatMessage);
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		String fdate= sdf.format(c.getTime());
+		Intent intent= getIntent();
+		final String msg ="<"+ fdate + ">" +intent.getStringExtra(MainActivity.EXTRA_USER) + ": " + editText.getText().toString() + "\n";
+		
+		ScrollView sv= (ScrollView) findViewById(R.id.fragmentScrollView1);
+		TextView scrollTv = (TextView) findViewById(R.id.fragmentChatLog);
+		scrollTv.append(msg);
+		sv.fullScroll(View.FOCUS_DOWN);
 	}
 }
