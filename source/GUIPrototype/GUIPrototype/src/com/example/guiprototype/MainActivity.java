@@ -19,8 +19,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
     
-    public void openChat (View view){
-    	Intent intent = new Intent (this, ChatScreenActivity.class);
+    public void swipeScreen (View view){
+    	Intent intent = new Intent (this, SwipeScreen.class);
     	EditText editText= (EditText) findViewById(R.id.editUsername);
     	String username= editText.getText().toString();
     	intent.putExtra(EXTRA_USER, username);
