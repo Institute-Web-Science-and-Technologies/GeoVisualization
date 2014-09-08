@@ -54,9 +54,11 @@ public class MainActivity extends ActionBarActivity {
         class Consumer implements Runnable  {
         	final ZMQ.Socket requester;
         	final ZMQ.Context context;
+        	final BlockingQueue<String> bq;
         	
-        	Consumer(){
-        		 context = ZMQ.context(1);;
+        	public Consumer(final BlockingQueue<String> bq){
+        		this.bq=bq;
+        		 context = ZMQ.context(1);
   				requester = context.socket(ZMQ.REQ);
   				requester.connect(serverIP+":5557");
         	}
@@ -90,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public void run() {
-				Consumer c = new Consumer();
+				Consumer c = new Consumer(bq);
 				c.run();
 				
 			}
