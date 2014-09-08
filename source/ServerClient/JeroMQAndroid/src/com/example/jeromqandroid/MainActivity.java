@@ -1,6 +1,8 @@
 package com.example.jeromqandroid;
 
 import java.io.Serializable;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.zeromq.ZMQ;
 
@@ -19,8 +21,8 @@ import com.google.gson.GsonBuilder;
 public class MainActivity extends ActionBarActivity {
 	
 	MainActivity self =this;
-	
 	final String name="user"+(int)(Math.random()*100);
+	final static String serverIP = "tcp://141.26.71.91";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,35 +30,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         
+       new JeroMQPoller(this, serverIP).poll();
         
-        
-        new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				ZMQ.Context context = ZMQ.context(1);
-				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
-				subscriber.connect("tcp://141.26.71.31:5558");
-				subscriber.subscribe("".getBytes());
-				while (true) {
-					final String msg=new String(subscriber.recv(0));
-					System.out.println(msg);
-					self.runOnUiThread(new Runnable(){
-
-						@Override
-						public void run() {
-							TextView textview=(TextView)findViewById(R.id.textView1);
-							textview.setText(textview.getText().toString()+ msg+'\n');
-							
-						}
-					
-					});
-				}
-				
-			}
-        	
-        }).start();
         
         class Msg implements Serializable{
         	/**
@@ -74,6 +49,56 @@ public class MainActivity extends ActionBarActivity {
         	
         }
         
+        final BlockingQueue<String> bq = new LinkedBlockingQueue();
+        
+        class Consumer implements Runnable  {
+        	final ZMQ.Socket requester;
+        	final ZMQ.Context context;
+        	
+        	Consumer(){
+        		 context = ZMQ.context(1);;
+  				requester = context.socket(ZMQ.REQ);
+  				requester.connect(serverIP+":5557");
+        	}
+
+			@Override
+			public void run() {
+				while(true){
+					try{
+					String msg = bq.take();
+					
+					if(msg!=null){
+          					requester.send(msg.getBytes(),0);
+          					
+          					requester.recv(0);
+          				
+          				
+					}
+					}catch(Exception e){e.printStackTrace();}
+				}
+			}
+			
+			public void close(){
+				requester.close();
+  				context.term();
+			}
+        	
+        }
+        
+       
+        new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				Consumer c = new Consumer();
+				c.run();
+				
+			}
+        	
+        }).start();
+        
+        
+        
     	Button button=(Button)findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -87,16 +112,17 @@ public class MainActivity extends ActionBarActivity {
 
           			@Override
           			public void run() {
-          				ZMQ.Context context = ZMQ.context(1);
+          				/*ZMQ.Context context = ZMQ.context(1);
           				final ZMQ.Socket requester = context.socket(ZMQ.REQ);
-          				requester.connect("tcp://141.26.71.31:5557");
+          				requester.connect(serverIP+":5557");
           				
           					requester.send(json.getBytes(),0);
           					
           					requester.recv(0);
           				
           				requester.close();
-          				context.term();
+          				context.term();*/
+          				bq.add(json);
           				
           			}
                   	
