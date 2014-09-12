@@ -4,6 +4,7 @@ import org.zeromq.ZMQ;
 
 public class ReqRepPublisher {
 	public static void startServer() {
+		System.out.println("Starting server ..");
 		ZMQ.Context context = ZMQ.context(1);
 		ZMQ.Socket replier = context.socket(ZMQ.REP);
 		ZMQ.Socket publisher = context.socket(ZMQ.PUB);
@@ -12,6 +13,7 @@ public class ReqRepPublisher {
 		ZMQ.Poller items = new ZMQ.Poller(2);
 		items.register(replier, ZMQ.Poller.POLLIN);
 		items.register(publisher, ZMQ.Poller.POLLIN);
+		System.out.println("Server started.");
 		
 		while (!Thread.currentThread().isInterrupted()) {
 			byte[] message;
