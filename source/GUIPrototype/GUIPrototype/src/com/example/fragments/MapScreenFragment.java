@@ -8,6 +8,13 @@ import org.zeromq.ZMQ;
 import com.example.guiprototype.MainActivity;
 import com.example.guiprototype.MapScreen;
 import com.example.guiprototype.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,19 +31,30 @@ import android.widget.TextView;
 public class MapScreenFragment extends Fragment {
 
 	public static FragmentManager fragmentManager;
+	private GoogleMap mMap;
+	private MapView mMapView;
+	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment_map_screen, container, false);
-
 		return rootView;
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		fragmentManager = getActivity().getSupportFragmentManager();
+	}
+	
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+	    if (this.mMap != null) setUpMap();
+	    if (mMap == null) {
+	    	this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+	        if (this.mMap != null) setUpMap();
+	    }
 	}
 	
 	protected void initFragment(Fragment fragment) {
@@ -46,6 +64,18 @@ public class MapScreenFragment extends Fragment {
         fragmentTransaction.commit();
     }
 	
+	public void setUpMapIfNeeded() {
+	    if (this.mMap == null) {
+	        this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+	        if (this.mMap != null) setUpMap();
+	    }
+	}
 	
-	
+	private void setUpMap() {
+	    this.mMap.setMyLocationEnabled(true);
+	    mMap.addMarker(new MarkerOptions()
+        	.position(KOBLENZ)
+        	.title("marker 1")
+        	.draggable(true));
+	}
 }
