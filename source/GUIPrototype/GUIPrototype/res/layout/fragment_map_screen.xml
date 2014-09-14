@@ -139,20 +139,20 @@
             android:visibility="invisible" />
     </LinearLayout>
 
-    <!--  >fragment
+    <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayoutInteractB"
+        android:layout_alignBottom="@+id/horizontalScrollViewItems"
         android:layout_alignLeft="@+id/linearLayoutScore"
+        android:layout_alignRight="@+id/horizontalScrollViewItems"
         android:layout_below="@+id/linearLayoutScore"
-        android:layout_toLeftOf="@+id/linearLayoutRightSide"
         app:cameraTargetLat="50.3511528"
         app:cameraTargetLng="7.5951959"
-        app:cameraZoom="14" /-->
+        app:cameraZoom="14" />
 
 </RelativeLayout>
