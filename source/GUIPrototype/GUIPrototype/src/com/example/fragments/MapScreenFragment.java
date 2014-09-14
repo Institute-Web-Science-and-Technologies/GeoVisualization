@@ -1,22 +1,11 @@
 package com.example.fragments;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import org.zeromq.ZMQ;
-
-import com.example.guiprototype.MainActivity;
-import com.example.guiprototype.MapScreen;
 import com.example.guiprototype.R;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,15 +13,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class MapScreenFragment extends Fragment {
 
 	public static FragmentManager fragmentManager;
 	private GoogleMap mMap;
-	private MapView mMapView;
 	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	
 	@Override
