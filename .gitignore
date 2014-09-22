@@ -6,6 +6,7 @@
 .project
 .metadata
 bin/
+*.class
 tmp/
 *.tmp
 *.bak
@@ -15,7 +16,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
-*.class
+
 
 # External tool builders
 .externalToolBuilders/
