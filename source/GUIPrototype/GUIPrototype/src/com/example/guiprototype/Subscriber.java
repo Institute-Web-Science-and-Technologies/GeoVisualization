@@ -2,9 +2,9 @@ package com.example.guiprototype;
 
 import org.zeromq.ZMQ;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Bundle;
 
 public class Subscriber implements Runnable{
 	private final Handler handler;

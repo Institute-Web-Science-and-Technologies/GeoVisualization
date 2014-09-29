@@ -1,96 +1,146 @@
 package com.example.guiprototype;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.zeromq.ZMQ;
 
-import com.example.adapter.TabsPagerAdapter;
-
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class SwipeScreen extends FragmentActivity implements ActionBar.TabListener {
+import com.example.adapter.TabsPagerAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+public class SwipeScreen extends FragmentActivity implements
+		ActionBar.TabListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	
-	private String[] tabs= {"Map", "Chat", "Backpack"};
-	
+	final BlockingQueue<String> bq  = new LinkedBlockingQueue();
+	final Gson gson = new GsonBuilder().create();
+
+	final long userID = (long) (Math.random() * Long.MAX_VALUE);
+	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
+
+	private String[] tabs = { "Map", "Chat", "Backpack" };
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_screen);
-		new Thread(new Runnable(){
-			public void run() {
-				ZMQ.Context context = ZMQ.context(1);
-				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
-				subscriber.connect("tcp://192.168.2.108:5558");
-				subscriber.subscribe("".getBytes());
-				while (true) {
-					final String msg=new String(subscriber.recv(0));
-					SwipeScreen.this.runOnUiThread(new Runnable(){
-						public void run(){
-							ScrollView sv= (ScrollView) findViewById(R.id.fragmentScrollView1);
-							TextView scrollTv = (TextView) findViewById(R.id.fragmentChatLog);
-							scrollTv.append(msg);
-							sv.fullScroll(View.FOCUS_DOWN);
-						}
-					});
-					
-					}
-				}
-		}).start();
+
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		actionBar=getActionBar();
-		mAdapter= new TabsPagerAdapter(getSupportFragmentManager());
-		
+		actionBar = getActionBar();
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
 		viewPager.setAdapter(mAdapter);
-		//actionBar.setHomeButtonEnabled(false);
+		// actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
-		//Tabs der Actionbar hinzufügen
-		for (String tab_name :tabs){
-			actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
+		new JeroMQPoller(this, serverIP).poll();
+
+		// Tabs der Actionbar hinzufügen
+		for (String tab_name : tabs) {
+			actionBar.addTab(actionBar.newTab().setText(tab_name)
+					.setTabListener(this));
 		}
-		
+
 		/**
-         * Sorgt dafür das beim wischen den entsprechden Tab ausgewählt wird
-         * */
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
- 
-            @Override
-            public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
-                actionBar.setSelectedNavigationItem(position);
-            }
- 
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
- 
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-       
+		 * Sorgt dafür das beim wischen den entsprechden Tab ausgewählt wird
+		 * */
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+				// on changing the page
+				// make respected tab selected
+				actionBar.setSelectedNavigationItem(position);
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+			}
+		});
+
+		new JeroMQPoller(this, serverIP).poll();
+
+		
+
+		class Consumer implements Runnable {
+			final ZMQ.Socket requester;
+			final ZMQ.Context context;
+			final BlockingQueue<String> bq;
+
+			public Consumer(final BlockingQueue<String> bq) {
+				this.bq = bq;
+				context = ZMQ.context(1);
+				requester = context.socket(ZMQ.REQ);
+				requester.connect(serverIP + ":5557");
+			}
+
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						String msg = bq.take();
+
+						if (msg != null) {
+							requester.send(msg.getBytes(), 0);
+
+							requester.recv(0);
+
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			public void close() {
+				requester.close();
+				context.term();
+			}
+
+		}
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Consumer c = new Consumer(bq);
+				c.run();
+
+			}
+
+		}).start();
+		
+	
+
+	
 	}
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -112,70 +162,41 @@ public class SwipeScreen extends FragmentActivity implements ActionBar.TabListen
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		
-		//ermöglicht wechseln über Tabs
+
+		// ermöglicht wechseln über Tabs
 		viewPager.setCurrentItem(tab.getPosition());
-		
+
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public void sendMessage(View view) {
 		
+		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
+		final String m = autotextview.getText().toString();
+
+		TransferObject msg = new TransferObject(0, m, Calendar
+				.getInstance().getTime(), userID, "ert");
+		final String json = gson.toJson(msg);
+		Log.d("ert", json);
+		bq.add(json);
 	}
-	public void sendMessage(View view){
-		send();
-		//localSend();
-	}
-	
-	
+
 	/**
 	 * Senden der der Chatnachrichten über den Server
 	 */
-	
-	public void send(){
-		EditText editText= (EditText) findViewById(R.id.fragmentChatMessage);
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		String fdate= sdf.format(c.getTime());
-		Intent intent= getIntent();
-		final String msg ="<"+ fdate + ">" +intent.getStringExtra(MainActivity.EXTRA_USER) + ": " + editText.getText().toString() + "\n";
-      	new Thread(new Runnable(){
-      		
-  			@Override
-  			public void run() {
-  				ZMQ.Context context = ZMQ.context(1);
-  				final ZMQ.Socket requester = context.socket(ZMQ.REQ);
-  				requester.connect("tcp://192.168.2.108:5557");
-  				
-  					requester.send(msg.getBytes(),0);
-  					
-  					requester.recv(0);
-  				
-  				requester.close();
-  				context.term();
-  				
-  			}
-          	
-          }).start();
-	}
-	public void localSend(){
-		EditText editText= (EditText) findViewById(R.id.fragmentChatMessage);
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		String fdate= sdf.format(c.getTime());
-		Intent intent= getIntent();
-		final String msg ="<"+ fdate + ">" +intent.getStringExtra(MainActivity.EXTRA_USER) + ": " + editText.getText().toString() + "\n";
-		
-		ScrollView sv= (ScrollView) findViewById(R.id.fragmentScrollView1);
-		TextView scrollTv = (TextView) findViewById(R.id.fragmentChatLog);
-		scrollTv.append(msg);
-		sv.fullScroll(View.FOCUS_DOWN);
-	}
+
+
+
+
 }
