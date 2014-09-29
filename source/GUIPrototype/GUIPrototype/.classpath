@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="C:/Users/me/Downloads/gson-2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/me/Downloads/jeromq-0.3.4.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="libs/jeromq-0.3.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
