@@ -37,6 +37,7 @@ public class SwipeScreen extends FragmentActivity implements
 	final Gson gson = new GsonBuilder().create();
 
 	final long userID = (long) (Math.random() * Long.MAX_VALUE);
+	String userName;
 	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 
 	private String[] tabs = { "Map", "Chat", "Backpack" };
@@ -45,6 +46,11 @@ public class SwipeScreen extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_screen);
+		
+		
+		// get user name
+		Intent intent= getIntent();
+		userName=intent.getStringExtra(MainActivity.EXTRA_USER) ;
 
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
@@ -186,9 +192,9 @@ public class SwipeScreen extends FragmentActivity implements
 		final String m = autotextview.getText().toString();
 
 		TransferObject msg = new TransferObject(0, m, Calendar
-				.getInstance().getTime(), userID, "ert");
+				.getInstance().getTime(), userID, userName);
 		final String json = gson.toJson(msg);
-		Log.d("ert", json);
+		Log.d(userName, json);
 		bq.add(json);
 	}
 
