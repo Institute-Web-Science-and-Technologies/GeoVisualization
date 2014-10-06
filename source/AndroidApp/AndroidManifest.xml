@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.guiprototype"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--
+         The following two permissions are not required to use
+    	 Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name" >
+>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChatScreenActivity"
+            android:label="@string/title_activity_chat_screen"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MapScreen"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_map_screen" >
+        </activity>
+        <activity
+            android:name=".BackPackScreen"
+            android:label="@string/title_activity_back_pack_screen" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAQARcVr797mMiBJB6Jl18bpS3cIYOxz8o" />
+
+        <activity
+            android:name=".MapScreenActivitySwipeable"
+            android:label="@string/title_activity_map_screen_activity_swipeable" >
+        </activity>
+        <activity
+            android:name=".SwipeScreen"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_swipe_screen" >
+        </activity>
+    </application>
+
+</manifest>
