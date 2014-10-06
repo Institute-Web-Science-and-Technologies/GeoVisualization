@@ -12,7 +12,10 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -23,28 +26,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fragments.*;
 import com.example.adapter.TabsPagerAdapter;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class SwipeScreen extends FragmentActivity implements
-		ActionBar.TabListener {
+		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks, LocationListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	final BlockingQueue<String> bq  = new LinkedBlockingQueue();
 	final Gson gson = new GsonBuilder().create();
+	public LocationClient mLocationClient;
 
 	final long userID = (long) (Math.random() * Long.MAX_VALUE);
+	String userName;
 	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 
 	private String[] tabs = { "Map", "Chat", "Backpack" };
+	private Location mCurrentLocation;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_screen);
+		this.mLocationClient = new LocationClient(this, this, null);
+		
+		// get user name
+		Intent intent= getIntent();
+		userName=intent.getStringExtra(MainActivity.EXTRA_USER) ;
 
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
@@ -179,17 +197,95 @@ public class SwipeScreen extends FragmentActivity implements
 		// TODO Auto-generated method stub
 
 	}
+	
+	 /*
+     * Called when the Activity becomes visible.
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLocationClient.connect();
+        // Connect the client.
+        
+    }
+
+    /*
+     * Called when the Activity is no longer visible.
+     */
+    @Override
+    protected void onStop() {
+        // Disconnecting the client invalidates it.
+        mLocationClient.disconnect();
+        super.onStop();
+    }
+	
+	 /*
+     * Called by Location Services when the request to connect the
+     * client finishes successfully. At this point, you can
+     * request the current location or start periodic updates
+     */
+    @Override
+    public void onConnected(Bundle dataBundle) {
+        // Display the connection status
+        Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+        this.mCurrentLocation = mLocationClient.getLastLocation();
+    }
+    
+    @Override
+    public void onLocationChanged(Location location) {
+    	String msg = "Updated Location: " +
+                Double.toString(location.getLatitude()) + "," +
+                Double.toString(location.getLongitude());
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    	this.mCurrentLocation = location;
+    }
+
+    /*
+     * Called by Location Services if the connection to the
+     * location client drops because of an error.
+     */
+    @Override
+    public void onDisconnected() {
+        // Display the connection status
+        Toast.makeText(this, "Disconnected. Please re-connect.",
+                Toast.LENGTH_SHORT).show();
+    }
+
+	
+	public LatLng getOwnLocation() {
+		return new LatLng(this.mCurrentLocation.getLatitude(), this.mCurrentLocation.getLongitude());
+	}
 
 	public void sendMessage(View view) {
 		
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
-
+		
+		LatLng location = this.getOwnLocation();
+		
 		TransferObject msg = new TransferObject(0, m, Calendar
-				.getInstance().getTime(), userID, "ert");
+				.getInstance().getTime(), userID, userName, location);
 		final String json = gson.toJson(msg);
-		Log.d("ert", json);
+		Log.d(userName, json);
 		bq.add(json);
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**

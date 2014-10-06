@@ -2,6 +2,7 @@ package com.example.fragments;
 
 import com.example.guiprototype.R;
 import com.google.android.gms.internal.lc;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +30,7 @@ public class MapScreenFragment extends Fragment {
 	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	static final LatLng UNI = new LatLng(50.363417, 7.558432);
 	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -38,12 +41,15 @@ public class MapScreenFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		fragmentManager = getActivity().getSupportFragmentManager();
+		
 	}
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 	    this.setUpMapIfNeeded();
 	}
+	
+	
 	
 	protected void initFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
