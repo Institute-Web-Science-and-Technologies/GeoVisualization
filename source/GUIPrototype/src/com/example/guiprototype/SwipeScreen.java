@@ -13,7 +13,7 @@ import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
+import com.google.android.gms.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -30,21 +30,24 @@ import android.widget.Toast;
 
 import com.example.fragments.*;
 import com.example.adapter.TabsPagerAdapter;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class SwipeScreen extends FragmentActivity implements
-		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks, LocationListener {
+		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks, LocationListener,GooglePlayServicesClient.OnConnectionFailedListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	final BlockingQueue<String> bq  = new LinkedBlockingQueue();
 	final Gson gson = new GsonBuilder().create();
 	public LocationClient mLocationClient;
+	private LocationRequest mLocationRequest;
 
 	final long userID = (long) (Math.random() * Long.MAX_VALUE);
 	String userName;
@@ -58,7 +61,14 @@ public class SwipeScreen extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_screen);
-		this.mLocationClient = new LocationClient(this, this, null);
+		this.mLocationClient = new LocationClient(this, this, this);
+		this.mLocationRequest = LocationRequest.create();
+		this.mLocationRequest.setPriority(
+	                LocationRequest.PRIORITY_HIGH_ACCURACY);
+		
+		this.mLocationRequest.setInterval(1000);
+		this.mLocationRequest.setFastestInterval(500);
+		
 		
 		// get user name
 		Intent intent= getIntent();
@@ -67,13 +77,13 @@ public class SwipeScreen extends FragmentActivity implements
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager(),this);
 
 		viewPager.setAdapter(mAdapter);
 		// actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
-		new JeroMQPoller(this, serverIP).poll();
+		//new JeroMQPoller(this, serverIP).poll();
 
 		// Tabs der Actionbar hinzufügen
 		for (String tab_name : tabs) {
@@ -102,7 +112,7 @@ public class SwipeScreen extends FragmentActivity implements
 			}
 		});
 
-		new JeroMQPoller(this, serverIP).poll();
+	//	new JeroMQPoller(this, serverIP).poll();
 
 		
 
@@ -227,17 +237,21 @@ public class SwipeScreen extends FragmentActivity implements
     @Override
     public void onConnected(Bundle dataBundle) {
         // Display the connection status
+    	mLocationClient.requestLocationUpdates(this.mLocationRequest, this);
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         this.mCurrentLocation = mLocationClient.getLastLocation();
     }
     
     @Override
     public void onLocationChanged(Location location) {
-    	String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     	this.mCurrentLocation = location;
+    	TransferObject msg = new TransferObject(1, "", Calendar
+				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()));
+    	final String json = gson.toJson(msg);
+    	bq.add(json);
+    	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -250,14 +264,13 @@ public class SwipeScreen extends FragmentActivity implements
         Toast.makeText(this, "Disconnected. Please re-connect.",
                 Toast.LENGTH_SHORT).show();
     }
-
-	
+    
 	public LatLng getOwnLocation() {
 		return new LatLng(this.mCurrentLocation.getLatitude(), this.mCurrentLocation.getLongitude());
 	}
 
 	public void sendMessage(View view) {
-		
+		//MapScreenFragment map = (MapScreenFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
 		
@@ -270,29 +283,12 @@ public class SwipeScreen extends FragmentActivity implements
 		bq.add(json);
 	}
 
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void onProviderEnabled(String provider) {
+	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
-		
 	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	/**
 	 * Senden der der Chatnachrichten über den Server
 	 */
-
-
-
-
 }

@@ -13,8 +13,7 @@ public class TransferObject implements Serializable {
 	public java.util.Date timestamp;
 	public long senderID;
 	public String senderName;
-	public double lat;
-	public double lng;
+	public LatLng pos;
 	
 	/**
 	 * 
@@ -32,8 +31,7 @@ public class TransferObject implements Serializable {
 		this.timestamp = timestamp;
 		this.senderID = senderID;
 		this.senderName = senderName;
-		this.lat = location.latitude;
-		this.lng = location.longitude;
+		this.pos=location;
 	}
 	
 	

@@ -25,10 +25,5 @@ public class MainActivity extends ActionBarActivity {
     	
     }
     public void start (View view){
-    	Intent intent = new Intent (this, MapScreen.class);
-    	EditText editText= (EditText) findViewById(R.id.editUsername);
-    	String username= editText.getText().toString();
-    	intent.putExtra(EXTRA_USER, username);
-    	startActivity(intent);
     }
 }

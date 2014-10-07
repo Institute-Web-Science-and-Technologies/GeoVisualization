@@ -1,6 +1,12 @@
 package com.example.fragments;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.zeromq.ZMQ;
+
 import com.example.guiprototype.R;
+import com.example.guiprototype.TransferObject;
 import com.google.android.gms.internal.lc;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,7 +18,10 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -22,14 +31,22 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class MapScreenFragment extends Fragment {
-
+	Activity self;
+	Map <String, Marker> players=new HashMap<String, Marker> ();
+	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
+	
 	public static FragmentManager fragmentManager;
-	private GoogleMap mMap;
+	public GoogleMap mMap;
 	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	static final LatLng UNI = new LatLng(50.363417, 7.558432);
-	
+	public MapScreenFragment (Activity self){
+		super();
+		this.self=self;
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,11 +77,12 @@ public class MapScreenFragment extends Fragment {
 	
 	public void setUpMapIfNeeded() {
 		if (this.mMap == null) this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-    	setUpMap();
+		setUpMap();
 	}
 	
+	
 	private void setUpMap() {
-	    this.mMap.setMyLocationEnabled(true);
+	   // this.mMap.setMyLocationEnabled(true);
 	    final Marker redFlag = initBase("red", KOBLENZ);
 	    final Marker blueFlag = initBase("blue", UNI);
 	    Marker blueMarker = initMarker(240, new LatLng(50.364661,7.563409));
@@ -106,8 +124,64 @@ public class MapScreenFragment extends Fragment {
 				
 			}
 	    }); 
-	    
+	    new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ZMQ.Context context = ZMQ.context(1);
+				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
+				subscriber.connect(serverIP+":5558");
+				subscriber.subscribe("".getBytes());
+				final Gson gson = new GsonBuilder().create();
+				
+				while (true) {
+					final String msg=new String(subscriber.recv(0));
+					System.out.println(msg);
+					final TransferObject t=gson.fromJson(msg, TransferObject.class);
+					if (t.msgtype==0) 
+						self.runOnUiThread(new Runnable(){
+						
+						@Override
+						public void run() {
+							/*TextView textview=(TextView)self.findViewById(R.id.textView1);
+							textview.setText(textview.getText().toString()+ msg+'\n');*/
+							
+							ScrollView sv= (ScrollView) self.findViewById(R.id.fragmentScrollView1);
+							TextView scrollTv = (TextView) self.findViewById(R.id.fragmentChatLog);
+							scrollTv.append(msg);
+							sv.fullScroll(View.FOCUS_DOWN);
+							
+						}
+					
+					});
+					if (t.msgtype==1){
+						self.runOnUiThread(new Runnable(){
+
+							@Override
+							public void run() {
+								handlePosition(t.senderName,t.pos);
+								//Marker marker=mMap.addMarker(new MarkerOptions().position(t.pos).title(t.senderName));
+								//marker.setIcon(BitmapDescriptorFactory.defaultMarker((float)Math.random()*240));
+							}
+							
+						});
+						
+					}
+				}
+				
+			}
+        	
+        }).start();
+	
 	}
+	private void handlePosition (String username, LatLng pos){
+		if (players.containsKey(username)) players.get(username).setPosition(pos);
+		else {
+			players.put(username, initMarker((float)Math.random()*240,pos));
+		}
+	}
+	
 	
 	private Marker initMarker(float colorDouble, LatLng position) {
 		Marker marker = this.mMap.addMarker(new MarkerOptions()
