@@ -43,6 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/fragmentLinearLayoutChatM"
         android:layout_alignLeft="@+id/fragmentLinearLayoutChatM"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/fragmentLinearLayoutChatM"
         android:gravity="left"
         android:orientation="horizontal"
         android:visibility="visible" >
@@ -50,7 +52,7 @@
         <ScrollView
             android:id="@+id/fragmentScrollView1"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:scrollbars="vertical" >
 
             <TextView
