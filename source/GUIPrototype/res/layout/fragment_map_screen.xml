@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Häretiker" />
+                    android:text="Jormungand" />
             </RelativeLayout>
         </FrameLayout>
 
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Fanatiker" />
+                    android:text="Quetzalcoatl" />
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
@@ -148,10 +148,10 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/horizontalScrollViewItems"
+        android:layout_above="@+id/fragmentLinearLayoutInteractB"
         android:layout_alignLeft="@+id/linearLayoutScore"
-        android:layout_alignRight="@+id/horizontalScrollViewItems"
-        android:layout_below="@+id/linearLayoutScore"
+        android:layout_alignRight="@+id/fragmentLinearLayoutRightSide"
+        android:layout_below="@+id/fragmentLinearLayoutScore"
         app:cameraTargetLat="50.3511528"
         app:cameraTargetLng="7.5951959"
         app:cameraZoom="14" />
