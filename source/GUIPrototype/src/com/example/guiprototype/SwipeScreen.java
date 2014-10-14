@@ -2,12 +2,11 @@ package com.example.guiprototype;
 
 import geoviz.communication.JeroMQPoller;
 import geoviz.communication.JeroMQQueue;
+import geoviz.communication.TransferObject;
+import geoviz.game.Game;
+import geoviz.game.SnakeGame;
 
 import java.util.Calendar;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import org.zeromq.ZMQ;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -50,6 +49,12 @@ public class SwipeScreen extends FragmentActivity implements
 	private String[] tabs = { "Map", "Chat"};
 	private Location mCurrentLocation;
 
+	private static FragmentActivity __instance;
+
+	public static void runOnUi(Runnable r){
+		__instance.runOnUiThread(r);
+	}
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +81,21 @@ public class SwipeScreen extends FragmentActivity implements
 		viewPager.setAdapter(mAdapter);
 		// actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		__instance =this;
+
+		Game.init(new SnakeGame());
 		
 		new JeroMQPoller(this).poll();
 
-		// Tabs der Actionbar hinzufügen
+		// Tabs der Actionbar hinzufï¿½gen
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));
 		}
 
 		/**
-		 * Sorgt dafür das beim wischen den entsprechden Tab ausgewählt wird
+		 * Sorgt dafï¿½r das beim wischen den entsprechden Tab ausgewï¿½hlt wird
 		 * */
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -136,7 +145,7 @@ public class SwipeScreen extends FragmentActivity implements
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 
-		// ermöglicht wechseln über Tabs
+		// ermï¿½glicht wechseln ï¿½ber Tabs
 		viewPager.setCurrentItem(tab.getPosition());
 
 	}
@@ -239,6 +248,6 @@ public class SwipeScreen extends FragmentActivity implements
 		// TODO Auto-generated method stub
 	}
 	/**
-	 * Senden der der Chatnachrichten über den Server
+	 * Senden der der Chatnachrichten ï¿½ber den Server
 	 */
 }

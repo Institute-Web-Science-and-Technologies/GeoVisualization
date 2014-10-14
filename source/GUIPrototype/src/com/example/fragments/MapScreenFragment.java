@@ -1,5 +1,7 @@
 package com.example.fragments;
 
+import geoviz.communication.TransferObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -8,7 +10,6 @@ import java.util.Map;
 import org.zeromq.ZMQ;
 
 import com.example.guiprototype.R;
-import com.example.guiprototype.TransferObject;
 import com.google.android.gms.internal.lc;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.GoogleMap;
@@ -183,7 +184,7 @@ public class MapScreenFragment extends Fragment {
 		double lat2 = pos2.latitude;
 		double lng1 = pos1.longitude;
 		double lng2 = pos2.longitude;
-	    double earthRadius = 6378137; //Radius am Äquator in Meter
+	    double earthRadius = 6378137; //Radius am ï¿½quator in Meter
 	    double dLat = Math.toRadians(lat2-lat1);
 	    double dLng = Math.toRadians(lng2-lng1);
 	    double sindLat = Math.sin(dLat / 2);

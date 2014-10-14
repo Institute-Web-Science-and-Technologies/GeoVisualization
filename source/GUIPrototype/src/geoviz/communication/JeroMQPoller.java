@@ -1,28 +1,19 @@
 package geoviz.communication;
 
+import geoviz.game.Game;
+
 import java.text.SimpleDateFormat;
 
 import org.zeromq.ZMQ;
 
-import com.example.fragments.MapScreenFragment;
-import com.example.guiprototype.R;
-import com.example.guiprototype.TransferObject;
-import com.example.guiprototype.R.id;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.example.guiprototype.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 //subscribes smartphone to the server and handles incoming communication
 public class JeroMQPoller  {
@@ -60,7 +51,7 @@ public class JeroMQPoller  {
 					final String msg=new String(subscriber.recv(0));
 					System.out.println(msg);
 					final TransferObject t=gson.fromJson(msg, TransferObject.class);
-					if (t.msgtype==0) 
+					if (t.msgtype==TransferObject.TYPE_MSG) 
 						self.runOnUiThread(new Runnable(){
 						
 						@Override
@@ -75,16 +66,8 @@ public class JeroMQPoller  {
 						}
 					
 					});
-					if (t.msgtype==1){
-						self.runOnUiThread(new Runnable(){
-
-							@Override
-							public void run() {
-								MapScreenFragment.getMSF().handlePosition(t.senderName,t.pos);
-								
-							}
-							
-						});
+					if (t.msgtype!=TransferObject.TYPE_MSG){
+						Game.getGame().update(t);
 						
 					}
 					
