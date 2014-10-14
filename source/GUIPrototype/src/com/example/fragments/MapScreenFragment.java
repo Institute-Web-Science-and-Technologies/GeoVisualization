@@ -38,6 +38,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MapScreenFragment extends Fragment {
+	private static MapScreenFragment __instance;
+	
+	
 	Map <String, Marker> players=new HashMap<String, Marker> ();
 	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 	
@@ -57,7 +60,11 @@ public class MapScreenFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		fragmentManager = getActivity().getSupportFragmentManager();
-		
+		__instance=this;
+	}
+	
+	public static MapScreenFragment getMSF(){
+		return __instance;
 	}
 	
 	@Override
@@ -133,58 +140,10 @@ public class MapScreenFragment extends Fragment {
 				
 			}
 	    }); 
-	    new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				ZMQ.Context context = ZMQ.context(1);
-				ZMQ.Socket subscriber = context.socket(ZMQ.SUB);
-				subscriber.connect(serverIP+":5558");
-				subscriber.subscribe("".getBytes());
-				final Gson gson = new GsonBuilder().create();
-				
-				while (true) {
-					final String msg=new String(subscriber.recv(0));
-					System.out.println(msg);
-					final TransferObject t=gson.fromJson(msg, TransferObject.class);
-					if (t.msgtype==0) 
-						getActivity().runOnUiThread(new Runnable(){
-						
-						@Override
-						public void run() {
-							/*TextView textview=(TextView)self.findViewById(R.id.textView1);
-							textview.setText(textview.getText().toString()+ msg+'\n');*/
-							SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-							ScrollView sv= (ScrollView) getActivity().findViewById(R.id.fragmentScrollView1);
-							TextView scrollTv = (TextView) getActivity().findViewById(R.id.fragmentChatLog);
-							scrollTv.append(t.senderName+" "+dateFormat.format(t.timestamp)+" :"+t.msg+"\n");
-							sv.fullScroll(View.FOCUS_DOWN);
-							
-						}
-					
-					});
-					if (t.msgtype==1){
-						getActivity().runOnUiThread(new Runnable(){
-
-							@Override
-							public void run() {
-								handlePosition(t.senderName,t.pos);
-								//Marker marker=mMap.addMarker(new MarkerOptions().position(t.pos).title(t.senderName));
-								//marker.setIcon(BitmapDescriptorFactory.defaultMarker((float)Math.random()*240));
-							}
-							
-						});
-						
-					}
-				}
-				
-			}
-        	
-        }).start();
+	 
 	
 	}
-	private void handlePosition (String username, LatLng pos){
+	public void handlePosition (String username, LatLng pos){
 		if (players.containsKey(username)) players.get(username).setPosition(pos);
 		else {
 			players.put(username, initMarker((float)Math.random()*240,pos, username));

@@ -1,7 +1,8 @@
 package com.example.guiprototype;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import geoviz.communication.JeroMQPoller;
+import geoviz.communication.JeroMQQueue;
+
 import java.util.Calendar;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -13,28 +14,23 @@ import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.location.Location;
-import com.google.android.gms.location.LocationListener;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fragments.*;
 import com.example.adapter.TabsPagerAdapter;
+import com.example.fragments.MapScreenFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,14 +40,12 @@ public class SwipeScreen extends FragmentActivity implements
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	final BlockingQueue<String> bq  = new LinkedBlockingQueue();
 	final Gson gson = new GsonBuilder().create();
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
 
 	final long userID = (long) (Math.random() * Long.MAX_VALUE);
 	String userName;
-	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 
 	private String[] tabs = { "Map", "Chat"};
 	private Location mCurrentLocation;
@@ -83,7 +77,7 @@ public class SwipeScreen extends FragmentActivity implements
 		// actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
-		//new JeroMQPoller(this, serverIP).poll();
+		new JeroMQPoller(this).poll();
 
 		// Tabs der Actionbar hinzufügen
 		for (String tab_name : tabs) {
@@ -116,58 +110,7 @@ public class SwipeScreen extends FragmentActivity implements
 
 		
 
-		class Consumer implements Runnable {
-			final ZMQ.Socket requester;
-			final ZMQ.Context context;
-			final BlockingQueue<String> bq;
-
-			public Consumer(final BlockingQueue<String> bq) {
-				this.bq = bq;
-				context = ZMQ.context(1);
-				requester = context.socket(ZMQ.REQ);
-				requester.connect(serverIP + ":5557");
-			}
-
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						
-						String msg = bq.take();
-
-						if (msg != null) {
-							requester.send(msg.getBytes(), 0);
-
-							requester.recv(0);
-
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-
-			public void close() {
-				requester.close();
-				context.term();
-			}
-
-		}
-
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				Consumer c = new Consumer(bq);
-				c.run();
-
-			}
-
-		}).start();
-		
-	
-
-	
+			
 	}
 
 	@Override
@@ -252,7 +195,7 @@ public class SwipeScreen extends FragmentActivity implements
     	TransferObject msg = new TransferObject(1, "", Calendar
 				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()));
     	final String json = gson.toJson(msg);
-    	bq.add(json);
+    	JeroMQQueue.getInstance().add(json);
     	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
     	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     }
@@ -283,9 +226,10 @@ public class SwipeScreen extends FragmentActivity implements
 				.getInstance().getTime(), userID, userName, location);
 		final String json = gson.toJson(msg);
 		Log.d(userName, json);
-		bq.add(json);
-		MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
-		bq.add(gson.toJson(fragment.testMSF(userID, m, location)));
+		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		jmqq.add(json);
+		MapScreenFragment fragment= MapScreenFragment.getMSF();// = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
+		jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
 		//doesnt work yet
 	}
 
