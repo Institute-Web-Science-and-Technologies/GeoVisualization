@@ -17,7 +17,7 @@ public class TransferObject implements Serializable {
 	
 	/**
 	 * 
-	 * @param msgtype int 
+	 * @param msgtype int 0 is chat message, 1 is gps update
 	 * @param msg String message
 	 * @param timestamp java.util.Date
 	 * @param senderID double

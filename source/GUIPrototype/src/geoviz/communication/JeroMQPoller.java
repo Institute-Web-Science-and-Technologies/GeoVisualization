@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+//subscribes smartphone to the server and handles incoming communication
 public class JeroMQPoller  {
 	
 	

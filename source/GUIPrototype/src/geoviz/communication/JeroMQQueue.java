@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.zeromq.ZMQ;
-
+//handles outgoing communication via a blocking queue and request reply
 public class JeroMQQueue {
 	
 	private static JeroMQQueue __instance;
