@@ -53,7 +53,7 @@ public class SwipeScreen extends FragmentActivity implements
 	String userName;
 	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 
-	private String[] tabs = { "Map", "Chat", "Backpack" };
+	private String[] tabs = { "Map", "Chat"};
 	private Location mCurrentLocation;
 
 	
@@ -77,7 +77,7 @@ public class SwipeScreen extends FragmentActivity implements
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager(),this);
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
 		viewPager.setAdapter(mAdapter);
 		// actionBar.setHomeButtonEnabled(false);
@@ -132,6 +132,7 @@ public class SwipeScreen extends FragmentActivity implements
 			public void run() {
 				while (true) {
 					try {
+						
 						String msg = bq.take();
 
 						if (msg != null) {
@@ -174,6 +175,7 @@ public class SwipeScreen extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.swipe_screen, menu);
 		return true;
+		
 	}
 
 	@Override
@@ -251,6 +253,7 @@ public class SwipeScreen extends FragmentActivity implements
 				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()));
     	final String json = gson.toJson(msg);
     	bq.add(json);
+    	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
     	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     }
 
@@ -281,6 +284,9 @@ public class SwipeScreen extends FragmentActivity implements
 		final String json = gson.toJson(msg);
 		Log.d(userName, json);
 		bq.add(json);
+		MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
+		bq.add(gson.toJson(fragment.testMSF(userID, m, location)));
+		//doesnt work yet
 	}
 
 

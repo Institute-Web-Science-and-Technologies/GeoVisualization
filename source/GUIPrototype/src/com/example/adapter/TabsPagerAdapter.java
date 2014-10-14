@@ -10,11 +10,9 @@ import com.example.fragments.ChatScreenFragment;
 import com.example.fragments.MapScreenFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter{
-	Activity a;
-	public TabsPagerAdapter(FragmentManager fm, Activity a) {
+	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
 		// TODO Auto-generated constructor stub
-		this.a=a;
 	}
 
 	@Override
@@ -22,14 +20,14 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
 		switch (index){
 		case 0:
 			
-			return new MapScreenFragment (a);
+			return new MapScreenFragment ();
 			
 		case 1:
 			return new ChatScreenFragment();
-			
+		/*	
 		case 2:
 			return new BackpackScreenFragment();
-		
+		*/
 		}
 		return null;
 	}
@@ -37,7 +35,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
 	@Override
 	public int getCount() {
 		
-		return 3;
+		return 2;
 	}
 
 }

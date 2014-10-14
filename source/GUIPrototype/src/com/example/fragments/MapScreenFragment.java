@@ -1,5 +1,7 @@
 package com.example.fragments;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +30,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +38,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MapScreenFragment extends Fragment {
-	Activity self;
 	Map <String, Marker> players=new HashMap<String, Marker> ();
 	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 	
@@ -43,10 +45,7 @@ public class MapScreenFragment extends Fragment {
 	public GoogleMap mMap;
 	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	static final LatLng UNI = new LatLng(50.363417, 7.558432);
-	public MapScreenFragment (Activity self){
-		super();
-		this.self=self;
-	}
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,26 +78,35 @@ public class MapScreenFragment extends Fragment {
 		if (this.mMap == null) this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		setUpMap();
 	}
-	
+	public TransferObject testMSF (long userID, String userName, LatLng location){
+		
+    	TransferObject msg = new TransferObject(0, "MSF casting successful", Calendar
+				.getInstance().getTime(), userID, userName, location);
+    	return msg;
+	}
 	
 	private void setUpMap() {
 	   // this.mMap.setMyLocationEnabled(true);
-	    final Marker redFlag = initBase("red", KOBLENZ);
-	    final Marker blueFlag = initBase("blue", UNI);
-	    Marker blueMarker = initMarker(240, new LatLng(50.364661,7.563409));
-	    Marker redMarker = initMarker(0, new LatLng(50.358870, 7.577356));
+	    //final Marker redFlag = initBase("red", KOBLENZ);
+	   // final Marker blueFlag = initBase("blue", UNI);
+	    //Marker blueMarker = initMarker(240, new LatLng(50.364661,7.563409));
+	    //Marker redMarker = initMarker(0, new LatLng(50.358870, 7.577356));
 	    
 	    this.mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 	    	
 			// ##### Berechnet immer die Distanz vom Marker zur roten Fahne
 			@Override
-			public boolean onMarkerClick(Marker arg0) {
+			/*public boolean onMarkerClick(Marker arg0) {
 				double d = calcDistance(redFlag.getPosition(), arg0.getPosition());
 				arg0.setSnippet("distance to red flag: " + (int)d + " meters");
 				arg0.showInfoWindow();
 				return true;
+			}*/
+			public boolean onMarkerClick (Marker arg0){
+				arg0.setSnippet (arg0.getTitle());
+				arg0.showInfoWindow();
+				return true;
 			}
-    	
     	});
 	    
 	    this.mMap.setOnMarkerDragListener(new OnMarkerDragListener() {
@@ -113,10 +121,11 @@ public class MapScreenFragment extends Fragment {
 			// #### Wenn der Marker gezogen wird, wird neue Distanz berechnet
 			@Override
 			public void onMarkerDragEnd(Marker arg0) {
-				double d = calcDistance(redFlag.getPosition(), arg0.getPosition());
+				/*double d = calcDistance(redFlag.getPosition(), arg0.getPosition());
 				arg0.setSnippet("distance to red flag: " + (int)d + " meters");
-				arg0.showInfoWindow();				
+				arg0.showInfoWindow();*/				
 			}
+			
 			
 			@Override
 			public void onMarkerDrag(Marker arg0) {
@@ -140,23 +149,23 @@ public class MapScreenFragment extends Fragment {
 					System.out.println(msg);
 					final TransferObject t=gson.fromJson(msg, TransferObject.class);
 					if (t.msgtype==0) 
-						self.runOnUiThread(new Runnable(){
+						getActivity().runOnUiThread(new Runnable(){
 						
 						@Override
 						public void run() {
 							/*TextView textview=(TextView)self.findViewById(R.id.textView1);
 							textview.setText(textview.getText().toString()+ msg+'\n');*/
-							
-							ScrollView sv= (ScrollView) self.findViewById(R.id.fragmentScrollView1);
-							TextView scrollTv = (TextView) self.findViewById(R.id.fragmentChatLog);
-							scrollTv.append(msg);
+							SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+							ScrollView sv= (ScrollView) getActivity().findViewById(R.id.fragmentScrollView1);
+							TextView scrollTv = (TextView) getActivity().findViewById(R.id.fragmentChatLog);
+							scrollTv.append(t.senderName+" "+dateFormat.format(t.timestamp)+" :"+t.msg+"\n");
 							sv.fullScroll(View.FOCUS_DOWN);
 							
 						}
 					
 					});
 					if (t.msgtype==1){
-						self.runOnUiThread(new Runnable(){
+						getActivity().runOnUiThread(new Runnable(){
 
 							@Override
 							public void run() {
@@ -178,15 +187,15 @@ public class MapScreenFragment extends Fragment {
 	private void handlePosition (String username, LatLng pos){
 		if (players.containsKey(username)) players.get(username).setPosition(pos);
 		else {
-			players.put(username, initMarker((float)Math.random()*240,pos));
+			players.put(username, initMarker((float)Math.random()*240,pos, username));
 		}
 	}
 	
 	
-	private Marker initMarker(float colorDouble, LatLng position) {
+	private Marker initMarker(float colorDouble, LatLng position, String name) {
 		Marker marker = this.mMap.addMarker(new MarkerOptions()
         	.position(position)
-        	.title("marker")
+        	.title(name)
         	.draggable(true));
 		marker.setIcon(BitmapDescriptorFactory.defaultMarker(colorDouble));
 		return marker;
