@@ -11,6 +11,7 @@ import java.util.Calendar;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.telephony.TelephonyManager;
 
 import com.example.adapter.TabsPagerAdapter;
 import com.example.fragments.MapScreenFragment;
@@ -43,10 +45,21 @@ public class SwipeScreen extends FragmentActivity implements
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
 
-	final long userID = (long) (Math.random() * Long.MAX_VALUE);
+	String userID ;
+	
+	
+	public static String getDeviceId(Context context) {
+	    final String deviceId = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+	    if (deviceId != null) {
+	        return deviceId;
+	    } else {
+	        return android.os.Build.SERIAL;
+	    }
+	}
+	
 	String userName;
 
-	private String[] tabs = { "Map", "Chat"};
+	private String[] tabs = { "Map", "Chat", "Games"};
 	private Location mCurrentLocation;
 
 	private static FragmentActivity __instance;
@@ -68,7 +81,7 @@ public class SwipeScreen extends FragmentActivity implements
 		this.mLocationRequest.setInterval(1000);
 		this.mLocationRequest.setFastestInterval(500);
 		
-		
+		userID = getDeviceId(this);
 		// get user name
 		Intent intent= getIntent();
 		userName=intent.getStringExtra(MainActivity.EXTRA_USER) ;

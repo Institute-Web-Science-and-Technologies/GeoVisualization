@@ -12,9 +12,13 @@ import org.zeromq.ZMQ;
 import com.example.guiprototype.R;
 import com.google.android.gms.internal.lc;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -46,6 +50,7 @@ public class MapScreenFragment extends Fragment {
 	final static String serverIP = "tcp://heglohitdos.west.uni-koblenz.de";
 	
 	public static FragmentManager fragmentManager;
+	MapView mapView;
 	public GoogleMap mMap;
 	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	static final LatLng UNI = new LatLng(50.363417, 7.558432);
@@ -55,6 +60,17 @@ public class MapScreenFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_map_screen, container, false);
+		 
+	    
+	/*	if (mapView == null){
+		MapsInitializer.initialize(getActivity()); 
+	    mapView = (MapView)rootView.findViewById(R.id.map);
+		mapView.onCreate(savedInstanceState);
+		if (mMap == null)
+		mMap= mapView.getMap();
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
+        mMap.animateCamera(cameraUpdate);
+		}*/
 		return rootView;
 	}
 	@Override
@@ -71,6 +87,8 @@ public class MapScreenFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 	    this.setUpMapIfNeeded();
+		//setUpMap();
+		
 	}
 	
 	
@@ -86,9 +104,9 @@ public class MapScreenFragment extends Fragment {
 		if (this.mMap == null) this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		setUpMap();
 	}
-	public TransferObject testMSF (long userID, String userName, LatLng location){
+	public TransferObject testMSF (String userID, String userName, LatLng location){
 		
-    	TransferObject msg = new TransferObject(0, "MSF casting successful", Calendar
+    	TransferObject msg = new TransferObject(0, userID, Calendar
 				.getInstance().getTime(), userID, userName, location);
     	return msg;
 	}

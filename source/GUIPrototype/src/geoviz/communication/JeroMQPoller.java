@@ -19,13 +19,13 @@ import com.google.gson.GsonBuilder;
 public class JeroMQPoller  {
 	
 	
-	final FragmentActivity self;
+	final FragmentActivity activity;
 	final String serverIP;
 	
 	
 	public JeroMQPoller(FragmentActivity self) {
 		super();
-		this.self = self;
+		this.activity = self;
 		this.serverIP = Const.serverIP;
 		
 	}
@@ -49,17 +49,16 @@ public class JeroMQPoller  {
 				
 				while (true) {
 					final String msg=new String(subscriber.recv(0));
-					System.out.println(msg);
 					final TransferObject t=gson.fromJson(msg, TransferObject.class);
 					if (t.msgtype==TransferObject.TYPE_MSG) 
-						self.runOnUiThread(new Runnable(){
+						activity.runOnUiThread(new Runnable(){
 						
 						@Override
 						public void run() {
 							
 							SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-							ScrollView sv= (ScrollView) self.findViewById(R.id.fragmentScrollView1);
-							TextView scrollTv = (TextView) self.findViewById(R.id.fragmentChatLog);
+							ScrollView sv= (ScrollView) activity.findViewById(R.id.fragmentScrollView1);
+							TextView scrollTv = (TextView) activity.findViewById(R.id.fragmentChatLog);
 							scrollTv.append(t.senderName+" "+dateFormat.format(t.timestamp)+" :"+t.msg+"\n");
 							sv.fullScroll(View.FOCUS_DOWN);
 							

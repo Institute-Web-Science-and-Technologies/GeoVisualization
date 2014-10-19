@@ -14,7 +14,7 @@ public class TransferObject implements Serializable {
 	public int msgtype;
 	public String msg;
 	public java.util.Date timestamp;
-	public long senderID;
+	public String senderID;
 	public String senderName;
 	public LatLng pos;
 	
@@ -27,7 +27,7 @@ public class TransferObject implements Serializable {
 	 * @param senderName String
 	 */
 	public TransferObject(int msgtype, String msg, Date timestamp,
-			long senderID, String senderName, LatLng location) {
+			String senderID, String senderName, LatLng location) {
 		super();
 		this.msgtype = msgtype;
 		this.msg = msg;

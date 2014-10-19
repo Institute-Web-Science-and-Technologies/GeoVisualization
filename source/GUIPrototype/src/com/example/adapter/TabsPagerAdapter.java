@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.fragments.BackpackScreenFragment;
 import com.example.fragments.ChatScreenFragment;
+import com.example.fragments.GamesScreenFragment;
 import com.example.fragments.MapScreenFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter{
@@ -24,10 +25,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
 			
 		case 1:
 			return new ChatScreenFragment();
-		/*	
+			
 		case 2:
-			return new BackpackScreenFragment();
-		*/
+			return new GamesScreenFragment();
+		
 		}
 		return null;
 	}
@@ -35,7 +36,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
 	@Override
 	public int getCount() {
 		
-		return 2;
+		return 3;
 	}
 
 }

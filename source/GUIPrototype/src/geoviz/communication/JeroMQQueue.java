@@ -28,11 +28,11 @@ public class JeroMQQueue {
 				this.bq = bq;
 				context = ZMQ.context(1);
 				requester = context.socket(ZMQ.REQ);
-				requester.connect(Const.serverIP + ":5557");
 			}
 
 			@Override
 			public void run() {
+				requester.connect(Const.serverIP + ":5557");
 				while (true) {
 					try {
 						
@@ -57,16 +57,7 @@ public class JeroMQQueue {
 
 		}
 
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				Consumer c = new Consumer(bq);
-				c.run();
-
-			}
-
-		}).start();
+		new Thread (new Consumer(bq)).start();
 	}
 	
 	public void add(String msg){
