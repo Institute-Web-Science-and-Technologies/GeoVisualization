@@ -6,7 +6,9 @@ import geoviz.communication.TransferObject;
 import geoviz.game.Game;
 import geoviz.game.SnakeGame;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -44,6 +46,7 @@ public class SwipeScreen extends FragmentActivity implements
 	final Gson gson = new GsonBuilder().create();
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
+	public List<String> gameIDs = new ArrayList<String>();
 
 	String userID ;
 	
@@ -97,7 +100,7 @@ public class SwipeScreen extends FragmentActivity implements
 
 		__instance =this;
 
-		Game.init(new SnakeGame());
+		Game.init(new SnakeGame(Game.TYPE_SNAKE+userID,this));
 		
 		new JeroMQPoller(this).poll();
 
@@ -215,7 +218,7 @@ public class SwipeScreen extends FragmentActivity implements
     	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     	this.mCurrentLocation = location;
     	TransferObject msg = new TransferObject(1, "", Calendar
-				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()));
+				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()),Game.getGame().gameID);
     	final String json = gson.toJson(msg);
     	JeroMQQueue.getInstance().add(json);
     	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
@@ -245,7 +248,7 @@ public class SwipeScreen extends FragmentActivity implements
 		LatLng location = this.getOwnLocation();
 		
 		TransferObject msg = new TransferObject(0, m, Calendar
-				.getInstance().getTime(), userID, userName, location);
+				.getInstance().getTime(), userID, userName, location,Game.getGame().gameID);
 		final String json = gson.toJson(msg);
 		Log.d(userName, json);
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();

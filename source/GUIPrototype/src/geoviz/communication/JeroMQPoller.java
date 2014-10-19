@@ -50,7 +50,7 @@ public class JeroMQPoller  {
 				while (true) {
 					final String msg=new String(subscriber.recv(0));
 					final TransferObject t=gson.fromJson(msg, TransferObject.class);
-					if (t.msgtype==TransferObject.TYPE_MSG) 
+					if (t.msgType==TransferObject.TYPE_MSG) 
 						activity.runOnUiThread(new Runnable(){
 						
 						@Override
@@ -59,13 +59,13 @@ public class JeroMQPoller  {
 							SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 							ScrollView sv= (ScrollView) activity.findViewById(R.id.fragmentScrollView1);
 							TextView scrollTv = (TextView) activity.findViewById(R.id.fragmentChatLog);
-							scrollTv.append(t.senderName+" "+dateFormat.format(t.timestamp)+" :"+t.msg+"\n");
+							scrollTv.append(t.senderName+" "+dateFormat.format(t.timeStamp)+" :"+t.msg+"\n");
 							sv.fullScroll(View.FOCUS_DOWN);
 							
 						}
 					
 					});
-					if (t.msgtype!=TransferObject.TYPE_MSG){
+					if (t.msgType!=TransferObject.TYPE_MSG){
 						Game.getGame().update(t);
 						
 					}

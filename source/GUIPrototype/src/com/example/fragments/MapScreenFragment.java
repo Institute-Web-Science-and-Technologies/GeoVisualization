@@ -1,6 +1,7 @@
 package com.example.fragments;
 
 import geoviz.communication.TransferObject;
+import geoviz.game.Game;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -107,7 +108,7 @@ public class MapScreenFragment extends Fragment {
 	public TransferObject testMSF (String userID, String userName, LatLng location){
 		
     	TransferObject msg = new TransferObject(0, userID, Calendar
-				.getInstance().getTime(), userID, userName, location);
+				.getInstance().getTime(), userID, userName, location,Game.getGame().gameID);
     	return msg;
 	}
 	
