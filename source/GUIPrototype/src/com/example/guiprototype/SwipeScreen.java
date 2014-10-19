@@ -23,7 +23,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.telephony.TelephonyManager;
 
@@ -134,8 +136,10 @@ public class SwipeScreen extends FragmentActivity implements
 	//	new JeroMQPoller(this, serverIP).poll();
 
 		
-
-			
+	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, gameIDs);
+	ListView lv = (ListView) findViewById(R.id.gameListView);
+	lv.setAdapter(adapter);
+	
 	}
 
 	@Override
