@@ -20,51 +20,24 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
-            <ProgressBar
-                android:id="@+id/fragmentProgressHaer"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:max="100"
-                android:progress="0" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="Jormungand" />
-            </RelativeLayout>
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <ProgressBar
-                android:id="@+id/fragmentProgressFana"
-                style="@android:style/Widget.ProgressBar.Horizontal"
+            <fragment
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:map="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:max="100"
-                android:progress="0" />
+                android:layout_height="430dp"
+                app:cameraTargetLat="50.3511528"
+                app:cameraTargetLng="7.5951959"
+                app:cameraZoom="14" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="Quetzalcoatl" />
-            </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
 
@@ -76,13 +49,6 @@
         android:layout_centerHorizontal="true"
         android:gravity="left"
         android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/fragmentButtonInteract"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="interact" >
-        </Button>
     </LinearLayout>
 
     <LinearLayout
@@ -99,61 +65,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center" >
-
-            <ImageView
-                android:id="@+id/fragmentImagePowUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="activatePowUP"
-                android:src="@drawable/placeholder_24x24" />
-
-            <ProgressBar
-                android:id="@+id/fragmentProgressBarPowUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
         </FrameLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/empty_block_24x20"
-            android:visibility="invisible" />
 
         <FrameLayout
             android:id="@+id/fragmentFrameLayoutPassive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center" >
-
-            <ImageView
-                android:id="@+id/fragmentImageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/placeholder_24x24" />
         </FrameLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/empty_block_24x20"
-            android:visibility="invisible" />
     </LinearLayout>
-	
-    <fragment
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/fragmentLinearLayoutInteractB"
-        android:layout_alignLeft="@+id/linearLayoutScore"
-        android:layout_alignRight="@+id/fragmentLinearLayoutRightSide"
-        android:layout_below="@+id/fragmentLinearLayoutScore"
-        app:cameraTargetLat="50.3511528"
-        app:cameraTargetLng="7.5951959"
-        app:cameraZoom="14" />
 
 </RelativeLayout>

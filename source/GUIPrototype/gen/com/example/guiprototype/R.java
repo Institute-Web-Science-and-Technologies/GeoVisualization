@@ -1485,7 +1485,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f080028;
         public static final int action_menu_presenter=0x7f080029;
         public static final int action_mode_close_button=0x7f080036;
-        public static final int action_settings=0x7f08007e;
+        public static final int action_settings=0x7f080079;
         public static final int activity_chooser_view_content=0x7f080037;
         public static final int always=0x7f08001e;
         public static final int beginning=0x7f080023;
@@ -1512,22 +1512,16 @@ containing a value of this type.
         public static final int end=0x7f080025;
         public static final int expand_activities_button=0x7f080038;
         public static final int expanded_menu=0x7f08003e;
-        public static final int fragmentButtonInteract=0x7f080077;
         public static final int fragmentChatLog=0x7f080072;
         public static final int fragmentChatMessage=0x7f08006e;
         public static final int fragmentChatbutton=0x7f08006f;
-        public static final int fragmentFrameLayoutPassive=0x7f08007c;
-        public static final int fragmentFrameLayoutPowUp=0x7f080079;
-        public static final int fragmentImagePowUp=0x7f08007a;
-        public static final int fragmentImageView1=0x7f08007d;
+        public static final int fragmentFrameLayoutPassive=0x7f080078;
+        public static final int fragmentFrameLayoutPowUp=0x7f080077;
         public static final int fragmentLinearLayoutChatM=0x7f08006d;
         public static final int fragmentLinearLayoutChatScreen=0x7f080070;
-        public static final int fragmentLinearLayoutInteractB=0x7f080076;
-        public static final int fragmentLinearLayoutRightSide=0x7f080078;
-        public static final int fragmentLinearLayoutScore=0x7f080073;
-        public static final int fragmentProgressBarPowUp=0x7f08007b;
-        public static final int fragmentProgressFana=0x7f080075;
-        public static final int fragmentProgressHaer=0x7f080074;
+        public static final int fragmentLinearLayoutInteractB=0x7f080075;
+        public static final int fragmentLinearLayoutRightSide=0x7f080076;
+        public static final int fragmentLinearLayoutScore=0x7f080074;
         public static final int fragmentScrollView1=0x7f080071;
         public static final int grayscale=0x7f080012;
         public static final int holo_dark=0x7f080005;
@@ -1553,6 +1547,7 @@ containing a value of this type.
         public static final int listMode=0x7f080014;
         public static final int list_item=0x7f08003b;
         public static final int map=0x7f08006b;
+        public static final int mapScreenFragment=0x7f080073;
         public static final int match_parent=0x7f08000c;
         public static final int middle=0x7f080024;
         public static final int monochrome=0x7f080013;
@@ -3522,7 +3517,7 @@ containing a value of this type.
          */
         public static final int[] MenuView = {
             0x010100ae, 0x0101012c, 0x0101012d, 0x0101012e,
-            0x0101012f, 0x01010130, 0x01010131, 0x010103ea
+            0x0101012f, 0x01010130, 0x01010131, 0x01010435
         };
         /**
           <p>
