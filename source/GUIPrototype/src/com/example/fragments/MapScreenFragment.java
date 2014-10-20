@@ -1,17 +1,22 @@
 package com.example.fragments;
 
 import geoviz.communication.TransferObject;
+import geoviz.game.Player;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.zeromq.ZMQ;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.guiprototype.R;
-import com.google.android.gms.internal.lc;
-import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
@@ -21,22 +26,8 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import android.app.Activity;
-import android.graphics.Color;
-import android.location.Location;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.format.DateFormat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapScreenFragment extends Fragment {
 	private static MapScreenFragment __instance;
@@ -66,6 +57,17 @@ public class MapScreenFragment extends Fragment {
 	
 	public static MapScreenFragment getMSF(){
 		return __instance;
+	}
+	
+	public Polyline initLine() {
+		return this.mMap.addPolyline(new PolylineOptions()
+	     .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
+	     .width(5)
+	     .color(Color.RED));
+	}
+	
+	public void drawLine() {
+		
 	}
 	
 	@Override
@@ -99,6 +101,8 @@ public class MapScreenFragment extends Fragment {
 	   // final Marker blueFlag = initBase("blue", UNI);
 	    //Marker blueMarker = initMarker(240, new LatLng(50.364661,7.563409));
 	    //Marker redMarker = initMarker(0, new LatLng(50.358870, 7.577356));
+		
+		Polyline line = this.initLine();
 	    
 	    this.mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 	    	
