@@ -21,10 +21,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
 		switch (index){
 		case 0:
 			
-			return new MapScreenFragment ();
+			return new ChatScreenFragment ();
 			
 		case 1:
-			return new ChatScreenFragment();
+			return new MapScreenFragment();
 			
 		case 2:
 			return new GamesScreenFragment();

@@ -10,7 +10,9 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fragments.ChatScreenFragment;
 import com.example.guiprototype.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -59,9 +61,14 @@ public class JeroMQPoller  {
 							SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 							ScrollView sv= (ScrollView) activity.findViewById(R.id.fragmentScrollView1);
 							TextView scrollTv = (TextView) activity.findViewById(R.id.fragmentChatLog);
+							if (sv!=null && scrollTv != null){
 							scrollTv.append(t.senderName+" "+dateFormat.format(t.timeStamp)+" :"+t.msg+"\n");
 							sv.fullScroll(View.FOCUS_DOWN);
-							
+							}
+							else {
+								ChatScreenFragment csf = (ChatScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+ ":0");
+								csf.msgs+=t.senderName+" "+dateFormat.format(t.timeStamp)+" :"+t.msg+"\n";
+							}
 						}
 					
 					});

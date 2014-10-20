@@ -17,7 +17,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
@@ -64,7 +66,7 @@ public class SwipeScreen extends FragmentActivity implements
 	
 	String userName;
 
-	private String[] tabs = { "Map", "Chat", "Games"};
+	private String[] tabs = { "Chat", "Map", "Games"};
 	private Location mCurrentLocation;
 
 	private static FragmentActivity __instance;
@@ -135,11 +137,11 @@ public class SwipeScreen extends FragmentActivity implements
 
 	//	new JeroMQPoller(this, serverIP).poll();
 
-		
+	/*	
 	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, gameIDs);
 	ListView lv = (ListView) findViewById(R.id.gameListView);
 	lv.setAdapter(adapter);
-	
+	*/
 	}
 
 	@Override
@@ -225,7 +227,7 @@ public class SwipeScreen extends FragmentActivity implements
 				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()),Game.getGame().gameID);
     	final String json = gson.toJson(msg);
     	JeroMQQueue.getInstance().add(json);
-    	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
+    //	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(1);
     	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     }
 
@@ -257,7 +259,8 @@ public class SwipeScreen extends FragmentActivity implements
 		Log.d(userName, json);
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.add(json);
-		MapScreenFragment fragment= MapScreenFragment.getMSF();// = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
+		//MapScreenFragment fragment= MapScreenFragment.getMSF();
+		MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+":1");
 		jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
 		//doesnt work yet
 	}
@@ -267,7 +270,5 @@ public class SwipeScreen extends FragmentActivity implements
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
 	}
-	/**
-	 * Senden der der Chatnachrichten �ber den Server
-	 */
+
 }
