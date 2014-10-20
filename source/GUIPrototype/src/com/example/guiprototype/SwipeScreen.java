@@ -4,7 +4,7 @@ import geoviz.communication.JeroMQPoller;
 import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Game;
-import geoviz.game.SnakeGame;
+import geoviz.game.snake.SnakeGame;
 
 import java.util.Calendar;
 
@@ -51,8 +51,8 @@ public class SwipeScreen extends FragmentActivity implements
 
 	private static FragmentActivity __instance;
 
-	public static void runOnUi(Runnable r){
-		__instance.runOnUiThread(r);
+	public static FragmentActivity getInstance(){
+		return __instance;
 	}
 
 	
@@ -237,8 +237,11 @@ public class SwipeScreen extends FragmentActivity implements
 		Log.d(userName, json);
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.add(json);
-		MapScreenFragment fragment= MapScreenFragment.getMSF();// = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
-		jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
+		/***************************
+		 * still needed ?
+		 */
+		//MapScreenFragment fragment= MapScreenFragment.getMSF();// = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
+		//jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
 		//doesnt work yet
 	}
 

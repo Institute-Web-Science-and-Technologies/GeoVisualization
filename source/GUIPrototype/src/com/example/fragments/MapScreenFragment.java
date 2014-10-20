@@ -1,7 +1,7 @@
 package com.example.fragments;
 
 import geoviz.communication.TransferObject;
-import geoviz.game.Player;
+import geoviz.game.snake.Player;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -102,7 +102,7 @@ public class MapScreenFragment extends Fragment {
 	    //Marker blueMarker = initMarker(240, new LatLng(50.364661,7.563409));
 	    //Marker redMarker = initMarker(0, new LatLng(50.358870, 7.577356));
 		
-		Polyline line = this.initLine();
+		//Polyline line = this.initLine();
 	    
 	    this.mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 	    	
