@@ -24,8 +24,7 @@ public class Player {
 			public void run(){
 			snake = MapScreenFragment.getMSF().initLine();
 
-			poss.add(new LatLng(50.3511528, 7.5951959));
-			poss.add(new LatLng(50.363417, 7.558432));
+
 			snake.setPoints(poss);
 			}
 		});

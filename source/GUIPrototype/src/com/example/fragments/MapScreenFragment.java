@@ -85,7 +85,7 @@ public class MapScreenFragment extends Fragment {
 		return this.mMap.addPolyline(new PolylineOptions()
 	     .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
 	     .width(5)
-	     .color(Color.RED));
+	     .color(Color.rgb((int)(Math.random()*250), (int)(Math.random()*250), (int)(Math.random()*250))));
 	}
 	
 	public void drawLine() {
