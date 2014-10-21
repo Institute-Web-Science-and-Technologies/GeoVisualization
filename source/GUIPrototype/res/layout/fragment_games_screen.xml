@@ -11,14 +11,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:onClick="createGame"
         android:text="Create" />
 
     <ListView
         android:id="@+id/gameListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/createGameButton" >
-
-</ListView> 
+        android:layout_above="@+id/createGameButton"
+        android:layout_alignParentLeft="true" >
+    </ListView>
 
 </RelativeLayout>

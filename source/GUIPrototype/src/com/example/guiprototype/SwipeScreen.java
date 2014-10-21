@@ -32,9 +32,11 @@ import android.widget.Toast;
 import android.telephony.TelephonyManager;
 
 import com.example.adapter.TabsPagerAdapter;
+import com.example.fragments.GamesScreenFragment;
 import com.example.fragments.MapScreenFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.games.Games;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -63,6 +65,7 @@ public class SwipeScreen extends FragmentActivity implements
 	        return android.os.Build.SERIAL;
 	    }
 	}
+
 	
 	String userName;
 
@@ -104,7 +107,7 @@ public class SwipeScreen extends FragmentActivity implements
 
 		__instance =this;
 
-		Game.init(new SnakeGame(Game.TYPE_SNAKE+userID,this));
+		Game.init(new SnakeGame("0",this));
 		
 		new JeroMQPoller(this).poll();
 
@@ -212,7 +215,6 @@ public class SwipeScreen extends FragmentActivity implements
      */
     @Override
     public void onConnected(Bundle dataBundle) {
-        // Display the connection status
     	mLocationClient.requestLocationUpdates(this.mLocationRequest, this);
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         this.mCurrentLocation = mLocationClient.getLastLocation();
@@ -220,15 +222,12 @@ public class SwipeScreen extends FragmentActivity implements
     
     @Override
     public void onLocationChanged(Location location) {
-    	//Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     	this.mCurrentLocation = location;
     	TransferObject msg = new TransferObject(1, "", Calendar
 				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()),Game.getGame().gameID);
     	final String json = gson.toJson(msg);
     	JeroMQQueue.getInstance().add(json);
-    //	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(1);
-    	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
+    
     }
 
     /*
@@ -245,9 +244,16 @@ public class SwipeScreen extends FragmentActivity implements
 	public LatLng getOwnLocation() {
 		return new LatLng(this.mCurrentLocation.getLatitude(), this.mCurrentLocation.getLongitude());
 	}
+	
+	public void createGame(View view){
+		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+":2");
+		String gameId= Game.TYPE_SNAKE+this.userID;
+		gsf.games.add(gameId);
+		Game.init(new SnakeGame(gameId,this));
+		gsf.adapter.notifyDataSetChanged();
+	}
 
 	public void sendMessage(View view) {
-		//MapScreenFragment map = (MapScreenFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
 		

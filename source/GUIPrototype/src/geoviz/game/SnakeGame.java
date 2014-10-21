@@ -4,7 +4,9 @@ import geoviz.communication.TransferObject;
 
 import android.app.Activity;
 
+import com.example.fragments.GamesScreenFragment;
 import com.example.fragments.MapScreenFragment;
+import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
 
 public class SnakeGame extends Game {
@@ -18,7 +20,8 @@ public class SnakeGame extends Game {
 	public void update(final TransferObject t) {
 		if (t.msgType==TransferObject.TYPE_COORD){
 			if(t.gameID.equals(this.gameID)){
-			final MapScreenFragment msf  =MapScreenFragment.getMSF();
+			//final MapScreenFragment msf  =MapScreenFragment.getMSF();
+			final MapScreenFragment msf = (MapScreenFragment) swipeScreen.getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+":1");
 			SwipeScreen.runOnUi(new Runnable(){
 				public void run(){
 					msf.handlePosition(t.senderName,t.pos);
@@ -28,8 +31,9 @@ public class SnakeGame extends Game {
 			
 			}
 			else {
-				if(!swipeScreen.gameIDs.contains(t.gameID))
-					swipeScreen.gameIDs.add(t.gameID);
+				GamesScreenFragment gsf = (GamesScreenFragment) swipeScreen.getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+":2");
+				if(!gsf.games.contains(t.gameID))
+					gsf.games.add(t.gameID);
 			}
 		}
 

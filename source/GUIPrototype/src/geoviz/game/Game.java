@@ -1,5 +1,7 @@
 package geoviz.game;
 
+import com.example.fragments.GamesScreenFragment;
+import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
 
 import android.app.Activity;
