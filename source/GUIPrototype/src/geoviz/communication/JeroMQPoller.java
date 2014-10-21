@@ -10,7 +10,9 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fragments.ChatScreenFragment;
 import com.example.guiprototype.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,13 +21,13 @@ import com.google.gson.GsonBuilder;
 public class JeroMQPoller  {
 	
 	
-	final FragmentActivity self;
+	final FragmentActivity activity;
 	final String serverIP;
 	
 	
 	public JeroMQPoller(FragmentActivity self) {
 		super();
-		this.self = self;
+		this.activity = self;
 		this.serverIP = Const.serverIP;
 		
 	}
@@ -49,24 +51,28 @@ public class JeroMQPoller  {
 				
 				while (true) {
 					final String msg=new String(subscriber.recv(0));
-					System.out.println(msg);
 					final TransferObject t=gson.fromJson(msg, TransferObject.class);
-					if (t.msgtype==TransferObject.TYPE_MSG) 
-						self.runOnUiThread(new Runnable(){
+					if (t.msgType==TransferObject.TYPE_MSG) 
+						activity.runOnUiThread(new Runnable(){
 						
 						@Override
 						public void run() {
 							
 							SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-							ScrollView sv= (ScrollView) self.findViewById(R.id.fragmentScrollView1);
-							TextView scrollTv = (TextView) self.findViewById(R.id.fragmentChatLog);
-							scrollTv.append(t.senderName+" "+dateFormat.format(t.timestamp)+" :"+t.msg+"\n");
+							ScrollView sv= (ScrollView) activity.findViewById(R.id.fragmentScrollView1);
+							TextView scrollTv = (TextView) activity.findViewById(R.id.fragmentChatLog);
+							if (sv!=null && scrollTv != null){
+							scrollTv.append(t.senderName+" "+dateFormat.format(t.timeStamp)+" :"+t.msg+"\n");
 							sv.fullScroll(View.FOCUS_DOWN);
-							
+							}
+							else {
+								ChatScreenFragment csf = (ChatScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+ ":0");
+								csf.msgs+=t.senderName+" "+dateFormat.format(t.timeStamp)+" :"+t.msg+"\n";
+							}
 						}
 					
 					});
-					if (t.msgtype!=TransferObject.TYPE_MSG){
+					if (t.msgType!=TransferObject.TYPE_MSG){
 						Game.getGame().update(t);
 						
 					}

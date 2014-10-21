@@ -11,12 +11,13 @@ public class TransferObject implements Serializable {
 	public final static int TYPE_MSG =0,
 			TYPE_COORD =1;
 	
-	public int msgtype;
+	public int msgType;
 	public String msg;
-	public java.util.Date timestamp;
-	public long senderID;
+	public java.util.Date timeStamp;
+	public String senderID;
 	public String senderName;
 	public LatLng pos;
+	public String gameID;
 	
 	/**
 	 * 
@@ -26,15 +27,16 @@ public class TransferObject implements Serializable {
 	 * @param senderID double
 	 * @param senderName String
 	 */
-	public TransferObject(int msgtype, String msg, Date timestamp,
-			long senderID, String senderName, LatLng location) {
+	public TransferObject(int msgType, String msg, Date timeStamp,
+			String senderID, String senderName, LatLng location, String gameID) {
 		super();
-		this.msgtype = msgtype;
+		this.msgType = msgType;
 		this.msg = msg;
-		this.timestamp = timestamp;
+		this.timeStamp = timeStamp;
 		this.senderID = senderID;
 		this.senderName = senderName;
 		this.pos=location;
+		this.gameID=gameID;
 	}
 	
 	

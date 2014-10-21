@@ -6,27 +6,37 @@ import geoviz.communication.TransferObject;
 import geoviz.game.Game;
 import geoviz.game.snake.SnakeGame;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+import android.telephony.TelephonyManager;
 
 import com.example.adapter.TabsPagerAdapter;
+import com.example.fragments.GamesScreenFragment;
 import com.example.fragments.MapScreenFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.games.Games;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -42,11 +52,24 @@ public class SwipeScreen extends FragmentActivity implements
 	final Gson gson = new GsonBuilder().create();
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
+	public List<String> gameIDs = new ArrayList<String>();
 
-	final long userID = (long) (Math.random() * Long.MAX_VALUE);
+	String userID ;
+	
+	
+	public static String getDeviceId(Context context) {
+	    final String deviceId = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+	    if (deviceId != null) {
+	        return deviceId;
+	    } else {
+	        return android.os.Build.SERIAL;
+	    }
+	}
+
+	
 	String userName;
 
-	private String[] tabs = { "Map", "Chat"};
+	private String[] tabs = { "Chat", "Map", "Games"};
 	private Location mCurrentLocation;
 
 	private static FragmentActivity __instance;
@@ -68,7 +91,7 @@ public class SwipeScreen extends FragmentActivity implements
 		this.mLocationRequest.setInterval(1000);
 		this.mLocationRequest.setFastestInterval(500);
 		
-		
+		userID = getDeviceId(this);
 		// get user name
 		Intent intent= getIntent();
 		userName=intent.getStringExtra(MainActivity.EXTRA_USER) ;
@@ -84,7 +107,7 @@ public class SwipeScreen extends FragmentActivity implements
 
 		__instance =this;
 
-		Game.init(new SnakeGame());
+		Game.init(new SnakeGame("0",this));
 		
 		new JeroMQPoller(this).poll();
 
@@ -117,9 +140,11 @@ public class SwipeScreen extends FragmentActivity implements
 
 	//	new JeroMQPoller(this, serverIP).poll();
 
-		
-
-			
+	/*	
+	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, gameIDs);
+	ListView lv = (ListView) findViewById(R.id.gameListView);
+	lv.setAdapter(adapter);
+	*/
 	}
 
 	@Override
@@ -190,7 +215,6 @@ public class SwipeScreen extends FragmentActivity implements
      */
     @Override
     public void onConnected(Bundle dataBundle) {
-        // Display the connection status
     	mLocationClient.requestLocationUpdates(this.mLocationRequest, this);
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         this.mCurrentLocation = mLocationClient.getLastLocation();
@@ -198,15 +222,12 @@ public class SwipeScreen extends FragmentActivity implements
     
     @Override
     public void onLocationChanged(Location location) {
-    	//Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
     	this.mCurrentLocation = location;
     	TransferObject msg = new TransferObject(1, "", Calendar
-				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()));
+				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()),Game.getGame().gameID);
     	final String json = gson.toJson(msg);
     	JeroMQQueue.getInstance().add(json);
-    	MapScreenFragment fragment = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
-    	//Toast.makeText(this, ""+Calendar.getInstance().getTime(), Toast.LENGTH_SHORT).show();
+    
     }
 
     /*
@@ -223,16 +244,23 @@ public class SwipeScreen extends FragmentActivity implements
 	public LatLng getOwnLocation() {
 		return new LatLng(this.mCurrentLocation.getLatitude(), this.mCurrentLocation.getLongitude());
 	}
+	
+	public void createGame(View view){
+		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+":2");
+		String gameId= Game.TYPE_SNAKE+this.userID;
+		gsf.games.add(gameId);
+		Game.init(new SnakeGame(gameId,this));
+		gsf.adapter.notifyDataSetChanged();
+	}
 
 	public void sendMessage(View view) {
-		//MapScreenFragment map = (MapScreenFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
 		
 		LatLng location = this.getOwnLocation();
 		
 		TransferObject msg = new TransferObject(0, m, Calendar
-				.getInstance().getTime(), userID, userName, location);
+				.getInstance().getTime(), userID, userName, location,Game.getGame().gameID);
 		final String json = gson.toJson(msg);
 		Log.d(userName, json);
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
@@ -242,6 +270,7 @@ public class SwipeScreen extends FragmentActivity implements
 		 */
 		//MapScreenFragment fragment= MapScreenFragment.getMSF();// = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
 		//jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
+
 		//doesnt work yet
 	}
 
@@ -250,7 +279,5 @@ public class SwipeScreen extends FragmentActivity implements
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
 	}
-	/**
-	 * Senden der der Chatnachrichten �ber den Server
-	 */
+
 }
