@@ -9,7 +9,7 @@ import geoviz.communication.TransferObject;
 
 public abstract class Game {
 	
-	SwipeScreen swipeScreen;
+	protected SwipeScreen swipeScreen;
 	static Game __instance;
 	public String gameID;
 	public static final String TYPE_SNAKE = "0";
