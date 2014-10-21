@@ -16,15 +16,17 @@ public class Player {
 	
 	private Polyline snake;
 	
+	List<LatLng> poss = new LinkedList();
+	
 	public Player(String name) {
 		this.name = name;
 		SwipeScreen.getInstance().runOnUiThread(new Runnable(){
 			public void run(){
 			snake = MapScreenFragment.getMSF().initLine();
-			List<LatLng> ps =new LinkedList<LatLng>();
-			ps.add(new LatLng(50.3511528, 7.5951959));
-			ps.add(new LatLng(50.363417, 7.558432));
-			snake.setPoints(ps);
+
+			poss.add(new LatLng(50.3511528, 7.5951959));
+			poss.add(new LatLng(50.363417, 7.558432));
+			snake.setPoints(poss);
 			}
 		});
 		
@@ -32,10 +34,10 @@ public class Player {
 	
 	void update(TransferObject t){
 
-		List<LatLng> ps =new LinkedList<LatLng>();
-		ps.add(t.pos);
-		ps.add(new LatLng(50.3511528, 7.5951959));
-		snake.setPoints(ps);
+
+		poss.add(t.pos);
+
+		snake.setPoints(poss);
 	}
 		
 	public String getName() {
