@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/flammen">
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/createGameButton"
@@ -21,5 +20,14 @@
         android:layout_above="@+id/createGameButton"
         android:layout_alignParentLeft="true" >
     </ListView>
+
+    <Spinner
+        android:id="@+id/gameModeSpinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/createGameButton"
+        android:layout_toRightOf="@+id/createGameButton" 
+        android:entries="@array/game_modes"
+        android:prompt="@string/game_mode_prompt"/>
 
 </RelativeLayout>
