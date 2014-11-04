@@ -27,7 +27,7 @@ public class SnakeGame extends Game {
 		if (t.gameID.equals(this.gameID)) {
 			Player player = players.get(t.senderName);
 			if (player == null) {
-				player = new Player(t.senderName);
+				player = new Player(t.senderName,players);
 				players.put(t.senderName, player);
 			}
 			if (t.msgType == TransferObject.TYPE_COORD) {
