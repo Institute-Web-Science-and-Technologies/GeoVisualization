@@ -180,7 +180,7 @@ public class MapScreenFragment extends Fragment {
 	}
 	
 	
-	private Marker initMarker(float colorDouble, LatLng position, String name) {
+	public Marker initMarker(float colorDouble, LatLng position, String name) {
 		Marker marker = this.mMap.addMarker(new MarkerOptions()
         	.position(position)
         	.title(name)

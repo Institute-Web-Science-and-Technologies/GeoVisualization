@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import android.location.Location;
 import android.widget.Toast;
 
 import com.example.fragments.MapScreenFragment;
@@ -20,11 +21,11 @@ public class Player {
 	private Polyline snake;
 
 	List<LatLng> poss = new LinkedList();
-	
+
 	Map<String, Player> players;
 
-	public Player(String name,Map<String, Player> players) {
-		this.players=players;
+	public Player(String name, Map<String, Player> players) {
+		this.players = players;
 		this.name = name;
 		SwipeScreen.getInstance().runOnUiThread(new Runnable() {
 			public void run() {
@@ -35,57 +36,64 @@ public class Player {
 		});
 
 	}
-	
-	void normalize(float max_length){
-		while(length()>max_length)
+
+	void normalize(float max_length) {
+		while (length() > max_length)
 			poss.remove(0);
 	}
-	
-	float length(){
-		float length=0;
-		for (int i = 0; i<poss.size()-1;i++){
-			length+= distance(poss.get(i),poss.get(i+1));
-		}
+
+	float length() {
+		float length = 0;
+		if (poss.size() > 1)
+			for (int i = 0; i < poss.size() - 1; i++) {
+				length += distance(poss.get(i), poss.get(i + 1));
+			}
 		return length;
 	}
-	
-	public float distance (LatLng d, LatLng b ) 
-	{
-	    double earthRadius = 3958.75;
-	    double latDiff = Math.toRadians(b.latitude-d.latitude);
-	    double lngDiff = Math.toRadians(b.longitude-d.longitude);
-	    double a = Math.sin(latDiff /2) * Math.sin(latDiff /2) +
-	    Math.cos(Math.toRadians(d.latitude)) * Math.cos(Math.toRadians(b.latitude)) *
-	    Math.sin(lngDiff /2) * Math.sin(lngDiff /2);
-	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	    double distance = earthRadius * c;
 
-	    int meterConversion = 1609;
+	public float distance(LatLng d, LatLng b) {
+		Location l1 = new Location("From");
+		l1.setLatitude(d.latitude);
+		l1.setLongitude(d.longitude);
+		Location l2 = new Location("To");
+		l2.setLatitude(b.latitude);
+		l2.setLongitude(b.longitude);
+		return l1.distanceTo(l2);
 
-	    return new Float(distance * meterConversion).floatValue();
+		/*
+		 * double earthRadius = 3958.75; double latDiff =
+		 * Math.toRadians(b.latitude-d.latitude); double lngDiff =
+		 * Math.toRadians(b.longitude-d.longitude); double a = Math.sin(latDiff
+		 * /2) * Math.sin(latDiff /2) + Math.cos(Math.toRadians(d.latitude)) *
+		 * Math.cos(Math.toRadians(b.latitude)) * Math.sin(lngDiff /2) *
+		 * Math.sin(lngDiff /2); double c = 2 * Math.atan2(Math.sqrt(a),
+		 * Math.sqrt(1-a)); double distance = earthRadius * c;
+		 * 
+		 * int meterConversion = 1609;
+		 * 
+		 * return new Float(distance * meterConversion).floatValue();
+		 */
 	}
 
 	void update(TransferObject t) {
 
 		poss.add(t.pos);
 		
-		normalize(10);
+		Toast.makeText(SwipeScreen.getInstance(), length() + "",
+				Toast.LENGTH_SHORT).show();
+
+		normalize(30);
 
 		snake.setPoints(poss);
+
 		
-	Toast.makeText(SwipeScreen.getInstance(), length()+"", Toast.LENGTH_SHORT).show();
-	
-	
-	/*	
-		for(String key: players.keySet()){
-			Player p=players.get(key);
-			if(p.name==this.name)
-				continue;
-			if(collides(this.poss,p.poss)){
-				//Toast.makeText(context, text, duration);
-				JeroMQQueue.getInstance().add("Helllllllow!");
-			}
-		}*/
+
+		/*
+		 * for(String key: players.keySet()){ Player p=players.get(key);
+		 * if(p.name==this.name) continue; if(collides(this.poss,p.poss)){
+		 * //Toast.makeText(context, text, duration);
+		 * JeroMQQueue.getInstance().add("Helllllllow!"); } }
+		 */
 	}
 
 	public String getName() {
