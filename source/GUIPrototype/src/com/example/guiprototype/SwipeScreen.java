@@ -95,8 +95,8 @@ public class SwipeScreen extends FragmentActivity implements
 		this.mLocationRequest
 				.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-		this.mLocationRequest.setInterval(1000);
-		this.mLocationRequest.setFastestInterval(500);
+		this.mLocationRequest.setInterval(500);
+		this.mLocationRequest.setFastestInterval(250);
 
 		userID = getDeviceId(this);
 		// get user name

@@ -8,8 +8,8 @@ import android.location.Location;
 import com.google.android.gms.maps.model.LatLng;
 
 public class Functions {
-	
-	public static  float distance(LatLng d, LatLng b) {
+
+	public static float distance(LatLng d, LatLng b) {
 		Location l1 = new Location("From");
 		l1.setLatitude(d.latitude);
 		l1.setLongitude(d.longitude);
@@ -32,29 +32,28 @@ public class Functions {
 		 * return new Float(distance * meterConversion).floatValue();
 		 */
 	}
-	
-	//funktioniert nicht!!!!??
-		public static LatLng randLoc(LatLng ll, int radius) {
-			double y0 = ll.latitude, x0 = ll.longitude;
-			Random random = new Random();
 
-			// Convert radius from meters to degrees
-			double radiusInDegrees = radius / 111000f;
+	public static LatLng randLoc(LatLng ll, int radius) {
+		double y0 = ll.latitude, x0 = ll.longitude;
+		Random random = new Random();
 
-			double u = random.nextDouble();
-			double v = random.nextDouble();
-			double w = radiusInDegrees * Math.sqrt(u);
-			double t = 2 * Math.PI * v;
-			double x = w * Math.cos(t);
-			double y = w * Math.sin(t);
+		// Convert radius from meters to degrees
+		double radiusInDegrees = radius / 111000f;
 
-			// Adjust the x-coordinate for the shrinking of the east-west distances
-			double new_x = x / Math.cos(y0);
+		double u = random.nextDouble();
+		double v = random.nextDouble();
+		double w = radiusInDegrees * Math.sqrt(u);
+		double t = 2 * Math.PI * v;
+		double x = w * Math.cos(t);
+		double y = w * Math.sin(t);
 
-			double foundLongitude = new_x + x0;
-			double foundLatitude = y + y0;
-			LatLng res = new LatLng(foundLatitude, foundLongitude);
-			return res;
-		}
+		// Adjust the x-coordinate for the shrinking of the east-west distances
+		double new_x = x / Math.cos(y0);
+
+		double foundLongitude = new_x + x0;
+		double foundLatitude = y + y0;
+		LatLng res = new LatLng(foundLatitude, foundLongitude);
+		return res;
+	}
 
 }

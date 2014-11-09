@@ -14,10 +14,11 @@ public class Chicken {
 	public final float radius;
 	public final float val;
 	public boolean dead;
+	public final String id ;
 	
 	Marker marker;
 	
-	public Chicken(final LatLng pos, float radius, float val) {
+	public Chicken(final LatLng pos, float radius, float val, final String id) {
 		super();
 		this.pos = pos;
 		this.radius = radius;
@@ -26,16 +27,24 @@ public class Chicken {
 
 			@Override
 			public void run() {
-				marker = MapScreenFragment.getMSF().initMarker(240, pos, "Chicken");
+				marker = MapScreenFragment.getMSF().initMarker(240, pos, "Chicken "+id);
 				
 			}});
-		
+		this.id=id;
 	}
 	
 	
 	void kill(){
 		//remove marker
-		marker.remove();
+		SwipeScreen.getInstance().runOnUiThread(new Runnable(){
+
+			@Override
+			public void run() {
+				marker.remove();
+				
+			}
+			
+		});
 		dead=true;
 	}
 
