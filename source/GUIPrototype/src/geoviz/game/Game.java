@@ -11,7 +11,7 @@ public abstract class Game {
 	
 	protected SwipeScreen swipeScreen;
 	static Game __instance;
-	public String gameID;
+	public String gameID,userID,userName;
 	public static final String TYPE_SNAKE = "0";
 	
 	public static Game getGame(){

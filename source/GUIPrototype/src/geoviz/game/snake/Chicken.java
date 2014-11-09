@@ -13,6 +13,7 @@ public class Chicken {
 	public final LatLng pos;
 	public final float radius;
 	public final float val;
+	public boolean dead;
 	
 	Marker marker;
 	
@@ -31,10 +32,11 @@ public class Chicken {
 		
 	}
 	
-	void update(){
-		
+	
+	void kill(){
+		//remove marker
+		marker.remove();
+		dead=true;
 	}
-	
-	
 
 }

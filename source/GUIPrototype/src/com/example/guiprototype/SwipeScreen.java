@@ -45,56 +45,63 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class SwipeScreen extends FragmentActivity implements
-		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks, LocationListener,GooglePlayServicesClient.OnConnectionFailedListener {
+		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks,
+		LocationListener, GooglePlayServicesClient.OnConnectionFailedListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
-	final Gson gson = new GsonBuilder().create();
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
 	public List<String> gameIDs = new ArrayList<String>();
 
-	String userID ;
-	
-	
-	public static String getDeviceId(Context context) {
-	    final String deviceId = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-	    if (deviceId != null) {
-	        return deviceId;
-	    } else {
-	        return android.os.Build.SERIAL;
-	    }
-	}
-
-	
+	// redundant in swipescreen an dgame
+	String userID;
+	// redundant in swipescreen an dgame
 	String userName;
 
-	private String[] tabs = { "Chat", "Map", "Games"};
+	public static String getDeviceId(Context context) {
+		final String deviceId = ((TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+		if (deviceId != null) {
+			return deviceId;
+		} else {
+			return android.os.Build.SERIAL;
+		}
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	private String[] tabs = { "Chat", "Map", "Games" };
 	private Location mCurrentLocation;
 
 	private static FragmentActivity __instance;
 
-	public static FragmentActivity getInstance(){
+	public static FragmentActivity getInstance() {
 		return __instance;
 	}
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_screen);
 		this.mLocationClient = new LocationClient(this, this, this);
 		this.mLocationRequest = LocationRequest.create();
-		this.mLocationRequest.setPriority(
-	                LocationRequest.PRIORITY_HIGH_ACCURACY);
-		
+		this.mLocationRequest
+				.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
 		this.mLocationRequest.setInterval(1000);
 		this.mLocationRequest.setFastestInterval(500);
-		
+
 		userID = getDeviceId(this);
 		// get user name
-		Intent intent= getIntent();
-		userName=intent.getStringExtra(MainActivity.EXTRA_USER) ;
+		Intent intent = getIntent();
+		userName = intent.getStringExtra(MainActivity.EXTRA_USER);
 
 		// Initialisierung
 		viewPager = (ViewPager) findViewById(R.id.pager);
@@ -105,10 +112,10 @@ public class SwipeScreen extends FragmentActivity implements
 		// actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		__instance =this;
+		__instance = this;
 
-		Game.init(new SnakeGame("0",this));
-		
+		Game.init(new SnakeGame("0", this));
+
 		new JeroMQPoller(this).poll();
 
 		// Tabs der Actionbar hinzuf�gen
@@ -138,13 +145,13 @@ public class SwipeScreen extends FragmentActivity implements
 			}
 		});
 
-	//	new JeroMQPoller(this, serverIP).poll();
+		// new JeroMQPoller(this, serverIP).poll();
 
-	/*	
-	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, gameIDs);
-	ListView lv = (ListView) findViewById(R.id.gameListView);
-	lv.setAdapter(adapter);
-	*/
+		/*
+		 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		 * android.R.layout.simple_list_item_1, gameIDs); ListView lv =
+		 * (ListView) findViewById(R.id.gameListView); lv.setAdapter(adapter);
+		 */
 	}
 
 	@Override
@@ -152,7 +159,7 @@ public class SwipeScreen extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.swipe_screen, menu);
 		return true;
-		
+
 	}
 
 	@Override
@@ -186,94 +193,108 @@ public class SwipeScreen extends FragmentActivity implements
 		// TODO Auto-generated method stub
 
 	}
-	
-	 /*
-     * Called when the Activity becomes visible.
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLocationClient.connect();
-        // Connect the client.
-        
-    }
 
-    /*
-     * Called when the Activity is no longer visible.
-     */
-    @Override
-    protected void onStop() {
-        // Disconnecting the client invalidates it.
-        mLocationClient.disconnect();
-        super.onStop();
-    }
-	
-	 /*
-     * Called by Location Services when the request to connect the
-     * client finishes successfully. At this point, you can
-     * request the current location or start periodic updates
-     */
-    @Override
-    public void onConnected(Bundle dataBundle) {
-    	mLocationClient.requestLocationUpdates(this.mLocationRequest, this);
-        Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-        this.mCurrentLocation = mLocationClient.getLastLocation();
-    }
-    
-    @Override
-    public void onLocationChanged(Location location) {
-    	this.mCurrentLocation = location;
-    	TransferObject msg = new TransferObject(1, "", Calendar
-				.getInstance().getTime(), userID, userName, new LatLng (location.getLatitude(), location.getLongitude()),Game.getGame().gameID);
-    	final String json = gson.toJson(msg);
-    	JeroMQQueue.getInstance().add(json);
-    
-    }
+	/*
+	 * Called when the Activity becomes visible.
+	 */
+	@Override
+	protected void onStart() {
+		super.onStart();
+		mLocationClient.connect();
+		// Connect the client.
 
-    /*
-     * Called by Location Services if the connection to the
-     * location client drops because of an error.
-     */
-    @Override
-    public void onDisconnected() {
-        // Display the connection status
-        Toast.makeText(this, "Disconnected. Please re-connect.",
-                Toast.LENGTH_SHORT).show();
-    }
-    
-	public LatLng getOwnLocation() {
-		return new LatLng(this.mCurrentLocation.getLatitude(), this.mCurrentLocation.getLongitude());
 	}
-	
-	public void createGame(View view){
-		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:"+R.id.pager+":2");
-		String gameId= Game.TYPE_SNAKE+this.userID;
+
+	/*
+	 * Called when the Activity is no longer visible.
+	 */
+	@Override
+	protected void onStop() {
+		// Disconnecting the client invalidates it.
+		mLocationClient.disconnect();
+		super.onStop();
+	}
+
+	/*
+	 * Called by Location Services when the request to connect the client
+	 * finishes successfully. At this point, you can request the current
+	 * location or start periodic updates
+	 */
+	@Override
+	public void onConnected(Bundle dataBundle) {
+		mLocationClient.requestLocationUpdates(this.mLocationRequest, this);
+		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+		this.mCurrentLocation = mLocationClient.getLastLocation();
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		this.mCurrentLocation = location;
+		/*
+		 * TransferObject msg = new TransferObject(1, "", Calendar
+		 * .getInstance().getTime(), userID, userName, new LatLng
+		 * (location.getLatitude(),
+		 * location.getLongitude()),Game.getGame().gameID); final String json =
+		 * gson.toJson(msg); JeroMQQueue.getInstance().add(json);
+		 */
+		JeroMQQueue.getInstance()
+				.sendMsg(
+						TransferObject.TYPE_COORD,
+						new LatLng(location.getLatitude(), location
+								.getLongitude()), "");
+
+	}
+
+	/*
+	 * Called by Location Services if the connection to the location client
+	 * drops because of an error.
+	 */
+	@Override
+	public void onDisconnected() {
+		// Display the connection status
+		Toast.makeText(this, "Disconnected. Please re-connect.",
+				Toast.LENGTH_SHORT).show();
+	}
+
+	public LatLng getOwnLocation() {
+		return new LatLng(this.mCurrentLocation.getLatitude(),
+				this.mCurrentLocation.getLongitude());
+	}
+
+	public void createGame(View view) {
+		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager()
+				.findFragmentByTag("android:switcher:" + R.id.pager + ":2");
+		String gameId = Game.TYPE_SNAKE + this.userID;
 		gsf.games.add(gameId);
-		Game.init(new SnakeGame(gameId,this));
+		Game.init(new SnakeGame(gameId, this));
 		gsf.adapter.notifyDataSetChanged();
 	}
 
 	public void sendMessage(View view) {
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
-		
+
 		LatLng location = this.getOwnLocation();
-		
-		TransferObject msg = new TransferObject(0, m, Calendar
-				.getInstance().getTime(), userID, userName, location,Game.getGame().gameID);
-		final String json = gson.toJson(msg);
-		Log.d(userName, json);
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.add(json);
+		jmqq.sendMsg(TransferObject.TYPE_MSG, location, m);
+
+		/*
+		 * TransferObject msg = new TransferObject(0, m, Calendar
+		 * .getInstance().getTime(), userID, userName,
+		 * location,Game.getGame().gameID); final String json =
+		 * gson.toJson(msg); Log.d(userName, json); final JeroMQQueue jmqq =
+		 * JeroMQQueue.getInstance(); jmqq.add(json);
+		 */
 		/***************************
 		 * still needed ?
 		 */
-		//MapScreenFragment fragment= MapScreenFragment.getMSF();// = (MapScreenFragment) this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
-		//jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
+		// MapScreenFragment fragment= MapScreenFragment.getMSF();// =
+		// (MapScreenFragment)
+		// this.getSupportFragmentManager().findFragmentById(R.id.mapScreenFragment);
+		// jmqq.add(gson.toJson(fragment.testMSF(userID, m, location)));
 
-		//doesnt work yet
+		// doesnt work yet
 	}
-
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {

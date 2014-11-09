@@ -9,7 +9,9 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class TransferObject implements Serializable {
 	public final static int TYPE_MSG =0,
-			TYPE_COORD =1;
+			TYPE_COORD =1,
+			TYPE_ADD_CHICKEN=2,
+			TYPE_KILL_CHICKEN=3;
 	
 	public int msgType;
 	public String msg;

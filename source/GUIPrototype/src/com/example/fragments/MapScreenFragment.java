@@ -190,6 +190,7 @@ public class MapScreenFragment extends Fragment {
         
 	}
 	
+	
 	private Marker initBase(String colorString, LatLng position) {
 		int colorInt = Color.parseColor(colorString);
 		this.mMap.addCircle(new CircleOptions()

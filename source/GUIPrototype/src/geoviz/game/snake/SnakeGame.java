@@ -1,18 +1,21 @@
 package geoviz.game.snake;
 
+import geoviz.communication.JeroMQPoller;
+import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
+import geoviz.game.Functions;
 import geoviz.game.Game;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
+import android.widget.Toast;
 
 import com.example.fragments.GamesScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
-import com.google.android.gms.maps.model.LatLng;
 
 public class SnakeGame extends Game {
 
@@ -24,6 +27,8 @@ public class SnakeGame extends Game {
 		this.swipeScreen = a;
 		if (!swipeScreen.gameIDs.contains(gameID))
 			swipeScreen.gameIDs.add(gameID);
+		userName=swipeScreen.getUserName();
+		userID=swipeScreen.getUserID();
 
 	}
 
@@ -36,12 +41,26 @@ public class SnakeGame extends Game {
 				players.put(t.senderName, player);
 				
 			}
+			if(t.msgType==TransferObject.TYPE_ADD_CHICKEN){
+				chickens.add(new Chicken(t.pos, 5, 1));
+			}
 			if (t.msgType == TransferObject.TYPE_COORD) {
 				swipeScreen.runOnUiThread(new Runnable() {
 					public void run() {
 						// msf.handlePosition(t.senderName,t.pos);
-						players.get(t.senderName).update(t);
-						chickens.add(new Chicken(randLoc(t.pos, 10), 1, 1));
+						Player player =players.get(t.senderName);
+						player.update(t);
+						for (Chicken chicken: chickens){
+							if(!chicken.dead&&player.collides(chicken)){
+								chicken.kill();
+								Toast.makeText(SwipeScreen.getInstance(), "chicken killed",
+										Toast.LENGTH_SHORT).show();
+							}
+						}
+						//chickens.add(new Chicken(Functions.randLoc(t.pos, 10), 5, 1));
+						//new TransferObject(TransferObject.TYPE_ADD_CHICKEN, "", timeStamp, senderID, senderName, location, gameID);
+					final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+					jmqq.sendMsg(TransferObject.TYPE_ADD_CHICKEN, Functions.randLoc(t.pos, 10), "");
 					}
 				});
 
@@ -57,28 +76,6 @@ public class SnakeGame extends Game {
 	}
 
 	
-	//funktioniert nicht!!!!??
-	public static LatLng randLoc(LatLng ll, int radius) {
-		double x0 = ll.latitude, y0 = ll.longitude;
-		Random random = new Random();
-
-		// Convert radius from meters to degrees
-		double radiusInDegrees = radius / 111000f;
-
-		double u = random.nextDouble();
-		double v = random.nextDouble();
-		double w = radiusInDegrees * Math.sqrt(u);
-		double t = 2 * Math.PI * v;
-		double x = w * Math.cos(t);
-		double y = w * Math.sin(t);
-
-		// Adjust the x-coordinate for the shrinking of the east-west distances
-		double new_x = x / Math.cos(y0);
-
-		double foundLongitude = new_x + x0;
-		double foundLatitude = y + y0;
-		LatLng res = new LatLng(foundLatitude, foundLongitude);
-		return res;
-	}
+	
 
 }

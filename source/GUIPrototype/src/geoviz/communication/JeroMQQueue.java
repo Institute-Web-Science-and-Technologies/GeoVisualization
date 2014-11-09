@@ -1,13 +1,24 @@
 package geoviz.communication;
 
+import geoviz.game.Game;
+
+import java.util.Calendar;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.zeromq.ZMQ;
+
+import com.example.guiprototype.SwipeScreen;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 //handles outgoing communication via a blocking queue and request reply
 public class JeroMQQueue {
 	
 	private static JeroMQQueue __instance;
+	
+	final Gson gson = new GsonBuilder().create();
+
 	
 	final BlockingQueue<String> bq  = new LinkedBlockingQueue();
 
@@ -62,6 +73,14 @@ public class JeroMQQueue {
 	
 	public void add(String msg){
 		bq.add(msg);
+	}
+	
+	public void sendMsg(int type, LatLng loc, String str){
+Game game= Game.getGame();
+    	TransferObject msg = new TransferObject(type, str, Calendar
+				.getInstance().getTime(),game.userID , game.userName, loc,Game.getGame().gameID);
+    	final String json = gson.toJson(msg);
+    	add(json);
 	}
 
 }

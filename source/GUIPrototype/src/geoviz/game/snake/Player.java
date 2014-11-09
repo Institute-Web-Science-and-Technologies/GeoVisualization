@@ -1,12 +1,12 @@
 package geoviz.game.snake;
 
 import geoviz.communication.TransferObject;
+import geoviz.game.Functions;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import android.location.Location;
 import android.widget.Toast;
 
 import com.example.fragments.MapScreenFragment;
@@ -46,70 +46,20 @@ public class Player {
 		float length = 0;
 		if (poss.size() > 1)
 			for (int i = 0; i < poss.size() - 1; i++) {
-				length += distance(poss.get(i), poss.get(i + 1));
+				length += Functions.distance(poss.get(i), poss.get(i + 1));
 			}
 		return length;
 	}
-
-	public float distance(LatLng d, LatLng b) {
-		Location l1 = new Location("From");
-		l1.setLatitude(d.latitude);
-		l1.setLongitude(d.longitude);
-		Location l2 = new Location("To");
-		l2.setLatitude(b.latitude);
-		l2.setLongitude(b.longitude);
-		return l1.distanceTo(l2);
-
-		/*
-		 * double earthRadius = 3958.75; double latDiff =
-		 * Math.toRadians(b.latitude-d.latitude); double lngDiff =
-		 * Math.toRadians(b.longitude-d.longitude); double a = Math.sin(latDiff
-		 * /2) * Math.sin(latDiff /2) + Math.cos(Math.toRadians(d.latitude)) *
-		 * Math.cos(Math.toRadians(b.latitude)) * Math.sin(lngDiff /2) *
-		 * Math.sin(lngDiff /2); double c = 2 * Math.atan2(Math.sqrt(a),
-		 * Math.sqrt(1-a)); double distance = earthRadius * c;
-		 * 
-		 * int meterConversion = 1609;
-		 * 
-		 * return new Float(distance * meterConversion).floatValue();
-		 */
+	
+	LatLng head(){
+		return poss.get(poss.size()-1);
 	}
-
-	void update(TransferObject t) {
-
-		poss.add(t.pos);
-		
-		Toast.makeText(SwipeScreen.getInstance(), length() + "",
-				Toast.LENGTH_SHORT).show();
-
-		normalize(30);
-
-		snake.setPoints(poss);
-
-		
-
-		/*
-		 * for(String key: players.keySet()){ Player p=players.get(key);
-		 * if(p.name==this.name) continue; if(collides(this.poss,p.poss)){
-		 * //Toast.makeText(context, text, duration);
-		 * JeroMQQueue.getInstance().add("Helllllllow!"); } }
-		 */
+	
+	boolean collides (Chicken chicken){
+		return Functions.distance(chicken.pos,head())<chicken.radius;
 	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public Player setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	public Polyline getSnake() {
-		return this.snake;
-	}
-
-	private static boolean collides(List<LatLng> list1, List<LatLng> list2) {
+	
+	public static boolean collides(List<LatLng> list1, List<LatLng> list2) {
 		if ((list1.size() <= 1) || (list2.size() <= 1))
 			return false;
 
@@ -160,4 +110,42 @@ public class Player {
 		}
 		return false;
 	}
+
+	
+
+	void update(TransferObject t) {
+
+		poss.add(t.pos);
+		
+		Toast.makeText(SwipeScreen.getInstance(), length() + "",
+				Toast.LENGTH_SHORT).show();
+
+		normalize(30);
+
+		snake.setPoints(poss);
+
+		
+
+		/*
+		 * for(String key: players.keySet()){ Player p=players.get(key);
+		 * if(p.name==this.name) continue; if(collides(this.poss,p.poss)){
+		 * //Toast.makeText(context, text, duration);
+		 * JeroMQQueue.getInstance().add("Helllllllow!"); } }
+		 */
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Player setName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public Polyline getSnake() {
+		return this.snake;
+	}
+
+	
 }
