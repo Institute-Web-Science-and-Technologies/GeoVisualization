@@ -19,6 +19,8 @@ public class Player {
 	private String name;
 
 	private Polyline snake;
+	
+	private float max_length=20;
 
 	List<LatLng> poss = new LinkedList();
 
@@ -40,6 +42,10 @@ public class Player {
 	void normalize(float max_length) {
 		while (length() > max_length)
 			poss.remove(0);
+	}
+	
+	void changeMaxLength(float f){
+		max_length+=f;
 	}
 
 	float length() {
@@ -120,7 +126,7 @@ public class Player {
 		Toast.makeText(SwipeScreen.getInstance(), length() + "",
 				Toast.LENGTH_SHORT).show();
 
-		normalize(30);
+		normalize(max_length);
 
 		snake.setPoints(poss);
 

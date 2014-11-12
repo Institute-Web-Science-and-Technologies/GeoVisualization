@@ -44,7 +44,7 @@ public class SnakeGame extends Game {
 
 			}
 			if (t.msgType == TransferObject.TYPE_ADD_CHICKEN) {
-				chickens.add(new Chicken(t.pos, 5, 1, t.msg));
+				chickens.add(new Chicken(t.pos, 2, 1, t.msg));
 			}
 			if (t.msgType == TransferObject.TYPE_KILL_CHICKEN) {
 				for (Chicken chicken : chickens) {
@@ -52,6 +52,7 @@ public class SnakeGame extends Game {
 						chicken.kill();
 				}
 				addToHighscore(t.senderName, 1);
+				players.get(t.senderName).changeMaxLength(+1.2f);
 			}
 			if (t.msgType == TransferObject.TYPE_COORD) {
 				swipeScreen.runOnUiThread(new Runnable() {
@@ -77,7 +78,9 @@ public class SnakeGame extends Game {
 						// new TransferObject(TransferObject.TYPE_ADD_CHICKEN,
 						// "", timeStamp, senderID, senderName, location,
 						// gameID);
-						addChicken(Functions.randLoc(t.pos, 10));
+						if(chickens.size()<20)
+						if(0==(int)(Math.random()*10))
+						addChicken(Functions.randLoc(t.pos, 30));
 					}
 				});
 

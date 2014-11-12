@@ -27,7 +27,7 @@ public class Chicken {
 
 			@Override
 			public void run() {
-				marker = MapScreenFragment.getMSF().initMarker(240, pos, "Chicken "+id);
+				marker = MapScreenFragment.getMSF().initMarker(240, pos, "Chicken");
 				
 			}});
 		this.id=id;
