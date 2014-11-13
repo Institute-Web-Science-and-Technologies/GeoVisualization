@@ -1,13 +1,12 @@
 package geoviz.game.snake;
 
+import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import android.widget.Toast;
 
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.SwipeScreen;
@@ -19,8 +18,8 @@ public class Player {
 	private String name;
 
 	private Polyline snake;
-	
-	private float max_length=20;
+
+	private float max_length = 20;
 
 	List<LatLng> poss = new LinkedList();
 
@@ -40,12 +39,12 @@ public class Player {
 	}
 
 	void normalize() {
-		while (length() > max_length)
+		while (poss.size() > 2 && length() > max_length)
 			poss.remove(0);
 	}
-	
-	void changeMaxLength(float f){
-		max_length+=f;
+
+	void changeMaxLength(float f) {
+		max_length += f;
 	}
 
 	float length() {
@@ -56,38 +55,33 @@ public class Player {
 			}
 		return length;
 	}
-	
-	LatLng head(){
-		return poss.get(poss.size()-1);
-	}
-	
-	boolean collides (Chicken chicken){
-		return Functions.distance(chicken.pos,head())<chicken.radius;
-	}
-	
-	
 
-	
+	LatLng head() {
+		return poss.get(poss.size() - 1);
+	}
+
+	boolean collides(Chicken chicken) {
+		return Functions.distance(chicken.pos, head()) < chicken.radius;
+	}
 
 	void update(TransferObject t) {
 
 		poss.add(t.pos);
-		
-		Toast.makeText(SwipeScreen.getInstance(), length() + "",
-				Toast.LENGTH_SHORT).show();
 
 		normalize();
 
 		snake.setPoints(poss);
 
-		
+		for (String key : players.keySet()) {
+			Player p = players.get(key);
+			if (p.name == this.name)
+				continue;
+			if (Functions.collides(this.poss, p.poss)) {
+				// Toast.makeText(context, text, duration);
+				JeroMQQueue.getInstance().add("Bam!");
+			}
+		}
 
-		/*
-		 * for(String key: players.keySet()){ Player p=players.get(key);
-		 * if(p.name==this.name) continue; if(collides(this.poss,p.poss)){
-		 * //Toast.makeText(context, text, duration);
-		 * JeroMQQueue.getInstance().add("Helllllllow!"); } }
-		 */
 	}
 
 	public String getName() {
@@ -103,5 +97,4 @@ public class Player {
 		return this.snake;
 	}
 
-	
 }

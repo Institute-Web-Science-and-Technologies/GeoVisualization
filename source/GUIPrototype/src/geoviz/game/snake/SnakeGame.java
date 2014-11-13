@@ -1,6 +1,5 @@
 package geoviz.game.snake;
 
-import geoviz.communication.JeroMQPoller;
 import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
@@ -60,7 +59,7 @@ public class SnakeGame extends Game {
 						// msf.handlePosition(t.senderName,t.pos);
 						Player player = players.get(t.senderName);
 						player.update(t);
-						if (player.getName().equals(userName))
+						if (player.getName().equals(userName)){
 							for (Chicken chicken : chickens) {
 								if (!chicken.dead && player.collides(chicken)) {
 									// chicken.kill();
@@ -73,6 +72,8 @@ public class SnakeGame extends Game {
 									
 								}
 							}
+							
+						}
 						// chickens.add(new Chicken(Functions.randLoc(t.pos,
 						// 10), 5, 1));
 						// new TransferObject(TransferObject.TYPE_ADD_CHICKEN,
