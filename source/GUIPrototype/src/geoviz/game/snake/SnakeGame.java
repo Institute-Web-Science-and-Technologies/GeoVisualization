@@ -10,8 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import android.widget.Toast;
-
 import com.example.fragments.GamesScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
@@ -38,40 +36,32 @@ public class SnakeGame extends Game {
 		if (t.gameID.equals(this.gameID)) {
 			Player player = players.get(t.senderName);
 			if (player == null) {
-				player = new Player(t.senderName, players);
+				player = new Player(t.senderName);
 				players.put(t.senderName, player);
 
 			}
-			if (t.msgType == TransferObject.TYPE_ADD_CHICKEN) {
-				chickens.add(new Chicken(t.pos, 2, 1, t.msg));
-			}
-			if (t.msgType == TransferObject.TYPE_KILL_CHICKEN) {
+			switch(t.msgType){
+			case TransferObject.TYPE_ADD_CHICKEN:
+				chickens.add(new Chicken(t.pos, Const.CHICKEN_COLLISION_RADIUS, 1, t.msg));
+			break;
+			
+			case TransferObject.TYPE_KILL_CHICKEN:
 				for (Chicken chicken : chickens) {
 					if (chicken.id.equals(t.msg))
 						chicken.kill();
 				}
 				addToHighscore(t.senderName, 1);
-				players.get(t.senderName).changeMaxLength(+1.2f);
-			}
-			if (t.msgType == TransferObject.TYPE_COORD) {
+				players.get(t.senderName).changeMaxLength(Const.SNAKE_GROWTH_RATE);
+			break;
+			
+			case TransferObject.TYPE_COORD:
 				swipeScreen.runOnUiThread(new Runnable() {
 					public void run() {
 						// msf.handlePosition(t.senderName,t.pos);
 						Player player = players.get(t.senderName);
 						player.update(t);
 						if (player.getName().equals(userName)){
-							for (Chicken chicken : chickens) {
-								if (!chicken.dead && player.collides(chicken)) {
-									// chicken.kill();
-									final JeroMQQueue jmqq = JeroMQQueue
-											.getInstance();
-									jmqq.sendMsg(
-											TransferObject.TYPE_KILL_CHICKEN,
-											t.pos, chicken.id);
-									jmqq.sendMsg(TransferObject.TYPE_MSG, t.pos, "gained point");
-									
-								}
-							}
+							player.checkCollision(players, chickens);
 							
 						}
 						// chickens.add(new Chicken(Functions.randLoc(t.pos,
@@ -81,9 +71,11 @@ public class SnakeGame extends Game {
 						// gameID);
 						if(chickens.size()<20)
 						if(0==(int)(Math.random()*10))
-						addChicken(Functions.randLoc(t.pos, 30));
+						addChicken(Functions.randLoc(t.pos, Const.CHICKEN_SPAWN_RADIUS));
 					}
 				});
+				break;
+			
 
 			}
 		} else {

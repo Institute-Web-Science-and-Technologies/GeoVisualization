@@ -1,12 +1,9 @@
 package geoviz.game.snake;
 
-import android.graphics.Color;
-
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.SwipeScreen;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import android.graphics.Color;
 
 public class Chicken {
 	
