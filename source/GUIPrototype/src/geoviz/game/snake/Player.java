@@ -1,13 +1,12 @@
 package geoviz.game.snake;
 
+import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import android.widget.Toast;
 
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.SwipeScreen;
@@ -19,15 +18,12 @@ public class Player {
 	private String name;
 
 	private Polyline snake;
-	
-	private float max_length=20;
+
+	private float max_length = Const.SNAKE_START_LENGTH;
 
 	List<LatLng> poss = new LinkedList();
 
-	Map<String, Player> players;
-
-	public Player(String name, Map<String, Player> players) {
-		this.players = players;
+	public Player(String name) {
 		this.name = name;
 		SwipeScreen.getInstance().runOnUiThread(new Runnable() {
 			public void run() {
@@ -39,13 +35,13 @@ public class Player {
 
 	}
 
-	void normalize(float max_length) {
-		while (length() > max_length)
+	void normalize() {
+		while (poss.size() > 2 && length() > max_length)
 			poss.remove(0);
 	}
-	
-	void changeMaxLength(float f){
-		max_length+=f;
+
+	void changeMaxLength(float f) {
+		max_length += f;
 	}
 
 	float length() {
@@ -56,88 +52,65 @@ public class Player {
 			}
 		return length;
 	}
-	
-	LatLng head(){
-		return poss.get(poss.size()-1);
+
+	LatLng head() {
+		return poss.get(poss.size() - 1);
+	}
+
+	boolean collides(Chicken chicken) {
+		return Functions.distance(chicken.pos, head()) < chicken.radius;
 	}
 	
-	boolean collides (Chicken chicken){
-		return Functions.distance(chicken.pos,head())<chicken.radius;
-	}
-	
-	public static boolean collides(List<LatLng> list1, List<LatLng> list2) {
-		if ((list1.size() <= 1) || (list2.size() <= 1))
-			return false;
-
-		// Den letzten und vorletzten Punkt aus liste1 holen
-		LatLng list1punkt1 = list1.get(list1.size() - 1);
-		LatLng list1punkt2 = list1.get(list1.size() - 2);
-		double x1 = list1punkt1.latitude;
-		double y1 = list1punkt1.longitude;
-		double x2 = list1punkt2.latitude;
-		double y2 = list1punkt2.longitude;
-
-		// Mit dem ersten Punkt beginnend immer zwei Punkte aus liste2 holen
-		for (int i = 0; i < (list2.size() - 1); i++) {
-
-			LatLng list2punkt1 = list2.get(i);
-			LatLng list2punkt2 = list2.get(i + 1);
-			double x3 = list2punkt1.latitude;
-			double y3 = list2punkt1.longitude;
-			double x4 = list2punkt2.latitude;
-			double y4 = list2punkt2.longitude;
-
-			// Zaehler
-			double zx = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2)
-					* (x3 * y4 - y3 * x4);
-			double zy = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2)
-					* (x3 * y4 - y3 * x4);
-
-			// Nenner
-			double n = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-
-			// Koordinaten des Schnittpunktes
-			double x = zx / n;
-			double y = zy / n;
-
-			// Vielleicht ist bei der Division durch n etwas schief gelaufen
-			if (Double.isNaN(x) & Double.isNaN(y)) {
-				throw new IllegalArgumentException(
-						"Schnittpunkt nicht eindeutig.");
+	boolean collides(Player p){
+		final double RADIUS = Const.SNAKE_COLLISION_RADIUS;
+		List<LatLng> collposs = p.poss;
+		if (p.name == this.name) {
+			if (poss.size() < 3)
+				return false;;
+			int i = poss.size() - 1;
+			double d = 0;
+			while (d < RADIUS*2 && i > 1) {
+				i--;
+				d += Functions.distance(poss.get(i), poss.get(i + 1));
 			}
-			// Test ob der Schnittpunkt auf den angebenen Strecken liegt oder
-			// außerhalb.
-			if (((x - x1) / (x2 - x1) > 1 || (x - x3) / (x4 - x3) > 1
-					|| (y - y1) / (y2 - y1) > 1 || (y - y3) / (y4 - y3) > 1))
-				continue;
-
-			return true;
-
+			collposs = poss.subList(0, i);
 		}
-		return false;
+		return Functions.collides_simple(this.poss, collposs, RADIUS);
 	}
-
-	
 
 	void update(TransferObject t) {
 
 		poss.add(t.pos);
-		
-		Toast.makeText(SwipeScreen.getInstance(), length() + "",
-				Toast.LENGTH_SHORT).show();
 
-		normalize(max_length);
+		normalize();
 
 		snake.setPoints(poss);
 
-		
+	}
 
-		/*
-		 * for(String key: players.keySet()){ Player p=players.get(key);
-		 * if(p.name==this.name) continue; if(collides(this.poss,p.poss)){
-		 * //Toast.makeText(context, text, duration);
-		 * JeroMQQueue.getInstance().add("Helllllllow!"); } }
-		 */
+	void checkCollision(Map<String, Player> players, List<Chicken> chickens) {
+		for (String key : players.keySet()) {
+			Player p = players.get(key);
+			// if (p.name == this.name)
+			// continue;
+			if (collides(p)) {
+				// final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				// jmqq.sendMsg(TransferObject.TYPE_MSG, null,
+				// "Bam!");
+				MapScreenFragment.getMSF().initMarker(120, head(), "Collision "+name);
+			}
+		}
+
+		for (Chicken chicken : chickens) {
+			if (!chicken.dead && collides(chicken)) {
+				// chicken.kill();
+				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN, null, chicken.id);
+				jmqq.sendMsg(TransferObject.TYPE_MSG, null, "gained point");
+
+			}
+		}
+
 	}
 
 	public String getName() {
@@ -153,5 +126,4 @@ public class Player {
 		return this.snake;
 	}
 
-	
 }
