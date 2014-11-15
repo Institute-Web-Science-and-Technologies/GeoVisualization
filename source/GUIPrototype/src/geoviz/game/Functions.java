@@ -108,15 +108,16 @@ public class Functions {
 		return false;
 	}
 	
-	public static boolean collides_simple(List<LatLng> list1, List<LatLng> list2, double radius) {
+	public static boolean collides_simple(List<LatLng> list1, List<LatLng> list2) {
 		if(list1.size()<1)
 			return false;
-				
+		
+		double radius = 2;
+		
 		LatLng head = list1.get(list1.size()-1);
 		for(LatLng l:list2){
-			//double dist = Math.pow(head.latitude-l.latitude,2)+Math.pow(head.longitude-l.longitude,2);
-			//if(dist<Math.pow(radius, 2))
-			if(distance(head,l)<radius)
+			double dist = Math.pow(head.latitude-l.latitude,2)+Math.pow(head.longitude-l.longitude,2);
+			if(dist<Math.pow(radius, 2))
 				return true;
 		}
 		return false;
