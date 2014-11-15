@@ -19,14 +19,11 @@ public class Player {
 
 	private Polyline snake;
 
-	private float max_length = 20;
+	private float max_length = Const.SNAKE_START_LENGTH;
 
 	List<LatLng> poss = new LinkedList();
 
-	Map<String, Player> players;
-
-	public Player(String name, Map<String, Player> players) {
-		this.players = players;
+	public Player(String name) {
 		this.name = name;
 		SwipeScreen.getInstance().runOnUiThread(new Runnable() {
 			public void run() {
@@ -63,6 +60,23 @@ public class Player {
 	boolean collides(Chicken chicken) {
 		return Functions.distance(chicken.pos, head()) < chicken.radius;
 	}
+	
+	boolean collides(Player p){
+		final double RADIUS = Const.SNAKE_COLLISION_RADIUS;
+		List<LatLng> collposs = p.poss;
+		if (p.name == this.name) {
+			if (poss.size() < 3)
+				return false;;
+			int i = poss.size() - 1;
+			double d = 0;
+			while (d < RADIUS*2 && i > 1) {
+				i--;
+				d += Functions.distance(poss.get(i), poss.get(i + 1));
+			}
+			collposs = poss.subList(0, i);
+		}
+		return Functions.collides_simple(this.poss, collposs, RADIUS);
+	}
 
 	void update(TransferObject t) {
 
@@ -72,13 +86,28 @@ public class Player {
 
 		snake.setPoints(poss);
 
+	}
+
+	void checkCollision(Map<String, Player> players, List<Chicken> chickens) {
 		for (String key : players.keySet()) {
 			Player p = players.get(key);
-			if (p.name == this.name)
-				continue;
-			if (Functions.collides(this.poss, p.poss)) {
-				// Toast.makeText(context, text, duration);
-				JeroMQQueue.getInstance().add("Bam!");
+			// if (p.name == this.name)
+			// continue;
+			if (collides(p)) {
+				// final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				// jmqq.sendMsg(TransferObject.TYPE_MSG, null,
+				// "Bam!");
+				MapScreenFragment.getMSF().initMarker(120, head(), "Collision "+name);
+			}
+		}
+
+		for (Chicken chicken : chickens) {
+			if (!chicken.dead && collides(chicken)) {
+				// chicken.kill();
+				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN, null, chicken.id);
+				jmqq.sendMsg(TransferObject.TYPE_MSG, null, "gained point");
+
 			}
 		}
 
