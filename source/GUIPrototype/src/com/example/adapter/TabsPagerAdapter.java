@@ -22,7 +22,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter{
 		case 0:
 			
 			return new ChatScreenFragment ();
-			
 		case 1:
 			return new MapScreenFragment();
 			
