@@ -76,6 +76,7 @@ public class Player {
 			collposs = poss.subList(0, i);
 		}
 		return Functions.collides_simple(this.poss, collposs, RADIUS);
+		//return Functions.collides(this.poss, collposs);
 	}
 
 	void update(TransferObject t) {

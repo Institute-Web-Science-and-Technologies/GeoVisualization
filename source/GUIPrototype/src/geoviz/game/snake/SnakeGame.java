@@ -69,7 +69,7 @@ public class SnakeGame extends Game {
 						// new TransferObject(TransferObject.TYPE_ADD_CHICKEN,
 						// "", timeStamp, senderID, senderName, location,
 						// gameID);
-						if(chickens.size()<20)
+						if(chickens.size()<7)
 						if(0==(int)(Math.random()*10))
 						addChicken(Functions.randLoc(t.pos, Const.CHICKEN_SPAWN_RADIUS));
 					}
