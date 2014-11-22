@@ -23,6 +23,11 @@ public class Player {
 
 	List<LatLng> poss = new LinkedList();
 
+	/**
+	 * creates an object to store information about a player/phone;
+	 * creates an polyline on the map to represent the snake
+	 * @param name the player's chosen name
+	 */
 	public Player(String name) {
 		this.name = name;
 		SwipeScreen.getInstance().runOnUiThread(new Runnable() {
@@ -35,15 +40,26 @@ public class Player {
 
 	}
 
+	/**
+	 * normalizes the sankes length th max_length
+	 */
 	void normalize() {
 		while (poss.size() > 2 && length() > max_length)
 			poss.remove(0);
 	}
 
+	/**
+	 * increases or decreases Max_length
+	 * @param f amount of the change
+	 */
 	void changeMaxLength(float f) {
 		max_length += f;
 	}
 
+	/**
+	 * calculates and adds the distance between point i and i+1 for i 0, ..., |snake|-2
+	 * @return the snake's length
+	 */
 	float length() {
 		float length = 0;
 		if (poss.size() > 1)
@@ -53,14 +69,28 @@ public class Player {
 		return length;
 	}
 
+	/**
+	 * returns the player's position
+	 * @return the last point added to the snake
+	 */
 	LatLng head() {
 		return poss.get(poss.size() - 1);
 	}
 
+	/**
+	 * checks wether this player and chicken collide
+	 * @param chicken an immovable object
+	 * @return true iff collision happened
+	 */
 	boolean collides(Chicken chicken) {
 		return Functions.distance(chicken.pos, head()) < chicken.radius;
 	}
 	
+	/**
+	 * checks wether this player and player p collide
+	 * @param p a different or the same player
+	 * @return true iff collision happened
+	 */
 	boolean collides(Player p){
 		final double RADIUS = Const.SNAKE_COLLISION_RADIUS;
 		List<LatLng> collposs = p.poss;
@@ -76,8 +106,13 @@ public class Player {
 			collposs = poss.subList(0, i);
 		}
 		return Functions.collides_simple(this.poss, collposs, RADIUS);
+		//return Functions.collides(this.poss, collposs);
 	}
 
+	/**
+	 * updates this snake's state to newer information send by the player
+	 * @param t msg send by the player this snake corresponds to
+	 */
 	void update(TransferObject t) {
 
 		poss.add(t.pos);
@@ -88,6 +123,12 @@ public class Player {
 
 	}
 
+	
+	/**
+	 * checks collisions between this snake and other objects and handles their consequences
+	 * @param players list of all players known
+	 * @param chickens list of all chickens known
+	 */
 	void checkCollision(Map<String, Player> players, List<Chicken> chickens) {
 		for (String key : players.keySet()) {
 			Player p = players.get(key);
@@ -113,6 +154,7 @@ public class Player {
 
 	}
 
+	
 	public String getName() {
 		return this.name;
 	}

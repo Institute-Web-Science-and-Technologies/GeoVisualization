@@ -15,6 +15,14 @@ public class Chicken {
 	
 	Marker marker;
 	
+	/**
+	 * creates a new passive object;
+	 * creates a new marker on the map to represent that object
+	 * @param pos position of the object (fix)
+	 * @param radius distance maximum for collision with other objects/players 
+	 * @param val not used atm
+	 * @param id randomly created id 
+	 */
 	public Chicken(final LatLng pos, float radius, float val, final String id) {
 		super();
 		this.pos = pos;
@@ -31,6 +39,10 @@ public class Chicken {
 	}
 	
 	
+	/**
+	 * this method is called on collison with a player;
+	 * destroys marker and sets dead
+	 */
 	void kill(){
 		//remove marker
 		SwipeScreen.getInstance().runOnUiThread(new Runnable(){
