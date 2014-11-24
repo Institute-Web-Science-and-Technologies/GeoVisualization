@@ -125,16 +125,13 @@ public class LocationClientActivity extends ActionBarActivity implements
 	public void onLocationChanged(Location location) {
 
 		tw.append("\n"
-				+ new SimpleDateFormat("HH:mm:ss").format(Calendar
-						.getInstance().getTime()));
+				+ new SimpleDateFormat("HH:mm:ss; ").format(Calendar.getInstance().getTime())+"accu: " +location.getAccuracy()+"; "+ " Lat="+location.getLatitude() + " Long="+location.getLongitude()+";");
 		sv.fullScroll(View.FOCUS_DOWN);
 
 		if (changeWriting.getText().equals("Stop Writing")) {
 			try {
 				PrintWriter pw=new PrintWriter(new FileWriter (root.getAbsolutePath() + "//gpsTestDaten//locationClientData.txt",true));
-				pw.append("\n"
-						+ new SimpleDateFormat("HH:mm:ss").format(Calendar
-								.getInstance().getTime()));
+				pw.append("\n" + new SimpleDateFormat("HH:mm:ss; ").format(Calendar.getInstance().getTime())+"accu: " +location.getAccuracy()+"; "+ " Lat="+location.getLatitude() + " Long="+location.getLongitude()+";");
 				pw.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

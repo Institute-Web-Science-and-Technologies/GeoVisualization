@@ -131,14 +131,14 @@ public class LocationManagerActivity extends ActionBarActivity implements Locati
 	@Override
 	public void onLocationChanged(Location location) {
 		
-		tw.append("\ntime="+new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime())+" Latitude="+location.getLatitude());//+" Longitude="+location.getLongitude()
-		tw.append("\nlat:"+lm.getLastKnownLocation("gps").getLatitude());
+		location.getAccuracy();
+		tw.append("\n" + new SimpleDateFormat("HH:mm:ss; ").format(Calendar.getInstance().getTime())+"accu: " +location.getAccuracy()+"; "+ " Lat="+location.getLatitude() + " Long="+location.getLongitude()+";");
 		//tw.append("\ntime="+new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
 		sv.fullScroll(View.FOCUS_DOWN);
 		if (changeWriting.getText().equals("Stop Writing")) {
 			try {
 				PrintWriter pw=new PrintWriter(new FileWriter (root.getAbsolutePath() + "//gpsTestDaten//locationManagerData.txt",true));
-				pw.append ("\n"+new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+				pw.append ("\n" + new SimpleDateFormat("HH:mm:ss; ").format(Calendar.getInstance().getTime())+"accu: " +location.getAccuracy()+"; "+ " Lat="+location.getLatitude() + " Long="+location.getLongitude()+";");
 				pw.close();
 	    	} catch (IOException e) {
 				// TODO Auto-generated catch block
