@@ -10,3 +10,11 @@ Der momentane Marktanteil (Stand 2. Quartal 2014) liegt bei 84,6. Dieser Fakt, s
 Geräten inerhalb unserer Projektgruppe war ein Grund die App für dieses Projektpraktikum für Android zu entwickeln.
 
 
+## Entwicklung
+In diesem Projektpraktikum wurde mit Java und dem Android Software Development kit entwickelt. Hauptsächlich wurde das offiziel unterstütze Eclipse mit dem Andoird Developemt Tools (ADT) Plugin verwendet. Hierbei hat man unter anderem die
+Möglichkeit einen Geräte Emulator zu verwenden. Da die damit erstellten virtuellen Geräte nur sehr langsam reagiert haben
+und das testen mit einem virtuellen GPS-Sensor sehr mühselig ist, wurde darauf weitestgehend verzichtet.
+
+### Layout
+
+Das Layout, also die graphische Oberläche der App kann in XML-Dateien festgelegt werden.
