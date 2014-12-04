@@ -11,15 +11,23 @@ public class TransferObject implements Serializable {
 	public final static int TYPE_MSG =0,
 			TYPE_COORD =1,
 			TYPE_ADD_CHICKEN=2,
-			TYPE_KILL_CHICKEN=3;
+			TYPE_KILL_CHICKEN=3,
+			TYPE_CREATE=4,
+			TYPE_GET_GAMELIST=5;
+
 	
 	public int msgType;
+	public String gameID;
 	public String msg;
+	
+	public LatLng pos;
 	public java.util.Date timeStamp;
 	public String senderID;
 	public String senderName;
-	public LatLng pos;
-	public String gameID;
+
+	
+	
+	
 	
 	/**
 	 * 

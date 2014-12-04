@@ -39,6 +39,7 @@ public class Chicken {
 	}
 	
 	
+
 	/**
 	 * this method is called on collison with a player;
 	 * destroys marker and sets dead

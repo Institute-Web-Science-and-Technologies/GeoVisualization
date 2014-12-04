@@ -9,12 +9,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Functions {
 
+
 	/**
 	 * Calculates distance between two coordinates
 	 * @param d point
 	 * @param b point
 	 * @return distance from b to d
 	 */
+
 	public static float distance(LatLng d, LatLng b) {
 		Location l1 = new Location("From");
 		l1.setLatitude(d.latitude);
@@ -39,6 +41,7 @@ public class Functions {
 		 */
 	}
 
+
 	
 	/**
 	 * generates a random location 
@@ -46,6 +49,7 @@ public class Functions {
 	 * @param radius
 	 * @return random location in a circle of radius radius around coordinate ll
 	 */
+
 	public static LatLng randLoc(LatLng ll, int radius) {
 		double y0 = ll.latitude, x0 = ll.longitude;
 		Random random = new Random();
@@ -69,6 +73,7 @@ public class Functions {
 		return res;
 	}
 	
+
 	
 	/**
 	 * tests if the line betwenn the last two points of list1 
@@ -77,6 +82,7 @@ public class Functions {
 	 * @params lists of coordinates 
 	 * @return true iff collision occurred
 	 */
+
 	public static boolean collides(List<LatLng> list1, List<LatLng> list2) {
 		if ((list1.size() <= 1) || (list2.size() <= 1))
 			return false;
@@ -129,12 +135,14 @@ public class Functions {
 		return false;
 	}
 	
+
 	/**
 	 * tests wether the distance betwenn the first point of list1 
 	 * and any of the points of list2 is smaller than radius
 	 * @params lists of coordinates 
 	 * @return true iff collision occurred
 	 */
+
 	public static boolean collides_simple(List<LatLng> list1, List<LatLng> list2, double radius) {
 		if(list1.size()<1)
 			return false;

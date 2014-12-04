@@ -79,8 +79,9 @@ public class JeroMQQueue {
 Game game= Game.getGame();
     	TransferObject msg = new TransferObject(type, str, Calendar
 				.getInstance().getTime(),game.userID , game.userName, loc,Game.getGame().gameID);
-    	final String json = gson.toJson(msg);
-    	add(json);
+
+    	String json = gson.toJson(msg);
+    	add(type +","+Game.getGame().gameID+","+game.userID+","+json);
 	}
 
 }

@@ -21,6 +21,7 @@ public class SnakeGame extends Game {
 	//list of all players participating in this game 
 	private Map<String, Player> players = new HashMap<String, Player>();
 	private Map<String, Integer> highscore =new HashMap();
+
 	//list of all chickens
 	private List<Chicken> chickens = new LinkedList();
 
@@ -43,7 +44,7 @@ public class SnakeGame extends Game {
 	
 	@Override
 	public void update(final TransferObject t) {
-		if (t.gameID.equals(this.gameID)) {
+		
 			Player player = players.get(t.senderName);
 			//create a new player if no player with the sender's name exists
 			if (player == null) {
@@ -57,6 +58,7 @@ public class SnakeGame extends Game {
 				chickens.add(new Chicken(t.pos, Const.CHICKEN_COLLISION_RADIUS, 1, t.msg));
 			break;
 			
+
 			//removes a chicken collected by sender
 			case TransferObject.TYPE_KILL_CHICKEN:
 				for (Chicken chicken : chickens) {
@@ -67,6 +69,7 @@ public class SnakeGame extends Game {
 				players.get(t.senderName).changeMaxLength(Const.SNAKE_GROWTH_RATE);
 			break;
 			
+
 			//updates sender's player object with new inofrmation abut sender's physical position
 			case TransferObject.TYPE_COORD:
 				swipeScreen.runOnUiThread(new Runnable() {
@@ -83,6 +86,7 @@ public class SnakeGame extends Game {
 						// new TransferObject(TransferObject.TYPE_ADD_CHICKEN,
 						// "", timeStamp, senderID, senderName, location,
 						// gameID);
+
 						if(chickens.size()<7)
 						if(0==(int)(Math.random()*10))
 						addChicken(Functions.randLoc(t.pos, Const.CHICKEN_SPAWN_RADIUS));
@@ -92,16 +96,13 @@ public class SnakeGame extends Game {
 			
 
 			}
-		} else {
-			GamesScreenFragment gsf = (GamesScreenFragment) swipeScreen
-					.getSupportFragmentManager().findFragmentByTag(
-							"android:switcher:" + R.id.pager + ":2");
-			if (!gsf.games.contains(t.gameID))
-				gsf.games.add(t.gameID);
+
+
 		}
 
 	}
 	
+
 	/**
 	 * add points th player's high score
 	 * @param player
@@ -113,6 +114,7 @@ public class SnakeGame extends Game {
 		else
 			highscore.put(player, 1);
 	}
+
 
 	/**
 	 * informs all phones taking part in the current game that chicken was created

@@ -32,6 +32,7 @@ import android.widget.Toast;
 import android.telephony.TelephonyManager;
 
 import com.example.adapter.TabsPagerAdapter;
+import com.example.callbacks.GamesScreenFragmentCallbacks;
 import com.example.fragments.GamesScreenFragment;
 import com.example.fragments.MapScreenFragment;
 import com.google.android.gms.common.ConnectionResult;
@@ -46,12 +47,15 @@ import com.google.gson.GsonBuilder;
 
 public class SwipeScreen extends FragmentActivity implements
 		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks,
-		LocationListener, GooglePlayServicesClient.OnConnectionFailedListener {
+
+		LocationListener, GooglePlayServicesClient.OnConnectionFailedListener ,GamesScreenFragmentCallbacks {
+
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
+	private JeroMQPoller poller;
 	public List<String> gameIDs = new ArrayList<String>();
 
 	// redundant in swipescreen an dgame
@@ -73,9 +77,11 @@ public class SwipeScreen extends FragmentActivity implements
 		return userID;
 	}
 
+
 	public String getUserName() {
 		return userName;
 	}
+
 
 	private String[] tabs = { "Chat", "Map", "Games" };
 	private Location mCurrentLocation;
@@ -116,7 +122,12 @@ public class SwipeScreen extends FragmentActivity implements
 
 		Game.init(new SnakeGame("0", this));
 
-		new JeroMQPoller(this).poll();
+
+		poller = new JeroMQPoller(this);
+		poller.addSubscription("0");
+		poller.addSubscription(userID);
+		poller.poll();
+
 
 		// Tabs der Actionbar hinzuf�gen
 		for (String tab_name : tabs) {
@@ -265,9 +276,19 @@ public class SwipeScreen extends FragmentActivity implements
 		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager()
 				.findFragmentByTag("android:switcher:" + R.id.pager + ":2");
 		String gameId = Game.TYPE_SNAKE + this.userID;
+
+		if (!gsf.games.contains(gameId)){
 		gsf.games.add(gameId);
-		Game.init(new SnakeGame(gameId, this));
+		}
+		connect(gameId);
 		gsf.adapter.notifyDataSetChanged();
+		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		jmqq.sendMsg(TransferObject.TYPE_CREATE, getOwnLocation(), "");
+	}
+	
+	public void updateGameList(View view){
+	JeroMQQueue jmqq = JeroMQQueue.getInstance();
+	jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, getOwnLocation(), "");
 	}
 
 	public void sendMessage(View view) {
@@ -299,6 +320,13 @@ public class SwipeScreen extends FragmentActivity implements
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void connect(String gameID) {
+		poller.deleteSubscription(Game.getGame().gameID);
+		poller.addSubscription(gameID);
+		Game.init(new SnakeGame(gameID,this));
 	}
 
 }

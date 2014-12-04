@@ -15,5 +15,12 @@
     <string name="title_activity_map_screen_activity_swipeable">MapScreenActivitySwipeable</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_swipe_screen">SwipeScreen</string>
-
+	
+    <string name="game_type_promt"> Choose a Game Type</string>
+    
+    <string-array name="game_types">
+        <item> Snake</item>
+        <item> Capture the Flag</item>
+        <item> PlACEHOLDER</item>
+    </string-array>
 </resources>

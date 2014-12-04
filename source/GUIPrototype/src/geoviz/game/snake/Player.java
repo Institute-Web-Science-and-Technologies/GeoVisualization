@@ -23,6 +23,7 @@ public class Player {
 
 	List<LatLng> poss = new LinkedList();
 
+
 	/**
 	 * creates an object to store information about a player/phone;
 	 * creates an polyline on the map to represent the snake
@@ -40,6 +41,7 @@ public class Player {
 
 	}
 
+
 	/**
 	 * normalizes the sankes length th max_length
 	 */
@@ -48,6 +50,7 @@ public class Player {
 			poss.remove(0);
 	}
 
+
 	/**
 	 * increases or decreases Max_length
 	 * @param f amount of the change
@@ -55,6 +58,7 @@ public class Player {
 	void changeMaxLength(float f) {
 		max_length += f;
 	}
+
 
 	/**
 	 * calculates and adds the distance between point i and i+1 for i 0, ..., |snake|-2
@@ -69,6 +73,7 @@ public class Player {
 		return length;
 	}
 
+
 	/**
 	 * returns the player's position
 	 * @return the last point added to the snake
@@ -76,6 +81,7 @@ public class Player {
 	LatLng head() {
 		return poss.get(poss.size() - 1);
 	}
+
 
 	/**
 	 * checks wether this player and chicken collide
@@ -86,6 +92,7 @@ public class Player {
 		return Functions.distance(chicken.pos, head()) < chicken.radius;
 	}
 	
+
 	/**
 	 * checks wether this player and player p collide
 	 * @param p a different or the same player
@@ -106,6 +113,7 @@ public class Player {
 			collposs = poss.subList(0, i);
 		}
 		return Functions.collides_simple(this.poss, collposs, RADIUS);
+
 		//return Functions.collides(this.poss, collposs);
 	}
 
@@ -154,7 +162,6 @@ public class Player {
 
 	}
 
-	
 	public String getName() {
 		return this.name;
 	}
