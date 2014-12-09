@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AwesomeLocationAccuracyTesterApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_location_client_map">LocationClientMap</string>
+    <string name="title_activity_location_manager_map">LocationManagerMap</string>
+
+</resources>
