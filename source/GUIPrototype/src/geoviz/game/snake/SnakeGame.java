@@ -100,7 +100,7 @@ public class SnakeGame extends Game {
 
 		}
 
-	}
+	
 	
 
 	/**

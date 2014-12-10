@@ -41,6 +41,8 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -241,6 +243,11 @@ public class SwipeScreen extends FragmentActivity implements
 	@Override
 	public void onLocationChanged(Location location) {
 		this.mCurrentLocation = location;
+		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 100);
+
+		MapScreenFragment.getMSF().mMap.animateCamera(cameraUpdate);
+		Toast.makeText(this, location.getAccuracy()+"", Toast.LENGTH_SHORT).show();
 		/*
 		 * TransferObject msg = new TransferObject(1, "", Calendar
 		 * .getInstance().getTime(), userID, userName, new LatLng

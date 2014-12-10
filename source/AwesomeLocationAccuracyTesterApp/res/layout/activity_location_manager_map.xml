@@ -12,7 +12,7 @@
         android:id="@+id/LmMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/LCStart"
+        android:layout_above="@+id/LmStart"
         class="com.google.android.gms.maps.MapFragment" />
     
     <Button
@@ -29,18 +29,18 @@
         android:id="@+id/LmStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/LCStart"
-        android:layout_toRightOf="@+id/LCStart"
-        android:text="StopM" 
-        android:onClick="lmStop"/>
+        android:layout_below="@+id/LmMap"
+        android:layout_toRightOf="@+id/LmStart"
+        android:onClick="lmStop"
+        android:text="StopM" />
 
     <Button
         android:id="@+id/LmDraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/LCStop"
-        android:layout_alignBottom="@+id/LCStop"
-        android:layout_toRightOf="@+id/LCStop"
-        android:text="Draw" 
-        android:onClick="lmDraw"/>
+        android:layout_below="@+id/LmMap"
+        android:layout_toRightOf="@+id/LmStop"
+        android:onClick="lmDraw"
+        android:text="Draw" />
+
 </RelativeLayout>
