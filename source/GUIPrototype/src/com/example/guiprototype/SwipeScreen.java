@@ -239,6 +239,9 @@ public class SwipeScreen extends FragmentActivity implements
 		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 		this.mCurrentLocation = mLocationClient.getLastLocation();
 	}
+	
+	float MIN_GPS_QUALITY=10;
+	boolean gps_quality_reached=false;
 
 	@Override
 	public void onLocationChanged(Location location) {
@@ -255,6 +258,11 @@ public class SwipeScreen extends FragmentActivity implements
 		 * location.getLongitude()),Game.getGame().gameID); final String json =
 		 * gson.toJson(msg); JeroMQQueue.getInstance().add(json);
 		 */
+		
+		if(location.getAccuracy()<MIN_GPS_QUALITY)
+			gps_quality_reached=true;
+		
+		if(gps_quality_reached)
 		JeroMQQueue.getInstance()
 				.sendMsg(
 						TransferObject.TYPE_COORD,
