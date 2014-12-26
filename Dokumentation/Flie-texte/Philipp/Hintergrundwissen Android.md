@@ -18,4 +18,5 @@ und das testen mit einem virtuellen GPS-Sensor sehr mühselig ist, wurde darauf 
 ### Layout
 
 Das Layout setzt sich aus einer Hierarchie aus View und ViewGroup Objekten zusammen. View Objekte sind hierbei normalerweise UI Widgets, z.B. Buttons oder Textfelder. ViewGroups Objekte sind hingegen unsichtbare View Container, die das Layout ihrer Kinder bestimmen.
+
 ![alt text](https://developer.android.com/images/viewgroup.png "viewgroup")
