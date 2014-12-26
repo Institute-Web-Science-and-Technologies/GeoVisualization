@@ -1,3 +1,50 @@
+
 \section{Softwareentwicklung mit Android}
 
-Hier steht der Text über Softwarentwicklung mit Android
+\subsection{Allgemeines}
+Android ist ein Betriebssystem für mobile Geräte, welches von Google entwickelt wird. Basierend auf dem Linux Kernel 
+wurde es primär für mobile Geräte mit Touchscreen, wie Smartphones und Tablet-PCs entwickelt.Spezialisierte 
+User-Interfaces für Fernseher  (Android TV), Autos (Android Car) und Uhren/Smartwatches (Android Wear) sind vorhanden. 
+Außerdem kann Android auch auf Geräten ohne Touchscreen eingesetzt werden. Der Sourcecode ist frei zugänglich und
+Läuft unter Open Source Lizenzen.
+
+Der momentane Marktanteil (Stand 2. Quartal 2014) liegt bei 84,6. Dieser Fakt, sowie auch die Verbreitung von Android 
+Geräten inerhalb unserer Projektgruppe war ein Grund die App für dieses Projektpraktikum für Android zu entwickeln.
+
+
+\subsection{Entwicklung}
+In diesem Projektpraktikum wurde mit Java und dem Android Software Development kit entwickelt. Hauptsächlich wurde das offiziel unterstütze Eclipse mit dem Andoird Developemt Tools (ADT) Plugin verwendet. Hierbei hat man unter anderem die
+Möglichkeit einen Geräte Emulator zu verwenden. Da die damit erstellten virtuellen Geräte nur sehr langsam reagiert haben
+und das testen mit einem virtuellen GPS-Sensor sehr mühselig ist, wurde darauf weitestgehend verzichtet.
+
+
+\subsubsection{Activity}
+Die Activity ist die Komponente, welche einen Bildschirm bereitstellt, mit dem der User interagieren kann. Eine Anwendung besteht üblicherweise aus mehreren Activities. Beim Starten der Anwendung wird üblicherweise erst mal eine "`main"' Activity aufgerufen.
+Jede Activity kann weitere Activites aufrufen.
+
+Wenn eine neue Activity gestartet wird, stoppt die vorangegangene. Das System Speichert diese in einem Stack ("`back stack"'). Der Stack funktioniert nach dem "`last in, first out"' Prizip. So gelangt der User zurück zur letzten Activity, wenn das Zurück-Symbol (Standard auf Android-Geräten) gedrückt wird.
+
+Jede Activity verfügt über einen "`Lifecycle"', der mit entsprechend zu implementierenden Callback Methoden verwaltet wird. Dieser Lifecycle wird direkt von der Assoziierung mit anderen Activities, seinen Abläufen oder back stack beeinflusst.
+
+\includegraphics[width=0.7\textwidth]{2-_Hintergrundwissen/2-1_Softwareentwicklung_mit_Android/Data/activity_lifecycle.png}
+
+\subsubsection{Fragment}
+Ein Fragment repräsentiert a Verhalten bzw. Teil eines User Interface in einer Activity. Es ist möglich mehrere Fragments in einer einzigen Activity zu kombinieren, sowie ein Fragment in verschiednen Activities wiederzuverwenden. Jedes Fragment verfügt ebenfalls über einen eigenen Lifecycle mit eigenen input events, welche hinzugefügt oder entfernt werden können während die Activity läuft. Man kann Fragments als "`Sub Activity"' verstehen.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{2-_Hintergrundwissen/2-1_Softwareentwicklung_mit_Android/Data/fragment_lifecycle.png}
+  \end{center}
+\end{wrapfigure}
+Jedes Fragment muss ein eine Activity eingebettet sein. Der Lifecycle des Fragments wird direkt von der "`Host Actvivty"' Beeinflusst. Wenn z.B. die Activity pausiert wird, werden auch sämtliche Fragments innerhalb pausiert. Jedes Fragment kann einzeln manipuliert werden. Hierbei ist aber zu beachten, dass ein Fragment kein anderes Fragment direkt manipulieren sollte. Die Manipulation soll an die Host Activity gemeldet werden, welche dann die Manipulation vornimmt.
+
+Fragmente können als Teil des Activity Layout hinzugefügt werden. Es "`lebt"' in einer ViewGroup in der Hierachie der Activity. Das Fragment definiert sein eigenes View Layout.
+
+
+\subsubsection{Layout}
+Das Layout setzt sich aus einer Hierarchie aus View und ViewGroup Objekten zusammen. View Objekte sind hierbei normalerweise UI Widgets, z.B. Buttons oder Textfelder. ViewGroups Objekte sind hingegen unsichtbare View Container, die das Layout ihrer Kinder bestimmen. Die Informationen der Views bzw. Viewgroups können vorab in XML Dateien abgelegt werden, oder direkt im Code erzeugt werden. Die Objekte lassen sich zudem auch zur Laufzeit manipulieren.
+
+Bei dem Entwurf der Layouts für dieses Projekt ist zu erwähnen, das die veschiedenen Android Geräte über verschiedene Auflösungen verfügen. Die Platzierung der Views so gewählt das diese an Fixpunkten des Bildschirms (Links, Mitte,Rechts) bzw. Positionen neben anderen Views gelegt worden sind. So ist außerdem gewährleistet, dass beim drehen des Gerätes die Objekte korrekt angezeigt werden (ebenfalls eine Änderung der Auflösung)
+
+\includegraphics[width=0.7\textwidth]{2-_Hintergrundwissen/2-1_Softwareentwicklung_mit_Android/Data/viewgroup.png}
+

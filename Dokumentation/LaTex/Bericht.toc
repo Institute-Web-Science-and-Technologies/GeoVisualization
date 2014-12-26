@@ -2,35 +2,40 @@
 \contentsline {chapter}{\numberline {1}Vorwort}{3}
 \contentsline {chapter}{\numberline {2}Hintergrundwissen}{4}
 \contentsline {section}{\numberline {2.1}Softwareentwicklung mit Android}{4}
-\contentsline {section}{\numberline {2.2}Kartendarstellung}{4}
-\contentsline {subsection}{\numberline {2.2.1}GoogleMaps und GooglePlay Services}{4}
-\contentsline {subsection}{\numberline {2.2.2}OpenStreetMaps}{4}
-\contentsline {section}{\numberline {2.3}Datenuebertragung}{4}
-\contentsline {subsection}{\numberline {2.3.1}Http Requests}{4}
-\contentsline {subsection}{\numberline {2.3.2}Http Requests}{4}
-\contentsline {section}{\numberline {2.4}Mathematisches}{4}
-\contentsline {chapter}{\numberline {3}Organisation}{5}
-\contentsline {section}{\numberline {3.1}Arbeitsaufteilung}{5}
-\contentsline {section}{\numberline {3.2}Tools}{5}
-\contentsline {subsection}{\numberline {3.2.1}Skype}{5}
-\contentsline {subsection}{\numberline {3.2.2}Emailverteiler}{5}
-\contentsline {subsection}{\numberline {3.2.3}GitHub}{5}
-\contentsline {chapter}{\numberline {4}Projektentwicklung}{6}
-\contentsline {section}{\numberline {4.1}Historie}{6}
-\contentsline {section}{\numberline {4.2}Features}{6}
-\contentsline {section}{\numberline {4.3}Modi}{6}
-\contentsline {chapter}{\numberline {5}Projektarchitektur}{7}
-\contentsline {section}{\numberline {5.1}Der Android Client}{7}
-\contentsline {subsection}{\numberline {5.1.1}Aufbau der GUI}{7}
-\contentsline {subsection}{\numberline {5.1.2}Kommunikation}{7}
-\contentsline {subsection}{\numberline {5.1.3}Die Karte}{7}
-\contentsline {subsubsection}{OpenStreetMap vs. GoogleMaps}{7}
-\contentsline {subsubsection}{Fazit}{8}
-\contentsline {subsection}{\numberline {5.1.4}Die Karte}{8}
-\contentsline {subsubsection}{LocationManager vs. LocationClient}{8}
-\contentsline {subsubsection}{Fazit}{8}
-\contentsline {subsection}{\numberline {5.1.5}Spiellogik}{8}
-\contentsline {section}{\numberline {5.2}Der ZeroMQ Server}{8}
-\contentsline {subsection}{\numberline {5.2.1}Aufbau}{8}
-\contentsline {subsection}{\numberline {5.2.2}Kommunikation}{8}
-\contentsline {section}{\numberline {5.3}Noch bestehende Bug}{8}
+\contentsline {subsection}{\numberline {2.1.1}Allgemeines}{4}
+\contentsline {subsection}{\numberline {2.1.2}Entwicklung}{4}
+\contentsline {subsubsection}{Activity}{4}
+\contentsline {subsubsection}{Fragment}{5}
+\contentsline {subsubsection}{Layout}{6}
+\contentsline {section}{\numberline {2.2}Kartendarstellung}{8}
+\contentsline {subsection}{\numberline {2.2.1}GoogleMaps und GooglePlay Services}{8}
+\contentsline {subsection}{\numberline {2.2.2}OpenStreetMaps}{8}
+\contentsline {section}{\numberline {2.3}Datenuebertragung}{9}
+\contentsline {subsection}{\numberline {2.3.1}Http Requests}{9}
+\contentsline {subsection}{\numberline {2.3.2}Http Requests}{9}
+\contentsline {section}{\numberline {2.4}Mathematisches}{10}
+\contentsline {chapter}{\numberline {3}Organisation}{11}
+\contentsline {section}{\numberline {3.1}Arbeitsaufteilung}{11}
+\contentsline {section}{\numberline {3.2}Tools}{11}
+\contentsline {subsection}{\numberline {3.2.1}Skype}{11}
+\contentsline {subsection}{\numberline {3.2.2}Emailverteiler}{11}
+\contentsline {subsection}{\numberline {3.2.3}GitHub}{11}
+\contentsline {chapter}{\numberline {4}Projektentwicklung}{12}
+\contentsline {section}{\numberline {4.1}Historie}{12}
+\contentsline {section}{\numberline {4.2}Features}{12}
+\contentsline {section}{\numberline {4.3}Modi}{12}
+\contentsline {chapter}{\numberline {5}Projektarchitektur}{13}
+\contentsline {section}{\numberline {5.1}Der Android Client}{13}
+\contentsline {subsection}{\numberline {5.1.1}Aufbau der GUI}{13}
+\contentsline {subsection}{\numberline {5.1.2}Kommunikation}{13}
+\contentsline {subsection}{\numberline {5.1.3}Die Karte}{13}
+\contentsline {subsubsection}{OpenStreetMap vs. GoogleMaps}{13}
+\contentsline {subsubsection}{Fazit}{14}
+\contentsline {subsection}{\numberline {5.1.4}Die Karte}{14}
+\contentsline {subsubsection}{LocationManager vs. LocationClient}{14}
+\contentsline {subsubsection}{Fazit}{14}
+\contentsline {subsection}{\numberline {5.1.5}Spiellogik}{14}
+\contentsline {section}{\numberline {5.2}Der ZeroMQ Server}{14}
+\contentsline {subsection}{\numberline {5.2.1}Aufbau}{14}
+\contentsline {subsection}{\numberline {5.2.2}Kommunikation}{14}
+\contentsline {section}{\numberline {5.3}Noch bestehende Bug}{14}
