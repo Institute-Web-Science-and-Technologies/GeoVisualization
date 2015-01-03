@@ -109,6 +109,8 @@ public class JeroMQPoller {
 					case TransferObject.TYPE_GET_GAMELIST:
 						handleGetGameList(msg);
 						break;
+					case TransferObject.TYPE_SNAKE_DIED:
+						handleSnakeDied(msg);
 					default:
 						break;
 					}
@@ -220,7 +222,10 @@ public class JeroMQPoller {
 				});
 
 			}
-
+			private void handleSnakeDied(String msg){
+				TransferObject t = gson.fromJson(msg, TransferObject.class);
+				Game.getGame().update(t);
+			}
 			private void handleCoord(String msg) {
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
 				Game.getGame().update(t);

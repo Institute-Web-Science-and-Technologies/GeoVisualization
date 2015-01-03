@@ -23,5 +23,6 @@ public abstract class Game {
 	}
 	
 	abstract public void update(TransferObject o);
+	abstract public void clearScreen();
 
 }
