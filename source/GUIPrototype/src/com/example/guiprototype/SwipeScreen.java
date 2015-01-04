@@ -4,10 +4,10 @@ import geoviz.communication.JeroMQPoller;
 import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Game;
+import geoviz.game.ants.AntGame;
 import geoviz.game.snake.SnakeGame;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -17,19 +17,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
-import android.telephony.TelephonyManager;
 
 import com.example.adapter.TabsPagerAdapter;
 import com.example.callbacks.GamesScreenFragmentCallbacks;
@@ -37,15 +32,12 @@ import com.example.fragments.GamesScreenFragment;
 import com.example.fragments.MapScreenFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.games.Games;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class SwipeScreen extends FragmentActivity implements
 		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks,
@@ -122,7 +114,8 @@ public class SwipeScreen extends FragmentActivity implements
 
 		__instance = this;
 
-		Game.init(new SnakeGame("0", this));
+		//Game.init(new SnakeGame("0", this));
+		Game.init(new AntGame("0"));
 
 
 		poller = new JeroMQPoller(this);
@@ -240,7 +233,7 @@ public class SwipeScreen extends FragmentActivity implements
 		this.mCurrentLocation = mLocationClient.getLastLocation();
 	}
 	
-	float MIN_GPS_QUALITY=10;
+	float MIN_GPS_QUALITY=1000;
 	boolean gps_quality_reached=false;
 
 	@Override
