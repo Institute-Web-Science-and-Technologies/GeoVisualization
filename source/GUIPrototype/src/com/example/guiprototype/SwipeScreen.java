@@ -333,8 +333,10 @@ public class SwipeScreen extends FragmentActivity implements
 	@Override
 	public void connect(String gameID) {
 		poller.deleteSubscription(Game.getGame().gameID);
-		poller.addSubscription(gameID);
+		Game.getGame().clearScreen();
 		Game.init(new SnakeGame(gameID,this));
+		poller.addSubscription(gameID);
+		
 	}
 
 }

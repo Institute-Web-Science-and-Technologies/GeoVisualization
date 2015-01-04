@@ -4,6 +4,7 @@ import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,12 @@ public class Player {
 	private String name;
 
 	private Polyline snake;
+	
+	private long invincibilityStart=0;
 
 	private float max_length = Const.SNAKE_START_LENGTH;
 
-	List<LatLng> poss = new LinkedList();
+	List<LatLng> positions = new LinkedList();
 
 
 	/**
@@ -35,7 +38,7 @@ public class Player {
 			public void run() {
 				snake = MapScreenFragment.getMSF().initLine();
 
-				snake.setPoints(poss);
+				snake.setPoints(positions);
 			}
 		});
 
@@ -46,8 +49,8 @@ public class Player {
 	 * normalizes the sankes length th max_length
 	 */
 	void normalize() {
-		while (poss.size() > 2 && length() > max_length)
-			poss.remove(0);
+		while (positions.size() > 2 && length() > max_length)
+			positions.remove(0);
 	}
 
 
@@ -58,7 +61,11 @@ public class Player {
 	void changeMaxLength(float f) {
 		max_length += f;
 	}
-
+	
+	public void snakeDied(Date timeOfDeath){
+		max_length=Const.SNAKE_START_LENGTH;
+		invincibilityStart=timeOfDeath.getTime();
+	}
 
 	/**
 	 * calculates and adds the distance between point i and i+1 for i 0, ..., |snake|-2
@@ -66,9 +73,9 @@ public class Player {
 	 */
 	float length() {
 		float length = 0;
-		if (poss.size() > 1)
-			for (int i = 0; i < poss.size() - 1; i++) {
-				length += Functions.distance(poss.get(i), poss.get(i + 1));
+		if (positions.size() > 1)
+			for (int i = 0; i < positions.size() - 1; i++) {
+				length += Functions.distance(positions.get(i), positions.get(i + 1));
 			}
 		return length;
 	}
@@ -79,7 +86,7 @@ public class Player {
 	 * @return the last point added to the snake
 	 */
 	LatLng head() {
-		return poss.get(poss.size() - 1);
+		return positions.get(positions.size() - 1);
 	}
 
 
@@ -100,19 +107,19 @@ public class Player {
 	 */
 	boolean collides(Player p){
 		final double RADIUS = Const.SNAKE_COLLISION_RADIUS;
-		List<LatLng> collposs = p.poss;
+		List<LatLng> collposs = p.positions;
 		if (p.name == this.name) {
-			if (poss.size() < 3)
+			if (positions.size() < 3)
 				return false;;
-			int i = poss.size() - 1;
+			int i = positions.size() - 1;
 			double d = 0;
 			while (d < RADIUS*2 && i > 1) {
 				i--;
-				d += Functions.distance(poss.get(i), poss.get(i + 1));
+				d += Functions.distance(positions.get(i), positions.get(i + 1));
 			}
-			collposs = poss.subList(0, i);
+			collposs = positions.subList(0, i);
 		}
-		return Functions.collides_simple(this.poss, collposs, RADIUS);
+		return Functions.collides_simple(this.positions, collposs, RADIUS);
 
 		//return Functions.collides(this.poss, collposs);
 	}
@@ -123,11 +130,11 @@ public class Player {
 	 */
 	void update(TransferObject t) {
 
-		poss.add(t.pos);
+		positions.add(t.pos);
 
 		normalize();
 
-		snake.setPoints(poss);
+		snake.setPoints(positions);
 
 	}
 
@@ -137,16 +144,18 @@ public class Player {
 	 * @param players list of all players known
 	 * @param chickens list of all chickens known
 	 */
-	void checkCollision(Map<String, Player> players, List<Chicken> chickens) {
+	void checkCollision(Date timeStamp,Map<String, Player> players, List<Chicken> chickens) {
 		for (String key : players.keySet()) {
 			Player p = players.get(key);
 			// if (p.name == this.name)
 			// continue;
+			if (!this.isInvincible() && !p.isInvincible()){
 			if (collides(p)) {
-				// final JeroMQQueue jmqq = JeroMQQueue.getInstance();
-				// jmqq.sendMsg(TransferObject.TYPE_MSG, null,
-				// "Bam!");
-				MapScreenFragment.getMSF().initMarker(120, head(), "Collision "+name);
+				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				jmqq.sendMsg(TransferObject.TYPE_SNAKE_DIED, null,
+				 "Bam!");
+				//MapScreenFragment.getMSF().initMarker(120, head(), "Collision "+name);
+				}
 			}
 		}
 
@@ -174,5 +183,8 @@ public class Player {
 	public Polyline getSnake() {
 		return this.snake;
 	}
-
+	public boolean isInvincible(){
+		if (new Date().getTime()-this.invincibilityStart<=10000)return true;
+		else return false;
+	}
 }

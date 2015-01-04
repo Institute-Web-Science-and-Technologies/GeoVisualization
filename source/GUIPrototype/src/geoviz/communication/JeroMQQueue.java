@@ -76,7 +76,7 @@ public class JeroMQQueue {
 	}
 	
 	public void sendMsg(int type, LatLng loc, String str){
-Game game= Game.getGame();
+		Game game= Game.getGame();
     	TransferObject msg = new TransferObject(type, str, Calendar
 				.getInstance().getTime(),game.userID , game.userName, loc,Game.getGame().gameID);
 

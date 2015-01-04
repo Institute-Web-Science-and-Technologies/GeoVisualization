@@ -13,8 +13,8 @@ public class TransferObject implements Serializable {
 			TYPE_ADD_CHICKEN=2,
 			TYPE_KILL_CHICKEN=3,
 			TYPE_CREATE=4,
-			TYPE_GET_GAMELIST=5;
-
+			TYPE_GET_GAMELIST=5,
+			TYPE_SNAKE_DIED=6;
 	
 	public int msgType;
 	public String gameID;

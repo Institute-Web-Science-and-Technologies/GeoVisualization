@@ -69,7 +69,10 @@ public class SnakeGame extends Game {
 				players.get(t.senderName).changeMaxLength(Const.SNAKE_GROWTH_RATE);
 			break;
 			
-
+			//updates sender's snake length to 3 after sender collided
+			case TransferObject.TYPE_SNAKE_DIED:
+				players.get(t.senderName).snakeDied(t.timeStamp);
+				
 			//updates sender's player object with new inofrmation abut sender's physical position
 			case TransferObject.TYPE_COORD:
 				swipeScreen.runOnUiThread(new Runnable() {
@@ -78,7 +81,7 @@ public class SnakeGame extends Game {
 						Player player = players.get(t.senderName);
 						player.update(t);
 						if (player.getName().equals(userName)){
-							player.checkCollision(players, chickens);
+							player.checkCollision(t.timeStamp,players, chickens);
 							
 						}
 						// chickens.add(new Chicken(Functions.randLoc(t.pos,
@@ -125,6 +128,29 @@ public class SnakeGame extends Game {
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.sendMsg(TransferObject.TYPE_ADD_CHICKEN, loc,
 				"" + (long) (Math.random() * Long.MAX_VALUE));
+	}
+
+
+	@Override
+	public void clearScreen() {
+		for (Chicken c : chickens){
+			c.kill();
+		}
+		swipeScreen.runOnUiThread(new Runnable(){
+
+			@Override
+			public void run() {
+		for (String p : players.keySet()){
+			
+					// TODO Auto-generated method stub
+					players.get(p).getSnake().remove();
+					players.remove(p);
+				}
+				
+			}
+		
+		});
+		
 	}
 
 }

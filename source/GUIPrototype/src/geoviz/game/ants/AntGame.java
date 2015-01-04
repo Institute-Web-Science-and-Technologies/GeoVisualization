@@ -45,4 +45,11 @@ public class AntGame extends Game {
 		}
 	}
 
+
+	@Override
+	public void clearScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
