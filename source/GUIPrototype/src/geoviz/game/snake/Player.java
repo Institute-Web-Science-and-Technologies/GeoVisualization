@@ -3,6 +3,7 @@ package geoviz.game.snake;
 import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
+import geoviz.game.Game;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -42,6 +43,17 @@ public class Player {
 			}
 		});
 
+	}
+	public Player(String name, List<LatLng> pos){
+		this.name=name;
+		positions.addAll(pos);
+		SwipeScreen.getInstance().runOnUiThread(new Runnable() {
+			public void run() {
+				snake = MapScreenFragment.getMSF().initLine();
+
+				snake.setPoints(positions);
+			}
+		});
 	}
 
 
@@ -152,8 +164,7 @@ public class Player {
 			if (!this.isInvincible() && !p.isInvincible()){
 			if (collides(p)) {
 				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
-				jmqq.sendMsg(TransferObject.TYPE_SNAKE_DIED, null,
-				 "Bam!");
+				jmqq.sendMsg(TransferObject.TYPE_SNAKE_DIED, Game.getGame().gameID);
 				//MapScreenFragment.getMSF().initMarker(120, head(), "Collision "+name);
 				}
 			}
@@ -163,8 +174,8 @@ public class Player {
 			if (!chicken.dead && collides(chicken)) {
 				// chicken.kill();
 				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
-				jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN, null, chicken.id);
-				jmqq.sendMsg(TransferObject.TYPE_MSG, null, "gained point");
+				jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN,  chicken.id, Game.getGame().gameID);
+				jmqq.sendMsg(TransferObject.TYPE_MSG, "gained point", Game.getGame().gameID);
 
 			}
 		}

@@ -60,7 +60,7 @@ public class SwipeScreen extends FragmentActivity implements
 	public static String getDeviceId(Context context) {
 		final String deviceId = ((TelephonyManager) context
 				.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-		if (deviceId != null) {
+		if (deviceId != null && !deviceId.equals("unknown")) {
 			return deviceId;
 		} else {
 			return android.os.Build.SERIAL;
@@ -114,8 +114,8 @@ public class SwipeScreen extends FragmentActivity implements
 
 		__instance = this;
 
-		//Game.init(new SnakeGame("0", this));
-		Game.init(new AntGame("0"));
+		Game.init(new SnakeGame("0", this));
+		//Game.init(new AntGame("0"));
 
 
 		poller = new JeroMQPoller(this);
@@ -240,10 +240,9 @@ public class SwipeScreen extends FragmentActivity implements
 	public void onLocationChanged(Location location) {
 		this.mCurrentLocation = location;
 		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 100);
-
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(latLng);
 		MapScreenFragment.getMSF().mMap.animateCamera(cameraUpdate);
-		Toast.makeText(this, location.getAccuracy()+"", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, location.getAccuracy()+"", Toast.LENGTH_SHORT).show();
 		/*
 		 * TransferObject msg = new TransferObject(1, "", Calendar
 		 * .getInstance().getTime(), userID, userName, new LatLng
@@ -260,7 +259,7 @@ public class SwipeScreen extends FragmentActivity implements
 				.sendMsg(
 						TransferObject.TYPE_COORD,
 						new LatLng(location.getLatitude(), location
-								.getLongitude()), "");
+								.getLongitude()), Game.getGame().gameID);
 
 	}
 
@@ -291,12 +290,12 @@ public class SwipeScreen extends FragmentActivity implements
 		connect(gameId);
 		gsf.adapter.notifyDataSetChanged();
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendMsg(TransferObject.TYPE_CREATE, getOwnLocation(), "");
+		jmqq.sendMsg(TransferObject.TYPE_CREATE, gameId);
 	}
 	
 	public void updateGameList(View view){
 	JeroMQQueue jmqq = JeroMQQueue.getInstance();
-	jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, getOwnLocation(), "");
+	jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, userID);
 	}
 
 	public void sendMessage(View view) {
@@ -305,7 +304,7 @@ public class SwipeScreen extends FragmentActivity implements
 
 		LatLng location = this.getOwnLocation();
 		final JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendMsg(TransferObject.TYPE_MSG, location, m);
+		jmqq.sendMsg(TransferObject.TYPE_MSG, m, Game.getGame().gameID);
 
 		/*
 		 * TransferObject msg = new TransferObject(0, m, Calendar
@@ -334,6 +333,8 @@ public class SwipeScreen extends FragmentActivity implements
 	public void connect(String gameID) {
 		poller.deleteSubscription(Game.getGame().gameID);
 		Game.getGame().clearScreen();
+		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
 		Game.init(new SnakeGame(gameID,this));
 		poller.addSubscription(gameID);
 		

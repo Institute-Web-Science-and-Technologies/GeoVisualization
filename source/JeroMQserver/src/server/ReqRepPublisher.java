@@ -41,31 +41,31 @@ public class ReqRepPublisher {
 				String msg = new String(message);
 				System.out.println(msg);
 				int msgType = Integer.parseInt(msg.split(",")[0]);
-				String gameID = msg.split(",")[1];
+				String receiverID = msg.split(",")[1];
 				String senderID= msg.split(",")[2];
 				msg = msg.substring(msg.indexOf("{"),msg.length());
 				
 				switch (msgType){
 				case TYPE_COORD:
-					handleCoord(gameID,msg,msgType);
+					handleCoord(receiverID,msg,msgType);
 					break;
 				case TYPE_ADD_CHICKEN:
-					handleAddChicken(gameID,msg,msgType);
+					handleAddChicken(receiverID,msg,msgType);
 					break;
 				case TYPE_KILL_CHICKEN:
-					handleKillChicken(gameID,msg,msgType);
+					handleKillChicken(receiverID,msg,msgType);
 					break;
 				case TYPE_CREATE:
-					handleCreate(gameID,msg,msgType);
+					handleCreate(receiverID,msg,msgType);
 					break;
 				case TYPE_GET_GAMELIST:
-					handleGetGamelist(senderID,msg,msgType);
+					handleGetGamelist(receiverID,msg,msgType);
 					break;
 				case TYPE_MSG:
-					handleMsg(gameID,msg,msgType);
+					handleMsg(receiverID,msg,msgType);
 					break;
 				default:
-					send(gameID,msgType,msg);
+					send(receiverID,msgType,msg);
 					break;
 				
 				}

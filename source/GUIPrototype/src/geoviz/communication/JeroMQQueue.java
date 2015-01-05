@@ -75,13 +75,43 @@ public class JeroMQQueue {
 		bq.add(msg);
 	}
 	
-	public void sendMsg(int type, LatLng loc, String str){
+	
+	public void sendMsg(int type, LatLng loc, String recipient){
 		Game game= Game.getGame();
-    	TransferObject msg = new TransferObject(type, str, Calendar
+    	TransferObject msg = new TransferObject(type, "", Calendar
 				.getInstance().getTime(),game.userID , game.userName, loc,Game.getGame().gameID);
 
     	String json = gson.toJson(msg);
-    	add(type +","+Game.getGame().gameID+","+game.userID+","+json);
+    	add(type +","+recipient+","+game.userID+","+json);
+
+	}
+	
+	public void sendMsg(int type, LatLng loc, String message, String recipient){
+		Game game= Game.getGame();
+    	TransferObject msg = new TransferObject(type, message, Calendar
+				.getInstance().getTime(),game.userID , game.userName, loc,Game.getGame().gameID);
+
+    	String json = gson.toJson(msg);
+    	add(type +","+recipient+","+game.userID+","+json);
+
+	}
+	
+	public void sendMsg(int type, String str, String recipient){
+		Game game= Game.getGame();
+    	TransferObject msg = new TransferObject(type, str, Calendar
+				.getInstance().getTime(),game.userID , game.userName, null,Game.getGame().gameID);
+
+    	String json = gson.toJson(msg);
+    	add(type +","+recipient+","+game.userID+","+json);		
+	}
+		
+	public void sendMsg(int type, String recipient){
+		Game game= Game.getGame();
+    	TransferObject msg = new TransferObject(type, "", Calendar
+				.getInstance().getTime(),game.userID , game.userName, null,Game.getGame().gameID);
+
+    	String json = gson.toJson(msg);
+    	add(type +","+recipient+","+game.userID+","+json);
 	}
 
 }

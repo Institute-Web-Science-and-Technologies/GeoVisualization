@@ -111,6 +111,13 @@ public class JeroMQPoller {
 						break;
 					case TransferObject.TYPE_SNAKE_DIED:
 						handleSnakeDied(msg);
+						break;
+					case TransferObject.TYPE_JOIN_GAME:
+						handleJoin(msg);
+						break;
+					case TransferObject.TYPE_GAME_STATUS:
+						handleGameStatus(msg);
+						break;
 					default:
 						break;
 					}
@@ -146,6 +153,18 @@ public class JeroMQPoller {
 
 				}
 
+			}
+
+			private void handleGameStatus(String msg) {
+				// TODO Auto-generated method stub
+				TransferObject t = gson.fromJson(msg, TransferObject.class);
+				Game.getGame().update(t);
+			}
+
+			private void handleJoin(String msg) {
+				// TODO Auto-generated method stub
+				TransferObject t = gson.fromJson(msg, TransferObject.class);
+				Game.getGame().update(t);
 			}
 
 			private void handleGetGameList(String msg) {
