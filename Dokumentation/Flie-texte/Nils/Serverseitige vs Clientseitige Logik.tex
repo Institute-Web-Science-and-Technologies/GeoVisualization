@@ -14,23 +14,19 @@ Das Publish-Subscribe-Pattern bietet jedoch den Vorteil, dass es in diesem konkr
 Dieser Pukt war ausschlaggebend, da bei mobilen Endgeräten die Internet-Bandbreite eine stark limitierte Ressource ist.
 Zusätzlich verringert sich beim Publish-Subscribe-Pattern die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{xmpp, http://www.sigs.de/publications/js/2003/01/schaeffer_JS_01_03.pdf}.
 
-Thin Client
-- Datenübertragung
-- Zustand doppelt
-+ Rechenleistung
-+ zentraler, definitver Zustand
-+ Skalierbarkeit
-+ Wartbarkeit
-+ Erweiterbarkeit
-
-Fat Client
-+ Datenübertragung
-+ Zustand nur auf Client
-- Rechenleistung
-- verteilter Zustand
-- Skalierbarkeit
-- Wartbarkeit
-- Erweiterbarkeit
+\begin{center}
+\begin{tabular}{l|l}
+	Thin-Client & Fat-Client \\
+	\hline
+	 - Datenübertragung & + Datenübertragung \\
+	 - Zustand doppelt & + Zustand nur auf Client \\
+	 + zentraler, definitiver Zustand &  - verteilter Zustand \\
+	 + Rechenleistung & - Rechenleistung \\
+	 + Skalierbarkeit & - Skalierbarkeit \\
+	 + Wartbarkeit & - Wartbarkeit \\
+	 + Erweiterbarkeit & - Erweiterbarkeit \\
+\end{tabular}
+\end{center}
 
 Die Kommunikation zwischen Client und Server kann als Push- oder Pull-Kommunikation realisiert werden. 
 Bei der Pull-Kommunikation fordert der Client die benötigten Informationen vom Server an. Im Falle einer Echtzeitanwendung muss dies in regelmäßigen Abständen geschehen.
