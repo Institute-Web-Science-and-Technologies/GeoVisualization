@@ -3,7 +3,7 @@ Bei der Kollisionsabfrage unterscheiden wir vier Fälle: sowohl das aktive, wie 
 Das aktive Objekt symbolisiert meist den die Kollision mit dem passiven Objekt auslösenden Spieler.
 Das passive Objekt kann ein aufsammelbares Bonus-Objekt sein oder ein anderer Spieler.
 Falls beide Objekte Kreise sind wird eine Kollision ausgelöst, falls die Entferung zwischen beiden Kreismittelpunkten kleiner ist, als die Summe der Radien.
-$(M_{aktiv}-M_{passiv})^2<r_{aktiv}+{r_passiv}$
+$(M_{aktiv}-M_{passiv})^2<r_{aktiv}+r_{passiv}$
 Bei einer Kollision mit einer Schlange, wird dieses Kriterium auf alle Glieder der Schlange angewendet. Die Kollision zwischen dem aktiven Objekt und einem der Eckpunkt des Polygonzugs führt zur Kollision mit der Schlange. 
 Falls das aktive Objekt ein Polygozug ist, müssen nur Kollisionen mit dessen erstem Element (dem Kopf der Schlange) berücksichtigt werden, da Kollisionen mit Schwanz immer von anderen Objekten ausgelöst werden. Die weiteren Fälle sind also analog zu den abgehandelten.
 Während Abstandsmessung als Kriterium für Kollison von Kreisen gut funktioniert, muss bei der Kollision von Polygonnzügen darauf geachtet werden, dass die Radien der Objekte genügend groß gewählt werden, damit sich auch bei schwankender Genauigkeit der GPS-Werte und damit sehr unregelmäßigen Abständen zwischen den Gliedern der Schlange, die Radien aufeinanderfolgender Glieder überschneiden.
