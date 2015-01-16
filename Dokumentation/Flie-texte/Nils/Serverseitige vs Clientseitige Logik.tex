@@ -1,0 +1,40 @@
+XMPP \footnote{http://xmpp.org/extensions/xep-0060.html#intro}
+
+Um den Zustand der einzelnen mobilen Geräte zu synchronisieren und Chat-Nachrichten zu übertragen, ist ein Server nötig.
+Hierzu bieten sich zwei unterschiedliche Modelle an.
+Bei der klassischen Server-Client-Architektur übernimmt der Server einen Großteil der Berechnungen.
+Der Server hält einen zentralen, im Zweifelsfall gültigen Status
+Die (Thin-)Clients übertragen die Nutzereingaben und Sensordaten an den Server, der daraus einen neuen Zustand ermittelt und diesen den Cients mitteilt.
+Alternativ bietet sich das Publish-Subscribe-Pattern an. 
+Dabei hält der Server keinen Zustand, sondern leitet bloß Nachrichten von einem Client (Publisher) an einen anderen Client (Subscriber) weiter.
+Im konkreten Fall eines interaktiven Spiels wird beispielsweise die Position eines Spielers an alle Spieler in der selben Spielinstanz weitergeleitet.
+Die (Fat-)Clients müssen dabei alle Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte. Diese haben sich als genügend leistungsfähig erwiesen.
+Bei fast jeder Änderung müssen alle Clients geupdatet werden, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Echtzeitsystemen kommt zusätzlich hinzu, dass, da es keinen definitiven, zentralen Zustand gibt, auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden nmüssen.
+Das Publish-Subscribe-Pattern bietet jedoch den Vorteil, dass es in diesem konkreten Fall Internet-Bandbreite spart, da kleinere Daten übertragen werden müssen. Beispielsweise muss bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, die der Fat-Client selber berechnet.
+Dieser Pukt war ausschlaggebend, da bei mobilen Endgeräten die Internet-Bandbreite eine stark limitierte Ressource ist.
+Zusätzlich verringert sich beim Publish-Subscribe-Pattern die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{xmpp, http://www.sigs.de/publications/js/2003/01/schaeffer_JS_01_03.pdf}.
+
+Thin Client
+- Datenübertragung
+- Zustand doppelt
++ Rechenleistung
++ zentraler Zustand
++ Skalierbarkeit
++ Wartbarkeit
++ Erweiterbarkeit
+
+Fat Client
++ Datenübertragung
++ Zustand nur auf Client
+- Rechenleistung
+- verteilter Zustand
+- Skalierbarkeit
+- Wartbarkeit
+- Erweiterbarkeit
+
+Die Kommunikation zwischen Client und Server kann als Push- oder Pull-Kommunikation realisiert werden. 
+Bei der Pull-Kommunikation fordert der Client die benötigten Informationen vom Server an. Im Falle einer Echtzeitanwendung muss dies in regelmäßigen Abständen geschehen.
+Bei der Push-Kommuikation sendet der Server, wenn sich der Zustand ändert, unaufgefordert Informationen an die betroffeen Clients.
+Im Falle mobiler Endgeräte muss Push-Kommunication üder Sockets laufen, da diese Geräte keine IP-Adresse haben.
+Pull-Kommunikation über HTTP-Requests umgesetzt hat eine nicht hinnehmbare Verzögerung bewirkt.
+Die finale Implementationn verwendet daher Push-Kommunikation. Eine spezialisierte Server-Architektur, die das Publish-Subscribe-Pattern und Push-Kommunikation verwendet ist XMPP \cite{XMPP}. Es wurde eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen. Wir haben Node.js\footnote{http://nodejs.org/} und JeroMQ\footnote{https://github.com/zeromq/jeromq} verglichen. Wir haben uns für JeroMQ entschieden, um Server und Client in der selben Programmiersprache umsetzen zu können.
