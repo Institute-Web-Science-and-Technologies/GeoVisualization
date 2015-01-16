@@ -9,7 +9,7 @@ Alternativ bietet sich das Publish-Subscribe-Pattern an.
 Dabei hält der Server keinen Zustand, sondern leitet bloß Nachrichten von einem Client (Publisher) an einen anderen Client (Subscriber) weiter.
 Im konkreten Fall eines interaktiven Spiels wird beispielsweise die Position eines Spielers an alle Spieler in der selben Spielinstanz weitergeleitet.
 Die (Fat-)Clients müssen dabei alle Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte. Diese haben sich als genügend leistungsfähig erwiesen.
-Bei fast jeder Änderung müssen alle Clients geupdatet werden, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Echtzeitsystemen kommt zusätzlich hinzu, dass, da es keinen definitiven, zentralen Zustand gibt, auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden nmüssen.
+Bei fast jeder Änderung müssen alle Clients aktualisiert werden, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Echtzeitsystemen kommt zusätzlich hinzu, dass, da es keinen definitiven, zentralen Zustand gibt, auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden nmüssen.
 Das Publish-Subscribe-Pattern bietet jedoch den Vorteil, dass es in diesem konkreten Fall Internet-Bandbreite spart, da kleinere Daten übertragen werden müssen. Beispielsweise muss bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, die der Fat-Client selber berechnet.
 Dieser Pukt war ausschlaggebend, da bei mobilen Endgeräten die Internet-Bandbreite eine stark limitierte Ressource ist.
 Zusätzlich verringert sich beim Publish-Subscribe-Pattern die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{xmpp, http://www.sigs.de/publications/js/2003/01/schaeffer_JS_01_03.pdf}.
@@ -18,7 +18,7 @@ Thin Client
 - Datenübertragung
 - Zustand doppelt
 + Rechenleistung
-+ zentraler Zustand
++ zentraler, definitver Zustand
 + Skalierbarkeit
 + Wartbarkeit
 + Erweiterbarkeit
