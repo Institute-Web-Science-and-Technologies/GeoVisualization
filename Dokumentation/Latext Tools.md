@@ -1,3 +1,3 @@
 # Unter Windows:
 
-http://www.toolscenter.org/ (TexniCenter)
+http://www.toolscenter.org/ (TeXniCenter)
