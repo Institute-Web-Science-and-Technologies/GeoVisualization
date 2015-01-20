@@ -4,7 +4,7 @@ Version=2
 
 [SessionInfo]
 ActiveTab=2
-FrameCount=20
+FrameCount=22
 ActiveFrame=0
 
 [Frame0]
@@ -32,8 +32,8 @@ cxCur=1169
 cxMin=10
 
 [Frame0_View0,0]
-Cursor.row=5
-Cursor.column=20
+Cursor.row=0
+Cursor.column=0
 TopSubLine=0
 
 [Frame1]
@@ -63,7 +63,7 @@ cxMin=10
 [Frame1_View0,0]
 Cursor.row=9
 Cursor.column=0
-TopSubLine=2
+TopSubLine=13
 
 [Frame2]
 Columns=1
@@ -496,9 +496,9 @@ cxCur=953
 cxMin=10
 
 [Frame16_View0,0]
-Cursor.row=37
-Cursor.column=16
-TopSubLine=39
+Cursor.row=0
+Cursor.column=0
+TopSubLine=0
 
 [Frame17]
 Columns=1
@@ -583,6 +583,64 @@ cxCur=953
 cxMin=10
 
 [Frame19_View0,0]
+Cursor.row=0
+Cursor.column=0
+TopSubLine=0
+
+[Frame20]
+Columns=1
+Rows=1
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-8
+MaxPos.y=-30
+NormalPos.left=50
+NormalPos.top=50
+NormalPos.right=1040
+NormalPos.bottom=524
+Class=CLatexEdit
+Document=
+
+[Frame20_Row0]
+cyCur=415
+cyMin=10
+
+[Frame20_Col0]
+cxCur=953
+cxMin=10
+
+[Frame20_View0,0]
+Cursor.row=0
+Cursor.column=0
+TopSubLine=0
+
+[Frame21]
+Columns=1
+Rows=1
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-8
+MaxPos.y=-30
+NormalPos.left=75
+NormalPos.top=75
+NormalPos.right=1065
+NormalPos.bottom=549
+Class=CLatexEdit
+Document=5-_Projektarchitektur\5-3_Noch_bestehende_Bugs\Bugs.tex
+
+[Frame21_Row0]
+cyCur=415
+cyMin=10
+
+[Frame21_Col0]
+cxCur=953
+cxMin=10
+
+[Frame21_View0,0]
 Cursor.row=0
 Cursor.column=0
 TopSubLine=0
