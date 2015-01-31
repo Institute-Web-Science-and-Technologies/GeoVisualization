@@ -5,10 +5,13 @@ import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
 import geoviz.game.Game;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import android.widget.Toast;
 
 import com.example.fragments.GamesScreenFragment;
 import com.example.guiprototype.R;
@@ -26,6 +29,7 @@ public class SnakeGame extends Game {
 	// list of all chickens
 	private List<Chicken> chickens = new LinkedList();
 	private boolean receivedStatus = false;
+	private LatLng centerOfGame; //first LatLng transmitted
 
 	/**
 	 * represents the game this phone takes part in
@@ -42,7 +46,7 @@ public class SnakeGame extends Game {
 			swipeScreen.gameIDs.add(gameID);
 		userName = swipeScreen.getUserName();
 		userID = swipeScreen.getUserID();
-
+		this.centerOfGame=null;	
 	}
 
 	@Override
@@ -55,8 +59,10 @@ public class SnakeGame extends Game {
 			players.put(t.senderName, player);
 
 		}
+		if (centerOfGame==null)
+			centerOfGame= t.pos;
 		switch (t.msgType) {
-		// adds a chciken created by sender
+		// adds a chicken created by sender
 		case TransferObject.TYPE_ADD_CHICKEN:
 			chickens.add(new Chicken(t.pos, Const.CHICKEN_COLLISION_RADIUS, 1,
 					t.msg));
@@ -81,7 +87,7 @@ public class SnakeGame extends Game {
 			break;
 		case TransferObject.TYPE_JOIN_GAME:
 			String senderID = t.senderID;
-			TransferSnakeGame tsg = new TransferSnakeGame(chickens, players);
+			TransferSnakeGame tsg = new TransferSnakeGame(chickens, players,centerOfGame);
 			String msg = gson.toJson(tsg);
 			JeroMQQueue jmqq = JeroMQQueue.getInstance();
 			jmqq.sendMsg(TransferObject.TYPE_GAME_STATUS, msg, senderID);
@@ -92,6 +98,7 @@ public class SnakeGame extends Game {
 				receivedStatus=true;
 			TransferSnakeGame tsg2 = gson.fromJson(t.msg,
 					TransferSnakeGame.class);
+			centerOfGame=tsg2.centerOfGame;
 			for (String p : tsg2.players.keySet()) {
 				players.put(p, new Player(p, tsg2.players.get(p)));
 			}
@@ -119,20 +126,35 @@ public class SnakeGame extends Game {
 					// "", timeStamp, senderID, senderName, location,
 					// gameID);
 
-					if (chickens.size() < 7)
-						if (0 == (int) (Math.random() * 10))
-							addChicken(Functions.randLoc(t.pos,
+					if (chickens.size() < Const.CHICKEN_MAX_NUMBER)
+						if (0 == (int) (Math.random() * Const.CHICKEN_SPAWN_CHANCE ))
+							addChicken(Functions.randLoc(centerOfGame,
 									Const.CHICKEN_SPAWN_RADIUS));
 				}
 			});
 			break;
-
+		case TransferObject.TYPE_SNAKE_WINS:
+			swipeScreen.runOnUiThread(new Runnable(){
+				public void run(){
+					Toast.makeText(swipeScreen, t.senderName+" WINS!", Toast.LENGTH_SHORT).show();
+				}
+			});
+			
+			for (String p : players.keySet()){
+				players.get(p).snakeDied(t.timeStamp);
+				}
+			for (Chicken c : chickens){
+				c.kill();
+			}
+			break;
+		default: 
+			break;
 		}
 
 	}
 
 	/**
-	 * add points th player's high score
+	 * add points the player's high score
 	 * 
 	 * @param player
 	 * @param point

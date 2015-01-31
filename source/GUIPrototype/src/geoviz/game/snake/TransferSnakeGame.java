@@ -9,9 +9,10 @@ import com.google.android.gms.maps.model.LatLng;
 public class TransferSnakeGame {
 	Map<String,LatLng> chickens;
 	Map<String,List<LatLng>> players;
+	LatLng centerOfGame;
 
 	
-	public TransferSnakeGame(List<Chicken> cs, Map<String,Player> ps){
+	public TransferSnakeGame(List<Chicken> cs, Map<String,Player> ps,LatLng cOG){
 		chickens = new HashMap<String,LatLng>();
 		for (Chicken c : cs){
 			chickens.put(c.id,c.pos);
@@ -20,6 +21,7 @@ public class TransferSnakeGame {
 		for (String p : ps.keySet()){
 			players.put(p, ps.get(p).positions);
 		}
+		centerOfGame = cOG;
 	}
 	
 	

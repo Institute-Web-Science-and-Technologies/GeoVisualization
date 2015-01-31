@@ -58,7 +58,7 @@ public class Player {
 
 
 	/**
-	 * normalizes the sankes length th max_length
+	 * normalizes the snakes length th max_length
 	 */
 	void normalize() {
 		while (positions.size() > 2 && length() > max_length)
@@ -113,9 +113,9 @@ public class Player {
 	
 
 	/**
-	 * checks wether this player and player p collide
+	 * checks whether this player and player p collide
 	 * @param p a different or the same player
-	 * @return true iff collision happened
+	 * @return true if collision happened
 	 */
 	boolean collides(Player p){
 		final double RADIUS = Const.SNAKE_COLLISION_RADIUS;
@@ -174,8 +174,13 @@ public class Player {
 			if (!chicken.dead && collides(chicken)) {
 				// chicken.kill();
 				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
-				jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN,  chicken.id, Game.getGame().gameID);
-				jmqq.sendMsg(TransferObject.TYPE_MSG, "gained point", Game.getGame().gameID);
+				if (max_length < Const.SNAKE_MAX_LENGTH){
+					jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN,  chicken.id, Game.getGame().gameID);
+					jmqq.sendMsg(TransferObject.TYPE_MSG, "gained point", Game.getGame().gameID);
+				}
+				else {
+					jmqq.sendMsg(TransferObject.TYPE_SNAKE_WINS, Game.getGame().gameID);
+				}
 
 			}
 		}
@@ -194,6 +199,7 @@ public class Player {
 	public Polyline getSnake() {
 		return this.snake;
 	}
+	
 	public boolean isInvincible(){
 		if (new Date().getTime()-this.invincibilityStart<=10000)return true;
 		else return false;

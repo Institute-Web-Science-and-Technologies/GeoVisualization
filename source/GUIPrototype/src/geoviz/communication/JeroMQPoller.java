@@ -119,6 +119,8 @@ public class JeroMQPoller {
 						handleGameStatus(msg);
 						break;
 					default:
+						TransferObject t = gson.fromJson(msg, TransferObject.class);
+						Game.getGame().update(t);
 						break;
 					}
 					/*
