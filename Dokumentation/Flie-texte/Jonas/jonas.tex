@@ -1,0 +1,132 @@
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{url}
+
+
+
+\begin{document}
+
+\author{Jonas Lenze}
+
+\section{Spielideen}
+
+\subsection{Umsetzung virtueller Spiele in der physischen Welt}
+
+Eine Reihe von Spielideen, die in der virtuellen Welt sehr populär sind.
+\subsubsection{Snake}
+Ein absoluter Klassiker, der früher auf keinem Handy fehlen durfte. Gerade wegen der
+Popularität und Einfachheit recht interessant es in die physische Welt zu integrieren.
+In einem begrenzten Areal gilt es eine Schlange geschickt zu steuern. Es müssen kleine
+Items eingesammelt werden, wodurch die Schlange wächst. Außerdem muss darauf
+geachtet werden, dass weder der Rand des Areals noch die eigene Schlange berührt wird.
+\subsubsection{Capture the Flag}
+Nicht nur in der virtuellen Welt Spielbar, aber wohl dort erst richtig bekannt geworden.
+Auch hier ist ein recht einfacher Spielmechanismus ausschlaggebend für einen leichten
+Einsatz in der physischen Welt.
+Zwei Teams treten gegeneinander an. Jedes Team besitzt eine Flagge, dessen Standort für
+das gegnerische Team bekannt ist. Es wird versucht die Flagge des jeweils anderen Teams
+zum Standort der eigenen Flagge zu bringen.
+\subsubsection{Domination}
+Meist in Kriegsszenarien integrierter virtueller Spielmodi, der sich mit wenig Aufwand in die
+physische Welt übertragen lässt.
+Zwei Teams treten gegeneinander an. Jedes Team hat einen Punktestand, der zu Anfang
+gleich ist. Sinkt der Punktestand auf Null, so ist das Spiel für dieses Team verloren. Es gibt
+verschiedene Areale, die eingenommen werden können. Hat ein Team mehr Areale
+eingenommen als das andere, läuft der Punktestand des Teams, das weniger Areale in
+besitzt hat gegen Null.
+
+\subsection{Integration einer virtuellen Welt in Bewegungsspiele}
+Natürlich können wir die Integration auch von der anderen Seite betrachten. Es kann in
+etablierte Bewegungsspiele der physischen Welt, eine virtuelle Umgebung eingefügt
+werden.
+Ein paar simple BeiSpiele:
+\subsubsection{Verstecken}
+Es gibt eine Person, die der Suchende ist. Alle weiteren Mitspieler verstecken sich möglichst
+gut und versuchen vom Suchenden nicht entdeckt zu werden. Hat der suchende Spieler
+alle Mitspieler gefunden ist das Spiel vorbei.
+\subsubsection{Fangen}
+Ein Spieler versucht alle anderen Mitspieler durch berühren zu „fangen“. Hat er geschafft
+einen Mitspieler zu berühren ist nun dieser Mitspieler seinerseits dran einen anderen zu
+fangen.
+\subsubsection{Topfschlagen}
+Ein Spieler bekommt die Augen verbunden. Er versucht anhand von Tipps der Mitspieler
+(„näher dran“ oder „weiter weg“) einen Gegenstand zu finden.
+
+\section{Spielkonzepte}
+Einige Hilfsmittel, die zur Umsetzung der oben genannten BeiSpiele notwendig oder
+hilfreich sind.
+
+\subsection{Darstellung der physischen und virtuellen Umgebung [in einer Karte]}
+
+Die physische Welt in eine virtuelle Umgebung zu übertragen kann oft sehr hilfreich sein.
+Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw.
+außerhalb des Spielfelds befindet. Eine Karte hat insoweit den Vorteil, dass man dort auch
+noch virtuelle Gegenstände einfügen kann, die in der physischen Welt nicht vorhanden
+sind. Z.B. die nächsten Items bei Snake.
+
+\subsection{Kompass}
+
+Eine Richtungsangabe kann eine Karte ersetzen. Sei es um bei „Capture the Flag“ die
+Richtung der Fahne des Gegners anzuzeigen oder für die „Snake“ das nächste
+einzusammelnde Item. In der Regel hat es hier weniger Sinn, wenn die Kompassnadel nach
+Norden zeigt.
+
+\subsection{Akustische und haptische Orientierungshilfen}
+
+Akustische oder haptische Signale können ebenso Hinweise geben auf in der Nähe
+befindliche Interessengebiete (z.B. ertönen eines Signals oder Vibration bei erreichen eines
+bestimmtem Umkreises von einem Item). Können aber auch als Bestätigung eingesetzt
+werden, wenn z.B. etwas eingesammelt wurde.
+
+\subsection{Chat}
+
+Um mit seinen Teammitgliedern oder dem gegnerischen Team zu kommunizieren gibt es
+eine Reihe von Möglichkeiten. Wenn man sich außer Sicht- und Hörweite befindet kann
+dies über ein mobiles Gerät stattfinden. Beim Chat wird eine Nachricht verschickt, die der
+Empfänger auf seinem Gerät einsehen kann und dann seinerseits eine Antwort verfassen
+kann.
+
+\subsection{Synchronisation zwischen mobilen Endgeräten}
+
+Damit alle Mitspieler überhaupt miteinander Spielen können, ist es wichtig, dass die
+einzelnen, sich im Spiel befindlichen mobilen Geräte, synchronisiert werden. Das heißt, das
+jedes Gerät auf irgend eine Art und Weise mit den anderen Geräten kommuniziert. Es ist
+wichtig, dass Daten, die jeder sehen kann, bei jedem identisch und zur selben Zeit
+angezeigt werden.
+
+\subsection{Kollision virtueller Objekte}
+
+Treffen zwei virtuelle Objekte aufeinander muss in der Regel ein Event ausgelöst werden.
+Wird bei Snake z.B. der eigene Schwanz berührt, was laut der Regeln nicht erlaubt ist, muss
+dies dem Spieler mitgeteilt werden und evtl. weitere Ereignisse ausgeführt werden.
+
+\subsection{Einsammeln von Objekten}
+Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in
+Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch
+passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass
+etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal
+gegeben werden.
+
+\subsection{Geschwindigkeitsmessung}
+
+Um das Spielgeschehen besser zu kontrollieren zu können, kann eine Messung der
+Geschwindigkeit von Vorteil sein. Möchten wir z.B. bei Capute the Flag dem Fahnenträger
+nicht erlauben eine gewissen Geschwindigkeit zu überschreiten, ist eine
+Geschwindigkeitsmessung unabdingbar.
+
+
+\subsection{Mensch-Maschine-Kommunikation}
+
+Das komplette Spielgeschehen lebt nach der Integrierung von mobilen Endgeräten von der Kommunikation zwischen Mensch und Gerät. Wird auf dem Endgerät ein Kompass angezeigt, muss der Spieler insofern reagieren, dass er sich in die richtige Richtung dreht.
+Wenn er etwas einsammeln möchte, kann es erforderlich sein, dass ein Button gedrückt
+wird.
+
+
+\end{document}
+
