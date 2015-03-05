@@ -1,11 +1,11 @@
 \subsection{Kollisionsabfrage über Abstandsmessung}
 Die Android API stellt eine Methode zur Verfügung, die die Entfernung zwischen zwei Punkten, die über geographische Koordinaten bestimmt sind, berechnet \footnote{http://developer.android.com/reference/android/location/Location.html}.
-Bei der Kollisionsabfrage unterscheiden wir vier Fälle: sowohl das aktive, wie auch das passive beteiligte Objekt können jeweils durch einen Kreis oder einen Polygonzug (eine Schlange) realisiert sein.
+Bei der Kollisionsabfrage müssen wir für das Snake-Spiel vier Fälle unterscheiden: sowohl das aktive, wie auch das passive beteiligte Objekt können jeweils durch einen Kreis oder einen Polygonzug (eine Schlange) realisiert sein.
 Das aktive Objekt symbolisiert meist den die Kollision mit dem passiven Objekt auslösenden Spieler.
 Das passive Objekt kann ein aufsammelbares Bonus-Objekt sein oder ein anderer Spieler.
 Falls beide Objekte Kreise sind wird eine Kollision ausgelöst, falls die Entfernung zwischen beiden Kreismittelpunkten kleiner ist, als die Summe der Radien.
 
-$(M_{aktiv}-M_{passiv})^2<r_{aktiv}+r_{passiv}$
+$|M_{aktiv}-M_{passiv}|<r_{aktiv}+r_{passiv}$
 
 Bei einer Kollision mit einer Schlange, wird dieses Kriterium auf alle Glieder der Schlange angewendet. Die Kollision zwischen dem aktiven Objekt und einem der Eckpunkt des Polygonzugs führt zur Kollision mit der Schlange. 
 Falls das aktive Objekt ein Polygonzug ist, müssen nur Kollisionen mit dessen erstem Element (dem Kopf der Schlange) berücksichtigt werden, da Kollisionen mit Schwanz immer von anderen Objekten ausgelöst werden. Die weiteren Fälle sind analog zu den abgehandelten.
