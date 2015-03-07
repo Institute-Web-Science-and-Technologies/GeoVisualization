@@ -1,58 +1,53 @@
 \select@language {ngerman}
-\contentsline {chapter}{\numberline {1}Einleitung}{4}
-\contentsline {chapter}{\numberline {2}Spielideen}{5}
-\contentsline {subsection}{\numberline {2.0.1}Umsetzung virtueller Spiele in der physischen Welt}{5}
-\contentsline {subsubsection}{Snake}{5}
-\contentsline {subsubsection}{Capture the Flag}{5}
-\contentsline {subsubsection}{Domination}{5}
-\contentsline {subsection}{\numberline {2.0.2}Integration einer virtuellen Welt in Bewegungsspiele}{6}
-\contentsline {subsubsection}{Verstecken}{6}
-\contentsline {subsubsection}{Fangen}{6}
-\contentsline {subsubsection}{Topfschlagen}{6}
-\contentsline {chapter}{\numberline {3}Spielkonzepte}{7}
-\contentsline {section}{\numberline {3.1}Integration virtueller Objekte in die physische Umgebung}{7}
-\contentsline {section}{\numberline {3.2}Darstellung der physischen und virtuellen Umgebung}{8}
-\contentsline {section}{\numberline {3.3}Kompass}{9}
-\contentsline {section}{\numberline {3.4}Arkustische und haptische Orientierungshilfen}{10}
-\contentsline {section}{\numberline {3.5}Synchronisation zwischen mobilen Endger\"aten}{11}
-\contentsline {section}{\numberline {3.6}Kollision virtueller Objekte}{12}
-\contentsline {section}{\numberline {3.7}Einsammeln von Objekten}{13}
-\contentsline {section}{\numberline {3.8}Geschwindigkeitsmessung}{14}
-\contentsline {section}{\numberline {3.9}Mensch-Maschine-Kommunikation}{15}
-\contentsline {section}{\numberline {3.10}Chat}{16}
-\contentsline {chapter}{\numberline {4}Technische Loesungen}{17}
-\contentsline {section}{\numberline {4.1}Positionsermittlung}{17}
-\contentsline {subsection}{\numberline {4.1.1}LocationManager vs LocationClient}{17}
-\contentsline {subsubsection}{LocationManager}{17}
-\contentsline {subsubsection}{LocationClient}{17}
-\contentsline {subsubsection}{Auswertung von Messdaten}{18}
-\contentsline {subsection}{\numberline {4.1.2}Genauigkeit}{18}
-\contentsline {section}{\numberline {4.2}Kollisionsabfrage}{19}
-\contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{19}
-\contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{19}
-\contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{20}
-\contentsline {subsection}{\numberline {4.3.1}GoogleMaps vs OpenStreetMaps}{20}
-\contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{21}
-\contentsline {subsection}{\numberline {4.4.1}Serverseitige vs Clientseitige Logik}{21}
-\contentsline {subsection}{\numberline {4.4.2}\"Ubersicht Server-Technologien}{22}
-\contentsline {subsection}{\numberline {4.4.3}Umsetzung mit ZeroMQ}{22}
-\contentsline {section}{\numberline {4.5}GUI}{23}
-\contentsline {subsection}{\numberline {4.5.1}Login-Screen}{23}
-\contentsline {subsection}{\numberline {4.5.2}Swipe-Screen}{23}
-\contentsline {subsubsection}{Chat-Screen}{24}
-\contentsline {subsubsection}{Map-Screen}{25}
-\contentsline {subsubsection}{Game-Screen}{25}
-\contentsline {section}{\numberline {4.6}AndereSensorik}{27}
-\contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{28}
-\contentsline {section}{\numberline {5.1}Snake}{28}
-\contentsline {subsection}{\numberline {5.1.1}Spielidee}{28}
-\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{28}
-\contentsline {subsection}{\numberline {5.1.3}Umgesetzte Features}{28}
-\contentsline {section}{\numberline {5.2}Snake}{29}
-\contentsline {subsection}{\numberline {5.2.1}Spielidee}{29}
-\contentsline {subsection}{\numberline {5.2.2}Spiellogik}{29}
-\contentsline {subsection}{\numberline {5.2.3}Umgesetzte Features}{29}
-\contentsline {chapter}{\numberline {6}Fazit}{30}
-\contentsline {chapter}{\numberline {7}Ausblick}{31}
-\contentsline {section}{\numberline {7.1}Weitere Features}{31}
-\contentsline {section}{\numberline {7.2}Weitere Spiele}{31}
+\contentsline {chapter}{\numberline {1}Einleitung}{3}{chapter.1}
+\contentsline {chapter}{\numberline {2}Spielideen}{4}{chapter.2}
+\contentsline {subsection}{\numberline {2.0.1}Umsetzung virtueller Spiele in der physischen Welt}{4}{subsection.2.0.1}
+\contentsline {subsubsection}{Snake}{4}{section*.2}
+\contentsline {subsubsection}{Capture the Flag}{4}{section*.3}
+\contentsline {subsubsection}{Domination}{4}{section*.4}
+\contentsline {subsection}{\numberline {2.0.2}Integration einer virtuellen Welt in Bewegungsspiele}{5}{subsection.2.0.2}
+\contentsline {subsubsection}{Verstecken}{5}{section*.5}
+\contentsline {subsubsection}{Fangen}{5}{section*.6}
+\contentsline {subsubsection}{Topfschlagen}{5}{section*.7}
+\contentsline {chapter}{\numberline {3}Spielkonzepte}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Integration virtueller Objekte in die physische Umgebung}{6}{section.3.1}
+\contentsline {section}{\numberline {3.2}Darstellung der physischen und virtuellen Umgebung}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}Kompass}{6}{section.3.3}
+\contentsline {section}{\numberline {3.4}Arkustische und haptische Orientierungshilfen}{7}{section.3.4}
+\contentsline {section}{\numberline {3.5}Synchronisation zwischen mobilen Endger\"aten}{7}{section.3.5}
+\contentsline {section}{\numberline {3.6}Kollision virtueller Objekte}{7}{section.3.6}
+\contentsline {section}{\numberline {3.7}Einsammeln von Objekten}{7}{section.3.7}
+\contentsline {section}{\numberline {3.8}Geschwindigkeitsmessung}{7}{section.3.8}
+\contentsline {section}{\numberline {3.9}Mensch-Maschine-Kommunikation}{8}{section.3.9}
+\contentsline {section}{\numberline {3.10}Chat}{8}{section.3.10}
+\contentsline {chapter}{\numberline {4}Technische Loesungen}{9}{chapter.4}
+\contentsline {section}{\numberline {4.1}Positionsermittlung}{9}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}LocationManager vs LocationClient}{9}{subsection.4.1.1}
+\contentsline {subsubsection}{LocationManager}{9}{section*.8}
+\contentsline {subsubsection}{LocationClient}{9}{section*.9}
+\contentsline {subsubsection}{Auswertung von Messdaten}{10}{section*.10}
+\contentsline {subsection}{\numberline {4.1.2}Genauigkeit}{10}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Kollisionsabfrage}{11}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{11}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{11}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{12}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}GoogleMaps vs OpenStreetMaps}{12}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{13}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Serverseitige vs Clientseitige Logik}{13}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}\"Ubersicht Server-Technologien}{14}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Umsetzung mit ZeroMQ}{14}{subsection.4.4.3}
+\contentsline {section}{\numberline {4.5}GUI}{16}{section.4.5}
+\contentsline {section}{\numberline {4.6}AndereSensorik}{20}{section.4.6}
+\contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}Snake}{21}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Spielidee}{21}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{21}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Umgesetzte Features}{21}{subsection.5.1.3}
+\contentsline {section}{\numberline {5.2}Snake}{22}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Spielidee}{22}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Spiellogik}{22}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Umgesetzte Features}{22}{subsection.5.2.3}
+\contentsline {chapter}{\numberline {6}Fazit}{23}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ausblick}{24}{chapter.7}
+\contentsline {section}{\numberline {7.1}Weitere Features}{24}{section.7.1}
+\contentsline {section}{\numberline {7.2}Weitere Spiele}{24}{section.7.2}

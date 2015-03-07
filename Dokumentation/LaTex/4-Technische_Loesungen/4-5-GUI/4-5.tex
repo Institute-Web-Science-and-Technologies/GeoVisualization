@@ -4,7 +4,7 @@ Die GUI (Grafic User Interface) wurde nur mit den Android bzw. GooglePlay Servic
 Möglichkeiten des Android SDK sind in dieser Hinsicht für die GUI-Umsetzung dieses Projektes vollkommen zufriedenstellend. Die komplette
 GUI setzt sich aus 2 Activities zu sammen, die im folgenden ein wenig genauer beleuchtet werden.
 
-\subsection{Login-Screen}
+\subsection*{Login-Screen}
 Diese Activity wird zuerst aufgerufen und zeigt einen Bildschirm auf dem sich der Spieler einen Benutzernamen aussucht und danach mit dem
 "`Start"' Button zu nächsten Activity wechselt, welche das eigentliche Spiel zeigt.
 
@@ -16,9 +16,8 @@ Diese Activity wird zuerst aufgerufen und zeigt einen Bildschirm auf dem sich de
 \end{wrapfigure}
 
 
-\subsection{Swipe-Screen}
-Schon in der sehr frühen Entwicklungsphase war festzustellen, das die verschiedenen Elemente der GUI - wie im folgenden weiter erläutert- zu zahlreich sind, um sie auf einen Bildschirm umzusetzen. Die eigentliche Kartendarstellung wäre sonst zu klein gewesen. Also wurde entschieden die verschiedenen Elemente auf weitere Bildschirme zu verteilen. In den ersten entwürfen geschah dies über einzelne Activities. Um gewisse Android Komfort-Funktionen und Gesten dem Nutzer zu verfügung zu stellen wurden die zunächst eigenständigen Activites zu Fragments umgebeut,
-die dann in einem so genannten Swipe-Screen zusammengefasst werden. In diesem werden die Fragments als Tabs organisiert und der User kann entweder durch "`wischen"' oder durch klicken auf die Tabs durch die GUI Navigieren. \newline
+\subsection*{Swipe-Screen}
+Schon in der sehr frühen Entwicklungsphase war festzustellen, das die verschiedenen Elemente der GUI - wie im folgenden weiter erläutert- zu zahlreich sind, um sie auf einen Bildschirm umzusetzen. Die eigentliche Kartendarstellung wäre sonst zu klein gewesen. Also wurde entschieden die verschiedenen Elemente auf weitere Bildschirme zu verteilen. In den ersten entwürfen geschah dies über einzelne Activities, also mehrere Bildschirme. Um gewisse Android Komfort-Funktionen und Gesten dem Nutzer zu verfügung zu stellen wurden die zunächst eigenständigen Activites zu Fragments umgebeut, die dann in einem so genannten Swipe-Screen zusammengefasst werden. In diesem werden die Fragments als Tabs organisiert und der User kann entweder durch "`wischen"' (swipe) oder durch klicken auf die Tabs durch die GUI Navigieren. \newline
 Ein weiterer Vorteil ist ebenfalls, dass benachbarte Tabs jeweils ein wenig vorgeladen(laden der Widgets) bzw. noch im Speicher behalten werden. Zum einen wird so sichergestellt, dass der Tab-Wechsel per wischen "`geschmeidig"' abläuft, aber auch gibt es so nur sehr geringe Ladezeiten zwischen den einzelenen Bildschirmen. Zudem ist die von Google angepriesene "`Wiederverwendbarkeit"' von Fragments als UI (User Interface) ebenfalls nützlich, wenn weitere ähnliche Spiele umgesetzt werden sollen.
 
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -28,7 +27,7 @@ Ein weiterer Vorteil ist ebenfalls, dass benachbarte Tabs jeweils ein wenig vorg
   \end{center}
 \end{wrapfigure}
 
-\subsubsection{Chat-Screen}
+\subsubsection*{Chat-Screen}
 In desem Fragment wird die möglichkeit des Chattens zwischen mehreren Spielern umgesetzt. Die grafische Umsetzung des Chats wurde der von IRC (Instant Relay Chat) Clients nachempfunden und ist entsprechend simpel gelöst. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView) was wiederum in einem scrollbaren Feld (SrcollView) liegt. Hierdurch ist es möglich durch alle empfangenen Nachrichten "`durchzuscrollen"'. Wird eine Chat-Message (genaueres in Kapitel 4.4) empfangen, wird diese mittels Stringmanipulation an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Somit kann es aufgrunde von Übertragungsverzögerungen dazu kommen, das die eigene Nachricht verzögert angezeigt, jedoch ist die korrekte Reihenfolge der Nachrichten gewahrt.
 
 \newpage
@@ -40,12 +39,12 @@ In desem Fragment wird die möglichkeit des Chattens zwischen mehreren Spielern u
   \end{center}
 \end{wrapfigure}
 
-\subsubsection{Map-Screen}
+\subsubsection*{Map-Screen}
 In diesem Fragment wird die Karte in einem weiterem Fragment angezeigt. Je nachdem welches Spiel gespielt wird zu zusätzliche Widgets vorhanden, wie z.B. Interaktions Buttons, (Team-)Punkte anzeige usw.
 
 
-\subsubsection{Game-Screen}
-In diesem Fragment werden momentan aktive Spiele angezeigt. Auch ist es möglich neue Spiele zu erstellen. Die Anzeige der Liste der Spiele erfolgt in einer ListView. Diese wird durch entsprechend angefordete Informationen über andere Spiele geupdatet. Diese Informationen werden durch Anfrage bei anderen Benutzer die sich eingeloggt haben über einen bestimmen Message-Typ abgerufen. Die Listen-Elemente sind interaktiv. Ein klick auf das entsprechende Spiel startet den beitritt. Um ein Spiel eines gewissen Typs zu Starten wählt man in einen Dropdown-Menü (bei Android Spinner) den entsprechenden Modus aus in klickt auf create. Man selbst betritt dieses Spiel und eintrag in der Spiele-Liste wird vorgenommen. 
+\subsubsection*{Game-Screen}
+In diesem Fragment werden momentan aktive Spiele angezeigt. Auch ist es möglich neue Spiele zu erstellen. Die Anzeige der Liste der Spiele erfolgt in einer scrollfähigen Liste (ListView). Diese wird durch entsprechend angefordete Informationen über andere Spiele geupdatet. Diese Informationen werden durch Anfrage bei anderen Benutzer die sich eingeloggt haben über einen bestimmen Message-Typ abgerufen. Die Listen-Elemente sind interaktiv. Ein klick auf das entsprechende Spiel startet den beitritt. Um ein Spiel eines gewissen Typs zu Starten wählt man in einen Dropdown-Menü (bei Android Spinner) den entsprechenden Modus aus in klickt auf create. Man selbst betritt dieses Spiel und eintrag in der Spiele-Liste wird vorgenommen. 
 
 
 \begin{figure}[h!]  

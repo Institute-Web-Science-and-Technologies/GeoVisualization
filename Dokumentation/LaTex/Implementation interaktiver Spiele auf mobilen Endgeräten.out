@@ -1,0 +1,43 @@
+\BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Spielideen}{}% 2
+\BOOKMARK [1][-]{subsection.2.0.1}{Umsetzung virtueller Spiele in der physischen Welt}{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.0.2}{Integration einer virtuellen Welt in Bewegungsspiele}{subsection.2.0.1}% 4
+\BOOKMARK [0][-]{chapter.3}{Spielkonzepte}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Integration virtueller Objekte in die physische Umgebung}{chapter.3}% 6
+\BOOKMARK [1][-]{section.3.2}{Darstellung der physischen und virtuellen Umgebung}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.3}{Kompass}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.4}{Arkustische und haptische Orientierungshilfen}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.5}{Synchronisation zwischen mobilen Endger\344ten}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.6}{Kollision virtueller Objekte}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.7}{Einsammeln von Objekten}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.8}{Geschwindigkeitsmessung}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.9}{Mensch-Maschine-Kommunikation}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.10}{Chat}{chapter.3}% 15
+\BOOKMARK [0][-]{chapter.4}{Technische Loesungen}{}% 16
+\BOOKMARK [1][-]{section.4.1}{Positionsermittlung}{chapter.4}% 17
+\BOOKMARK [2][-]{subsection.4.1.1}{LocationManager vs LocationClient}{section.4.1}% 18
+\BOOKMARK [2][-]{subsection.4.1.2}{Genauigkeit}{section.4.1}% 19
+\BOOKMARK [1][-]{section.4.2}{Kollisionsabfrage}{chapter.4}% 20
+\BOOKMARK [2][-]{subsection.4.2.1}{Kollisionsabfrage \374ber Abstandsmessung}{section.4.2}% 21
+\BOOKMARK [2][-]{subsection.4.2.2}{Kollisionsabfrage \374ber Linienintersektion }{section.4.2}% 22
+\BOOKMARK [1][-]{section.4.3}{Kartendarstellung mit Android}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.3.1}{GoogleMaps vs OpenStreetMaps}{section.4.3}% 24
+\BOOKMARK [1][-]{section.4.4}{Server-Client-Kommunikation}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.4.1}{Serverseitige vs Clientseitige Logik}{section.4.4}% 26
+\BOOKMARK [2][-]{subsection.4.4.2}{\334bersicht Server-Technologien}{section.4.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.3}{Umsetzung mit ZeroMQ}{section.4.4}% 28
+\BOOKMARK [1][-]{section.4.5}{GUI}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.6}{AndereSensorik}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Implementation von Beispielapps}{}% 31
+\BOOKMARK [1][-]{section.5.1}{Snake}{chapter.5}% 32
+\BOOKMARK [2][-]{subsection.5.1.1}{Spielidee}{section.5.1}% 33
+\BOOKMARK [2][-]{subsection.5.1.2}{Spiellogik}{section.5.1}% 34
+\BOOKMARK [2][-]{subsection.5.1.3}{Umgesetzte Features}{section.5.1}% 35
+\BOOKMARK [1][-]{section.5.2}{Snake}{chapter.5}% 36
+\BOOKMARK [2][-]{subsection.5.2.1}{Spielidee}{section.5.2}% 37
+\BOOKMARK [2][-]{subsection.5.2.2}{Spiellogik}{section.5.2}% 38
+\BOOKMARK [2][-]{subsection.5.2.3}{Umgesetzte Features}{section.5.2}% 39
+\BOOKMARK [0][-]{chapter.6}{Fazit}{}% 40
+\BOOKMARK [0][-]{chapter.7}{Ausblick}{}% 41
+\BOOKMARK [1][-]{section.7.1}{Weitere Features}{chapter.7}% 42
+\BOOKMARK [1][-]{section.7.2}{Weitere Spiele}{chapter.7}% 43
