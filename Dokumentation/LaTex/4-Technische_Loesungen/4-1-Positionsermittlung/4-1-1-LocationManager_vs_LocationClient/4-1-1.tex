@@ -17,6 +17,44 @@ Der LocationClient ist ein von Google bereitgestellter Dienst, der über den GPS 
 Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötig. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen. Zudem ist man auch total von Google abhängig.
 
 
-\subsubsection{Auswertung von Messdaten}
+\subsubsection{Messdaten}
 
-Um LocationManager und LocationClient für unsere zwecke vergleichen zu können, wurde ein kleines Testprogramm entwickelt, welches jeweils in zwei seperaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammtelt. Zur optischen Darstellung der Ergenisse wird aus den aufgezeichneten Koordinate eine Linie (PolyLine) gezeichet. Als vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen.
+Um LocationManager und LocationClient für unsere zwecke vergleichen zu können, wurde ein kleines Testprogramm entwickelt, welches jeweils in zwei seperaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammtelt. Zur optischen Darstellung der Ergenisse wird aus den aufgezeichneten Koordinate eine Linie (PolyLine) gezeichet. Als vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. \newline
+Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
+
+\begin{table}[h]
+\caption{Location Versuch 1}
+\begin{tabular}{l|l|l|}
+\cline{2-3}
+                                      & locationClient         & locationManager         \\ \hline
+\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{10.12.2014}                  \\ \hline
+\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Universität Koblenz, Campus} \\ \hline
+\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{Bewölk, leichter Niesel}     \\ \hline
+\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}           \\ \hline
+\multicolumn{1}{|l|}{Genauigkeit}     & 7,049                  & 8,698                   \\ \hline
+\multicolumn{1}{|l|}{Updates/Sekunde} & 0,936                  & 1,016                   \\ \hline
+\end{tabular}
+\label{tab:lV1}
+\end{table}
+
+\begin{table}[h]
+\caption{Location Versuch 2}
+\begin{tabular}{l|l|l|}
+\cline{2-3}
+                                      & locationClient                & locationManager                \\ \hline
+\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{14.12.2014}                                \\ \hline
+\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
+\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{Wetter:,leicht bewölk leicht windig}       \\ \hline
+\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
+\multicolumn{1}{|l|}{Genauigkeit}     & 5,482                         & 6,216                          \\ \hline
+\multicolumn{1}{|l|}{Updates/Sekunde} & 1,003                         & 0,969                          \\ \hline
+\end{tabular}
+\label{tab:lV2}
+\end{table}
+
+Hierbei muss noch ergänzt werden, dass sich der Genaukeitswert folgendermaßen beschrieben wird. An Längen- und Breitengrad
+der Position wird ein Kreis mit Radius der Genauigkeit gezeichnet. Es besteht eine 68-prozentige Wahrscheinlichkeit, dass
+sich die Position innerhalb des Kreises Befindet\footnote{http://developer.android.com/reference/android/location/Location.html}.
+Es gilt, je kleiner der Wert desto besser. In den Tabellen wurde jeweils das aritmetische Mittel der aufgezeichneten Genauigkeiten eingetragen.
+
+
