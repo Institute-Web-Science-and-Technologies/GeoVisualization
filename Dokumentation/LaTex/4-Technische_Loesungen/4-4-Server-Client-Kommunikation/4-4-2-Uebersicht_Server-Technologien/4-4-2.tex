@@ -5,4 +5,7 @@ Bei der Pull-Kommunikation fordert der Client die benötigten Informationen vom S
 Bei der Push-Kommunikation sendet der Server, wenn sich der Zustand ändert, unaufgefordert Informationen an die betroffenen Clients.
 Im Falle mobiler Endgeräte muss Push-Kommunikation über Sockets laufen, da diese Geräte keine IP-Adresse haben.
 Pull-Kommunikation über HTTP-Requests umgesetzt hat eine nicht hinnehmbare Verzögerung bewirkt.
-Die finale Implementation verwendet daher Push-Kommunikation. Eine spezialisierte Server-Architektur, die das Publish-Subscribe-Pattern und Push-Kommunikation verwendet ist XMPP \cite{xmpp}. Es wurde eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen. Wir haben Node.js\footnote{http://nodejs.org/} und JeroMQ\footnote{https://github.com/zeromq/jeromq} verglichen. Wir haben uns für JeroMQ entschieden, um Server und Client in der selben Programmiersprache umsetzen zu können.
+Die finale Implementation verwendet daher Push-Kommunikation. Eine spezialisierte Server-Architektur, die das Publish-Subscribe-Pattern und Push-Kommunikation verwendet ist XMPP \cite{xmpp}. Es wurde eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen. Wir haben Node.js\footnote{\url{http://nodejs.org/}} und ZeroMQ\footnote{\url{http://zeromq.org/}} verglichen. 
+Beides sind asynchrone Server-Technologien.
+JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}} ist eine Implementation von ZeroMQ in Java. 
+  Wir haben uns für JeroMQ entschieden, um Server und Client in der selben Programmiersprache umsetzen zu können.
