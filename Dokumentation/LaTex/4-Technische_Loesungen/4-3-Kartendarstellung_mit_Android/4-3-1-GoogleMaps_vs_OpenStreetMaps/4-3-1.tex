@@ -1,2 +1,7 @@
 \subsection{GoogleMaps vs OpenStreetMaps}
-Reaaaaaaaaaaaaaady?? FIGHT!!!!!!
+Die Basis der Spielkonzepte ist eine Karte der reellen Umgebung, die mit Android dargestellt wird. Realisiert wurde dies mit Google Maps, obwohl Open Street Maps auch eine Alternative gewesen wäre. Im folgenden möchten wir beide Optionen durchleuchten und die Vor- und Nachteile sowie die Unterschiede betrachten. 
+Google Maps ist Eigentümer aller Karten und Informationen die diese beinhalten. OSM dagegen kommt mit einer offenen Lizenz daher. Die zugrundeliegenden Geodaten der Karten stellt Google Maps nicht zur Verfügung, OSM hingegen schon. Beide erhalten tägliche Updates, wobei jedoch die Satellitenkarte von Google Maps nur alle 1 bis 3 Jahre aktuell gehalten wird. Diese wird von OSM allerdings nicht angeboten.
+OSM bietet volle Funktionalität in allen Ländern, wogegen diese bei Google Maps auf spezielle Länder beschränkt ist. 
+Als Datentyp im Backend nutzt Google Maps JSON, OSM setzt hingegen auf XML. Beide bieten Bibliotheken für Java und Javascript. Wobei die letzteren für OSM von Drittanbietern bereitgestellt werden. 
+Beide nutzen GPS und Wi-Fi des Mobilen Endgerätes für die Positionsbestimmung und bieten die Darstellung der Bewegungsrichtung. Google Maps unterstützt zusätzlich den Zugriff auf Mobilfunkzellen für die Ortsbestimmung.
+Wir haben uns für Google Maps entschieden, weil die API sehr gut und zentral dokumentiert ist. Die Integration in die Android App war unkompliziert und die Karten-Funktionalitäten waren leicht zu nutzen. Google bietet hier für alle Zwecke ausführliche Tutorials an. Auch die Geodaten benötigten wir nicht. Einzig die Anzeige der Karte und die Interaktion der Benutzer untereinander war uns wichtig.
