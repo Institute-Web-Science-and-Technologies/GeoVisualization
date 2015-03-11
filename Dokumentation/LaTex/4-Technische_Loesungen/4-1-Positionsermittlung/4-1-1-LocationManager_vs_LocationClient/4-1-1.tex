@@ -1,6 +1,6 @@
 \subsection{LocationManager vs LocationClient}
 
-Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verwendet. Der LocationManager und der Location client.
+Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verwendet. Der LocationManager\footnote{{\color{red}Link zur Android-Doku}} und der LocationClient\footnote{{\color{red}\url{Link zur Android-Doku}}}.
 
 
 \subsubsection{LocationManager}
@@ -8,18 +8,18 @@ Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verwendet. Der
 Der LocationManager ist ein von Android bereitgestellter Dienst, der über den GPS Sensor die Position des Smartphones ermittelt.
 Ein Vorteil bei verwendenden dieses Dienstes ist, das man nicht an die Dienste von Google gebunden ist, und somit theoretisch auch für
 nicht Google-Konforme Androidbetriebssysteme entwickeln kann. Da nur der GPS Sensor verwendet wird, wäre eine entsprechende Anwendung sogar unabhängig von einer Internetverbindung. Auch wird dieser Dienst auch noch von älteren Android Versionen unterstützt.
-Nachteilig wird in einer Forendiskussion \footnote{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien} der Hohe Akku verbrauch genannt.
+Nachteilig wird in einer Forendiskussion \footnote{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien {\color{red}}bessere Quelle} der Hohe Akku verbrauch genannt.
 
 
 \subsubsection{LocationClient}
 
 Der LocationClient ist ein von Google bereitgestellter Dienst, der über den GPS Sensor und andere Quellen, die Google zur Verfügung stellt, die Position des Smartphones zu ermitteln. Als Vorteile dieses Dienstes werden in der oben schon erwähnten Forendiskussion wird erwähnt, dass dieser Dienst Akku-schonender sei. Auch sei er zuverlässiger. Die anderen Quellen zur Positionsermittlung könnten auch zu einer genauen Positionsermittlung beitragen, wenn es eventuell Übertragungsprobleme zum GPS-Satelliten gibt.
-Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen. Zudem ist man auch total von Google abhängig.
+Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen. Zudem ist man auch total von Google abhängig. {\color{red} 'auch total' streichen}
 
 
 \subsubsection{Messdaten}
 
-Um LocationManager und LocationClient für unsere Zwecke vergleichen zu können, wurde ein kleines Testprogramm entwickelt, welches jeweils in zwei separaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammelt. Zur optischen Darstellung der Ergebnisse wird aus den aufgezeichneten Koordinate eine Linie (PolyLine) gezeichnet. Als Vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. \newline
+Um LocationManager und LocationClient für unsere Zwecke vergleichen zu können, wurde ein kleines {\color{red}'kleines' streichen} Testprogramm entwickelt, welches jeweils in zwei separaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammelt. Zur optischen Darstellung der Ergebnisse wird aus den aufgezeichneten Koordinate eine Linie (PolyLine\footnote{{\color{red}\url{Link zur Android-Doku}}}) gezeichnet. Als Vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. \newline
 Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
 
 \begin{table}[h]
