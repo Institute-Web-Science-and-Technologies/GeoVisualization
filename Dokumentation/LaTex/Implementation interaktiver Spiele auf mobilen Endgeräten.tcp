@@ -3,10 +3,10 @@ Type=TeXnicCenterProjectInformation
 Version=4
 
 [ProjectInfo]
-MainFile=Implementation interaktiver Spiele auf mobilen Endgeräten.tex
+MainFile=Implementation interaktiver Spiele auf mobilen Endgerï¿½ten.tex
 UseBibTeX=0
 UseMakeIndex=0
-ActiveProfile=LaTeX => PDF
-ProjectLanguage=
-ProjectDialect=
+ActiveProfile=LaTeX â‡¨ PDF
+ProjectLanguage=en
+ProjectDialect=US
 
