@@ -1,4 +1,4 @@
-\section{GUI}
+\section{GUI}\label{gui}
 
 Die GUI (Grafic User Interface) wurde nur mit den Android bzw. GooglePlay Services (inkl. Googlemaps) um gesetzt. Die mitgelieferten
 Möglichkeiten des Android SDK sind in dieser Hinsicht für die GUI-Umsetzung dieses Projektes vollkommen zufriedenstellend. Die komplette
@@ -28,7 +28,7 @@ Ein weiterer Vorteil ist ebenfalls, dass benachbarte Tabs jeweils vorgeladen (La
 \end{wrapfigure}
 
 \subsubsection*{Chat-Screen}
-In desem Fragment wird die möglichkeit des Chattens zwischen mehreren Spielern umgesetzt. Die grafische Umsetzung des Chats wurde der von IRC (Instant Relay Chat) Clients nachempfunden und ist entsprechend simpel gelöst. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}) was wiederum in einem scrollbaren Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}}) liegt. Hierdurch ist es möglich durch alle empfangenen Nachrichten "`durchzuscrollen"'. Wird eine Chat-Message (genaueres in Kapitel 4.4) empfangen, wird diese mittels Stringmanipulation an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Somit kann es aufgrunde von Übertragungsverzögerungen dazu kommen, das die eigene Nachricht verzögert angezeigt, jedoch ist die korrekte Reihenfolge der Nachrichten gewahrt.
+In desem Fragment wird die möglichkeit des Chattens zwischen mehreren Spielern umgesetzt. Die grafische Umsetzung des Chats wurde der von IRC (Instant Relay Chat) Clients nachempfunden und ist entsprechend simpel gelöst. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}) was wiederum in einem scrollbaren Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}) liegt. Hierdurch ist es möglich durch alle empfangenen Nachrichten "`durchzuscrollen"'. Wird eine Chat-Message (genaueres in Kapitel 4.4) empfangen, wird diese mittels Stringmanipulation an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Somit kann es aufgrunde von Übertragungsverzögerungen dazu kommen, das die eigene Nachricht verzögert angezeigt, jedoch ist die korrekte Reihenfolge der Nachrichten gewahrt.
 
 \newpage
 
