@@ -1,6 +1,13 @@
 package geovis14.awesomelocationaccuracytesterapp;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +17,33 @@ import android.view.View;
 
 
 public class MainActivity extends ActionBarActivity {
-
+	File root;
+	File dir;
+    File file;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        root = android.os.Environment.getExternalStorageDirectory();
+		dir = new File(root.getAbsolutePath() + "/gpsTestDaten");
+		dir.mkdirs();
+		file = new File(dir, "Device.txt");
+		if (file.exists())file.delete();
+		
+        try {
+			PrintWriter pw = new PrintWriter(new FileWriter(
+					root.getAbsolutePath()
+							+ "//gpsTestDaten//Device.txt",
+					true));
+			pw.append("\n Device: " + android.os.Build.DEVICE
+						+ "\n Model (and Product): " + android.os.Build.MODEL + " ("+ android.os.Build.PRODUCT + ")");
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 
@@ -44,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void locationManager (View view){
-    	Intent intent = new Intent (this, LocationManagerMap.class);
+    	Intent intent = new Intent (this, LocationClientMap.class);
     	startActivity(intent);
     	
     }

@@ -77,7 +77,7 @@ public class LocationManagerMap extends ActionBarActivity implements LocationLis
 		if (lm.isProviderEnabled("gps")==false) onProviderDisabled ("gps");
 		else onProviderEnabled ("gps");
 		
-		map.setMyLocationEnabled(true);
+		
 	}
 
 	@Override

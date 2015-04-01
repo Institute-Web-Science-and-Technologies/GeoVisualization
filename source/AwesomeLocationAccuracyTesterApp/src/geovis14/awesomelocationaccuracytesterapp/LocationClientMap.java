@@ -1,8 +1,11 @@
 package geovis14.awesomelocationaccuracytesterapp;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,6 +14,7 @@ import java.util.List;
 
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -49,6 +53,7 @@ import com.google.android.gms.location.LocationRequest;
 	File root;
 	File dir;
 	File file;
+	File imageFile;
 	boolean writing = false;
 	Marker start; 
 	Marker stop;
@@ -79,7 +84,11 @@ import com.google.android.gms.location.LocationRequest;
 		file = new File(dir, "locationClientData.txt");
 		if (file.exists())
 			file.delete();
-		
+		/*
+		imageFile = new File(dir, "locationClient.jpeg");
+		if (imageFile.exists())
+			imageFile.delete();
+		*/
 		map.setMyLocationEnabled(true);
 
 	}
@@ -186,5 +195,34 @@ import com.google.android.gms.location.LocationRequest;
 		polylineOptions.width(5);
 		polylineOptions.addAll(locs);
 		map.addPolyline(polylineOptions);
+		
+		Bitmap bitmap;
+		View v1 = getWindow().getDecorView().getRootView();
+		v1.setDrawingCacheEnabled(true);
+		bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+		v1.setDrawingCacheEnabled(false);
+		
+		OutputStream fout = null;
+		
+		/*imageFile = new File(dir, "locationClient.jpeg");
+		if (imageFile.exists())
+			imageFile.delete();
+		*/
+		
+		/*
+		try {
+		    fout = new FileOutputStream(imageFile);
+		    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fout);
+		    fout.flush();
+		    fout.close();
+
+		} catch (FileNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		*/
 	}
 }
