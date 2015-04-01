@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:keepScreenOn = "true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -12,7 +13,7 @@
         android:id="@+id/LmMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/LmStart"
+        android:layout_above="@+id/LCStart"
         class="com.google.android.gms.maps.MapFragment" />
     
     <Button
@@ -29,18 +30,18 @@
         android:id="@+id/LmStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LmMap"
-        android:layout_toRightOf="@+id/LmStart"
-        android:onClick="lmStop"
-        android:text="StopM" />
+        android:layout_alignBottom="@+id/LCStart"
+        android:layout_toRightOf="@+id/LCStart"
+        android:text="StopM" 
+        android:onClick="lmStop"/>
 
     <Button
         android:id="@+id/LmDraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LmMap"
-        android:layout_toRightOf="@+id/LmStop"
-        android:onClick="lmDraw"
-        android:text="Draw" />
-
+        android:layout_alignBaseline="@+id/LCStop"
+        android:layout_alignBottom="@+id/LCStop"
+        android:layout_toRightOf="@+id/LCStop"
+        android:text="Draw" 
+        android:onClick="lmDraw"/>
 </RelativeLayout>
