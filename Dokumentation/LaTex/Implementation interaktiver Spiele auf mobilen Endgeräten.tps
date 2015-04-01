@@ -3,7 +3,7 @@ Type=TeXnicCenterProjectSessionInformation
 Version=2
 
 [SessionInfo]
-ActiveTab=2
+ActiveTab=0
 FrameCount=10
 ActiveFrame=0
 
@@ -32,9 +32,9 @@ cxCur=1169
 cxMin=10
 
 [Frame0_View0,0]
-Cursor.row=17
-Cursor.column=37
-TopSubLine=6
+Cursor.row=0
+Cursor.column=0
+TopSubLine=0
 
 [Frame1]
 Columns=1
@@ -61,9 +61,9 @@ cxCur=978
 cxMin=10
 
 [Frame1_View0,0]
-Cursor.row=39
-Cursor.column=16
-TopSubLine=44
+Cursor.row=0
+Cursor.column=0
+TopSubLine=0
 
 [Frame2]
 Columns=1
@@ -148,7 +148,7 @@ cxCur=978
 cxMin=10
 
 [Frame4_View0,0]
-Cursor.row=0
+Cursor.row=5
 Cursor.column=0
 TopSubLine=0
 
@@ -208,7 +208,7 @@ cxMin=10
 [Frame6_View0,0]
 Cursor.row=57
 Cursor.column=143
-TopSubLine=58
+TopSubLine=73
 
 [Frame7]
 Columns=1
@@ -235,8 +235,8 @@ cxCur=1028
 cxMin=10
 
 [Frame7_View0,0]
-Cursor.row=18
-Cursor.column=500
+Cursor.row=0
+Cursor.column=0
 TopSubLine=0
 
 [Frame8]
@@ -264,8 +264,8 @@ cxCur=1028
 cxMin=10
 
 [Frame8_View0,0]
-Cursor.row=4
-Cursor.column=8
+Cursor.row=0
+Cursor.column=0
 TopSubLine=0
 
 [Frame9]
