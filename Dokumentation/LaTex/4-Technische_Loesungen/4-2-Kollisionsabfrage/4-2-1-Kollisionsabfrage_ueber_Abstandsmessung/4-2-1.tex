@@ -7,6 +7,11 @@ Falls beide Objekte Kreise sind wird eine Kollision ausgelöst, falls die Entfern
 
 $|M_{aktiv}-M_{passiv}|<r_{aktiv}+r_{passiv}$
 
-Bei einer Kollision mit einer Schlange, wird dieses Kriterium auf alle Glieder der Schlange angewendet. Die Kollision zwischen dem aktiven Objekt und einem der Eckpunkt des Polygonzugs führt zur Kollision mit der Schlange. 
-Falls das aktive Objekt ein Polygonzug ist, müssen nur Kollisionen mit dessen erstem Element (dem Kopf der Schlange) berücksichtigt werden, da Kollisionen mit Schwanz immer von anderen Objekten ausgelöst werden. Die weiteren Fälle sind analog zu den abgehandelten.
+Bei einer Kollision mit einer Schlange als passives Objekt, wird dieses Kriterium auf alle Glieder der Schlange angewendet. Die Kollision zwischen dem aktiven Objekt und einem der Eckpunkt des Polygonzugs führt zur Kollision mit der Schlange. 
+Falls das aktive Objekt ein Polygonzug ist, müssen nur Kollisionen mit dessen erstem Element (dem Kopf der Schlange) berücksichtigt werden, da Kollisionen mit Schwanz immer von anderen Objekten ausgelöst werden. Es handelt sich also um eine Kollision mit einem Kreis. Die weiteren Fälle sind analog zu den abgehandelten.
+
 Während Abstandsmessung als Kriterium für Kollision von Kreisen gut funktioniert, muss bei der Kollision von Polygonzügen darauf geachtet werden, dass die Radien der Objekte genügend groß gewählt werden, damit sich auch bei schwankender Genauigkeit der GPS-Werte und damit sehr unregelmäßigen Abständen zwischen den Gliedern der Schlange, die Radien aufeinanderfolgender Glieder überschneiden.
+
+Im Experiment wurde bei guten Bedingungen eine Abweichung der ermittelten Positionen von den realen von circa vier Metern gemessen (siehe ...).
+In der Praxis hat sich aber ein Radius von zwei Metern als ausreichend erwiesen, da die Spieler die Diskrepanz zwischen realer und virtueller Welt bemerken und gegebenenfalls gegensteuern können. Auch ist ein Radius von zwei Metern fein genug, um ein Hindurchlaufen durch eine Schlange zu verhindern.
+Gleichzeitig bringt der geringere Radius den Vorteil, dass das Spiel auch auf kleineren Arealen gespielt werden kann und Spieler schärfere Kurven laufen können ohne Selbstkollisionen zu riskieren.

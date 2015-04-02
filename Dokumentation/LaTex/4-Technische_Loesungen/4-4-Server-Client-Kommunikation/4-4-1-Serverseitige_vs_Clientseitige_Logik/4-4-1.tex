@@ -1,3 +1,11 @@
+\subsection{Publish-Subscribe-Pattern}
+Beim Publish-Subscribe-Pattern werden alle Berechnungen von den Clients durchgeführt, während der Server ausschließlich für den Datenaustausch zwischen den Clients zuständig ist.  
+Dabei hält der Server keinen eigenen Zustand, sondern leitet bloß Nachrichten von einem Client (Publisher) an einen anderen Client (Subscriber) weiter \cite{xmpp}.
+
+Im konkreten Fall eines interaktiven Spiels leitet der Server beispielsweise die Position eines Spielers, die ihm von dem Client-Gerät dieses Spielers zugeschockt wurde, an alle Spieler in der selben Spielinstanz weiter. Um Kollisionsabfrage und ähnliches kümmert sich jedoch jeder Client selbst.
+
+Das Pattern hat Vor- und Nachteile. So kann durch Auslagerung der Rechenleistung der Server entlastet werden, dafür sind aber auch entsprechend leistungsfähige Clients nötig. Bei geschickter Anwendung können die Daten so auf den einzelnen Clients vorverarbeitet werden, dass weniger Netzwerk-Bandbreite verbraucht wird, ist die Anwendung aber schlecht optimiert, kann sich der Netzwerk-Verkehr auch vergrößern. Ein großer Vorteil bei mobilen Anwendungen ist, dass im Falle einer unterbrochenen Internetverbindung der Client einige Zeit autonom ohne Kontakt mit dem Server weiterarbeiten kann. Je länger die Unterbrechung jedoch andauert, desto gravierender unterscheiden sich die Zustände der einzelnen Clients.  
+
 \subsection{Serverseitige vs Clientseitige Logik}
 
 
@@ -7,9 +15,7 @@ Bei der klassischen Server-Client-Architektur übernimmt der Server einen Großtei
 Der Server hält einen zentralen, im Zweifelsfall gültigen Status
 Die (Thin-)Clients übertragen die Nutzereingaben und Sensordaten an den Server, der daraus einen neuen Zustand ermittelt und diesen den Clients mitteilt.
 Alternativ bietet sich das Publish-Subscribe-Pattern an. 
-Dabei hält der Server keinen Zustand, sondern leitet bloß Nachrichten von einem Client (Publisher) an einen anderen Client (Subscriber) weiter.
-Im konkreten Fall eines interaktiven Spiels wird beispielsweise die Position eines Spielers an alle Spieler in der selben Spielinstanz weitergeleitet.
-Die (Fat-)Clients müssen dabei alle Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte. Diese haben sich als genügend leistungsfähig erwiesen.
+Dabei müssen die (Fat-)Clients  alle Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte. Diese haben sich als genügend leistungsfähig erwiesen.
 Bei fast jeder Änderung müssen alle Clients aktualisiert werden, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Echtzeitsystemen kommt zusätzlich hinzu, dass, da es keinen definitiven, zentralen Zustand gibt, auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
 Das Publish-Subscribe-Pattern bietet jedoch den Vorteil, dass es in diesem konkreten Fall Internet-Bandbreite spart, da kleinere Daten übertragen werden müssen. Beispielsweise muss bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, die der Fat-Client selber berechnet.
 Dieser Punkt war ausschlaggebend, da bei mobilen Endgeräten die Internet-Bandbreite eine stark limitierte Ressource ist.
