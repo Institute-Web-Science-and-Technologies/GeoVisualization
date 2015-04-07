@@ -8,12 +8,14 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,17 +27,16 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         root = android.os.Environment.getExternalStorageDirectory();
 		dir = new File(root.getAbsolutePath() + "/gpsTestDaten");
 		dir.mkdirs();
-		file = new File(dir, "Device.txt");
+		file = new File(dir, "Experiment.txt");
 		if (file.exists())file.delete();
 		
         try {
 			PrintWriter pw = new PrintWriter(new FileWriter(
 					root.getAbsolutePath()
-							+ "//gpsTestDaten//Device.txt",
+							+ "//gpsTestDaten//Experiment.txt",
 					true));
 			pw.append("\n Device: " + android.os.Build.DEVICE
 						+ "\n Model (and Product): " + android.os.Build.MODEL + " ("+ android.os.Build.PRODUCT + ")");
@@ -67,13 +68,44 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void locationClient (View view){
+    	
     	Intent intent = new Intent (this, LocationClientMap.class);
+    	EditText editLoc= (EditText) findViewById(R.id.editLocation);
+    	EditText editWetter= (EditText) findViewById(R.id.editWetter);
+    	try {
+			PrintWriter pw = new PrintWriter(new FileWriter(
+					root.getAbsolutePath()
+							+ "//gpsTestDaten//Experiment.txt",
+					true));
+			pw.append("\n"+ editWetter.getText().toString() +
+					  "\n"+ editLoc.getText().toString() + 
+					  "\n LocationClient");
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	startActivity(intent);
     	
     }
     
     public void locationManager (View view){
     	Intent intent = new Intent (this, LocationClientMap.class);
+    	EditText editLoc= (EditText) findViewById(R.id.editLocation);
+    	EditText editWetter= (EditText) findViewById(R.id.editWetter);
+    	try {
+			PrintWriter pw = new PrintWriter(new FileWriter(
+					root.getAbsolutePath()
+							+ "//gpsTestDaten//Experiment.txt",
+					true));
+			pw.append("\n"+ editWetter.getText().toString() +
+					  "\n"+ editLoc.getText().toString() + 
+					  "\n LocationManager");
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	startActivity(intent);
     	
     }

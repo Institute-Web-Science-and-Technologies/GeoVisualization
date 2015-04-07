@@ -27,4 +27,27 @@
         android:onClick="locationClient"
         android:text="LocationClient" />
 
+    <EditText
+        android:id="@+id/editWetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Wetter" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editWetter"
+        android:ems="10"
+        android:hint="Location" />
+
 </RelativeLayout>
