@@ -1,3 +1,25 @@
 \section{AndereSensorik}\label{sensorik}
 
-{\color{red}Recherche, welche weitere Sensoren (Bewegungssensor, Termometer? etc.) Android hat, überlegen ob man die verwenden kann}
+\subsection*{BLEep}
+BLEep bezeichnet eine Technologie, die Bluetooth Sender nutzt um Signale mit anderen Geräten auszutauschen. BLE (auch bekannt als Bluetooth Low Energy) sendet auf einer Frequenz von 2,4 GHz und nutzt Bluetooth Version 4.0, welche auch heute von allen gängigen Smartphones unterstützt wird.
+Ein BLEep Sender wird an einem Ort angebracht und sendet dauerhaft Signale an alle umliegenden Geräte. Die Reichweite des Sender liegt zwischen 15cm und 50m.
+Mobile Geräte empfangen das Signal und können an der Signalstärke die Entfernung zum Sensor bestimmen. Je schwächer das Signal, desto weiter ist die Entfernung.
+Jeder BLEep Sensor besitzt eine ID, womit dieser sich eindeutig identifizieren lässt.
+Eine mobile Applikation empfängt also das Signal mit der ID und berechnet anhand der Signalstärke die Entfernung. Aus diesem Kontext heraus können dann Interaktionen zwischen der mobilen App und dem Sensor durchgeführt werden. Dies ist auch mit mehreren Smartphones möglich, denn die Sensoren haben keine Begrenzung hinsichtlich der Anzahl der Geräte mit denen sie kommunizieren können. Auch kann ein Gerät mit mehreren Sensoren gleichzeitig interagieren, was Spielraum für weitere mögliche Szenarios lässt.
+
+\subsection*{Kompass}
+Heute besitzen alle gängigen Smartphones eine Kompass Funktionalität, die von mobilen Applikationen genutzt werden kann. Doch wie funktioniert das?
+Ganz allgemein richtet sich ein Kompass nach dem Magnetfeld der Erde. Er ist mit einer magnetischen Nadel ausgestattet, die sich auf den Nordpol einstellt.
+In Smartphones ist ein kleines Magnetometer integriert, mit dem sich das Magnetfeld der Erde messen lässt. Zudem bestimmt das Smartphone seine Position und Neigung anhand von anderer Sensorik. Das Gerät kombiniert all diese Informationen und bestimmt somit die Richtung.
+
+\subsection*{Geschwindigkeitsmessung}
+Die Bewegungsgeschwindigkeit wird durch einen Beschleunigungssensor (auch Accelerometer genannt) gemessen. Durch die auf ein Gerät wirkende Trägheitskraft kann bestimmt werden ob  eine Geschwindigkeitszunahme oder -abnahme stattfindet. Anhand der mittleren Erdbeschleunigung lässt sich diese dann genau berechnen.
+In modernen Smartphones ist solch ein Sensor verbaut. Dieser lässt sich in mobilen Applikationen dazu benutzen um die Geschwindigkeit des Nutzers zu ermitteln.
+
+\subsection*{Thermometer}
+Smartphones besitzen einen Wärmesensor, der genutzt werden kann um die Temperatur zu messen. Allerdings wird dieser meist durch die Betriebstemperatur beeinflusst und liefert daher nicht immer korrekte Werte für die Außentemperatur. Aus diesem Grund werden die Messwerte von Thermometer Apps meist aus dem örtlichen Wetterinformationsnetz bezogen. 
+Die Innentemperatur hingegen wird tatsächlich durch den integrierten Wärmesensor bestimmt. Dazu muss das Gerät sich aber eine gewisse Zeit im Standby Betrieb befinden, damit die Temperatur des Akkus das Ergebnis nicht verfälscht.
+
+\subsection*{Haptisches Feedback}
+Haptisch bedeutet “fühlbar” oder “berührbar”. Bei Smartphones betrachten wir in diesem Zusammenhang den Vibrationsalarm. Dieser wird nativ dazu genutzt um dem Nutzer mitzuteilen, dass ein Anruf oder eine Nachricht eingegangen ist oder um Eingaben zu bestätigen.
+Erzeugt werden die Vibrationen durch einen kleinen Motor, der durch eine Unwucht dafür sorgt, dass das Gehäuse vibriert. Bei einigen Geräten wird sogar der Lautsprecher dazu genutzt, indem er niedrigfrequente Töne erzeugt, die das Gehäuse in Schwingung versetzen.
