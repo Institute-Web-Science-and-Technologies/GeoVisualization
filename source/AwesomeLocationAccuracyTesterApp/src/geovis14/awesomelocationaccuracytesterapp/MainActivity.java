@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void locationManager (View view){
-    	Intent intent = new Intent (this, LocationClientMap.class);
+    	Intent intent = new Intent (this, LocationManagerMap.class);
     	EditText editLoc= (EditText) findViewById(R.id.editLocation);
     	EditText editWetter= (EditText) findViewById(R.id.editWetter);
     	try {
