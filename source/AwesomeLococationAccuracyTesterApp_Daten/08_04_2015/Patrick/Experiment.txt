@@ -1,0 +1,6 @@
+
+ Device: jflte
+ Model (and Product): GT-I9505 (jfltexx)
+sonnig
+Koblenz
+ LocationClient

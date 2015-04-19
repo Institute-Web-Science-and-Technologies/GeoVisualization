@@ -1,0 +1,9 @@
+
+ Device: ville
+ Model (and Product): HTC One S (htc_europe)
+sonnig
+Uni Koblenz
+ LocationManager
+sonnig
+Uni Koblenz
+ LocationClient
