@@ -1,0 +1,36 @@
+\section{Erweiterte Realität}
+\textit{Kleine Einleitung wird noch eingefügt}
+
+
+\subsubsection{Integration virtueller Objekte in die physische Umgebung}
+Um ein virtuelles Spiel in die physische Umgebung integrieren zu können, müssen auch alle Objekte
+des virtuelles Spieles in die physische Umgebung gebracht werden.
+Bei vielen Objekten kann dies durch einen eingeschränkten Zufall geschehen. Z.B. bei Snake die 
+Items. Bei dem ein oder anderen Spiel soll es eine Basis für jedes Team geben. Dabei bietet sich an
+dieses auf eine relativ freie Fläche festzusetzen. Generell sollte darauf geachtet werden, 
+dass die Objekte nicht innerhalb eines Gebäudes landen oder in nicht begehbares Terrain platziert werden.
+
+
+
+Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden:
+Kartendarstellung (s. \ref{kartendarstellung}), Kollisionsabfrage (s. \ref{kollisionsabfrage}), Positionsabfrage (um sicherzustellen, dass Objekt in der Nähe des Spieler erstellt wird, s. \ref{positionsermittlung}).
+
+\subsubsection{Kollision virtueller Objekte}
+Treffen zwei virtuelle Objekte aufeinander muss in der Regel ein Event ausgelöst werden.
+Wird bei Snake z.B. der eigene Schwanz berührt, was laut der Regeln nicht erlaubt ist, muss
+dies dem Spieler mitgeteilt werden und evtl. weitere Ereignisse ausgeführt werden.
+\newline
+Technische Lösungen:
+Kollisionsabfrage (s. \ref{kollisionsabfrage}), Positionsermittlung (s. \ref{positionsermittlung})
+
+
+\subsubsection{Einsammeln von Objekten}
+Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in
+Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch
+passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass
+etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal
+gegeben werden.
+
+
+Technische Lösungen:
+Positionsermittlung (s. \ref{positionsermittlung}), Kollisionsabfrage (s. \ref{kollisionsabfrage})
