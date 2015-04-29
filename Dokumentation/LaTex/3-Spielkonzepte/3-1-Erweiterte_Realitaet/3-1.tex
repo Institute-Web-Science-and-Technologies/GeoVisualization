@@ -1,5 +1,5 @@
 \section{Erweiterte Realität}
-\textit{Kleine Einleitung wird noch eingefügt}
+Konzepte, die explizit die Realität erweitern und somit einen Mehrwert zum Spiel beitragen.
 
 
 \subsubsection{Integration virtueller Objekte in die physische Umgebung}
@@ -13,7 +13,17 @@ dass die Objekte nicht innerhalb eines Gebäudes landen oder in nicht begehbares 
 
 
 Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden:
-Kartendarstellung (s. \ref{kartendarstellung}), Kollisionsabfrage (s. \ref{kollisionsabfrage}), Positionsabfrage (um sicherzustellen, dass Objekt in der Nähe des Spieler erstellt wird, s. \ref{positionsermittlung}).
+Kartendarstellung (s. \ref{kartendarstellung}), Kollisionsabfrage (s. \ref{kollisionsabfrage}), Positionsabfrage (um sicherzustellen, dass das Objekt in der Nähe des Spieler erstellt wird, s. \ref{positionsermittlung}).
+
+\subsubsection{Darstellung der physischen und virtuellen Umgebung}
+
+Die physische Welt in eine virtuelle Umgebung zu übertragen kann oft sehr hilfreich sein.
+Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw.
+außerhalb des Spielfelds befindet. Eine Karte hat insoweit den Vorteil, dass man dort auch
+noch virtuelle Gegenstände einfügen kann, die in der physischen Welt nicht vorhanden
+sind. Z.B. die nächsten Items bei Snake.
+Dazu sind 
+Kartendarstellung (s. \ref{kartendarstellung}) und Positionsermittlung (s. \ref{positionsermittlung}) nötig.
 
 \subsubsection{Kollision virtueller Objekte}
 Treffen zwei virtuelle Objekte aufeinander muss in der Regel ein Event ausgelöst werden.
