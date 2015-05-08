@@ -1,0 +1,15 @@
+
+ Device: protou
+ Model (and Product): HTC Desire X (protou)
+bewoelkt
+rb
+ LocationManager
+bewoelkt
+rb
+ LocationClient
+bewoelkt
+rb
+ LocationManager
+bewoelkt
+rb
+ LocationClient

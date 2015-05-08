@@ -1,0 +1,9 @@
+
+ Device: m0
+ Model (and Product): GT-I9300 (m0xx)
+sonnig
+Ransbach-Baumbach Rheinstraße
+ LocationManager
+sonnig
+Ransbach-Baumbach Rheinstraße
+ LocationClient

@@ -1,0 +1,9 @@
+
+ Device: m0
+ Model (and Product): GT-I9300 (m0xx)
+bewölkt
+Ransbach-Baumbach Rheinstraße
+ LocationManager
+bewölkt
+Ransbach-Baumbach Rheinstraße
+ LocationClient
