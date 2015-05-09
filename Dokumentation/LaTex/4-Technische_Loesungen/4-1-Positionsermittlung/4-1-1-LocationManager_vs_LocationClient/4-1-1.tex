@@ -1,25 +1,25 @@
 \subsection{LocationManager vs LocationClient}
 
-Im folgenden werden zwei mÃ¶gliche Dienste zur Positionsermittlung verwendet. Der LocationManager\footnote{{\url{http://developer.android.com/reference/android/location/LocationManager.html}}} und der LocationClient\footnote{{\url{http://www.doc.ic.ac.uk/project/2013/271/g1327125/android-studio/sdk/extras/google/google_play_services/docs/reference/com/google/android/gms/location/LocationClient.html}}}.
+Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verwendet. Der LocationManager\footnote{{\url{http://developer.android.com/reference/android/location/LocationManager.html}}} und der LocationClient\footnote{{\url{http://www.doc.ic.ac.uk/project/2013/271/g1327125/android-studio/sdk/extras/google/google\_play\_services/docs/reference/com/google/android/gms/location/LocationClient.html}}}.
 
 
 \subsubsection{LocationManager}
 
 Der LocationManager ist ein von Android bereitgestellter Dienst, der Ã¼ber den GPS Sensor die Position des Smartphones ermittelt.
 Ein Vorteil bei verwendenden dieses Dienstes ist, das man nicht an die Dienste von Google gebunden ist, und somit theoretisch auch fÃ¼r
-nicht Google-konforme Androidbetriebssysteme entwickeln kann. Da nur der GPS Sensor verwendet wird, wÃ¤re eine entsprechende Anwendung sogar unabhÃ¤ngig von einer Internetverbindung. Auch wird dieser Dienst noch von Ã¤lteren Android Versionen unterstÃ¼tzt.
-Nachteilig wird in einer Forendiskussion \footnote{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien {\color{red}}bessere Quelle} der hohe Akku verbrauch genannt.
+nicht Google-konforme Androidbetriebssysteme entwickeln kann. Da nur der GPS Sensor verwendet wird, wäre eine entsprechende Anwendung sogar unabhängig von einer Internetverbindung. Auch wird dieser Dienst noch von älteren Android Versionen unterstützt.
+Nachteilig wird in einer Forendiskussion \footnote{\url{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien }} der hohe Akku verbrauch genannt.
 
 
 \subsubsection{LocationClient}
 
-Der LocationClient ist ein von Google bereitgestellter Dienst, der Ã¼ber den GPS Sensor (und anderen Quellen, die Google zur VerfÃ¼gung stellt) die Position des Smartphones ermittelt. Ein weiterer Vorteil dieses Dienstes ist - wie auch oben bereits erwÃ¤hnt - , das dieser Dienst Akku-schonender und zuberlÃ¤ssiger sei. Die anderen Quellen zur Positionsermittlung kÃ¶nnten auch zu einer genauen Positionsermittlung beitragen, wenn es Ãœbertragungsprobleme zum GPS-Satelliten gibt.
-Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benÃ¶tigt. AuÃŸerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur VerfÃ¼gung stehen. Zudem ist man von Google abhÃ¤ngig.
+Der LocationClient ist ein von Google bereitgestellter Dienst, der über den GPS Sensor (und anderen Quellen, die Google zur Verfügung stellt) die Position des Smartphones ermittelt. Ein weiterer Vorteil dieses Dienstes ist - wie auch oben bereits erwähnt - , das dieser Dienst Akku-schonender und zuberlässiger sei. Die anderen Quellen zur Positionsermittlung könnten auch zu einer genauen Positionsermittlung beitragen, wenn es Übertragungsprobleme zum GPS-Satelliten gibt.
+Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen. Zudem ist man von Google abhängig.
 
 
 \subsubsection{Messdaten}
 
-Um LocationManager und LocationClient fÃ¼r unsere Zwecke vergleichen zu kÃ¶nnen, wurde ein Testprogramm entwickelt, welches jeweils in zwei separaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammelt. Zur optischen Darstellung der Ergebnisse wird aus den aufgezeichneten Koordinaten eine Linie (PolyLine\footnote{\url{https://developer.android.com/reference/com/google/android/gms/maps/model/Polyline.html}}) gezeichnet. Als Vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. \newline
+Um LocationManager und LocationClient für unsere Zwecke vergleichen zu können, wurde ein Testprogramm entwickelt, welches jeweils in zwei separaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammelt. Zur optischen Darstellung der Ergebnisse wird aus den aufgezeichneten Koordinaten eine Linie (PolyLine\footnote{\url{https://developer.android.com/reference/com/google/android/gms/maps/model/Polyline.html}}) gezeichnet. Als Vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. \newline
 Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
 
 \begin{table}[h]
@@ -28,7 +28,7 @@ Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
 \cline{2-3}
                                       & locationClient         & locationManager         \\ \hline
 \multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{10.12.2014}                  \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{UniversitÃ¤t Koblenz, Campus} \\ \hline
+\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Universität Koblenz, Campus} \\ \hline
 \multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{bewölkt, leichter Niesel}     \\ \hline
 \multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}           \\ \hline
 \multicolumn{1}{|l|}{Genauigkeit}     & 7,049                  & 8,698                   \\ \hline
@@ -43,7 +43,7 @@ Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
 \cline{2-3}
                                       & locationClient                & locationManager                \\ \hline
 \multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{14.12.2014}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
+\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307 Richtung Mogendorf} \\ \hline
 \multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{leicht bewölkt leicht windig}       \\ \hline
 \multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
 \multicolumn{1}{|l|}{Genauigkeit}     & 5,482                         & 6,216                          \\ \hline
@@ -59,7 +59,7 @@ Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
 \cline{2-3}
                                       & locationClient                & locationManager                \\ \hline
 \multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
+\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307 Richtung Mogendorf} \\ \hline
 \multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
 \multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
 \multicolumn{1}{|l|}{Genauigkeit}     & 5,616													& 5,303                          \\ \hline
@@ -192,9 +192,9 @@ Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
 
 \clearpage
 
-Hierbei muss noch ergÃ¤nzt werden, dass der Genauigkeitswert folgendermaÃŸen beschrieben wird. An LÃ¤ngen- und Breitengrad
+Hierbei muss noch ergänzt werden, dass der Genauigkeitswert folgendermaßen beschrieben wird. An Längen- und Breitengrad
 der Position wird ein Kreis mit dem Radius der Genauigkeit gezeichnet. Es besteht eine 68-prozentige Wahrscheinlichkeit, dass
-sich die Position innerhalb des Kreises befindet\footnote{http://developer.android.com/reference/android/location/Location.html}.
+sich die Position innerhalb des Kreises befindet\footnote{\url{http://developer.android.com/reference/android/location/Location.html}}.
 Es gilt, je kleiner der Wert desto besser. In den Tabellen wurde jeweils das arithmetische Mittel der aufgezeichneten Genauigkeiten eingetragen.
 
 

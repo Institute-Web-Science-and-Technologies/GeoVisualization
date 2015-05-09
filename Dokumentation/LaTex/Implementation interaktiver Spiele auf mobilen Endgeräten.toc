@@ -11,7 +11,7 @@
 \contentsline {subsubsection}{Pacman auf Google-maps}{8}{section*.9}
 \contentsline {subsubsection}{Twinkomplex}{8}{section*.10}
 \contentsline {chapter}{\numberline {3}Spielkonzepte}{11}{chapter.3}
-\contentsline {section}{\numberline {3.1}Erweiterte Realit\~A\IeC {\textcurrency }t}{11}{section.3.1}
+\contentsline {section}{\numberline {3.1}Erweiterte Realit\"at}{11}{section.3.1}
 \contentsline {subsubsection}{Integration virtueller Objekte in die physische Umgebung}{11}{section*.11}
 \contentsline {subsubsection}{Darstellung der physischen und virtuellen Umgebung}{11}{section*.12}
 \contentsline {subsubsection}{Kollision virtueller Objekte}{12}{section*.13}
@@ -20,8 +20,8 @@
 \contentsline {subsubsection}{Kompass}{13}{section*.15}
 \contentsline {subsubsection}{Akustische und haptische Orientierungshilfen}{13}{section*.16}
 \contentsline {subsubsection}{Geschwindigkeitsmessung}{13}{section*.17}
-\contentsline {subsubsection}{Mensch-Maschine-Kommunikation}{14}{section*.18}
-\contentsline {section}{\numberline {3.3}Mehrspieler-Features}{14}{section.3.3}
+\contentsline {subsubsection}{Mensch-Maschine-Kommunikation}{13}{section*.18}
+\contentsline {section}{\numberline {3.3}Mehrspieler-Features}{13}{section.3.3}
 \contentsline {subsubsection}{Synchronisation zwischen mobilen Endger\"aten}{14}{section*.19}
 \contentsline {subsubsection}{Chat}{14}{section*.20}
 \contentsline {chapter}{\numberline {4}Technische Loesungen}{15}{chapter.4}
@@ -55,5 +55,3 @@
 \contentsline {subsection}{\numberline {5.3.2}Umgesetzte Features}{41}{subsection.5.3.2}
 \contentsline {chapter}{\numberline {6}Fazit}{42}{chapter.6}
 \contentsline {chapter}{\numberline {7}Ausblick}{43}{chapter.7}
-\contentsline {section}{\numberline {7.1}Weitere Features}{43}{section.7.1}
-\contentsline {section}{\numberline {7.2}Weitere Spiele}{43}{section.7.2}
