@@ -92,5 +92,4 @@ Nun folgen eine grafische Darstellung der Genauigkeitsaufzeinungen die mit dem T
 \clearpage
 
 \subsection{Fazit}
-Die Messdaten belegen, dass der LocationClient minimal die besseren Ergebnisse liefert. Dies ist der Fall bei der Genauigkeit der
-Sensordaten und auch bei der grafischen Darstellung. Zweiteres ist ein wichtiger Faktor beim Umsetzten des Snakespiels. Die Unterschiede bei Updates pro Sekunde sind verschwindend gering. Ein weiteres Faktor ist, dass sich schon bereits für die Kartenanzeige für GoogleMaps entschieden wurde. Da der LocationClient minimal die besseren Ergebnisse liefert und schon ein Dienst von Google verwendet wird, wird zur Positionsermittlung in diesem Projekt der LocationClient verwendet.
+Die Messdaten zeigen, dass beide Dienste auf unterschiedlichen Geräten zu unterschiedlichen Ergebnissen führen. Ein klarer Favorit ist nicht auszumachen. Bezüglich Updates pro Sekunde liefert der LocationClient minimal die besseren Ergebnisse. Ein weiteres Faktor ist, dass sich schon bereits für die Kartenanzeige für GoogleMaps entschieden wurde. Es ist davon auszugehen,dass GoogleMaps und LocationClient besser harmonieren bzw. Kompatibilitätsprobleme weniger wahrscheinlich sind, da beides von Google Play Services bereitgestellt werden. In diesem Projekt wird daher der LocationManager verwendet.
