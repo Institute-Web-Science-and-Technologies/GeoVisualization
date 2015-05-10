@@ -36,7 +36,6 @@
 \contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{26}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{26}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{28}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}GoogleMaps vs OpenStreetMaps}{28}{subsection.4.3.1}
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{29}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Publish-Subscribe-Pattern}{29}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Serverseitige vs Clientseitige Logik}{29}{subsection.4.4.2}
