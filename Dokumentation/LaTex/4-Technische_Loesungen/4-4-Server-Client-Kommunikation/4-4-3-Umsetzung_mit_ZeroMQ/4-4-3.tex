@@ -5,7 +5,7 @@ Für Echtzeit-Spiele benötigt man eine  permanente Datenübertragung. Nicht nur we
 
 Generell kann man davon ausgehen, dass je schneller das Spiel ist und je mehr virtuelle Objekte einbezogen werden, desto häufiger und schneller müssen Updates kommen. Daher wollten wir eine Übertragung, die performant ist, schnell viele Nachrichten senden kann und außerdem asynchron Nachrichten verarbeitet, also nicht jedes mal auf eine Antwort des Empfängers wartet, bevor eine weitere Nachricht abgeschickt werden kann.
 
-ZeroMQ kann all das. In unseren Probeläufen war ZMQ (ZeroMQ) in der Lage, mehrere Tausend Nachrichten innerhalb einer Sekunde abzuschicken. ZMQ arbeitet standardmäßig asynchron. Außerdem sendet ZMQ Nachrichten erneut, falls die Nachricht beim ersten Senden nicht an kam, sodass es relativ unwahrscheinlich wird, dass eine Nachricht komplett ausfällt und Spieler mit zwei unterschiedlichen Versionen spielen. Das ermöglicht eine relativ kleine Serverarchitektur, da der Server nicht eine Version des momentanen Spiels speichern muss. Außerdem ist es recht einsteigerfreundlich. Das alles machte es für unsere Test-Apps zum idealen Kandidaten.
+ZeroMQ kann all das. In unseren Probeläufen war ZMQ (ZeroMQ) in der Lage, mehrere Tausend Nachrichten innerhalb einer Sekunde abzuschicken. ZMQ arbeitet standardmäßig asynchron. Außerdem ist es recht einsteigerfreundlich. Das alles machte es für unsere Test-Apps zum idealen Kandidaten.
 
 
 %Hier kommen Vergleiche zwischen ZMQ und seinen Konkurrenten (andere messaging Protokolle) hin.
