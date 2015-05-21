@@ -1,95 +1,27 @@
-\subsection{Genauigkeit}
-Nun folgen eine grafische Darstellung der Genauigkeitsaufzeinungen die mit dem Testprogramm gemacht wurden
-
+\subsection{Genauigkeit- und Updategeschwindigkeitsvergleich}
+  
   \begin{figure}[h]
     \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2014-12-10-12-41-12_fuusion.png}
+    \includegraphics[width=1.0\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/updates_per_second_bigger.png}
     \end{center}
-     \caption{Location Versuch 1}
-     \label{fig: picLV1}
-  \end{figure}
-
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2014-12-14-15-33-10_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 2}
-     \label{fig: picLV2}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-16-09-35_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 3}
-     \label{fig: picLV3}
+     \caption{Updates pro Sekunde}
+     \label{fig: picUdates}
   \end{figure}
 	
 	\begin{figure}[h]
     \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-16-37-21_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 4}
-     \label{fig: picLV4}
+    \includegraphics[width=1.0\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/accuracy_bigger.png}
+    \end{center}
+     \caption{Genauigkeit}
+     \label{fig: picAccu}
   \end{figure}
-	
-	\begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-03-10_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 5}
-     \label{fig: picLV5}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/2015-05-08_16-14-46_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 6}
-     \label{fig: picLV6}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/2015-05-08_17-01-38_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 7}
-     \label{fig: picLV7}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-07-04_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 8}
-     \label{fig: picLV8}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-24-35_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 9}
-     \label{fig: picLV9}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-39-18_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 10}
-     \label{fig: picLV10}
-  \end{figure}
-  
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/2015-05-08_17-34-52_fuusion.png}
-     \end{center}
-     \caption{Location Versuch 11}
-     \label{fig: picLV11}
-  \end{figure}
-  
+	  
 \clearpage
 
+Die Auswertung der Daten hat ergeben, dass bzgl. der Genauigkeit der LocationManager in 6 von 11 Versuchen besser als der LocationClient abschneitet. Im Bezug auf Updates pro Sekunde liefert der LocationClient in 9 von 11 Versuchen die besseren Ergebnisse.
+
 \subsection{Fazit}
-Die Messdaten zeigen, dass beide Dienste auf unterschiedlichen Geräten zu unterschiedlichen Ergebnissen führen. Ein klarer Favorit ist nicht auszumachen. Bezüglich Updates pro Sekunde liefert der LocationClient minimal die besseren Ergebnisse. Ein weiteres Faktor ist, dass sich schon bereits für die Kartenanzeige für GoogleMaps entschieden wurde. Es ist davon auszugehen,dass GoogleMaps und LocationClient besser harmonieren bzw. Kompatibilitätsprobleme weniger wahrscheinlich sind, da beides von Google Play Services bereitgestellt werden. In diesem Projekt wird daher der LocationManager verwendet.
+Genauigkeit ist in diesem Projekt ein wichtiger Faktor, vorallem im Bezug auf Kollisionen mit anderen Spielern und virtuellen Objekten. Da in diesem Projekt kompetitive Mehrspieler-Spiele realisiert werden, ist auch die Updategeschwindigkeit zu berücksichtigen. Die Versuche haben gezeigt, dass der LocationManager nur knapp in der Genauigkeit unterlegen war und nahezu durchgehend überlegen in der Updategeschwindigkeit. In diesem Projekt wird daher der LocationClient verwendet. 
+Außerdem ist anzumerken, dass sich schon bereits für die Kartenanzeige für GoogleMaps entschieden wurde. Es ist davon auszugehen,dass GoogleMaps und LocationClient besser harmonieren bzw. Kompatibilitätsprobleme weniger wahrscheinlich sind, da beides von Google Play Services bereitgestellt werden.
+
+ 
