@@ -1,12 +1,12 @@
 \subsection{LocationManager vs LocationClient}
 
-Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verwendet. Der LocationManager\footnote{{\url{http://developer.android.com/reference/android/location/LocationManager.html}}} und der LocationClient\footnote{{\url{http://www.doc.ic.ac.uk/project/2013/271/g1327125/android-studio/sdk/extras/google/google\_play\_services/docs/reference/com/google/android/gms/location/LocationClient.html}}}.
+Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verglichen. Der LocationManager\footnote{{\url{http://developer.android.com/reference/android/location/LocationManager.html}}} und der LocationClient\footnote{{\url{http://www.doc.ic.ac.uk/project/2013/271/g1327125/android-studio/sdk/extras/google/google\_play\_services/docs/reference/com/google/android/gms/location/LocationClient.html}}}.
 
 
 \subsubsection{LocationManager}
 
 Der LocationManager ist ein von Android bereitgestellter Dienst, der Ã¼ber den GPS Sensor die Position des Smartphones ermittelt.
-Ein Vorteil bei verwendenden dieses Dienstes ist, das man nicht an die Dienste von Google gebunden ist, und somit theoretisch auch fÃ¼r
+Ein Vorteil bei der Verwendendung dieses Dienstes ist, das man nicht an die Dienste von Google gebunden ist, und somit theoretisch auch fÃ¼r
 nicht Google-konforme Androidbetriebssysteme entwickeln kann. Da nur der GPS Sensor verwendet wird, wäre eine entsprechende Anwendung sogar unabhängig von einer Internetverbindung. Auch wird dieser Dienst noch von älteren Android Versionen unterstützt.
 Nachteilig wird in einer Forendiskussion \footnote{\url{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien }} der hohe Akku verbrauch genannt.
 
@@ -14,7 +14,7 @@ Nachteilig wird in einer Forendiskussion \footnote{\url{http://stackoverflow.com
 \subsubsection{LocationClient}
 
 Der LocationClient ist ein von Google bereitgestellter Dienst, der über den GPS Sensor (und anderen Quellen, die Google zur Verfügung stellt) die Position des Smartphones ermittelt. Ein weiterer Vorteil dieses Dienstes ist - wie auch oben bereits erwähnt - , das dieser Dienst Akku-schonender und zuberlässiger sei. Die anderen Quellen zur Positionsermittlung könnten auch zu einer genauen Positionsermittlung beitragen, wenn es Übertragungsprobleme zum GPS-Satelliten gibt.
-Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen. Zudem ist man von Google abhängig.
+Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen.
 
 
 \subsubsection{Messdaten}
