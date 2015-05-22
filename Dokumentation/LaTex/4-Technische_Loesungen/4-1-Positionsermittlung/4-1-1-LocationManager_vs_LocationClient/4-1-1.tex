@@ -1,218 +1,25 @@
-\subsection{LocationManager vs LocationClient}
+\subsection{Dienste zur Positionsermittlung}
 
 Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verglichen. Der LocationManager\footnote{{\url{http://developer.android.com/reference/android/location/LocationManager.html}}} und der LocationClient\footnote{{\url{http://www.doc.ic.ac.uk/project/2013/271/g1327125/android-studio/sdk/extras/google/google\_play\_services/docs/reference/com/google/android/gms/location/LocationClient.html}}}.
 
 
 \subsubsection{LocationManager}
 
-Der LocationManager ist ein von Android bereitgestellter Dienst, der Ã¼ber den GPS Sensor die Position des Smartphones ermittelt.
-Ein Vorteil bei der Verwendendung dieses Dienstes ist, das man nicht an die Dienste von Google gebunden ist, und somit theoretisch auch fÃ¼r
-nicht Google-konforme Androidbetriebssysteme entwickeln kann. Da nur der GPS Sensor verwendet wird, wäre eine entsprechende Anwendung sogar unabhängig von einer Internetverbindung. Auch wird dieser Dienst noch von älteren Android Versionen unterstützt.
-Nachteilig wird in einer Forendiskussion \footnote{\url{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien }} der hohe Akku verbrauch genannt.
-
+Der LocationManager ist ein von Android bereitgestellter Dienst, der über den GPS Sensor die Position des Smartphones ermittelt.
+Ein Vorteil dieses Dienstes ist, dass er im Gegensatz zum LocationClient nicht an von Google bereitgestellte Standardbibliotheken, wie beispielsweise Google-Play-Services, gebunden ist. Der LocationManager kann daher problemlos auf vielen Android-Geräten verwendet werden, auf denen die Installation der für den LocationClient benötigten Bibliotheken unmöglich oder zu aufwendig ist.
+Da der LocationManager zur Positionsbestimmung ausschließlich vom GPS-Sensor bereitgestellte Daten  verwendet, funktioniert er ohne Internetverbindung. Da der LocationManager älter ist als der LocationClient ist, wird er auch von älteren Android-Versionen unterstützt.
+%Nachteilig wird in einer Forendiskussion \footnote{\url{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien }} der hohe Akku verbrauch genannt.
+Der LocationManager scheint den Akku in höherem Maße zu belasten, als der LocationClient.
+Da die entwickelten Anwendungen aber nur kurzfristig für einzelne Spiele verwendet werden sollen, halten wir dies nicht für ausschlaggebend.
 
 \subsubsection{LocationClient}
 
-Der LocationClient ist ein von Google bereitgestellter Dienst, der über den GPS Sensor (und anderen Quellen, die Google zur Verfügung stellt) die Position des Smartphones ermittelt. Ein weiterer Vorteil dieses Dienstes ist - wie auch oben bereits erwähnt - , das dieser Dienst Akku-schonender und zuberlässiger sei. Die anderen Quellen zur Positionsermittlung könnten auch zu einer genauen Positionsermittlung beitragen, wenn es Übertragungsprobleme zum GPS-Satelliten gibt.
-Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt. Außerdem werden die Google Play Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen.
-
-
-\subsubsection{Messdaten}
-
-Um LocationManager und LocationClient für unsere Zwecke vergleichen zu können, wurde ein Testprogramm entwickelt, welches jeweils in zwei separaten Activities GPS Messdaten in einer Datei sammelt. Es werden jeweils Koordinaten und Genauigkeit gesammelt. Zur optischen Darstellung der Ergebnisse wird aus den aufgezeichneten Koordinaten eine Linie (PolyLine\footnote{\url{https://developer.android.com/reference/com/google/android/gms/maps/model/Polyline.html}}) gezeichnet. Als Vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. \newline
-Im Folgenden werden nun die ausgewerteten Sensordaten dargestellt.
-
-\begin{table}[thb]
-\caption{Location Versuch 1}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient         & locationManager         \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{10.12.2014}                  \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Universität Koblenz, Campus} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{bewölkt, leichter Niesel}     \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}           \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 7,049                  & 8,698                   \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 0,936                  & 1,016                   \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2014-12-10-12-41-12_fuusion.png}}
-\end{tabular}
-\label{tab:lV1}
-\end{table}
-
-
-\begin{table}[thb]
-\caption{Location Versuch 2}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{14.12.2014}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307 Richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{leicht bewölkt leicht windig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 5,482                         & 6,216                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,003                         & 0,969                          \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2014-12-14-15-33-10_fuusion.png}}
-\end{tabular}
-\label{tab:lV2}
-\end{table}
-
-\begin{table}[thb]
-\caption{Location Versuch 3}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307 Richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 5,616													& 5,303                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,042                         & 1,004                          \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-16-09-35_fuusion.png}}
-\end{tabular}
-\label{tab:lV3}
-\end{table}
-
-
-\begin{table}[thb]
-\caption{Location Versuch 4}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 6,163													& 5,868                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,010													& 1,011 \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-16-37-21_fuusion.png}}
-\end{tabular}
-\label{tab:lV4}
-\end{table}
-
-
-\begin{table}[thb]
-\caption{Location Versuch 5}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{Samsung Galaxy S3}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 5,473													& 6,317                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,009													& 1 \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-03-10_fuusion.png}}
-\end{tabular}
-\label{tab:lV5}
-\end{table}
-
-  
-\begin{table}[thb]
-\caption{Location Versuch 6}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{htc one s}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 5,483													& 3,293                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,047													& 0,967   \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/2015-05-08_16-14-46_fuusion.png}}
-\end{tabular}
-\label{tab:lV6}
-\end{table}
-
-
-\begin{table}[thb]
-\caption{Location Versuch 7}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{htc one s}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 3,962													& 3,144                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,070													& 1,009    \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/2015-05-08_17-01-38_fuusion.png}}
-\end{tabular}
-\label{tab:lV7}
-\end{table}
+Der LocationClient ist ein in den Google-Play-Services enthaltener Dienst, der über den GPS-Sensor und anderen Quellen, wie beispielsweise WLAN-Netze in der näheren Umgebung, die Position des Smartphones ermittelt. 
+%Ein weiterer Vorteil dieses Dienstes ist - wie auch oben bereits erwähnt - , das dieser Dienst Akku-schonender und zuverlässiger ist. 
+Die weiteren Quellen zur Positionsermittlung können zu einer genauen Positionsermittlung beitragen, wenn es Übertragungsprobleme zum GPS-Satelliten gibt.
+Nachteilig an diesem Dienst ist, dass man eine Internetverbindung benötigt, um diesen Dienst einsetzen zu können. Außerdem werden die Google-Play-Services vorausgesetzt, welche erst ab Android Version 2.2 zur Verfügung stehen.
 
 
 
-\begin{table}[thb]
-\caption{Location Versuch 8}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{htc desire x}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 12,722													& 7,576                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,009 													& 1,008    \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-07-04_fuusion.png}}
-\end{tabular}
-\label{tab:lV8}
-\end{table}
-
-
-\begin{table}[thb]
-\caption{Location Versuch 9}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{htc desire x}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 6,436													& 5,281                    \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,004 												& 0,981    \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-24-35_fuusion.png}}
-\end{tabular}
-\label{tab:lV9}
-\end{table}
-
-
-\begin{table}[thb]
-\caption{Location Versuch 10}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{htc desire x}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 7,848													& 5,500                    \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,009 												& 0,952    \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/Screenshot_2015-05-08-17-39-18_fuusion.png}}
-\end{tabular}
-\label{tab:lV10}
-\end{table}
-
-  
-\begin{table}[thb]
-\caption{Location Versuch 11}
-\begin{tabular}{l|l|l|}
-\cline{2-3}
-                                      & locationClient                & locationManager                \\ \hline
-\multicolumn{1}{|l|}{Datum}           & \multicolumn{2}{l|}{08.05.2015}                                \\ \hline
-\multicolumn{1}{|l|}{Ort}             & \multicolumn{2}{l|}{Ransbach-Baumbach, L307richtung Mogendorf} \\ \hline
-\multicolumn{1}{|l|}{Wetter}          & \multicolumn{2}{l|}{sonnig}       \\ \hline
-\multicolumn{1}{|l|}{Gerät}           & \multicolumn{2}{l|}{htc one s}                         \\ \hline
-\multicolumn{1}{|l|}{Genauigkeit}     & 3,957													& 5,505                          \\ \hline
-\multicolumn{1}{|l|}{Updates/Sekunde} & 1,107													& 1,018    \\ \hline
-\multicolumn{3}{l}{\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/2015-05-08_17-34-52_fuusion.png}}
-\end{tabular}
-\label{tab:lV11}
-\end{table}
-
-
-\clearpage
-Hierbei muss noch ergänzt werden, dass der Genauigkeitswert folgendermaßen beschrieben wird. An Längen- und Breitengrad
-der Position wird ein Kreis mit dem Radius der Genauigkeit gezeichnet. Es besteht eine 68-prozentige Wahrscheinlichkeit, dass
-sich die Position innerhalb des Kreises befindet\footnote{\url{http://developer.android.com/reference/android/location/Location.html}}.
-Es gilt, je kleiner der Wert desto besser. In den Tabellen wurde jeweils das arithmetische Mittel der aufgezeichneten Genauigkeiten eingetragen.
 
 

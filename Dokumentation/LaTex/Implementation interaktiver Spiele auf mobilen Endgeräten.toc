@@ -26,31 +26,30 @@
 \contentsline {subsubsection}{Chat}{14}{section*.25}
 \contentsline {chapter}{\numberline {4}Technische Loesungen}{15}{chapter.4}
 \contentsline {section}{\numberline {4.1}Positionsermittlung}{15}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}LocationManager vs LocationClient}{15}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}Dienste zur Positionsermittlung}{15}{subsection.4.1.1}
 \contentsline {subsubsection}{LocationManager}{15}{section*.26}
-\contentsline {subsubsection}{LocationClient}{15}{section*.27}
-\contentsline {subsubsection}{Messdaten}{16}{section*.28}
-\contentsline {subsection}{\numberline {4.1.2}Genauigkeit- und Updategeschwindigkeitsvergleich}{22}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Fazit}{24}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Kollisionsabfrage}{25}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{25}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{25}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{27}{section.4.3}
-\contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{28}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Publish-Subscribe-Pattern}{28}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Serverseitige vs Clientseitige Logik}{28}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}\"Ubersicht Server-Technologien}{29}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Umsetzung mit ZeroMQ}{29}{subsection.4.4.4}
-\contentsline {section}{\numberline {4.5}GUI}{31}{section.4.5}
-\contentsline {section}{\numberline {4.6}Andere Sensorik}{35}{section.4.6}
-\contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{37}{chapter.5}
-\contentsline {section}{\numberline {5.1}Snake}{37}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Spielidee}{37}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{37}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Umgesetzte Features}{39}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}R\"auber und Gendarm}{40}{section.5.2}
-\contentsline {section}{\numberline {5.3}Implementation von Beispielapps}{40}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Spiellogik}{40}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Umgesetzte Features}{41}{subsection.5.3.2}
-\contentsline {chapter}{\numberline {6}Fazit}{42}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ausblick}{43}{chapter.7}
+\contentsline {subsubsection}{LocationClient}{16}{section*.27}
+\contentsline {subsection}{\numberline {4.1.2}Evaluation der Genauigkeit der Positionsermittlung mit unterschiedlichen Diensten}{16}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Kollisionsabfrage}{19}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{19}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{19}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{21}{section.4.3}
+\contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{22}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Publish-Subscribe-Pattern}{22}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Serverseitige vs Clientseitige Logik}{22}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}\"Ubersicht Server-Technologien}{23}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}Umsetzung mit ZeroMQ}{23}{subsection.4.4.4}
+\contentsline {section}{\numberline {4.5}GUI}{25}{section.4.5}
+\contentsline {section}{\numberline {4.6}Andere Sensorik}{29}{section.4.6}
+\contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Snake}{31}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Spielidee}{31}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{31}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Umgesetzte Features}{33}{subsection.5.1.3}
+\contentsline {section}{\numberline {5.2}R\"auber und Gendarm}{34}{section.5.2}
+\contentsline {section}{\numberline {5.3}Implementation von Beispielapps}{34}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Spiellogik}{34}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Umgesetzte Features}{35}{subsection.5.3.2}
+\contentsline {chapter}{\numberline {6}Fazit}{36}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ausblick}{37}{chapter.7}
+\contentsline {chapter}{\numberline {A}Messergebnisse}{39}{appendix.A}

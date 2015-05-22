@@ -1,5 +1,5 @@
-\subsection{Genauigkeit- und Updategeschwindigkeitsvergleich}
-  
+\subsection{Evaluation der Genauigkeit der Positionsermittlung mit unterschiedlichen Diensten}
+
   \begin{figure}[h]
     \begin{center}
     \includegraphics[width=1.0\textwidth]{4-Technische_Loesungen/4-1-Positionsermittlung/Data/updates_per_second_bigger.png}
@@ -15,14 +15,23 @@
      \caption{Genauigkeit}
      \label{fig: picAccu}
   \end{figure}
+
+Um LocationManager und LocationClient für unsere Zwecke vergleichen zu können, wurde ein Testprogramm entwickelt, welches jeweils in zwei separaten Activities GPS-Messdaten in einer Datei sammelt. Je eine Activity verwendet dabei den LocationManager und den LocationClient, um in regelmäßigen Abständen Koordinaten und deren approximierte Genauigkeit abzurufen und abzuspeichern. Das Experiment wird durchgeführt, indem eine Person mit dem Gerät, auf dem das Testprogramm ausgeführt wird, eine möglichst gerade Strecke abgeht. Zur optischen Darstellung der Ergebnisse wird aus den aufgezeichneten Koordinaten eine Linie (PolyLine\footnote{\url{https://developer.android.com/reference/com/google/android/gms/maps/model/Polyline.html}}) gezeichnet. Als Vergleich wird eine Luftlinie zwischen Anfangs- und Endpunkt gezogen. Die ausgewerteten Sensordaten werden in Anhang \ref{app} dargestellt.
+
+Der Genauigkeitswert ist hierbei folgendermaßen definiert: Um die ermittelte Position wird ein Kreis mit der ermittelten Genauigkeit als Radius gezeichnet. Der verwendete Dienst schätzt nun, dass
+sich die tatsächliche Position des Geräts mit einer 68-prozentigen Wahrscheinlichkeit innerhalb dieses Kreises um die von dem Dienst ermittelte Position befindet\footnote{\url{http://developer.android.com/reference/android/location/Location.html}}.
+Es gilt, je kleiner der Wert desto besser. In den Tabellen in Anhang \ref{app} wurde jeweils das arithmetische Mittel aller im Zuge des entsprechenden Experiments aufgezeichneten Genauigkeiten eingetragen.
 	  
-\clearpage
 
-Die Auswertung der Daten hat ergeben, dass bzgl. der Genauigkeit der LocationManager in 6 von 11 Versuchen besser als der LocationClient abschneitet. Im Bezug auf Updates pro Sekunde liefert der LocationClient in 9 von 11 Versuchen die besseren Ergebnisse.
+Die Auswertung der Daten hat ergeben, dass bezüglich der Genauigkeit die vom LocationManager ermittelten Daten in sechs von elf Versuchen genauer als die vom LocationClient ermittelten sind (siehe Graph \ref{fig: picAccu}). Im Bezug auf Updates pro Sekunde liefert der LocationClient in neun von elf Versuchen die besseren Ergebnisse (siehe Graph \ref{fig: picUdates}).
 
-\subsection{Fazit}
-Genauigkeit ist in diesem Projekt ein wichtiger Faktor, vorallem im Bezug auf Kollisionen mit anderen Spielern und virtuellen Objekten. Da in diesem Projekt kompetitive Mehrspieler-Spiele realisiert werden, ist auch die Updategeschwindigkeit zu berücksichtigen. Die Versuche haben gezeigt, dass bzgl. der Genauigkeit zwischen den beiden Dienste kein statistisch signifikanter Unterschied festgestellt werden kann. In diesem Projekt wird daher der LocationClient verwendet. 
-Außerdem ist anzumerken, dass sich schon bereits für die Kartenanzeige für GoogleMaps entschieden wurde. Somit wurde schon die Nachteile der Abwärtskompatibilität und das Benötigen einer Internetverbindung schon in Kauf genommen.
+Mit mobilen Endgeräten erzeugte Positionsdaten haben meist eine Genauigkeit von 2 bis 15 Metern, dabei sind die Ergebnisse in offenem Gelände besser, als in engen Gassen \cite{gpsacc}. Befindet sich das Gerät innerhalb eines Gebäudes sind die Ergebnisse unbrauchbar. Beides wurde durch die im Zuge der Evaluation durchgeführten Experimente bestätigt. Da beim Testen der entwickelten Anwendungen Ungenauigkeiten von fünf oder mehr Metern als extrem störend empfunden wurden, können solche Spiele nur auf einem genügend großen, offenen Gelände gespielt werden. Die Updategeschwindigkeit von etwa einer Sekunde hat sich als ausreichend erwiesen, falls sich alle Mitspieler in Schrittgeschwindigkeit bewegen.
+
+%\subsection{Fazit}
+Genauigkeit ist in diesem Projekt ein wichtiger Faktor, vor allem im Bezug auf Kollisionen mit anderen Spielern und virtuellen Objekten. Da in diesem Projekt kompetitive Mehrspieler-Spiele realisiert werden, ist auch die Updategeschwindigkeit zu berücksichtigen. 
+%Die Versuche haben gezeigt, dass bezüglich der Genauigkeit zwischen den beiden Dienste kein statistisch signifikanter Unterschied festgestellt werden kann. 
+Da die im Zuge dieses Projekts entwickelten Anwendungen zur Umgebungsdarstellung auf GoogleMaps zu\-rück\-grei\-fen (siehe Abschnitt \ref{kartendarstellung}), das sowohl Google-Play-Services, als auch eine konstante Internetverbindung benötigt, kann der LocationClient ohne Bedenken wegen dieser Abhängigkeiten und fehlender Abwärtskompabilität eingesetzt werden.
+Da dieser zusätzlich durch tendenziell geringere Zeitintervalle zwischen den gelieferten Werten einen flüssigeren Spielablauf ermöglicht, wird in diesem Projekt der LocationClient verwendet. 
 
 
  
