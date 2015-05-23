@@ -5,50 +5,38 @@
 Konzepte, die hauptsächlich dazu dienen mit dem Spieler zu interagieren und sehr abhängig von seinen Entscheidungen sind.
 
 
-\subsubsection{Kompass}
-%\begin{wrapfigure}{r}{0.4\textwidth}
- % \begin{center}
-  %  \includegraphics[width=0.3\textwidth]{3-Spielkonzepte/3-2-Benutzer_Interface/kompass.png}
-   %  \caption{integrierter Kompass unter Android
-	%(Quelle: \url{https://lh6.ggpht.com/tQTY2Itaq9YtG8CZh8RA0N7sekCbURqBG5ZcpV6_u2no8Y8ezVIEibB4udVNFLzYKA\%3Dh900})
-%		}
-%  \end{center}
-%\end{wrapfigure}
+\subsubsection{Richtungsangabe}
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{3-Spielkonzepte/3-2-Benutzer_Interface/kompass.png}
+     \caption{Integrierter Kompass unter Android
+	(Quelle: \url{https://lh6.ggpht.com/tQTY2Itaq9YtG8CZh8RA0N7sekCbURqBG5ZcpV6_u2no8Y8ezVIEibB4udVNFLzYKA\%3Dh900})
+		}
+  \end{center}
+\end{wrapfigure}
 
-Eine Richtungsangabe kann eine Karte ersetzen. Sei es um bei „Capture the Flag“ die
-Richtung der Fahne des Gegners anzuzeigen oder für die „Snake“ das nächste
-einzusammelnde Item. In der Regel hat es hier weniger Sinn, wenn die Kompassnadel nach
-Norden zeigt.
+Eine Richtungsangabe kann eine Karte ersetzen. Sei es um bei „Capture the Flag“ die Richtung der Fahne des Gegners anzuzeigen oder für „Snake“ das nächste einzusammelnde Item. Auch ein Kompass dient als Richtungsangabe und findet beim oben erwähnten "`Geocaching"' teilweise seinen Einsatz.
 \newline
-Technische Lösungen:
-Positionsermittlung (s. \ref{positionsermittlung}), GUI (s. \ref{gui}), Andere Sensorik (s. \ref{sensorik})
+Die technischen Lösungen für eine Richtungsangabe sind unter Positionsermittlung (s. \ref{positionsermittlung}), GUI (s. \ref{gui}) und Andere Sensorik (s. \ref{sensorik}) zu finden.
 
 \subsubsection{Akustische und haptische Orientierungshilfen}
 
-Akustische oder haptische Signale können ebenso Hinweise geben auf in der Nähe
-befindliche Interessengebiete (z.B. ertönen eines Signals oder Vibration beim Erreichen eines
-bestimmtem Umkreises von einem Item). 
+Akustische oder haptische Signale können ebenso Hinweise auf in der Nähe
+befindliche Interessengebiete geben (z.B. ertönen eines Signals oder Vibration beim Erreichen eines bestimmtem Umkreises eines Items). 
 Akustische oder haptische Signale können aber auch als Bestätigung eingesetzt
 werden, wenn z.B. etwas eingesammelt wurde.
 \newline
-Technische Lösungen:
-Kollisionsabfrage (s. \ref{kollisionsabfrage}), Andere Sensorik (s. \ref{sensorik})
+Zur Bestätigung einer Kollision wird die Kollisionsabfrage (s. \ref{kollisionsabfrage}) benötigt. Unter Andere Sensorik (s. \ref{sensorik}) ist mehr zu akustischen und haptischen Signalen zu finden.
 
 
 \subsubsection{Geschwindigkeitsmessung}
 Um das Spielgeschehen besser zu kontrollieren zu können, kann eine Messung der
-Geschwindigkeit von Vorteil sein. Möchten wir z.B. bei Capute the Flag dem Fahnenträger
-nicht erlauben eine gewissen Geschwindigkeit zu überschreiten, ist eine
-Geschwindigkeitsmessung unabdingbar.
+Geschwindigkeit von Vorteil sein. Möchten wir z.B. bei Capture the Flag dem Fahnenträger nicht erlauben eine gewisse Geschwindigkeit zu überschreiten, ist eine Geschwindigkeitsmessung unabdingbar.
 \newline
-Technische Lösungen:
-Positionsermittlung (s. \ref{positionsermittlung}), Server-Client-Kommunikation (s. \ref{kommunikation}), Andere Sensorik (s. \ref{sensorik})
+Um diese umsetzen zu können wird Positionsermittlung (s. \ref{positionsermittlung}), Server-Client-Kommunikation (s. \ref{kommunikation}) und Andere Sensorik (s. \ref{sensorik}) benötigt.
 
 
 \subsubsection{Mensch-Maschine-Kommunikation}\label{sec:mensch-maschine-kommunikation}
-Das komplette Spielgeschehen lebt nach der Integrierung von mobilen Endgeräten von der Kommunikation zwischen Mensch und Gerät. Wird auf dem Endgerät ein Kompass angezeigt, muss der Spieler insofern reagieren, dass er sich in die richtige Richtung dreht.
-Wenn er etwas einsammeln möchte, kann es erforderlich sein, dass ein Button gedrückt
-wird.
+Das komplette Spielgeschehen lebt von der Integrierung der mobilen Endgeräten und der Kommunikation zwischen Mensch und Gerät. Wird auf dem Endgerät eine Richtungsanzeige eingeblendet, muss der Spieler insofern reagieren, dass er sich in die richtige Richtung dreht. Wenn er etwas einsammeln möchte, kann es erforderlich sein, dass ein Button gedrückt wird.
 \newline
-Technische Lösungen:
-GUI (s. \ref{gui}), Kartendarstellung (s. \ref{kartendarstellung})
+Dafür benötigt wird die GUI (s. \ref{gui}) bzw. die Kartendarstellung (s. \ref{kartendarstellung}).

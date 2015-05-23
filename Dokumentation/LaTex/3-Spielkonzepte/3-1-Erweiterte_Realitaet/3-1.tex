@@ -1,56 +1,39 @@
 Um die oben genannten Spiele um einen virtuellen Teil erweitern zu können werden Konzepte benötigt. Eine von uns getroffene Auswahl wird im folgenden beschrieben. 
 
 \section{Erweiterte Realität}
-Konzepte, die explizit die Realität erweitern und somit einen Mehrwert zum Spiel beitragen.
+Konzepte, die explizit die Realität erweitern und dadurch einen Mehrwert zum Spiel beitragen.
 
 
 \subsubsection{Integration virtueller Objekte in die physische Umgebung}\label{sec:integration-virtueller-objekte-in-die-physische-umgebung}
-Um ein virtuelles Spiel in die physische Umgebung integrieren zu können, müssen auch alle Objekte
-des virtuelles Spieles in die physische Umgebung gebracht werden.
-Bei vielen Objekten kann dies durch einen eingeschränkten Zufall geschehen. Z.B. bei Snake die 
-Items. Bei dem ein oder anderen Spiel soll es eine Basis für jedes Team geben. Dabei bietet sich an
-dieses auf eine relativ freie Fläche festzusetzen. Generell sollte darauf geachtet werden, 
-dass die Objekte nicht innerhalb eines Gebäudes landen oder in nicht begehbares Terrain platziert werden.
+Um ein virtuelles Spiel in die physische Umgebung integrieren zu können, müssen auch alle Objekte des virtuellen Spieles in die physische Umgebung gebracht werden. Dies kann z.B. auf einer virtuellen Karte, die die Wirklichkeit widerspiegelt, geschehen.
+
+Zum Beispiel die Items bei unserem Spiel Snake, die es einzusammeln gilt, werden auf einer Karte auf dem Smartphone dargestellt und durch einen eingeschränkten Zufall platziert. Bei dem ein oder anderen Spiel soll es eine Basis für jedes Team geben. Dabei bietet sich an, dieses auf eine relativ freie Fläche festzusetzen. Generell sollte darauf geachtet werden, dass die Objekte nicht innerhalb eines Gebäudes landen oder in nicht begehbares/erreichbares Terrain platziert werden.
 
 
 
-Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden:
-Kartendarstellung (s. \ref{kartendarstellung}), Kollisionsabfrage (s. \ref{kollisionsabfrage}), Positionsabfrage (um sicherzustellen, dass das Objekt in der Nähe des Spieler erstellt wird, s. \ref{positionsermittlung}).
+Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden. Die Kartendarstellung (s. \ref{kartendarstellung}) hilft enorm die Objekte in die physische Welt einzuarbeiten, da sie lediglich auf der Karte eingefügt werden müssen. Mit der Kollisionsabfrage (s. \ref{kollisionsabfrage}) kann eine Kollision zweier Objekte, zum Beispiel eine "`Snake"' mit einem "`Item"', verwirklicht werden. Die Positionsabfrage wird unter anderem dafür benötigt um sicherzustellen, dass das Objekt in der Nähe des Spielers erstellt wird. (s. \ref{positionsermittlung}).
 
 \subsubsection{Darstellung der physischen und virtuellen Umgebung}\label{sec:darstellung-der-physischen-und-virtuellen-umgebung}
 
-Die physische Welt in eine virtuelle Umgebung zu übertragen kann oft sehr hilfreich sein.
-Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw.
-außerhalb des Spielfelds befindet. 
+Die physische Welt in eine virtuelle Umgebung zu übertragen kann einen enormen Mehrwert des Spiels darstellen.
+Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw. außerhalb des Spielfelds befindet. Des weiteren kann mit den heutigen Smartphones auch wie in \label{fig:map01} gezeigt eine Augmented Reality geschaffen werden, die die Darstellung der realen Welt um etwa die Beschriftung der zu sehenden Geschäfte erweitert.
 \begin{figure}[htbp]
   \centering
     \includegraphics[width=0.9\textwidth]{3-Spielkonzepte/3-1-Erweiterte_Realitaet/map01.png}
-     \caption{Handyscreen um die zu sehenden Geschäfte, Hotels, etc. erweitert
+    \label{fig:map01} 
+		\caption{Handyscreen um die zu sehenden Geschäfte, Hotels, etc. erweitert
 	(Quelle: \url{http://blogs.bing.com/maps/wp-content/uploads/sites/3/2013/06/clip_5F00_image006_5F00_thumb_5F00_4AEFDB0C.png})
 		}
 \end{figure}
-Eine Karte hat insoweit den Vorteil, dass man dort auch
-virtuelle Gegenstände einfügen kann, die in der physischen Welt nicht vorhanden
-sind, wie beispielsweise die nächsten Items bei Snake.
-Dazu sind 
-Kartendarstellung (s. \ref{kartendarstellung}) und Positionsermittlung (s. \ref{positionsermittlung}) nötig.
+\newling Hierfür werden Kartendarstellung (s. \ref{kartendarstellung}) und Positionsermittlung (s. \ref{positionsermittlung}) benötigt.
 
 \subsubsection{Kollision virtueller Objekte}\label{sec:kollision-virtueller-objekte}
-Treffen zwei virtuelle Objekte aufeinander muss in der Regel ein Event ausgelöst werden.
-Wird bei Snake z.B. der eigene Schwanz berührt, was laut der Regeln nicht erlaubt ist, muss
-dies dem Spieler mitgeteilt werden und evtl. weitere Ereignisse ausgeführt werden.
+Treffen zwei virtuelle Objekte aufeinander muss in der Regel ein Event ausgelöst werden. Wird bei Snake z.B. der eigene Schwanz berührt, was laut der Regeln nicht erlaubt ist, muss dies dem Spieler mitgeteilt werden und evtl. weitere Ereignisse ausgeführt werden.
 \newline
-Technische Lösungen:
-Kollisionsabfrage (s. \ref{kollisionsabfrage}), Positionsermittlung (s. \ref{positionsermittlung})
+Dazu werden die Kollisionsabfrage (s. \ref{kollisionsabfrage}) und die  Positionsermittlung (s. \ref{positionsermittlung}) gebraucht.
 
 
 \subsubsection{Einsammeln von Objekten}\label{sec:einsammeln-von-objekten}
-Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in
-Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch
-passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass
-etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal
-gegeben werden.
+Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal gegeben werden.
 
-
-Technische Lösungen:
-Positionsermittlung (s. \ref{positionsermittlung}), Kollisionsabfrage (s. \ref{kollisionsabfrage})
+\newline Erreicht werden kann dies durch die Positionsermittlung (s. \ref{positionsermittlung}) und die Kollisionsabfrage (s. \ref{kollisionsabfrage}). Für weitere Bestätigungssignale sind auch Andere Sensorik (s. \ref{sensorik}) von Vorteil.
