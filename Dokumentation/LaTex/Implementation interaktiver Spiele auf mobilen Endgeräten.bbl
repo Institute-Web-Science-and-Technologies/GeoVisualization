@@ -51,13 +51,16 @@
 \newblock \url{http://xmpp.org/extensions/xep-0060.html#intro}, 2010. --
 \newblock [abgerufen am 05. März 2015]
 
+\bibitem[NZZ11]{neis}
+\textsc{Neis}, Pascal ; \textsc{Zielstra}, Dennis  ; \textsc{Zipf}, Alexander:
+\newblock The Street Network Evolution of Crowdsourced Maps: OpenStreetMap in
+  Germany 2007–2011.
+\newblock {In: }\emph{Future Internet} 4 (2011), Nr. 1, S. 1--21
+
 \bibitem[Sch03]{schaeffer}
 \textsc{Schäffer}, Bruno:
-\newblock \emph{Probleme bei Thin-Clients}.
-\newblock
-  \url{http://www.sigs.de/publications/js/2003/01/schaeffer_JS_01_03.pdf},
-  2003. --
-\newblock [abgerufen am 05. März 2015]
+\newblock Probleme bei Thin-Clients.
+\newblock {In: }\emph{JavaSpektrum} 1 (2003), S. 52--55
 
 \bibitem[Sta15]{android}
 \textsc{Statista}:

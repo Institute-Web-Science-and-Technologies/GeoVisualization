@@ -1,55 +1,48 @@
 \section{GUI}\label{gui}
 
-Die GUI (Grafic User Interface) wurde nur mit den Android bzw. GooglePlay Services (inkl. Googlemaps) umgesetzt. Die mitgelieferten
-Möglichkeiten des Android SDK sind in dieser Hinsicht für die GUI-Umsetzung dieses Projektes vollkommen zufriedenstellend. Die komplette
-GUI setzt sich aus 2 Activities zu sammen, die im folgenden näher beleuchtet werden.
+Die GUI (\textit{graphical user interface}) wurde mit Android und den GooglePlay Services (einschließlich Google Maps) umgesetzt. 
+Die mitgelieferten
+Mög\-lich\-kei\-ten des Android SDK sind in dieser Hinsicht für die GUI-Umsetzung dieses Projektes vollkommen zufriedenstellend. Die komplette
+GUI setzt sich aus zwei Activities zusammen, die im Folgenden näher betrachtet werden.
 
 \subsection*{Login-Screen}
 Diese Activity wird zuerst aufgerufen und zeigt einen Bildschirm auf dem sich der Spieler einen Benutzernamen aussucht und danach mit dem
-"`Start"' Button zu nächsten Activity wechselt, welche das eigentliche Spiel zeigt.
+"`Start"' Button zu nächsten Activity wechselt, welche das eigentliche Spiel zeigt (siehe Abbildung \ref{fig:chat}).
 
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/login_screen.png}
-     \caption{Login Screen}
-  \end{center}
-\end{wrapfigure}
+\begin{figure}
+    \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/login_screen.png}
+    \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/chat_screen.png}
+     \caption{Login-Screen (rechts) und Chat-Screen (rechts)}
+     \label{fig:chat}
+\end{figure}
 
 
 \subsection*{Swipe-Screen}
-Schon in der sehr frühen Entwicklungsphase war festzustellen, das die verschiedenen Elemente der GUI - wie im folgenden weiter erläutert- zu zahlreich sind, um sie auf einen Bildschirm umzusetzen. Die eigentliche Kartendarstellung wäre sonst zu klein gewesen. Also wurde entschieden die verschiedenen Elemente auf weitere Bildschirme zu verteilen. In den ersten Entwürfen geschah dies über einzelne Activities, also mehrere Bildschirme. Um gewisse Android Komfort-Funktionen und Gesten dem Nutzer zu verfügung zu stellen wurden die zunächst eigenständigen Activites zu Fragments umgebeut, die dann in einem so genannten Swipe-Screen zusammengefasst werden. In diesem werden die Fragments als Tabs organisiert und der User kann entweder durch "`wischen"' (swipe) oder durch klicken auf die Tabs durch die GUI Navigieren. \newline
-Ein weiterer Vorteil ist ebenfalls, dass benachbarte Tabs jeweils vorgeladen (Laden der Widgets) bzw. noch im Speicher behalten werden. Zum einen wird so sichergestellt, dass der Tab-Wechsel per wischen "`geschmeidig"' abläuft. Dadurch ergeben sich auch sehr geringe Ladezeiten zwischen den einzelenen Bildschirmen. Zudem ist die von Google angepriesene "`Wiederverwendbarkeit"' von Fragments als UI (User Interface) ebenfalls nützlich, wenn weitere ähnliche Spiele umgesetzt werden sollen.
+Schon in der sehr frühen Entwicklungsphase war festzustellen, das die verschiedenen Elemente der GUI, wie im folgenden weiter erläutert, zu zahlreich sind, um sie auf einen Bildschirm umzusetzen. Die eigentliche Kartendarstellung wäre sonst zu klein gewesen. Also wurde entschieden die verschiedenen Elemente auf weitere Bildschirme zu verteilen. In den ersten Entwürfen geschah dies über einzelne Activities, also mehrere Voll\-bild-Fens\-ter. Um gewisse Android Kom\-fort-Funk\-tio\-nen und Gesten dem Nutzer zu verfügung zu stellen wurden die zunächst eigenständigen Activites zu Fragments umgebaut, die dann in einem so genannten Swipe-Screen zusammengefasst werden. In diesem werden die Fragments als Tabs organisiert und der User kann entweder durch "`wischen"' (\textit{swipe}) oder durch klicken auf die Tabs durch die GUI Navigieren. 
 
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/chat_screen.png}
-     \caption{Chat Screen}
-  \end{center}
-\end{wrapfigure}
-
-\subsubsection*{Chat-Screen}
-In desem Fragment wird die Möglichkeit des Chattens zwischen mehreren Spielern umgesetzt. Die grafische Umsetzung des Chats wurde der von IRC (Instant Relay Chat) Clients nachempfunden und ist entsprechend simpel gelöst. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}) was wiederum in einem scrollbaren Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}) liegt. Hierdurch ist es möglich durch alle empfangenen Nachrichten "`durchzuscrollen"'. Wird eine Chat-Message (genaueres in Kapitel 4.4) empfangen, wird diese mittels Stringmanipulation an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Somit kann es aufgrund von Über\-tra\-gungs\-ver\-zö\-ge\-rungen dazu kommen, das die eigene Nachricht verzögert angezeigt, jedoch ist die korrekte Reihenfolge der Nachrichten gewährleistet.
-
-\newpage
-
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \begin{center}
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/map_screen.png}
-     \caption{Map Screen}
-  \end{center}
-\end{wrapfigure}
-
-\subsubsection*{Map-Screen}
-In diesem Fragment wird die Karte angezeigt. Je nachdem welches Spiel gespielt wird sind zusätzliche Widgets vorhanden, wie z.B. Interaktions Buttons, (Team-)Punkte anzeige usw.
+Ein weiterer Vorteil ist ebenfalls, dass benachbarte Tabs jeweils vorgeladen (Laden der Widgets) und noch im Speicher behalten werden. Zum einen wird so sichergestellt, dass der Tab-Wechsel durch Wischen "`geschmeidig"' abläuft. Dadurch ergeben sich auch  geringere Ladezeiten zwischen den einzelnen Bildschirmen. Zudem ist die  "`Wiederverwendbarkeit"' von Fragments als UI (\textit{user interface}) ebenfalls nützlich, wenn weitere ähnliche Spiele umgesetzt werden sollen. Der Swipe-Screen umfasst drei Tabs: Der Map-Screen zeigt den aktuellen Spielzustand, über den Chat-Screen können sich Spieler einer Spielinstanz austauschen und der Game-Screen erlaubt es, eine neue Spielinstanz zu erstellen oder einer bestehenden Spielinstanz beizutreten. 
 
 
-\subsubsection*{Game-Screen}
-In diesem Fragment werden momentan aktive Spiele angezeigt. Auch ist es möglich neue Spiele zu erstellen. Die Anzeige der Liste der Spiele erfolgt in einer scrollfähigen Liste (ListView). Diese wird durch entsprechend angefordete Informationen über andere Spiele geupdatet. Die Listen-Elemente sind interaktiv. Ein klick auf das entsprechende Spiel startet den beitritt. Um ein Spiel eines gewissen Typs zu Starten wählt man in einen Drop\-down-Menü (bei Android Spinner) den entsprechenden Modus aus in klickt auf create. Man selbst betritt dieses Spiel und der Eintrag in der Spiele-Liste wird vorgenommen. 
+\subsection*{Chat-Screen}
+In desem Fragment wird die Möglichkeit des Chattens zwischen mehreren Spielern umgesetzt (siehe Abbildung \ref{fig:chat}). Die grafische Umsetzung des Chats wurde der von IRC (Instant Relay Chat) Clients nachempfunden und ist entsprechend simpel gelöst. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}) was wiederum in einem scrollbaren Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}) liegt. Hierdurch ist es möglich den Nachrichtenverlauf zu durchsuchen. Wird eine Chat-Message (genaueres in Kapitel 4.4) empfangen, wird diese an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Dabei muss eine gringe Über\-tra\-gungs\-ver\-zö\-ge\-rungen in Kauf genommen werden, jedoch ist die korrekte Reihenfolge der Nachrichten ge\-währ\-leis\-tet.
 
 
-\begin{figure}[r]  
-    \includegraphics[width=0.48\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/game_screen.png}
-    \caption{Game Screen}
+\begin{figure}
+    \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/map_screen.png}
+    \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/game_screen.png}
+         \caption{Map-Screen (links) und Game-Screen (rechts)}
+         \label{fig:game}
 \end{figure}
 
-\clearpage
+\subsection*{Map-Screen}
+In diesem Fragment wird die Karte der näheren Umgebung des Spielers dargestellt (siehe Abbildung \ref{fig:game}). Auf der Karte werden alle in der aktuellen Spielinstanz vorhandenen und für den Spieler sichtbaren virtuellen Objekte und Mitspieler angezeigt. Je nachdem welches Spiel gespielt wird sind zusätzliche In\-ter\-ak\-tions\-mög\-lich\-kei\-ten und Anzeigefelder vorhanden, wie beispielsweise die Anzeige des Punktestands der Teams.
+
+
+\subsection*{Game-Screen}
+In diesem Fragment werden momentan aktive Spielinstanzen angezeigt (siehe Abbildung \ref{fig:game}). Auch ist es möglich neue Spiele zu erstellen. Die Anzeige der Liste der Spiele erfolgt in einer scrollbaren Liste (ListView). Diese wird regelmäßig aktualisiert. Die Listen-Elemente sind interaktiv: Ein klick auf das entsprechende Spiel startet den Beitritt. Um ein Spiel eines gewissen Typs zu Starten wählt man in einen Drop\-down-Menü (bei Android Spinner) den entsprechenden Modus aus in klickt auf \glqq Create\grqq. Man selbst betritt dieses Spiel und der Eintrag in der Spiele-Liste wird vorgenommen. 
+
+\subsection*{Haptisches Feedback}
+Die graphische Benutzeroberfläche kann durch Haptisches Feedback ergänzt werden. Haptisch bedeutet \glqq fühlbar\grqq oder \glqq berührbar\glqq. Bei Smartphones betrachten wir in diesem Zusammenhang den Vibrationsalarm. Dieser wird nativ dazu genutzt um dem Nutzer mitzuteilen, dass ein Anruf oder eine Nachricht eingegangen ist oder um Eingaben zu bestätigen.
+Erzeugt werden die Vibrationen durch einen kleinen Motor, der durch eine Unwucht dafür sorgt, dass das Gehäuse vibriert. Bei einigen Geräten wird sogar der Lautsprecher dazu genutzt, indem er niedrigfrequente Töne erzeugt, die das Gehäuse in Schwingung versetzen.
+
+

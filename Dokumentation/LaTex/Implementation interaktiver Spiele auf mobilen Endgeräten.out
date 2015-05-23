@@ -7,7 +7,7 @@
 \BOOKMARK [1][-]{section.3.1}{Erweiterte Realit\344t}{chapter.3}% 7
 \BOOKMARK [1][-]{section.3.2}{Benutzer Interface}{chapter.3}% 8
 \BOOKMARK [1][-]{section.3.3}{Mehrspieler-Features}{chapter.3}% 9
-\BOOKMARK [0][-]{chapter.4}{Technische Loesungen}{}% 10
+\BOOKMARK [0][-]{chapter.4}{Technische L\366sungen}{}% 10
 \BOOKMARK [1][-]{section.4.1}{Positionsermittlung}{chapter.4}% 11
 \BOOKMARK [2][-]{subsection.4.1.1}{Dienste zur Positionsermittlung}{section.4.1}% 12
 \BOOKMARK [2][-]{subsection.4.1.2}{Evaluation der Genauigkeit der Positionsermittlung mit unterschiedlichen Diensten}{section.4.1}% 13
@@ -21,7 +21,7 @@
 \BOOKMARK [2][-]{subsection.4.4.3}{\334bersicht Server-Technologien}{section.4.4}% 21
 \BOOKMARK [2][-]{subsection.4.4.4}{Umsetzung mit ZeroMQ}{section.4.4}% 22
 \BOOKMARK [1][-]{section.4.5}{GUI}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.6}{Andere Sensorik}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.6}{Sensorik}{chapter.4}% 24
 \BOOKMARK [0][-]{chapter.5}{Implementation von Beispielapps}{}% 25
 \BOOKMARK [1][-]{section.5.1}{Snake}{chapter.5}% 26
 \BOOKMARK [2][-]{subsection.5.1.1}{Spielidee}{section.5.1}% 27

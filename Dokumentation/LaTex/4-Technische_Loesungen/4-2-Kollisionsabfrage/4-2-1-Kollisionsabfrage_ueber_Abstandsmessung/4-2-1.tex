@@ -1,8 +1,12 @@
 \subsection{Kollisionsabfrage über Abstandsmessung}
-Die Android API stellt eine Methode zur Verfügung, die die Entfernung zwischen zwei Punkten, die über geographische Koordinaten bestimmt sind, berechnet \footnote{\url{http://developer.android.com/reference/android/location/Location.html}}.
-Bei der Kollisionsabfrage müssen wir für das Snake-Spiel vier Fälle unterscheiden: sowohl das aktive, wie auch das passive beteiligte Objekt können jeweils durch einen Kreis oder einen Polygonzug (eine Schlange) realisiert sein.
+Bei der Kollisionsabfrage wird zwischen aktiven und passiven Objekten unterschieden. Objekte sind entweder beweglich oder unbeweglich und entweder solide oder unsolide. Jedes bewegliche Objekt nimmt, nachdem seine Positionsdaten geändert wurden, die Rolle des aktiven Objekts ein. Das aktive Objekt wird dann mit jedem soliden Objekt verglichen und im Falle einer Kollision wird abhängig von den beteiligten Objekten ein entsprechender Effekt ausgelöst.
+
+
+Bei der Kollisionsabfrage müssen beispielsweise für das Snake-Spiel vier Fälle unterscheiden werden: sowohl das aktive, wie auch das passive beteiligte Objekt können jeweils durch einen Kreis oder einen Polygonzug (eine Schlange) realisiert sein. Jeder Eckpunkt des Polygonzuges ist dabei ein Segment der Schlange.
 Das aktive Objekt symbolisiert meist den die Kollision mit dem passiven Objekt auslösenden Spieler.
-Das passive Objekt kann ein aufsammelbares Bonus-Objekt sein oder ein anderer Spieler.
+Das passive Objekt kann ein aufsammelbares Bonus-Objekt sein oder ein Objekt oder ein anderer Spieler.
+
+Die Android API stellt eine Methode zur Verfügung, die die Entfernung zwischen zwei Punkten, die über geographische Koordinaten bestimmt sind, berechnet \footnote{\url{http://developer.android.com/reference/android/location/Location.html}}. Damit kann die Kollisionsabfrage über Abstandsmessung implementiert werden.
 Falls beide Objekte Kreise sind wird eine Kollision ausgelöst, falls die Entfernung zwischen beiden Kreismittelpunkten kleiner ist, als die Summe der Radien.
 
 $|M_{aktiv}-M_{passiv}|<r_{aktiv}+r_{passiv}$
@@ -12,6 +16,6 @@ Falls das aktive Objekt ein Polygonzug ist, müssen nur Kollisionen mit dessen er
 
 Während Abstandsmessung als Kriterium für Kollision von Kreisen gut funktioniert, muss bei der Kollision von Polygonzügen darauf geachtet werden, dass die Radien der Objekte genügend groß gewählt werden, damit sich auch bei schwankender Genauigkeit der GPS-Werte und damit sehr unregelmäßigen Abständen zwischen den Gliedern der Schlange, die Radien aufeinanderfolgender Glieder überschneiden.
 
-Im Experiment wurde bei guten Bedingungen eine Abweichung der ermittelten Positionen von den realen von circa vier Metern gemessen (siehe ...).
+Im Experiment wurde bei guten Bedingungen eine Abweichung der ermittelten Positionen von den tatsächlichen von circa vier Metern gemessen (siehe Anhang \ref{app}).
 In der Praxis hat sich aber ein Radius von zwei Metern als ausreichend erwiesen, da die Spieler die Diskrepanz zwischen realer und virtueller Welt bemerken und gegebenenfalls gegensteuern können. Auch ist ein Radius von zwei Metern fein genug, um ein Hindurchlaufen durch eine Schlange zu verhindern.
 Gleichzeitig bringt der geringere Radius den Vorteil, dass das Spiel auch auf kleineren Arealen gespielt werden kann und Spieler schärfere Kurven laufen können ohne Selbstkollisionen zu riskieren.
