@@ -1,0 +1,30 @@
+Ideen für Capture the Flag
+
+Stealthansatz:
+- In der Stadt spielbar
+- Die Position des Gegnerteams ist unbekannt, die eigenen Teammitglieder sind zu sehen.
+- Man sieht nur die gegnerische Flagge und beide Basen
+- Die Flaggen spawnen zufällig zwischen den beiden Basen
+- Das aufheben der Flagge wird mitgeteilt, auch die Position.
+- Leute die sich zu schnell bewegen werden auf der Karte angezeigt (neues Feature: Geschwindigkeit)
+- Es ist möglich seine nähere Umgebung nach Gegnern zu scannen. (längerer cooldown)
+- Es ist möglich Gegner zu "markieren", diese sind dann sichtbar für eine Gewisse zeit.
+- Wird der Flaggenträger makiert, verliert er die Flagge und sie wird wieder zufällig plaziert
+- Fahne wird auf der Straße generiert1
+- Einteilung in Teams erfolgt zufällig
+
+
+Extrafeatures im Vergleich zu snake:
+
+-Geschwindigkeitsmessung
+-Ping auf Karte
+-Handy-Vibration
+-Richtungssensor (Markieren/Fahne abnehmen, mögl. über Kompass)
+-Straßenerkennung (momentan über google static maps api und Pixelfarbe)
+-Basenplatzierung durch Spieler (Gegnerfahne wird platziert nachdem eigene Basis gesetzt wurde)
+
+Variation alter Features:
+-nur Anzeige des eigenen Teams
+-nur Teamchat
+-nur zeitweise sichtbar machen
+-Cooldowns
