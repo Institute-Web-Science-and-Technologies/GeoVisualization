@@ -1,11 +1,15 @@
-\subsection{Übersicht Server-Technologien}
+\subsection{Server-Technologien}
 
-Die Kommunikation zwischen Client und Server kann als Push- oder Pull-Kommunikation realisiert werden. 
-Bei der Pull-Kommunikation fordert der Client die benötigten Informationen vom Server an. Im Falle einer Echtzeitanwendung muss dies in regelmäßigen Abständen geschehen.
-Bei der Push-Kommunikation sendet der Server, wenn sich der Zustand ändert, unaufgefordert Informationen an die betroffenen Clients.
+%Die Kommunikation zwischen Client und Server kann als Push- oder Pull-Kommunikation realisiert werden. 
+%Bei der Pull-Kommunikation fordert der Client die benötigten Informationen vom Server an. Im Falle einer Echtzeitanwendung muss dies in regelmäßigen Abständen geschehen.
+%Bei der Push-Kommunikation sendet der Server, wenn sich der Zustand ändert, unaufgefordert Informationen an die betroffenen Clients.
+
+%Pull-Kommunikation über HTTP-Requests umgesetzt hat eine nicht hinnehmbare Verzögerung bewirkt.
+%Die finale Implementation verwendet daher Push-Kommunikation. 
+Eine spezialisierte Server-Architektur, die \textit{message passing} mit Push-Kom\-mu\-ni\-ka\-tion umsetzt, ist XMPP \cite{xmpp}. Es wurde jedoch eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen und notfalls Berechnungen auf den Server auslagern zu können.
 Im Falle mobiler Endgeräte muss Push-Kommunikation über Sockets laufen, da diese Geräte keine IP-Adresse haben.
-Pull-Kommunikation über HTTP-Requests umgesetzt hat eine nicht hinnehmbare Verzögerung bewirkt.
-Die finale Implementation verwendet daher Push-Kommunikation. Eine spezialisierte Server-Architektur, die das Publish-Subscribe-Pattern und Push-Kommunikation verwendet ist XMPP \cite{xmpp}. Es wurde eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen. Wir haben Node.js\footnote{\url{http://nodejs.org/}} und ZeroMQ\footnote{\url{http://zeromq.org/}} verglichen. 
-Beides sind asynchrone Server-Technologien.
-JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}} ist eine Implementation von ZeroMQ in Java. 
-  Wir haben uns für JeroMQ entschieden, um Server und Client in der selben Programmiersprache umsetzen zu können.
+ Wir haben die Publish-Subscribe-Architektur jeweils mit Hilfe von WebSockets und ZeroMQ\footnote{\url{http://zeromq.org/}} umgesetzt und beide Ansätze verglichen. 
+Die auf WebSockets aufbauende Lösung haben wir mit Node.js\footnote{\url{https://nodejs.org/}} implementiert.
+Die andere Lösung verwendet
+JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}}, eine Implementation von ZeroMQ in Java. 
+  Wir haben uns für JeroMQ entschieden, da es so möglich war, Server und Client in der selben Programmiersprache umzusetzen.

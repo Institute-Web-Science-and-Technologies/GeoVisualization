@@ -12,6 +12,12 @@
 \newblock \emph{A Survey of Augmented Reality}.
 \newblock 1997
 
+\bibitem[EFGK03]{eugster}
+\textsc{Eugster}, Patrick~T. ; \textsc{Felber}, Pascal~A. ; \textsc{Guerraoui},
+  Rachid  ; \textsc{Kermarrec}, Anne-Marie:
+\newblock The Many Faces of Publish/Subscribe.
+\newblock {In: }\emph{ACM Comput. Surv.} 35 (2003), Juni, Nr. 2, S. 114--131
+
 \bibitem[ESSS15]{cb}
 \textsc{Engeliena}, Marco ; \textsc{Schuldt}, Rainer ; \textsc{Szymanski},
   Przemyslaw  ; \textsc{Schmidt}, Markus:
@@ -47,9 +53,8 @@
 \bibitem[MSAM10]{xmpp}
 \textsc{Millard}, Peter ; \textsc{Saint-Andre}, Peter  ; \textsc{Meijer},
   Ralph:
-\newblock \emph{Publish-Subscribe}.
-\newblock \url{http://xmpp.org/extensions/xep-0060.html#intro}, 2010. --
-\newblock [abgerufen am 05. März 2015]
+\newblock \emph{XEP-0060: Publish-Subscribe}.
+\newblock 2010
 
 \bibitem[NZZ11]{neis}
 \textsc{Neis}, Pascal ; \textsc{Zielstra}, Dennis  ; \textsc{Zipf}, Alexander:

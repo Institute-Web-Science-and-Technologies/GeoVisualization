@@ -36,10 +36,9 @@
 \contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{22}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{23}{section.4.3}
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{24}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Publish-Subscribe-Pattern}{24}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Serverseitige vs Clientseitige Logik}{24}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}\"Ubersicht Server-Technologien}{25}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Umsetzung mit ZeroMQ}{25}{subsection.4.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Serverseitige und clientseitige Logik}{24}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Publish-Subscribe-Pattern}{25}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Server-Technologien}{25}{subsection.4.4.3}
 \contentsline {section}{\numberline {4.5}GUI}{27}{section.4.5}
 \contentsline {section}{\numberline {4.6}Sensorik}{31}{section.4.6}
 \contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{33}{chapter.5}
