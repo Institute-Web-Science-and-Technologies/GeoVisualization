@@ -1,10 +1,10 @@
-\subsection{Umgesetzte Features}
-\begin{itemize}
-	\item Integration virtueller Objekte in die physische Umgebung (s. \ref {sec:integration-virtueller-objekte-in-die-physische-umgebung})
-	\item Darstellung der physischen und virtuellen Umgebung (s. \ref{sec:darstellung-der-physischen-und-virtuellen-umgebung})
-	\item Kollision virtueller Objekte  (s. \ref{sec:kollision-virtueller-objekte})
-	\item Einsammeln von Objekten (s. \ref{sec:einsammeln-von-objekten})
-	\item Mensch-Maschine-Kommunikation (s. \ref{sec:mensch-maschine-kommunikation})
-	\item Synchronisation zwischen mobilen Endgeräten (s. \ref{sec:synchronisation-zwischen-mobilen-endgeraeten})
-	\item Chat (s. \ref{sec:chat})
-\end{itemize}
+\subsection{Umgesetzte Spielkonzepte}
+
+Es ist uns gelungen viele der angedachten Spielkonzepte im Zuge der Implementation von Snake umzusetzen.
+Durch die Karte, die die Umgebung darstellt und dabei virtuelle wie reelle Objekte einbezieht, werden mehrere Features umgesetzt, nämlich Integration virtueller Objekte in die physische Umgebung (siehe \ref {sec:integration-virtueller-objekte-in-die-physische-umgebung}) und Darstellung der physischen und virtuellen Umgebung (siehe \ref{sec:darstellung-der-physischen-und-virtuellen-umgebung}).
+Für die Spiellogik von Snake mussten die Kollision virtueller Objekte  (siehe \ref{sec:kollision-virtueller-objekte}) und das Einsammeln von Objekten (siehe \ref{sec:einsammeln-von-objekten}) implementiert werden, wobei die Objekte konkret als Schlangen und Hühner ausgeprägt sind.
+Die Mensch-Maschine-Kommunikation (siehe \ref{sec:mensch-maschine-kommunikation}) läuft bei dieser Anwendung in die eine Richtung über die graphische Ausgabe des Spielzustands mit Hilfe der Umgebungskarte. Spieler hingegen beeinflussen den Spielzustand ausschließlich, indem sie sich und damit ihr Handy bewegen.
+Über den implementierten Chat (siehe \ref{sec:chat}) können sich Spieler austauschen.
+Die einzelnen Clients synchronisieren ihren Zustand über einen speziellen Server (siehe \ref{sec:synchronisation-zwischen-mobilen-endgeraeten})
+
+

@@ -1,13 +1,34 @@
 \subsection{Spiellogik}
-Unser System besteht aus 2 Komponenten. Eine Android-App mit der gesamten Spiellogik und einem Server über den die Kommunikation zwischen den mobilen Endgeräten abläuft.
+Unser System besteht aus zwei Komponenten. Eine Android-App mit der gesamten Spiellogik und einem Server über den die Kommunikation zwischen den mobilen Endgeräten abläuft.
+
+\begin{figure}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{img/transferobject.png}
+
+     \caption{UML-Diagramm der Klasse\newline geoviz.communication.TransferObject}
+     \label{fig:transfer}
+         \end{center}
+\end{figure}
 
 \subsubsection*{Server}
-Unser Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ Request Reply Socket Paar über das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish Subscribe Socket Paar über das die Nachrichten möglichst schnell an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht bei uns aus 3 Teilen: Der Empfänger der Nachricht,  der Nachrichtentyp und der eigentlichen Nachricht. Wir nutzen ZeroMQs multipart Message Feature um diese Teile voneinander getrennt bei der Kommunikation zu übermitteln. Hauptsächlich sendet der Server Nachrichten einfach an den Empfänger, welcher entweder ein einzelner Client oder alle Clients die sich in eine Spielsession befinden ist, weiter. Des weiteren nutzen wir den Server um die Gamesessions zu verwalten. Wenn eine Nachricht vom Typ create\_game empfangen wird schreibt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine Nachricht vom Typ Get\_Gamelist anfragt.
+Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, über das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, über das die Nachrichten  an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: eine Adresse,  dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu übermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client oder alle Clients die sich in eine Spielsession befinden sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. Er speichert aber Metainformationen, um mehrere Spielinstanzen gleichzeitig verwalten zu können. Wenn eine Nachricht vom Typ \glqq create\_game\grqq empfangen wird schreibt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine entsprechende Nachricht anfragt.
+
+
+
+\begin{figure}
+\begin{center}
+    \includegraphics[width=1\textwidth]{img/snake.png}
+\end{center}
+
+     \caption{UML-Diagramm zur Spiellogik von Snake}
+     \label{fig:snake}
+\end{figure}
 
 \subsubsection*{Client}
-Unsere Android Applikation besteht aus 3 Fragmenten zwischen denen man durch wischen wechseln kann. Das erste Fragment ist ein kleiner Chat über den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden können.
+Unsere Android-Applikation besteht aus drei Fragmenten zwischen denen man durch Wischen wechseln kann. Das erste Fragment ist ein Chat über den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden können.
 Das zweite Fragment ist die Karte auf der wir unser Spiel darstellen.  
 Für die Darstellung der Karte verwenden wir GoogleMaps. 
-Im dritten Fragment kann ein Spieler eine neue Spielsession erstellen oder einem bereits laufendem Spiel beitreten. Die Liste der momentan laufenden Spiele wird per Knopfdruck vom Server abgefragt. Wenn man einer laufenden Session beitritt wird über den Server eine Anfrage des aktuellen Status des Spiels an alle momentanen Mitspieler gesendet, welche den Zustand des Spiels alle an den anfragenden Client zurück senden. Dieser beachtet nur die erste Nachricht und verwirft den Rest.
-Im Hintergrund laufen zwei Threads für die Kommunikation. Der eine kümmert sich um den Empfang von Nachrichten und beinhaltet ein ZeroMQ Subscriber Socket welches vom Publisher auf dem Server alle Nachrichten, die direkt an die ID des Clients oder die ID des Spiels in dem er sich befindet adressiert sind, empfängt. Der zweite sendet Nachrichten an den Server. Des weiteren läuft ein LocationClient welcher immer wenn ein Positionsupdate reinkommt die neue Position als Nachricht an das ganze Spiel weiterschickt. 
+Im dritten Fragment kann ein Spieler eine neue Spielinstanz erstellen oder einem bereits laufendem Spiel beitreten. Die Liste der momentan laufenden Spiele wird per Knopfdruck vom Server abgefragt. Wenn man einer laufenden Session beitritt wird über den Server eine Anfrage des aktuellen Status des Spiels an alle momentanen Mitspieler gesendet, welche den Zustand des Spiels alle an den anfragenden Client zurück senden. Dieser beachtet nur die erste Nachricht und verwirft den Rest.
+
+Im Hintergrund laufen zwei Threads für die Kommunikation. Der eine kümmert sich um den Empfang von Nachrichten und beinhaltet einen ZeroMQ-Subscriber-Socket welches vom Publisher-Socket auf dem Server alle Nachrichten, die direkt an die ID des Clients oder die ID des Spiels in dem er sich befindet adressiert sind, empfängt. Der zweite sendet Nachrichten an den Server. Des weiteren läuft ein LocationClient welcher immer, wenn die Position aktualisiert wird, die neue Position als Nachricht an alle Spieler der selben Spielinstanz weiterschickt. 
 Jeder Client überprüft nur für sich selbst ob er nahe genug an einem Zielpunkt ist um diesen aufzusammeln und sendet diese Information weiter an alle Mitspieler inklusive sich selbst. Erst beim Empfang dieser Nachricht wird die Länge der Schlange verändert und der Zielpunkt von der Karte entfernt. Die Zielpunkte werden zufällig in der Nähe von Spielern erzeugt falls die Anzahl an momentan im Spiel befindlichen Punkte einen einstellbaren Wert unterschreitet.

@@ -1,19 +1,17 @@
 \chapter{Einleitung}
-Wir haben uns damit beschäftigt Interaktivität zwischen Smartphones und dem Benutzer herzustellen. Dazu nutzen wir verschiedene Sensorik, die uns solche Geräte bieten.
+%Wir haben uns damit beschäftigt Interaktivität zwischen Smartphones und den Benutzern herzustellen. Dazu nutzen wir verschiedene Sensorik, die uns solche Geräte bieten.
 
-Was bedeutet Interaktivität für uns in diesem Zusammenhang? Wir wollen es schaffen die physische Umgebung in eine virtuelle Welt einfließen zu lassen. Umgekehrt sollen Entscheidungen in der Realität von virtuellen Ereignissen unterstützt werden.
-Smartphones bieten durch Sensorik und interaktive Kommunikation die Grundlage hierzu. So ist es möglich ortsübergreifend mit dem Spielpartner oder der Spielpartnerin zu interagieren. Dabei ist man auch ortsunabhängig im Austausch von Daten durch das Mobilfunknetz. 
-Virtuelle Realität bedeutet eine durch den Computer geschaffene Welt, in der Menschen mit dieser interagieren.
-Eine weitere Ausprägung wäre die sogenannte “Augmented Reality”. Der Unterschied zur Virtuellen Realität besteht darin, dass der Nutzer sich in der wirklichen Welt bewegt und diese mit virtuellen Informationen befüllt wird. So werden z.B. in dem dargestellten Bild einer Smartphone-Kamera zusätzliche optische Informationen eingeblendet.
+%Was bedeutet Interaktivität für uns in diesem Zusammenhang? Wir wollen es schaffen die physische Umgebung in eine virtuelle Welt einfließen zu lassen. Umgekehrt sollen Entscheidungen in der Realität von virtuellen Ereignissen unterstützt werden.
 
-Bekannte Anwendungen in diesem Gebiet sind Geocaching oder Google Ingress. Doch welche Unterschiede bietet unser Projekt dazu?
-Zum einen haben wir eine Kollisionsabfrage implementiert, die Nutzer dazu motiviert die eigene Position und die der anderen zu verfolgen. Auch muss der Spieler unseres Spiels "`Snake"' ständig in Bewegung bleiben, damit er nicht mit sich selbst kollidiert. Also haben wir eine Echtzeit Interaktivität erschaffen, wobei der Nutzer permanent aufmerksam sein muss. 
 
-Betrachten wir Smartphone Apps im Unterschied zu klassischen Computerspielen. Bei Letzteren ist man statisch und hat keine Interaktion mit der Umgebung. Eine Smartphone App bietet genau das. Der Nutzer ist nicht an den Ort gebunden und hat seine Apps, dank des portablem Smartphones, immer mit dabei. 
-Auch Computerspiele bieten Interaktivität mit anderen Nutzern, wenn man z.B. Online-Spiele nimmt, allerdings existiert beim Computer keine Sensorik um sich in der Augmented Reality zu bewegen, wie es das Smartphone schafft.
+Durch die fortlaufende technologische Entwicklung vergrößern sich Möglichkeiten und Qualität virtueller Realitäten (\textit{virtual reality}, VR) stetig.
+Während VR meist für das Eintauchen in komplett synthetisch erzeugte Welten steht, ist \textit{augmented reality} (in etwa \glqq angereicherte Realität\grqq) eine Spielart der VR, bei der virtuelle Elemente die tatsächliche Welt integriert werden \cite{azuma}. 
 
-Warum haben wir uns für Android als Plattform entschieden? Die anderen Alternativen wären iOS und Windows Phone gewesen. Zuletzt genanntes hat einen zu geringen Marktanteil \cite{android} und die Entwicklung für iOS kommt mit hohen Lizenzkosten daher.  
+Smartphones bieten durch Ortungsfunktionalität und andere Sensorik die Möglichkeit, ihre Umgebung zu erfassen und durch virtuelle Elemente anzureichern. Dadurch lassen sich interaktive Bewegungsspiele entwickeln, bei denen jeder Spieler durch sein Smartphone gleichzeitig geortet und mit Informationen über den Spielverlauf versorgt werden kann. Mobiles Internet macht es zusätzlich möglich, dass sich das Smartphone mit den Smartphones der Mitspieler und Mitspielerinnen synchronisiert. Eine solche Interaktivität zwischen maschinengestütztem Spiel und physischer Umgebung ist weder mit einem stationären Rechner, noch mit einem nicht internetfähigen Handy möglich.
+Mehrspieler-Anwendungen, die versuchen eine \textit{augmented reality} mit dem Smartphone zu erzeugen sind vorhanden (siehe Abschnitt \ref{related}). Jedoch setzen nur wenige Echtzeit-Interaktion zwischen den Spielern um und erfordern ständige Aufmerksamkeit und Bewegung von den Spielern.
 
-Im folgenden beschäftigen wir uns mit den Spielideen, den Konzepten, den technischen Lösungen und der Implementation von Beispiel-Applikationen. Zudem ziehen wir ein Fazit und geben einen kleinen Ausblick.
 
-\newpage
+Warum wird Android als Plattform genutzt, um die Beispiel-App\-li\-ka\-tio\-nen umzusetzen?  Alternativen sind iOS und Windows Phone gewesen. Zweiteres hat einen zu geringen Marktanteil \cite{android} und die Entwicklung für iOS ist mit hohen Lizenzkosten verbunden.  
+
+Im den folgenden Kapiteln beschäftigen werden zunächst verschiedene Ideen vorgestellt, wie man virtuelle Spiele in die physische Welt integrieren kann oder eine virtuelle Welt in traditionelle Bewegungsspiele eingebaut werden kann (siehe Kapitel \ref{ideen}). Danach werden Spielkonzepte genannt, die zur Umsetzung dieser Ideen benötigt werden (siehe Kapitel \ref{konzepte}). Es wird untersucht, wie sich diese Konzepte technisch umsetzen lassen (siehe Kapitel \ref{technisch}). Mit Hilfe der erarbeiteten technischen Lösungen werden einige Spielideen als Android-Apps umgesetzt (siehe Kapitel \ref{implementation}).
+
