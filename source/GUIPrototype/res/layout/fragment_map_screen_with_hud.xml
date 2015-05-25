@@ -82,6 +82,22 @@
             android:layout_height="wrap_content"
             android:text="interact" >
         </Button>
+        
+        <Button
+            android:id="@+id/fragmentButtonScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="scan" >
+        </Button>
+        
+        <Button
+            android:id="@+id/fragmentButtonToggleMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="toggle mark" >
+        </Button>
+        
+        
     </LinearLayout>
 
     <LinearLayout
@@ -138,7 +154,7 @@
             android:src="@drawable/empty_block_24x20"
             android:visibility="invisible" />
     </LinearLayout>
-	
+
     <fragment
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -149,10 +165,41 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/fragmentLinearLayoutInteractB"
         android:layout_alignLeft="@+id/linearLayoutScore"
+        android:layout_alignRight="@+id/fragmentLinearLayoutRightSide"
         android:layout_below="@+id/fragmentLinearLayoutScore"
-        android:layout_toLeftOf="@+id/fragmentLinearLayoutRightSide"
         app:cameraTargetLat="50.3511528"
         app:cameraTargetLng="7.5951959"
         app:cameraZoom="14" />
+
+    <FrameLayout
+        android:id="@+id/fragmentFrameLayoutShoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center" >
+		<LinearLayout
+        android:id="@+id/fragmentLinearLayoutShoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        	<Button
+            	android:id="@+id/fragmentButtonShoot"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:height="256dp"
+        		android:width="256dp"
+            	android:text="MARK" />
+
+    		<TextView
+    	    	android:layout_width="wrap_content"
+    	    	android:layout_height="wrap_content"
+    	    	android:layout_below="@+id/fragmentButtonShoot"
+    	    	android:text="COOOOOOOOOLDOWN"
+    	    	android:gravity="center_horizontal"
+    	    	android:width="256dp" />
+		</LinearLayout>
+    
+    </FrameLayout>
 
 </RelativeLayout>
