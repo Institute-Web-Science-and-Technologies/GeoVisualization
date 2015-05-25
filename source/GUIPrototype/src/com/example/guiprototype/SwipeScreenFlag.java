@@ -3,18 +3,20 @@ package com.example.guiprototype;
 import geoviz.game.Game;
 import geoviz.game.snake.SnakeGame;
 
-import com.example.adapter.TabsPagerAdapter;
+import geoviz.flag.adapter.TabsPagerAdapterFlag;
 
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.FrameLayout;
 
 public class SwipeScreenFlag extends SwipeScreen {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		viewPager = (ViewPager) findViewById(R.id.pager);
 				actionBar = getActionBar();
-				mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+				mAdapter = new TabsPagerAdapterFlag(getSupportFragmentManager());
 
 				viewPager.setAdapter(mAdapter);
 				actionBar.setHomeButtonEnabled(false);
@@ -47,5 +49,14 @@ public class SwipeScreenFlag extends SwipeScreen {
 				});
 
 
+	}
+
+	public void toogleMark(View view) {
+		FrameLayout shoot = (FrameLayout) findViewById(R.id.fragmentFrameLayoutShoot);
+		if (shoot.getVisibility()== View.VISIBLE){
+			shoot.setVisibility(View.GONE);
+		} else{
+			shoot.setVisibility(View.VISIBLE);
+		}
 	}
 }

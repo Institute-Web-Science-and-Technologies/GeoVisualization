@@ -13,6 +13,7 @@ public abstract class Game {
 	static Game __instance;
 	public String gameID,userID,userName;
 	public static final String TYPE_SNAKE = "0";
+	public static final String TYPE_FLAG = "1";
 	
 	public static Game getGame(){
 		return __instance;

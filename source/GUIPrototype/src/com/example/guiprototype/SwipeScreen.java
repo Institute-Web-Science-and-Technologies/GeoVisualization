@@ -285,8 +285,11 @@ public abstract class SwipeScreen extends FragmentActivity implements
 				.findFragmentByTag("android:switcher:" + R.id.pager + ":2");
 		Spinner spinner =(Spinner)findViewById(R.id.gameTypeSpinner);
 		String gameType= (String) spinner.getSelectedItem();
-
-		String gameId = Game.TYPE_SNAKE + this.userID;
+		String gameId;
+		if (gameType.compareTo("Snake")==0)
+			gameId = Game.TYPE_SNAKE + this.userID;
+		else
+			gameId = Game.TYPE_FLAG + this.userID;
 		if (gameType.compareTo("Snake")==0 && !Game.getGame().gameID.startsWith("0")){
 			Intent intent = new Intent (this, SwipeScreenSnake.class);
 			intent.putExtra(MainActivity.EXTRA_USER, userName);
@@ -371,10 +374,11 @@ public abstract class SwipeScreen extends FragmentActivity implements
 				startActivity(intent);
 			}
 		}
+		Game.init(new SnakeGame(gameID,this));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
-		if (gameID.startsWith("0"))
-			Game.init(new SnakeGame(gameID,this));
+		//if (gameID.startsWith("0"))
+		
 		//else
 		//	Game.init(new FlagGame(gameID,this));
 		poller.addSubscription(gameID);
