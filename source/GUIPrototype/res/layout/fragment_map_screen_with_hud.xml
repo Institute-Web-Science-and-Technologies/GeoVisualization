@@ -149,8 +149,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/fragmentLinearLayoutInteractB"
         android:layout_alignLeft="@+id/linearLayoutScore"
-        android:layout_alignRight="@+id/fragmentLinearLayoutRightSide"
         android:layout_below="@+id/fragmentLinearLayoutScore"
+        android:layout_toLeftOf="@+id/fragmentLinearLayoutRightSide"
         app:cameraTargetLat="50.3511528"
         app:cameraTargetLng="7.5951959"
         app:cameraZoom="14" />

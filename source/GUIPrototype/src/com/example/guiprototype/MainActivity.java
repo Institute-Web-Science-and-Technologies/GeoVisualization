@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void swipeScreen (View view){
-    	Intent intent = new Intent (this, SwipeScreen.class);
+    	Intent intent = new Intent (this, SwipeScreenSnake.class);
     	EditText editText= (EditText) findViewById(R.id.editUsername);
     	String username= editText.getText().toString();
     	intent.putExtra(EXTRA_USER, username);

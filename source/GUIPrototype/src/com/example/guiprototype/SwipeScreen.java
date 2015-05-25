@@ -39,14 +39,14 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 
-public class SwipeScreen extends FragmentActivity implements
+public abstract class SwipeScreen extends FragmentActivity implements
 		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks,
 
 		LocationListener, GooglePlayServicesClient.OnConnectionFailedListener ,GamesScreenFragmentCallbacks {
 
-	private ViewPager viewPager;
-	private TabsPagerAdapter mAdapter;
-	private ActionBar actionBar;
+	protected ViewPager viewPager;
+	protected TabsPagerAdapter mAdapter;
+	protected ActionBar actionBar;
 	public LocationClient mLocationClient;
 	private LocationRequest mLocationRequest;
 	private JeroMQPoller poller;
@@ -77,7 +77,7 @@ public class SwipeScreen extends FragmentActivity implements
 	}
 
 
-	private String[] tabs = { "Chat", "Map", "Games" };
+	protected String[] tabs = { "Chat", "Map", "Games" };
 	private Location mCurrentLocation;
 
 	private static FragmentActivity __instance;
@@ -104,17 +104,17 @@ public class SwipeScreen extends FragmentActivity implements
 		userName = intent.getStringExtra(MainActivity.EXTRA_USER);
 
 		// Initialisierung
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		actionBar = getActionBar();
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		//viewPager = (ViewPager) findViewById(R.id.pager);
+		//actionBar = getActionBar();
+		//mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
-		viewPager.setAdapter(mAdapter);
+		//viewPager.setAdapter(mAdapter);
 		// actionBar.setHomeButtonEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		//actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		__instance = this;
 
-		Game.init(new SnakeGame("0", this));
+		//Game.init(new SnakeGame("0", this));
 		//Game.init(new AntGame("0"));
 
 
@@ -125,15 +125,15 @@ public class SwipeScreen extends FragmentActivity implements
 
 
 		// Tabs der Actionbar hinzuf�gen
-		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
-		}
+		//for (String tab_name : tabs) {
+		//	actionBar.addTab(actionBar.newTab().setText(tab_name)
+		//			.setTabListener(this));
+		//}
 
 		/**
 		 * Sorgt daf�r das beim wischen den entsprechden Tab ausgew�hlt wird
 		 * */
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		/*viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int position) {
@@ -149,7 +149,7 @@ public class SwipeScreen extends FragmentActivity implements
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
 			}
-		});
+		});*/
 
 		// new JeroMQPoller(this, serverIP).poll();
 
@@ -279,7 +279,7 @@ public class SwipeScreen extends FragmentActivity implements
 				this.mCurrentLocation.getLongitude());
 	}
 
-	public void createGame(View view) {
+	/*public void createGame(View view) {
 		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager()
 				.findFragmentByTag("android:switcher:" + R.id.pager + ":2");
 		String gameId = Game.TYPE_SNAKE + this.userID;
@@ -296,8 +296,17 @@ public class SwipeScreen extends FragmentActivity implements
 	public void updateGameList(View view){
 	JeroMQQueue jmqq = JeroMQQueue.getInstance();
 	jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, userID);
+	}*/
+	public void createGame(View view){
+		Intent intent = new Intent (this, SwipeScreenFlag.class);
+    	intent.putExtra(MainActivity.EXTRA_USER, userName);
+    	startActivity(intent);
 	}
-
+	public void updateGameList(View view){
+		Intent intent = new Intent (this, SwipeScreenSnake.class);
+		intent.putExtra(MainActivity.EXTRA_USER, userName);
+		startActivity(intent);
+	}
 	public void sendMessage(View view) {
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
