@@ -19,7 +19,6 @@ public class SwipeScreenFlag extends SwipeScreen {
 				viewPager.setAdapter(mAdapter);
 				actionBar.setHomeButtonEnabled(false);
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-				Game.init(new SnakeGame("0", this));
 
 				// Tabs der Actionbar hinzuf�gen
 				for (String tab_name : tabs) {

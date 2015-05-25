@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.adapter.TabsPagerAdapter;
@@ -102,7 +103,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		// get user name
 		Intent intent = getIntent();
 		userName = intent.getStringExtra(MainActivity.EXTRA_USER);
-
+		
 		// Initialisierung
 		//viewPager = (ViewPager) findViewById(R.id.pager);
 		//actionBar = getActionBar();
@@ -119,9 +120,9 @@ public abstract class SwipeScreen extends FragmentActivity implements
 
 
 		poller = new JeroMQPoller(this);
-		poller.addSubscription("0");
 		poller.addSubscription(userID);
 		poller.poll();
+		connect(intent.getStringExtra(MainActivity.EXTRA_GAMEID));
 
 
 		// Tabs der Actionbar hinzuf�gen
@@ -279,11 +280,25 @@ public abstract class SwipeScreen extends FragmentActivity implements
 				this.mCurrentLocation.getLongitude());
 	}
 
-	/*public void createGame(View view) {
+	public void createGame(View view) {
 		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager()
 				.findFragmentByTag("android:switcher:" + R.id.pager + ":2");
-		String gameId = Game.TYPE_SNAKE + this.userID;
+		Spinner spinner =(Spinner)findViewById(R.id.gameTypeSpinner);
+		String gameType= (String) spinner.getSelectedItem();
 
+		String gameId = Game.TYPE_SNAKE + this.userID;
+		if (gameType.compareTo("Snake")==0 && !Game.getGame().gameID.startsWith("0")){
+			Intent intent = new Intent (this, SwipeScreenSnake.class);
+			intent.putExtra(MainActivity.EXTRA_USER, userName);
+			intent.putExtra(MainActivity.EXTRA_GAMEID,gameId);
+			startActivity(intent);
+		}
+		else if(gameType.compareTo("Flaggame")==0 && !Game.getGame().gameID.startsWith("1")){
+			Intent intent = new Intent(this, SwipeScreenFlag.class);
+			intent.putExtra(MainActivity.EXTRA_USER, userName);
+			intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);
+			startActivity(intent);
+		}
 		if (!gsf.games.contains(gameId)){
 		gsf.games.add(gameId);
 		}
@@ -296,8 +311,8 @@ public abstract class SwipeScreen extends FragmentActivity implements
 	public void updateGameList(View view){
 	JeroMQQueue jmqq = JeroMQQueue.getInstance();
 	jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, userID);
-	}*/
-	public void createGame(View view){
+	}
+	/*public void createGame(View view){
 		Intent intent = new Intent (this, SwipeScreenFlag.class);
     	intent.putExtra(MainActivity.EXTRA_USER, userName);
     	startActivity(intent);
@@ -306,7 +321,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		Intent intent = new Intent (this, SwipeScreenSnake.class);
 		intent.putExtra(MainActivity.EXTRA_USER, userName);
 		startActivity(intent);
-	}
+	}*/
 	public void sendMessage(View view) {
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
@@ -340,11 +355,28 @@ public abstract class SwipeScreen extends FragmentActivity implements
 
 	@Override
 	public void connect(String gameID) {
-		poller.deleteSubscription(Game.getGame().gameID);
-		Game.getGame().clearScreen();
+		if (Game.getGame()!=null){
+			poller.deleteSubscription(Game.getGame().gameID);
+			Game.getGame().clearScreen();
+			if (!Game.getGame().gameID.startsWith("0") && gameID.startsWith("0")){
+				Intent intent= new Intent(this,SwipeScreenSnake.class);
+				intent.putExtra(MainActivity.EXTRA_USER, userName);
+				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
+				startActivity(intent);
+			}
+			if (!Game.getGame().gameID.startsWith("1") && gameID.startsWith("1")){
+				Intent intent= new Intent(this,SwipeScreenFlag.class);
+				intent.putExtra(MainActivity.EXTRA_USER, userName);
+				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
+				startActivity(intent);
+			}
+		}
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
-		Game.init(new SnakeGame(gameID,this));
+		if (gameID.startsWith("0"))
+			Game.init(new SnakeGame(gameID,this));
+		//else
+		//	Game.init(new FlagGame(gameID,this));
 		poller.addSubscription(gameID);
 		
 	}

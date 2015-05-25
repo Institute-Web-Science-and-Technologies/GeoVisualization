@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import geoviz.flag.fragments.ChatScreenFragment;
-import geoviz.flag.fragments.GamesScreenFragment;
+import com.example.fragments.ChatScreenFragment;
+import com.example.fragments.GamesScreenFragment;
 import geoviz.flag.fragments.MapScreenFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter{

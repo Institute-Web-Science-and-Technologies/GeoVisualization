@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends ActionBarActivity {
-	public final static String EXTRA_USER="com.example.guiprototype";
+	public final static String EXTRA_USER="com.example.guiprototype",
+			EXTRA_GAMEID="whatever";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
     	EditText editText= (EditText) findViewById(R.id.editUsername);
     	String username= editText.getText().toString();
     	intent.putExtra(EXTRA_USER, username);
+    	intent.putExtra(EXTRA_GAMEID, "0");
     	startActivity(intent);
     	
     }

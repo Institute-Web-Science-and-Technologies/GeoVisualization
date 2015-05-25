@@ -19,8 +19,7 @@
 
     <string-array name="game_types">
         <item> Snake</item>
-        <item> Capture the Flag</item>
-        <item> PlACEHOLDER</item>
+        <item> Flaggame</item>
     </string-array>
 
     <string name="title_activity_swipes_srceen_flag">SwipesSrceenFlag</string>
