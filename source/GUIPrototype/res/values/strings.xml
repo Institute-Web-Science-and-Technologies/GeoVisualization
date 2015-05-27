@@ -25,5 +25,6 @@
     <string name="title_activity_swipes_srceen_flag">SwipesSrceenFlag</string>
     <string name="title_activity_swipe_screen_snake">SwipeScreenSnake</string>
     <string name="title_activity_swipe_screen_flag">SwipeScreenFlag</string>
+    <string name="title_activity_select_flag_team">SelectFlagTeam</string>
 
 </resources>

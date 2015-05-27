@@ -49,8 +49,8 @@ public abstract class SwipeScreen extends FragmentActivity implements
 	protected TabsPagerAdapter mAdapter;
 	protected ActionBar actionBar;
 	public LocationClient mLocationClient;
-	private LocationRequest mLocationRequest;
-	private JeroMQPoller poller;
+	protected LocationRequest mLocationRequest;
+	protected JeroMQPoller poller;
 	public List<String> gameIDs = new ArrayList<String>();
 
 	// redundant in swipescreen an dgame
@@ -79,9 +79,9 @@ public abstract class SwipeScreen extends FragmentActivity implements
 
 
 	protected String[] tabs = { "Chat", "Map", "Games" };
-	private Location mCurrentLocation;
+	protected Location mCurrentLocation;
 
-	private static FragmentActivity __instance;
+	protected static FragmentActivity __instance;
 
 	public static FragmentActivity getInstance() {
 		return __instance;
@@ -260,7 +260,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 				.sendMsg(
 						TransferObject.TYPE_COORD,
 						new LatLng(location.getLatitude(), location
-								.getLongitude()), Game.getGame().gameID);
+								.getLongitude()),location.getSpeed(), Game.getGame().gameID);
 
 	}
 
@@ -297,7 +297,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 			startActivity(intent);
 		}
 		else if(gameType.compareTo("Flaggame")==0 && !Game.getGame().gameID.startsWith("1")){
-			Intent intent = new Intent(this, SwipeScreenFlag.class);
+			Intent intent = new Intent(this, SelectFlagTeam.class);
 			intent.putExtra(MainActivity.EXTRA_USER, userName);
 			intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);
 			startActivity(intent);
@@ -368,7 +368,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 				startActivity(intent);
 			}
 			if (!Game.getGame().gameID.startsWith("1") && gameID.startsWith("1")){
-				Intent intent= new Intent(this,SwipeScreenFlag.class);
+				Intent intent= new Intent(this,SelectFlagTeam.class);
 				intent.putExtra(MainActivity.EXTRA_USER, userName);
 				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
 				startActivity(intent);

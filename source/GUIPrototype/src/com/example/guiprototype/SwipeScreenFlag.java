@@ -1,12 +1,21 @@
 package com.example.guiprototype;
 
+import com.example.fragments.MapScreenFragment;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+
 import geoviz.game.Game;
 import geoviz.game.snake.SnakeGame;
 
+import geoviz.communication.JeroMQQueue;
+import geoviz.communication.TransferObject;
 import geoviz.flag.adapter.TabsPagerAdapterFlag;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
 import android.support.v4.view.ViewPager;
@@ -19,6 +28,9 @@ import android.widget.ProgressBar;
 public class SwipeScreenFlag extends SwipeScreen {
 	
 	
+	public String userName;
+	public String gameId;
+	public String team;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);	
@@ -56,6 +68,11 @@ public class SwipeScreenFlag extends SwipeScreen {
 					}
 				});
 		
+				Intent intent =getIntent();
+				userName = intent.getStringExtra(MainActivity.EXTRA_USER);
+				gameId = intent.getStringExtra(MainActivity.EXTRA_GAMEID);
+				team = intent.getStringExtra(SelectFlagTeam.EXTRA_TEAM);
+				
 	}
 
 	public void toogleMark(View view) {
@@ -65,6 +82,23 @@ public class SwipeScreenFlag extends SwipeScreen {
 		} else{
 			shoot.setVisibility(View.VISIBLE);
 		}
+	}
+	
+	@Override
+	public void onLocationChanged(Location location){
+		this.mCurrentLocation = location;
+		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(latLng);
+		
+		if(location.getAccuracy()<MIN_GPS_QUALITY)
+			gps_quality_reached=true;
+		
+		if(gps_quality_reached)
+		JeroMQQueue.getInstance()
+				.sendMsg(
+						TransferObject.TYPE_COORD,
+						new LatLng(location.getLatitude(), location
+								.getLongitude()), Game.getGame().gameID);	
 	}
 	
 	public void addBluePoint(View view) {

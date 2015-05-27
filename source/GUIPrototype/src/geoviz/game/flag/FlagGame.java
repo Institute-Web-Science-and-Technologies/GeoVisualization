@@ -27,7 +27,13 @@ public class FlagGame extends Game {
 	}
 	@Override
 	public void update(TransferObject o) {
-		// TODO Auto-generated method stub
+		switch (o.msgType){
+		case TransferObject.TYPE_COORD:
+			if(teamA.updatePlayers(o.senderName, o.speed, o.pos)==0)
+				teamB.updatePlayers(o.senderName, o.speed, o.pos);
+			break;
+		default : break;
+		}
 
 	}
 

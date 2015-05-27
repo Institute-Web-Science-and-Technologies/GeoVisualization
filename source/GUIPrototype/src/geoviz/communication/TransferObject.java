@@ -17,12 +17,13 @@ public class TransferObject implements Serializable {
 			TYPE_SNAKE_DIED=6,
 			TYPE_JOIN_GAME=7,
 			TYPE_GAME_STATUS=8,
-			TYPE_SNAKE_WINS = 9;
+			TYPE_SNAKE_WINS = 9,
+			TYPE_PLAYER_MARKED = 10;
 	
 	public int msgType;
 	public String gameID;
 	public String msg;
-	
+	public float speed=0f;
 	public LatLng pos;
 	public java.util.Date timeStamp;
 	public String senderID;
@@ -50,6 +51,18 @@ public class TransferObject implements Serializable {
 		this.senderName = senderName;
 		this.pos=location;
 		this.gameID=gameID;
+	}
+	
+	public TransferObject(int msgType,String msg, Date timeStamp,String senderID,String senderName,LatLng location,float speed, String gameID){
+		super();
+		this.msgType=msgType;
+		this.msg = msg;
+		this.timeStamp = timeStamp;
+		this.senderID = senderID;
+		this.senderName = senderName;
+		this.pos=location;
+		this.gameID=gameID;
+		this.speed=speed;
 	}
 	
 	

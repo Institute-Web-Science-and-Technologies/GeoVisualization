@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class MainActivity extends ActionBarActivity {
 	public final static String EXTRA_USER="com.example.guiprototype",
-			EXTRA_GAMEID="whatever";
+							   EXTRA_GAMEID="whatever";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

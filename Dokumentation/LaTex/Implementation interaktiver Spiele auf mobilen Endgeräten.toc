@@ -34,22 +34,22 @@
 \contentsline {section}{\numberline {4.2}Kollisionsabfrage}{17}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{17}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{18}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{18}{section.4.3}
+\contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{19}{section.4.3}
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{19}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Serverseitige und clientseitige Logik}{19}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Publish-Subscribe-Pattern}{20}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}Server-Technologien}{21}{subsection.4.4.3}
-\contentsline {section}{\numberline {4.5}GUI}{21}{section.4.5}
+\contentsline {section}{\numberline {4.5}GUI}{22}{section.4.5}
 \contentsline {section}{\numberline {4.6}Sensorik}{25}{section.4.6}
 \contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{27}{chapter.5}
 \contentsline {section}{\numberline {5.1}Snake}{27}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Spielidee}{27}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{27}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Umgesetzte Spielkonzepte}{29}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}R\"auber und Gendarm}{30}{section.5.2}
+\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{28}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Umgesetzte Spielkonzepte}{30}{subsection.5.1.3}
+\contentsline {section}{\numberline {5.2}Flaggenspiel}{30}{section.5.2}
 \contentsline {section}{\numberline {5.3}Implementation von Beispielapps}{30}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}Spiellogik}{31}{subsection.5.3.1}
 \contentsline {subsection}{\numberline {5.3.2}Umgesetzte Features}{31}{subsection.5.3.2}
 \contentsline {chapter}{\numberline {6}Fazit}{32}{chapter.6}
 \contentsline {chapter}{\numberline {7}Ausblick}{33}{chapter.7}
-\contentsline {chapter}{\numberline {A}Messergebnisse}{34}{appendix.A}
+\contentsline {chapter}{\numberline {A}Messergebnisse}{35}{appendix.A}
