@@ -55,7 +55,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBPjERKJ5EO9td441OQfP4tSIL3OJh7re0" />
+            android:value="AIzaSyAzXpl6FdovTrQ3JutipjD2j6D9gB1qkpE" />
 
         <activity
             android:name=".MapScreenActivitySwipeable"
