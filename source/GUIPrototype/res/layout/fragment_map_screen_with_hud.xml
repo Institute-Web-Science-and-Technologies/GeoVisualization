@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/blue"
                     android:text="Blue" />
 
             </RelativeLayout>
@@ -64,7 +65,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="Red"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/red" />
 
             </RelativeLayout>
         </FrameLayout>

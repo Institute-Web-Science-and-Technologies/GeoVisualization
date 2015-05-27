@@ -55,14 +55,7 @@ public class SwipeScreenFlag extends SwipeScreen {
 					public void onPageScrollStateChanged(int arg0) {
 					}
 				});
-
-				
-	ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);
-	bluebar.getProgressDrawable().setColorFilter(Color.BLUE, Mode.SRC);
-				
-	ProgressBar redbar =(ProgressBar) findViewById(R.id.fragmentProgressRed);
-	redbar.getProgressDrawable().setColorFilter(Color.RED, Mode.SRC);
-					
+		
 	}
 
 	public void toogleMark(View view) {
@@ -75,7 +68,7 @@ public class SwipeScreenFlag extends SwipeScreen {
 	}
 	
 	public void addBluePoint(View view) {
-		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);; 
+		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);		
 		bluebar.setProgress(bluebar.getProgress()+1);
 	}
 	
