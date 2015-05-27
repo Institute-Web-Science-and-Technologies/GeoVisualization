@@ -1177,10 +1177,11 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f07001c;
+        public static final int abc_search_url_text_holo=0x7f07001d;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        public static final int blue=0x7f07001c;
         public static final int common_action_bar_splitter=0x7f07000c;
         /**  Sign-in Button Colors 
          */
@@ -1193,8 +1194,8 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f070009;
         public static final int common_signin_btn_light_text_focused=0x7f07000a;
         public static final int common_signin_btn_light_text_pressed=0x7f070008;
-        public static final int common_signin_btn_text_dark=0x7f07001d;
-        public static final int common_signin_btn_text_light=0x7f07001e;
+        public static final int common_signin_btn_text_dark=0x7f07001e;
+        public static final int common_signin_btn_text_light=0x7f07001f;
         public static final int red=0x7f07001a;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f070012;
         /** 
@@ -1214,8 +1215,8 @@ containing a value of this type.
         public static final int wallet_hint_foreground_holo_light=0x7f070014;
         public static final int wallet_holo_blue_light=0x7f070018;
         public static final int wallet_link_text_light=0x7f070019;
-        public static final int wallet_primary_text_holo_light=0x7f07001f;
-        public static final int wallet_secondary_text_holo_dark=0x7f070020;
+        public static final int wallet_primary_text_holo_light=0x7f070020;
+        public static final int wallet_secondary_text_holo_dark=0x7f070021;
         public static final int white=0x7f07001b;
     }
     public static final class dimen {
@@ -1536,8 +1537,8 @@ containing a value of this type.
         public static final int fragmentLinearLayoutScore=0x7f050078;
         public static final int fragmentLinearLayoutShoot=0x7f050086;
         public static final int fragmentProgressBarPowUp=0x7f050083;
-        public static final int fragmentProgressFana=0x7f05007e;
-        public static final int fragmentProgressHaer=0x7f05007d;
+        public static final int fragmentProgressBlue=0x7f05007d;
+        public static final int fragmentProgressRed=0x7f05007e;
         public static final int fragmentScrollView1=0x7f050072;
         public static final int gameListView=0x7f050075;
         public static final int gameTypeSpinner=0x7f050077;

@@ -7,13 +7,21 @@ import geoviz.flag.adapter.TabsPagerAdapterFlag;
 
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+
+
 
 public class SwipeScreenFlag extends SwipeScreen {
+	
+	
+	
 	protected void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);	
 		viewPager = (ViewPager) findViewById(R.id.pager);
 				actionBar = getActionBar();
 				mAdapter = new TabsPagerAdapterFlag(getSupportFragmentManager());
@@ -48,7 +56,13 @@ public class SwipeScreenFlag extends SwipeScreen {
 					}
 				});
 
-
+				
+	ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);
+	bluebar.getProgressDrawable().setColorFilter(Color.BLUE, Mode.SRC);
+				
+	ProgressBar redbar =(ProgressBar) findViewById(R.id.fragmentProgressRed);
+	redbar.getProgressDrawable().setColorFilter(Color.RED, Mode.SRC);
+					
 	}
 
 	public void toogleMark(View view) {
@@ -58,5 +72,24 @@ public class SwipeScreenFlag extends SwipeScreen {
 		} else{
 			shoot.setVisibility(View.VISIBLE);
 		}
+	}
+	
+	public void addBluePoint(View view) {
+		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);; 
+		bluebar.setProgress(bluebar.getProgress()+1);
+	}
+	
+	public void addRedPoint(View view) {
+		ProgressBar redbar =(ProgressBar) findViewById(R.id.fragmentProgressRed);
+		redbar.setProgress(redbar.getProgress()+1);
+	}
+	
+	public void resetPoints(View view) {
+		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);
+		bluebar.setProgress(0);
+		
+		ProgressBar redbar =(ProgressBar) findViewById(R.id.fragmentProgressRed);
+		redbar.setProgress(0);
+		
 	}
 }

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content" >
 
             <ProgressBar
-                android:id="@+id/fragmentProgressHaer"
+                android:id="@+id/fragmentProgressBlue"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -37,7 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Jormungand" />
+                    android:text="Blue" />
+
             </RelativeLayout>
         </FrameLayout>
 
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content" >
 
             <ProgressBar
-                android:id="@+id/fragmentProgressFana"
+                android:id="@+id/fragmentProgressRed"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -62,7 +63,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Quetzalcoatl" />
+                    android:text="Red"
+                    android:textColor="@color/blue" />
+
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
@@ -80,6 +83,7 @@
             android:id="@+id/fragmentButtonInteract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="addBluePoint"
             android:text="interact" >
         </Button>
         
@@ -87,6 +91,7 @@
             android:id="@+id/fragmentButtonScan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="addRedPoint"
             android:text="scan" >
         </Button>
         
@@ -190,6 +195,7 @@
             	android:id="@+id/fragmentButtonShoot"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
+            	android:onClick="resetPoints"
             	android:height="256dp"
         		android:width="256dp"
             	android:text="MARK" />
