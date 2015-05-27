@@ -21,8 +21,8 @@ import android.view.ViewGroup;
 
 import com.example.guiprototype.R;
 
-import com.google.android.gms.internal.lc;
-import com.google.android.gms.location.LocationClient;
+//import com.google.android.gms.internal.lc;
+//import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +32,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -91,7 +92,10 @@ public class MapScreenFragment extends Fragment {
 	public void drawLine() {
 		
 	}
-	
+
+	public Circle initCircle(){
+		return mMap.addCircle(new CircleOptions().radius(1));
+	}
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 	    this.setUpMapIfNeeded();
