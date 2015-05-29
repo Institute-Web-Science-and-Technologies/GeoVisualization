@@ -18,7 +18,10 @@ public class TransferObject implements Serializable {
 			TYPE_JOIN_GAME=7,
 			TYPE_GAME_STATUS=8,
 			TYPE_SNAKE_WINS = 9,
-			TYPE_PLAYER_MARKED = 10;
+			TYPE_PLAYER_MARKED = 10,
+			TYPE_JOIN_TEAM = 11;
+
+
 	
 	public int msgType;
 	public String gameID;

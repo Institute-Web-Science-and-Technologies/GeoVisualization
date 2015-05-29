@@ -28,8 +28,6 @@ import android.widget.ProgressBar;
 public class SwipeScreenFlag extends SwipeScreen {
 	
 	
-	public String userName;
-	public String gameId;
 	public String team;
 	
 	protected void onCreate(Bundle savedInstanceState){
@@ -69,9 +67,9 @@ public class SwipeScreenFlag extends SwipeScreen {
 				});
 		
 				Intent intent =getIntent();
-				userName = intent.getStringExtra(MainActivity.EXTRA_USER);
-				gameId = intent.getStringExtra(MainActivity.EXTRA_GAMEID);
 				team = intent.getStringExtra(SelectFlagTeam.EXTRA_TEAM);
+				JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM, team, intent.getStringExtra(MainActivity.EXTRA_GAMEID));
 				
 	}
 
@@ -98,7 +96,7 @@ public class SwipeScreenFlag extends SwipeScreen {
 				.sendMsg(
 						TransferObject.TYPE_COORD,
 						new LatLng(location.getLatitude(), location
-								.getLongitude()), Game.getGame().gameID);	
+								.getLongitude()),location.getSpeed(), Game.getGame().gameID);	
 	}
 	
 	public void addBluePoint(View view) {

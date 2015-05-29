@@ -40,6 +40,12 @@ public class Player {
 			}
 		});
 	}
+	
+	public Player(Team team, String name, LatLng pos, float speed, long lastMarkedAt){
+		this.team= team;
+		final SwipeScreen activity = team.getGame().getActivity();
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;
@@ -100,9 +106,7 @@ public class Player {
 	public boolean isVisible(){
 		return (((new Date().getTime() - lastMarkedAt) < Const.markedInms) || speed > Const.maxspeed);
 	}
-	public void setPos(LatLng pos){
-		this.position=pos;
-	}
+
 	public void setSpeed(float speed){
 		this.speed=speed;
 	}

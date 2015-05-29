@@ -260,7 +260,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 				.sendMsg(
 						TransferObject.TYPE_COORD,
 						new LatLng(location.getLatitude(), location
-								.getLongitude()),location.getSpeed(), Game.getGame().gameID);
+								.getLongitude()), Game.getGame().gameID);
 
 	}
 

@@ -36,7 +36,9 @@ public class JeroMQPoller {
 
 		subscriptions = new LinkedList<String>();
 	}
-
+	public List<String> getSubscriptions(){
+		return subscriptions;
+	}
 	public void addSubscription(String id) {
 		if (!subscriptions.contains(id))
 			subscriptions.add(id);
