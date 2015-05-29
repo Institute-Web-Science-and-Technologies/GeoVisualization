@@ -5,34 +5,31 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@drawable/flammen"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.guiprototype.SelectFlagTeam" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/Red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@color/red"
-        android:text="Red"
         android:height="200dp"
-        android:width="256dp"
-        android:onClick="selectedRed"
-        android:textColor="@color/blue" />
+        android:onClick="sRed"
+        android:text="Red"
+        android:width="256dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/Blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/blue"
-        android:text="Blue"
-        android:onClick="selectedBlue"
-        android:textColor="@color/red"
         android:height="200dp"
+        android:onClick="sBlue"
+        android:text="Blue"
         android:width="256dp" />
 
 </RelativeLayout>

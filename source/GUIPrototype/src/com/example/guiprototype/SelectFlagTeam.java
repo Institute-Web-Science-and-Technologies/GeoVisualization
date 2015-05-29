@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class SelectFlagTeam extends Activity {
 	public static final String EXTRA_TEAM ="ihavenoideawhatthisisfor";
@@ -32,7 +33,7 @@ public class SelectFlagTeam extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	public void selectedBlue(){
+	public void sBlue(View view){
 		Intent intent = getIntent();
 		String userName = intent.getStringExtra(MainActivity.EXTRA_USER);
 		String gameId = intent.getStringExtra(MainActivity.EXTRA_GAMEID);
@@ -43,7 +44,7 @@ public class SelectFlagTeam extends Activity {
 		startActivity(intent);
 		
 	}
-	public void selectedRed(){
+	public void sRed(View view){
 		Intent intent = getIntent();
 		String userName = intent.getStringExtra(MainActivity.EXTRA_USER);
 		String gameId = intent.getStringExtra(MainActivity.EXTRA_GAMEID);
