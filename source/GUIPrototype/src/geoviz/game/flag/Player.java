@@ -28,7 +28,7 @@ public class Player {
 		lastMarkedAt = 0;
 		team.getGame().getActivity().runOnUiThread(new Runnable(){
 
-
+			
 
 			@Override
 			public void run() {
@@ -41,10 +41,25 @@ public class Player {
 		});
 	}
 	
-	public Player(Team team, String name, LatLng pos, float speed, long lastMarkedAt){
+	public Player(Team team, String name, LatLng pos, float speed, long lastMarkedAt, boolean playerInTeam){
 		this.team= team;
 		final SwipeScreen activity = team.getGame().getActivity();
 		this.name = name;
+		this.speed = 0;
+		this.lastMarkedAt = lastMarkedAt;
+		team.getGame().getActivity().runOnUiThread(new Runnable(){
+
+
+
+			@Override
+			public void run() {
+
+				MapScreenFragment msf = (MapScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
+				posMarker = msf.initCircle();
+			}
+		
+		});
+		updatePlayer(speed,pos,playerInTeam);
 	}
 
 	public String getName() {

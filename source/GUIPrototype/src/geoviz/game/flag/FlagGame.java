@@ -78,13 +78,13 @@ public class FlagGame extends Game {
 					for (Player player : teamRed.players){
 						if (player.getName().contentEquals(tfg2.teamRed.get(i))){
 							playerExists = true;
-							player.setSpeed(tfg2.teamRedSpeed.get(i));
 							player.setLastMarkedAt(tfg2.teamRedLMA.get(i));
-							player.setPosition(tfg2.teamRedPos.get(i));
+							player.updatePlayer(tfg2.teamRedSpeed.get(i), tfg2.teamRedPos.get(i), teamRed.userInTeam);
+
 						}
 					}
 					if (!playerExists){
-						teamRed.addPlayer(new Player())
+						teamRed.addPlayer(new Player(teamRed,tfg2.teamRed.get(i),tfg2.teamRedPos.get(i),tfg2.teamRedSpeed.get(i),tfg2.teamRedLMA.get(i),teamRed.userInTeam));
 					}
 				}
 			}
