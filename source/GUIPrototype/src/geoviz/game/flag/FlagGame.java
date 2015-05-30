@@ -3,6 +3,8 @@ package geoviz.game.flag;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.graphics.Color;
+
 import com.example.guiprototype.SwipeScreen;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -23,8 +25,8 @@ public class FlagGame extends Game {
 	public FlagGame(String gameID, SwipeScreen swipescreen,String team){
 		this.gameID=gameID;
 		this.swipeScreen=swipescreen;
-		teamRed = new Team();
-		teamBlue = new Team();
+		teamRed = new Team(Color.RED);
+		teamBlue = new Team(Color.BLUE);
 		if(team.contentEquals("teamBlue")){
 			teamBlue.userInTeam= true;
 		}
@@ -102,6 +104,24 @@ public class FlagGame extends Game {
 					}
 				}
 			}
+			break;
+		case TransferObject.TYPE_PLAYER_MARKED:
+			for (Player p:teamBlue.players){
+				if (p.getName().contentEquals(o.msg)){
+					p.setLastMarkedAt(o.timeStamp.getTime());
+				}
+			}
+			for (Player p:teamRed.players){
+				if (p.getName().contentEquals(o.msg)){
+					p.setLastMarkedAt(o.timeStamp.getTime());
+				}
+			}
+			break;
+		case TransferObject.TYPE_JOIN_TEAM:
+			if (o.msg.contentEquals("teamBlue"))
+				teamBlue.addPlayer(new Player(teamBlue,o.senderName));
+			else 
+				teamRed.addPlayer(new Player(teamRed,o.senderName));
 			break;
 		default : break;
 		}

@@ -31,8 +31,6 @@ public class Player {
 		lastMarkedAt = 0;
 		team.getGame().getActivity().runOnUiThread(new Runnable(){
 
-			
-
 			@Override
 			public void run() {
 
@@ -42,6 +40,7 @@ public class Player {
 
 			}
 		});
+		posMarker.setFillColor(team.color);
 	}
 	
 	public Player(Team team, String name, LatLng pos, float speed, long lastMarkedAt, boolean playerInTeam){
@@ -51,17 +50,13 @@ public class Player {
 		this.speed = 0;
 		this.lastMarkedAt = lastMarkedAt;
 		team.getGame().getActivity().runOnUiThread(new Runnable(){
-
-
-
 			@Override
 			public void run() {
-
 				MapScreenFragment msf = (MapScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-				posMarker = msf.initCircle();
+				posMarker = msf.initCircle();	
 			}
-		
 		});
+		posMarker.setFillColor(team.color);
 		updatePlayer(speed,pos,playerInTeam);
 	}
 
@@ -134,12 +129,10 @@ public class Player {
 		this.speed= speed;
 		if (userInTeam){
 			posMarker.setCenter(pos);
-			posMarker.setFillColor(100);
 			posMarker.setVisible(true);
 		}
 		else if (isVisible()){
 			posMarker.setCenter(pos);
-			posMarker.setFillColor(200);
 			posMarker.setVisible(true);
 		}
 		else {

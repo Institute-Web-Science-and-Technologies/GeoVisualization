@@ -138,6 +138,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 		 
 		 */
 		float orientationAngle = (float) Math.toDegrees(orientationValues[0]);
+		if (orientationAngle < 0) orientationAngle = 360f - orientationAngle;
 		FlagGame flaggame = (FlagGame) Game.getGame();
 		if (flaggame.getTeamBlue().userInTeam){
 			for (Player player : flaggame.getTeamRed().players){
@@ -145,8 +146,9 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 				pl.setLatitude(player.getPosition().latitude);
 				pl.setLongitude(player.getPosition().longitude);
 				
-				if(Functions.distance(this.getOwnLocation(), player.getPosition()) == Const.markerRange && ( mCurrentLocation.bearingTo(pl)>= orientationAngle - (Const.markerAngleInDegree/2) && mCurrentLocation.bearingTo(pl) <= orientationAngle + (Const.markerAngleInDegree/2))){
-					
+				if(Functions.distance(this.getOwnLocation(), player.getPosition()) <= Const.markerRange && ( mCurrentLocation.bearingTo(pl)>= orientationAngle - (Const.markerAngleInDegree/2) && mCurrentLocation.bearingTo(pl) <= orientationAngle + (Const.markerAngleInDegree/2))){
+					JeroMQQueue jmqq = JeroMQQueue.getInstance();
+					jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED, player.getName(), flaggame.gameID);
 				}
 			}
 		} else{
@@ -155,8 +157,9 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 				pl.setLatitude(player.getPosition().latitude);
 				pl.setLongitude(player.getPosition().longitude);
 				
-				if(Functions.distance(this.getOwnLocation(), player.getPosition()) == Const.markerRange && ( mCurrentLocation.bearingTo(pl)>= orientationAngle - (Const.markerAngleInDegree/2) && mCurrentLocation.bearingTo(pl) <= orientationAngle + (Const.markerAngleInDegree/2))){
-				
+				if(Functions.distance(this.getOwnLocation(), player.getPosition()) <= Const.markerRange && ( mCurrentLocation.bearingTo(pl)>= orientationAngle - (Const.markerAngleInDegree/2) && mCurrentLocation.bearingTo(pl) <= orientationAngle + (Const.markerAngleInDegree/2))){
+					JeroMQQueue jmqq = JeroMQQueue.getInstance();
+					jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED, player.getName(), flaggame.gameID);
 				}
 			}
 			

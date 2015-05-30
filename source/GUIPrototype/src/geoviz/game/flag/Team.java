@@ -15,8 +15,9 @@ public class Team {
 	public LatLng flag;
 	private FlagGame game;
 	public boolean userInTeam;
+	int color;
 
-	public Team(){
+	public Team(int color){
 		points=0;
 		players= new LinkedList<Player>();
 	}
