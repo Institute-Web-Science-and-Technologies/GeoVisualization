@@ -14,7 +14,7 @@ public class Team {
 	public LatLng base;
 	public LatLng flag;
 	private FlagGame game;
-	boolean userInTeam;
+	public boolean userInTeam;
 
 	public Team(){
 		points=0;

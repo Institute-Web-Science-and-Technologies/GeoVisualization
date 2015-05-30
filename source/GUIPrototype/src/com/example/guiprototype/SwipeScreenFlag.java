@@ -5,7 +5,11 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 
+import geoviz.game.Functions;
 import geoviz.game.Game;
+import geoviz.game.flag.Const;
+import geoviz.game.flag.FlagGame;
+import geoviz.game.flag.Player;
 import geoviz.game.snake.SnakeGame;
 
 import geoviz.communication.JeroMQQueue;
@@ -37,7 +41,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 	float[] grav=new float[9];
 	float[] mag=new float[9];
 	
-	float values []=new float [3];
+	float orientationValues []=new float [3];
 	
 	public String team;
 	
@@ -125,6 +129,41 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 								.getLongitude()),location.getSpeed(), Game.getGame().gameID);	
 	}
 	
+	public void markPlayer(View view) {
+		
+		/*
+		for(PLAYER P DER NICHT NUR ALS STRING EXISTIEREN SOLLTE : LISTE ALLER SPIELER
+		float bearingToPlayer = mCurrentLocation.bearingTo(LOCATION_OF_A_PLAYER)
+		mCurrentLocation.distanceTo(LOCATION OF A PLAYER);
+		 
+		 */
+		float orientationAngle = (float) Math.toDegrees(orientationValues[0]);
+		FlagGame flaggame = (FlagGame) Game.getGame();
+		if (flaggame.getTeamBlue().userInTeam){
+			for (Player player : flaggame.getTeamRed().players){
+				Location pl = new Location("pl");
+				pl.setLatitude(player.getPosition().latitude);
+				pl.setLongitude(player.getPosition().longitude);
+				
+				if(Functions.distance(this.getOwnLocation(), player.getPosition()) == Const.markerRange && ( mCurrentLocation.bearingTo(pl)>= orientationAngle - (Const.markerAngleInDegree/2) && mCurrentLocation.bearingTo(pl) <= orientationAngle + (Const.markerAngleInDegree/2))){
+					
+				}
+			}
+		} else{
+			for (Player player : flaggame.getTeamRed().players){
+				Location pl = new Location("pl");
+				pl.setLatitude(player.getPosition().latitude);
+				pl.setLongitude(player.getPosition().longitude);
+				
+				if(Functions.distance(this.getOwnLocation(), player.getPosition()) == Const.markerRange && ( mCurrentLocation.bearingTo(pl)>= orientationAngle - (Const.markerAngleInDegree/2) && mCurrentLocation.bearingTo(pl) <= orientationAngle + (Const.markerAngleInDegree/2))){
+				
+				}
+			}
+			
+		}
+		
+		
+	}
 	public void addBluePoint(View view) {
 		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);		
 		bluebar.setProgress(bluebar.getProgress()+1);
@@ -161,7 +200,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 				float [] I=new float[9];
 				boolean success =SensorManager.getRotationMatrix(R, I, grav, mag);
 				if (success){
-					SensorManager.getOrientation(R, values);
+					SensorManager.getOrientation(R, orientationValues);
 				}
 		}
 		

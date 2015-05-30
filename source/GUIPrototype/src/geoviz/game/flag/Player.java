@@ -2,6 +2,8 @@ package geoviz.game.flag;
 
 import java.util.Date;
 
+import android.location.Location;
+
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
@@ -12,6 +14,7 @@ public class Player {
 	private String name;
 	private String id;
 	private LatLng position;
+	private Location location;
 	private boolean hasFlag;
 	private long lastMarkedAt;
 	private float speed;
