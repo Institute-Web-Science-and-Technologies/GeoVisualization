@@ -18,6 +18,10 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,8 +29,15 @@ import android.widget.ProgressBar;
 
 
 
-public class SwipeScreenFlag extends SwipeScreen {
+public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 	
+	Sensor accelerometer;
+	Sensor magnetometer;
+	private SensorManager sm;
+	float[] grav=new float[9];
+	float[] mag=new float[9];
+	
+	float values []=new float [3];
 	
 	public String team;
 	
@@ -70,7 +81,10 @@ public class SwipeScreenFlag extends SwipeScreen {
 				team = intent.getStringExtra(SelectFlagTeam.EXTRA_TEAM);
 				JeroMQQueue jmqq = JeroMQQueue.getInstance();
 				jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM, team, intent.getStringExtra(MainActivity.EXTRA_GAMEID));
-				
+	
+				sm=(SensorManager)getSystemService(SENSOR_SERVICE);
+				accelerometer=sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+				magnetometer=sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 	}
 
 	public void toogleMark(View view) {
@@ -82,6 +96,18 @@ public class SwipeScreenFlag extends SwipeScreen {
 		}
 	}
 	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		sm.registerListener(this,accelerometer,sm.SENSOR_DELAY_UI);
+		sm.registerListener(this,magnetometer,sm.SENSOR_DELAY_UI);
+	}
+	
+	@Override
+	protected void onPause(){
+		super.onPause();
+		sm.unregisterListener(this);
+	}
 	@Override
 	public void onLocationChanged(Location location){
 		this.mCurrentLocation = location;
@@ -115,6 +141,29 @@ public class SwipeScreenFlag extends SwipeScreen {
 		
 		ProgressBar redbar =(ProgressBar) findViewById(R.id.fragmentProgressRed);
 		redbar.setProgress(0);
+		
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		//Getting the Orientation
+		if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) grav=event.values;
+		if (event.sensor.getType()==Sensor.TYPE_MAGNETIC_FIELD) mag=event.values;
+		if (grav!=null && mag!=null){
+				
+			float [] R=new float[9]; 
+				float [] I=new float[9];
+				boolean success =SensorManager.getRotationMatrix(R, I, grav, mag);
+				if (success){
+					SensorManager.getOrientation(R, values);
+				}
+		}
 		
 	}
 }
