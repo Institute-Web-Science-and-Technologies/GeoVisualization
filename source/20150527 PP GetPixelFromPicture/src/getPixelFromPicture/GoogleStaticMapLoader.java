@@ -28,7 +28,7 @@ public class GoogleStaticMapLoader {
 			xy[0]=x+(180 / Math.PI) * (Math.random() * radius / 6378137);
 			xy[1]=y+ (180 / Math.PI) * (Math.random() * radius / 6378137)
 					/ Math.cos(Math.PI / 180.0 * x);
-			String s="https://maps.googleapis.com/maps/api/staticmap?center="+xy[0]+","+xy[1]+"&zoom=20&size=1x1&key=AlzaSyADfFDCH3mrZQc6Y3Vxj7m5_l-8I1JBAHQ";
+			String s="https://maps.googleapis.com/maps/api/staticmap?center="+xy[0]+","+xy[1]+"&zoom=20&size=1x1&key=AIzaSyADfFDCH3mrZQc6Y3Vxj7m5_l-8I1JBAHQ";
 			URL url=new URL(s);
 			this.img=ImageIO.read(url);
 			ic.setImage(img);
