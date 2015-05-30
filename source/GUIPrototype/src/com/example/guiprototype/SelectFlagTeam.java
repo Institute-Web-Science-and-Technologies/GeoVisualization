@@ -40,7 +40,7 @@ public class SelectFlagTeam extends Activity {
 		intent = new Intent(this, SwipeScreenFlag.class);
 		intent.putExtra(MainActivity.EXTRA_USER, userName);
 		intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);
-		intent.putExtra(EXTRA_TEAM, "0");
+		intent.putExtra(EXTRA_TEAM, "teamBlue");
 		startActivity(intent);
 		
 	}
@@ -51,7 +51,7 @@ public class SelectFlagTeam extends Activity {
 		intent = new Intent(this, SwipeScreenFlag.class);
 		intent.putExtra(MainActivity.EXTRA_USER, userName);
 		intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);
-		intent.putExtra(EXTRA_TEAM, "1");
+		intent.putExtra(EXTRA_TEAM, "teamRed");
 		startActivity(intent);
 		
 	}

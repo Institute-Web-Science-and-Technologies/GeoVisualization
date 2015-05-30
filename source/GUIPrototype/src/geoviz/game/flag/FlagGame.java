@@ -19,7 +19,21 @@ public class FlagGame extends Game {
 	private Team teamRed;
 	private Team teamBlue;
 	private Gson gson = new GsonBuilder().create();
-
+	
+	public FlagGame(String gameID, SwipeScreen swipescreen,String team){
+		this.gameID=gameID;
+		this.swipeScreen=swipescreen;
+		teamRed = new Team();
+		teamBlue = new Team();
+		if(team.contentEquals("teamBlue")){
+			teamBlue.userInTeam= true;
+		}
+		else {
+			teamRed.userInTeam = true;
+		}
+		
+	}
+	
 	public Team getTeamRed() {
 		return teamRed;
 	}
