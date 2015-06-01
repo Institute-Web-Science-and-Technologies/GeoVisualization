@@ -13,8 +13,8 @@ Alternativ kann man die Logik vorrangig clientseitig implementieren.
 Dabei müssen die (Fat-)Clients  den Großteil der Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte, während der Server entlastet wird. 
 Aktuelle Smartphones könnten die entwickelte Anwendung jedoch mühelos ausführen.
 %Diese haben sich als genügend leistungsfähig erwiesen.
-Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Echtzeitsystemen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
-Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. Beispielsweise muss bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, wie die Sichtbarkeit für andere Spieler, die der Fat-Client selber berechnet.
+Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
+Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. Im implementierten Capture-the-Flag-Spielmodus muss beispielsweise bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, wie die Sichtbarkeit für andere Spieler, die der Fat-Client selber berechnet.
 Dieser Punkt war ausschlaggebend, da bei mobilen Endgeräten die Internet-Bandbreite eine stark limitierte Ressource ist \cite{schaeffer}.
 
 Ein großer Vorteil bei mobilen Anwendungen ist, dass im Falle einer unterbrochenen Internetverbindung Fat-Clients einige Zeit autonom ohne Kontakt mit dem Server weiterarbeiten können. Je länger die Unterbrechung jedoch andauert, desto gravierender unterscheiden sich die Zustände der einzelnen Clients.
@@ -34,13 +34,13 @@ Ein großer Vorteil bei mobilen Anwendungen ist, dass im Falle einer unterbrochen
 \end{center}
 
 \subsection{Publish-Subscribe-Pattern}
-Publish-Subscribe-Pattern ist ein alternativer Name für das Beobachter-Muster (\textit{observer pattern}), der besonders die Übertragung dieses Entwurfsmusters auf die Server-Client-Kommunikation bezeichnet.
-Die Kommunikation zwischen Server und Client wird dabei als Push-Kommunikation umgesetzt:
+Das Publish-Subscribe-Pattern ist ein Entwurfsmuster für Server-Client -Kommunikation. Es gleicht dem Beobachter-Muster (\textit{observer pattern}).
+Die Kommunikation zwischen Server und Client wird dabei als Push"=Kommunikation umgesetzt:
 Die Clients nehmen die Rolle des Subscribers ein. Jeder Client meldet sich beim Server, der in der Rolle des Publishers fungiert, für bestimmte Typen von Nachrichten an. Tritt ein bestimmtes Ereignis auf, beispielsweise eine Änderung des Server-Zustands, informiert der Server aktiv alle Clients, die diese Art Ereignis abonniert haben, und schickt jedem eine Nachricht \cite{xmpp, eugster}.
 
 Im Gegensatz dazu wird bei der Pull-Kommunikation der Server ausschließlich auf Anfrage eines Clients aktiv. Falls der Client nicht bloß einzelne Berechnungen auf den Server auslagern soll, sondern Informationen über externe Ereignisse braucht, muss er in regelmäßigen Abständen diese Informationen beim Server anfragen. 
 Dies verbraucht zusätzliche Bandbreite und führt zu einer Verzögerung der Aktualisierung des Client-Zustands. Da die Bandbreite bei mobilen Geräten von vielen Faktoren negativ beeinflusst werden kann und Verzögerungen bei einem interaktiven Spiel stören können, wurden beide Faktoren als kritisch eingestuft. Daher wurde Push-Kommunikation verwendet. 
 
-Die Kommunikation zwischen Server und Client haben wir mit Hilfe von \textit{message passing} realisiert. \textit{Message passing} ist eine Abwandlung des Publish-Subscribe-Patterns, bei dem der Server keinen Zustand hält, sondern bloß eingehende Nachrichten an alle Clients weiterleitet, die den entsprechen Nachrichtentyp abonniert haben.
+Die Kommunikation zwischen Server und Client haben wir mit Hilfe von \textit{message passing} realisiert. \textit{Message passing} ist eine Variante des Publish"=Subscribe"=Patterns, bei dem der Server keinen Zustand hält, sondern bloß eingehende Nachrichten an alle Clients weiterleitet, die den entsprechen Nachrichtentyp abonniert haben.
 Dabei werden alle Berechnungen vom Client ausgeführt.
 Dadurch verringert sich die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{eugster}.

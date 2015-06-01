@@ -38,7 +38,7 @@
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{21}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Serverseitige und clientseitige Logik}{21}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Publish-Subscribe-Pattern}{22}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Server-Technologien}{22}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.3}Server-Technologien}{23}{subsection.4.4.3}
 \contentsline {section}{\numberline {4.5}GUI}{23}{section.4.5}
 \contentsline {section}{\numberline {4.6}Sensorik}{27}{section.4.6}
 \contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{29}{chapter.5}
