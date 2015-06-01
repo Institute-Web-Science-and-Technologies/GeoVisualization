@@ -131,12 +131,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 	
 	public void markPlayer(View view) {
 		
-		/*
-		for(PLAYER P DER NICHT NUR ALS STRING EXISTIEREN SOLLTE : LISTE ALLER SPIELER
-		float bearingToPlayer = mCurrentLocation.bearingTo(LOCATION_OF_A_PLAYER)
-		mCurrentLocation.distanceTo(LOCATION OF A PLAYER);
-		 
-		 */
+		
 		float orientationAngle = (float) Math.toDegrees(orientationValues[0]);
 		if (orientationAngle < 0) orientationAngle = 360f - orientationAngle;
 		FlagGame flaggame = (FlagGame) Game.getGame();
@@ -167,6 +162,34 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener{
 		
 		
 	}
+	
+	public void scan (View view){
+		FlagGame flaggame = (FlagGame) Game.getGame();
+		
+		if (flaggame.getTeamBlue().userInTeam){
+			for (Player player : flaggame.getTeamRed().players){
+				Location pl = new Location("pl");
+				pl.setLatitude(player.getPosition().latitude);
+				pl.setLongitude(player.getPosition().longitude);
+				
+				if(Functions.distance(this.getOwnLocation(), player.getPosition()) <= Const.markerRange){
+					player.getPosMarker().setVisible(true);
+				}
+			}
+		} else{
+			for (Player player : flaggame.getTeamRed().players){
+				Location pl = new Location("pl");
+				pl.setLatitude(player.getPosition().latitude);
+				pl.setLongitude(player.getPosition().longitude);
+				
+				if(Functions.distance(this.getOwnLocation(), player.getPosition()) <= Const.markerRange){
+					player.getPosMarker().setVisible(true);
+				}
+			}
+			
+		}
+	}
+	
 	public void addBluePoint(View view) {
 		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);		
 		bluebar.setProgress(bluebar.getProgress()+1);
