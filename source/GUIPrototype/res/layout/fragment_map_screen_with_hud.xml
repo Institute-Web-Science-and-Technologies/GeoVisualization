@@ -196,12 +196,13 @@
             	android:id="@+id/fragmentButtonShoot"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
-            	android:onClick="resetPoints"
+            	android:onClick="markPlayer"
             	android:height="256dp"
         		android:width="256dp"
             	android:text="MARK" />
 
     		<TextView
+    	    	android:id="@+id/fragmentMarkCooldown"
     	    	android:layout_width="wrap_content"
     	    	android:layout_height="wrap_content"
     	    	android:layout_below="@+id/fragmentButtonShoot"
