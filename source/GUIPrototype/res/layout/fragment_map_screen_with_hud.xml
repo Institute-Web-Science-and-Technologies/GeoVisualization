@@ -1,12 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.guiprototype.MapScreen" xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.example.guiprototype.MapScreen" >
 
     <LinearLayout
         android:id="@+id/fragmentLinearLayoutScore"
@@ -25,7 +26,7 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:max="100"
+                android:max="10"
                 android:progress="0" />
 
             <RelativeLayout
@@ -37,9 +38,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/blue"
-                    android:text="Blue" />
-
+                    android:text="Blue"
+                    android:textColor="@color/blue" />
             </RelativeLayout>
         </FrameLayout>
 
@@ -66,7 +66,6 @@
                     android:layout_centerVertical="true"
                     android:text="Red"
                     android:textColor="@color/red" />
-
             </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
@@ -77,25 +76,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:gravity="left"
+        android:gravity="bottom"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/fragmentButtonInteract"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addBluePoint"
-            android:text="interact" >
-        </Button>
-        
-        <Button
-            android:id="@+id/fragmentButtonScan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addRedPoint"
-            android:text="scan" >
-        </Button>
-        
         <Button
             android:id="@+id/fragmentButtonToggleMark"
             android:layout_width="wrap_content"
@@ -103,8 +86,38 @@
             android:onClick="toogleMark"
             android:text="toggle mark" >
         </Button>
-        
-        
+
+        <LinearLayout
+            android:id="@+id/fragmentLinearLayoutScanCooldown"
+       	 	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:gravity="left"
+        	android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fragmentScanCooldown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cooldown" >
+            </TextView>
+            <Button
+                android:id="@+id/fragmentButtonScan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="addRedPoint"
+                android:text="scan" >
+            </Button>
+
+            
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/fragmentButtonInteract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="setBase"
+            android:text="set base" >
+        </Button>
     </LinearLayout>
 
     <LinearLayout
@@ -187,29 +200,30 @@
         android:gravity="center"
         android:visibility="visible" >
 
-		<LinearLayout
-        android:id="@+id/fragmentLinearLayoutShoot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        	<Button
-            	android:id="@+id/fragmentButtonShoot"
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-            	android:onClick="resetPoints"
-            	android:height="256dp"
-        		android:width="256dp"
-            	android:text="MARK" />
+        <LinearLayout
+            android:id="@+id/fragmentLinearLayoutShoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    		<TextView
-    	    	android:layout_width="wrap_content"
-    	    	android:layout_height="wrap_content"
-    	    	android:layout_below="@+id/fragmentButtonShoot"
-    	    	android:text="COOOOOOOOOLDOWN"
-    	    	android:gravity="center_horizontal"
-    	    	android:width="256dp" />
-		</LinearLayout>
-    
+            <Button
+                android:id="@+id/fragmentButtonShoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="256dp"
+                android:onClick="markPlayer"
+                android:text="MARK"
+                android:width="256dp" />
+
+            <TextView
+                android:id="@+id/fragmentMarkCooldown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragmentButtonShoot"
+                android:gravity="center_horizontal"
+                android:text="Cooldown"
+                android:width="256dp" />
+        </LinearLayout>
     </FrameLayout>
 
 </RelativeLayout>
