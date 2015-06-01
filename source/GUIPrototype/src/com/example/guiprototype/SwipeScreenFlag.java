@@ -91,6 +91,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		magnetometer = sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		
 	}
 
 	public void toogleMark(View view) {
@@ -213,23 +214,23 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 			}
 			
 		}
-		startMarkCooldown();
+		 startScanCooldown();
 		}else{
 			//Feedback that scan isn't ready
 		}
 	}
 
-	public void addBluePoint(View view) {
+	public void addBluePoint() {
 		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);
-		bluebar.setProgress(bluebar.getProgress() + 1);
+		bluebar.setProgress(bluebar.getProgress() + Const.pointGain);
 	}
 
-	public void addRedPoint(View view) {
+	public void addRedPoint() {
 		ProgressBar redbar = (ProgressBar) findViewById(R.id.fragmentProgressRed);
-		redbar.setProgress(redbar.getProgress() + 1);
+		redbar.setProgress(redbar.getProgress() + Const.pointGain);
 	}
 
-	public void resetPoints(View view) {
+	public void resetPoints() {
 		ProgressBar bluebar = (ProgressBar) findViewById(R.id.fragmentProgressBlue);
 		bluebar.setProgress(0);
 
@@ -265,7 +266,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 	public void startMarkCooldown(){
 		final TextView mCooldown = (TextView) findViewById(R.id.fragmentMarkCooldown);
 		
-		new CountDownTimer(30000, 1000) {
+		new CountDownTimer(Const.markedCdInMs, 1000) {
 
 		     public void onTick(long millisUntilFinished) {
 		    	 mCooldown.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -277,5 +278,26 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		     }
 		  }.start();
 
+	}
+	public void startScanCooldown(){
+		final TextView sCooldown = (TextView) findViewById(R.id.fragmentScanCooldown);
+		
+		new CountDownTimer(Const.scanCdinMs, 1000) {
+
+		     public void onTick(long millisUntilFinished) {
+		    	 sCooldown.setText("seconds remaining: " + millisUntilFinished / 1000);
+		     }
+
+		     public void onFinish() {
+		    	 sCooldown.setText("Ready");
+		    	 scanIsReady=true;
+		     }
+		  }.start();
+
+	}
+
+	
+	public void setBase(View view){
+		//Stuff to do
 	}
 }
