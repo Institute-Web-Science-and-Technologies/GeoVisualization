@@ -48,7 +48,7 @@
 \contentsline {subsection}{\numberline {5.1.3}Umgesetzte Spielkonzepte}{32}{subsection.5.1.3}
 \contentsline {section}{\numberline {5.2}Flaggenspiel}{32}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Spiellogik}{33}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Umgesetzte Features}{33}{subsection.5.2.2}
-\contentsline {chapter}{\numberline {6}Fazit}{34}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ausblick}{35}{chapter.7}
-\contentsline {chapter}{\numberline {A}Messergebnisse}{36}{appendix.A}
+\contentsline {subsection}{\numberline {5.2.2}Umgesetzte Features}{34}{subsection.5.2.2}
+\contentsline {chapter}{\numberline {6}Fazit}{35}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ausblick}{36}{chapter.7}
+\contentsline {chapter}{\numberline {A}Messergebnisse}{37}{appendix.A}

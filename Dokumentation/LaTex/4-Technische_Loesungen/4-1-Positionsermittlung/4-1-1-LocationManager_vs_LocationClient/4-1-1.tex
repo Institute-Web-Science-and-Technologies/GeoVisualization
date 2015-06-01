@@ -3,7 +3,7 @@
 Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verglichen. Der LocationManager\footnote{{\url{http://developer.android.com/reference/android/location/LocationManager.html}}} und der LocationClient\footnote{{\url{http://www.doc.ic.ac.uk/project/2013/271/g1327125/android-studio/sdk/extras/google/google\_play\_services/docs/reference/com/google/android/gms/location/LocationClient.html}}}.
 
 
-\subsubsection{LocationManager}
+\subsubsection{LocationManager}\label{locationManager}
 
 Der LocationManager ist ein von Android bereitgestellter Dienst, der über den GPS Sensor die Position des Smartphones ermittelt, außerdem werden die Positionen mit Geschwindigkeitswerten versehen.
 Ein Vorteil dieses Dienstes ist, dass er im Gegensatz zum LocationClient nicht an von Google bereitgestellte Standardbibliotheken, wie beispielsweise Google-Play-Services, gebunden ist. Der LocationManager kann daher problemlos auf vielen Android-Geräten verwendet werden, auf denen die Installation der für den LocationClient benötigten Bibliotheken unmöglich oder zu aufwendig ist.
