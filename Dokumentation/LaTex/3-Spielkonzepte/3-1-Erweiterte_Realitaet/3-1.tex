@@ -16,20 +16,21 @@ Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden. Die Kar
 \subsubsection{Darstellung der physischen und virtuellen Umgebung}\label{sec:darstellung-der-physischen-und-virtuellen-umgebung}
 
 Die physische Welt in eine virtuelle Umgebung zu übertragen kann einen enormen Mehrwert des Spiels darstellen.
-Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw. außerhalb des Spielfelds befindet. Des weiteren kann mit den heutigen Smartphones auch wie in \label{fig:aug01} gezeigt eine Augmented Reality geschaffen werden, die die Darstellung der realen Welt um etwa die Beschriftung der zu sehenden Geschäfte erweitert.
+Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw. außerhalb des Spielfelds befindet. Des weiteren kann mit den heutigen Smartphones auch wie in  Abbildung \ref{fig:aug01} gezeigt eine Augmented Reality geschaffen werden, die die Darstellung der realen Welt um etwa die Beschriftung der zu sehenden Geschäfte erweitert.
 \begin{figure}[htbp]
   \centering
     \includegraphics[width=0.9\textwidth]{3-Spielkonzepte/3-1-Erweiterte_Realitaet/map01.png}
-    \label{fig:aug01} 
+    
 		\caption{Handyscreen um die zu sehenden Geschäfte, Hotels, etc. erweitert
 	(Quelle: \url{http://blogs.bing.com/maps/wp-content/uploads/sites/3/2013/06/clip_5F00_image006_5F00_thumb_5F00_4AEFDB0C.png})
 		}
+		\label{fig:aug01} 
 \end{figure}
  Hierfür werden Kartendarstellung (s. \ref{kartendarstellung}) und Positionsermittlung (s. \ref{positionsermittlung}) benötigt.
 
 \subsubsection{Kollision virtueller Objekte}\label{sec:kollision-virtueller-objekte}
 Treffen zwei virtuelle Objekte aufeinander kann ein Event ausgelöst werden. Wird bei Snake z.B. der eigene Schwanz berührt, was laut der Regeln nicht erlaubt ist, muss dies dem Spieler mitgeteilt werden und evtl. weitere Ereignisse ausgeführt werden.
-\newline
+
 Dazu werden die Kollisionsabfrage (s. \ref{kollisionsabfrage}) und die  Positionsermittlung (s. \ref{positionsermittlung}) gebraucht.
 
 
