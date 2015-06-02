@@ -4,7 +4,6 @@ import geoviz.communication.JeroMQPoller;
 import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Game;
-import geoviz.game.ants.AntGame;
 import geoviz.game.snake.SnakeGame;
 
 import java.util.ArrayList;

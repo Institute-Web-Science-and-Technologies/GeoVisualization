@@ -1,5 +1,7 @@
 package com.example.guiprototype;
 
+import java.util.Date;
+
 import com.example.fragments.MapScreenFragment;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -185,6 +187,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		}
 
 	}
+	
 
 	public void scan(View view) {
 		if(scanIsReady==true){
@@ -197,19 +200,19 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 				pl.setLongitude(player.getPosition().longitude);
 
 				if (Functions.distance(this.getOwnLocation(),
-						player.getPosition()) <= Const.markerRange) {
-					player.getPosMarker().setVisible(true);
+						player.getPosition()) <= Const.scannerRange) {
+					player.setLastScannedAt(new Date().getTime());
 				}
 			}
 		} else {
-			for (Player player : flaggame.getTeamRed().players) {
+			for (Player player : flaggame.getTeamBlue().players) {
 				Location pl = new Location("pl");
 				pl.setLatitude(player.getPosition().latitude);
 				pl.setLongitude(player.getPosition().longitude);
 
 				if (Functions.distance(this.getOwnLocation(),
-						player.getPosition()) <= Const.markerRange) {
-					player.getPosMarker().setVisible(true);
+						player.getPosition()) <= Const.scannerRange) {
+					player.setLastScannedAt(new Date().getTime());
 				}
 			}
 			
@@ -263,6 +266,33 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		}
 
 	}
+	
+	@Override
+	public void connect(String gameID) {
+		if (Game.getGame()!=null){
+			poller.deleteSubscription(Game.getGame().gameID);
+			Game.getGame().clearScreen();
+			if (gameID.startsWith("0")){
+				Intent intent= new Intent(this,SwipeScreenSnake.class);
+				intent.putExtra(MainActivity.EXTRA_USER, userName);
+				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
+				startActivity(intent);
+			}
+
+		}
+		Game.init(new FlagGame(gameID,this,this.team));
+		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		
+		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);
+		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
+		//if (gameID.startsWith("0"))
+		
+		//else
+		//	Game.init(new FlagGame(gameID,this));
+		poller.addSubscription(gameID);
+		
+	}
+	
 	public void startMarkCooldown(){
 		final TextView mCooldown = (TextView) findViewById(R.id.fragmentMarkCooldown);
 		
@@ -298,6 +328,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 
 	
 	public void setBase(View view){
-		//Stuff to do
+		FlagGame flaggame = (FlagGame) Game.getGame();
+		
 	}
 }

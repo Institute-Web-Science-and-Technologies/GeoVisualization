@@ -183,6 +183,9 @@ public class MapScreenFragment extends Fragment {
 		}
 	}
 	
+	public Marker  initMarker(){
+		return this.mMap.addMarker(new MarkerOptions());
+	}
 	
 	public Marker initMarker(float colorDouble, LatLng position, String name) {
 		Marker marker = this.mMap.addMarker(new MarkerOptions()

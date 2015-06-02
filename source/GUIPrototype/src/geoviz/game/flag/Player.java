@@ -20,6 +20,11 @@ public class Player {
 	private float speed;
 	private Circle posMarker;
 	private final Team team;
+	private long lastScannedAt;
+
+	public void setLastScannedAt(long lastScannedAt) {
+		this.lastScannedAt = lastScannedAt;
+	}
 
 	public Player(Team team, String name){
 		this.team=team;
@@ -29,6 +34,7 @@ public class Player {
 		speed= 0;
 		hasFlag = false;
 		lastMarkedAt = 0;
+		lastScannedAt=0;
 		team.getGame().getActivity().runOnUiThread(new Runnable(){
 
 			@Override
@@ -117,7 +123,8 @@ public class Player {
 	}
 
 	public boolean isVisible(){
-		return (((new Date().getTime() - lastMarkedAt) < Const.markedInms) || speed > Const.maxspeed);
+		long time = new Date().getTime();
+		return (((time - lastMarkedAt) < Const.markedInms) || speed > Const.maxspeed || (time - lastScannedAt) < Const.scannerDuration);
 	}
 
 	public void setSpeed(float speed){
@@ -127,6 +134,8 @@ public class Player {
 	public void updatePlayer(float speed, LatLng pos, boolean userInTeam) {
 		position = pos;
 		this.speed= speed;
+		if (hasFlag)
+			team.setFlag(pos);
 		if (userInTeam){
 			posMarker.setCenter(pos);
 			posMarker.setVisible(true);

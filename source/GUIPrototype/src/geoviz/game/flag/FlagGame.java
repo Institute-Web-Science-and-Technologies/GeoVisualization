@@ -25,8 +25,8 @@ public class FlagGame extends Game {
 	public FlagGame(String gameID, SwipeScreen swipescreen,String team){
 		this.gameID=gameID;
 		this.swipeScreen=swipescreen;
-		teamRed = new Team(Color.RED);
-		teamBlue = new Team(Color.BLUE);
+		teamRed = new Team(Color.RED,this);
+		teamBlue = new Team(Color.BLUE,this);
 		if(team.contentEquals("teamBlue")){
 			teamBlue.userInTeam= true;
 		}
@@ -79,8 +79,8 @@ public class FlagGame extends Game {
 					teamRedPos, teamBluePos,
 					teamRedSpeed, teamBlueSpeed,
 					teamRedLMA, teamBlueLMA,
-					teamRed.flag, teamBlue.flag, teamRed.base,
-					teamBlue.base);
+					teamRed.getFlag(), teamBlue.getFlag(), teamRed.getBase(),
+					teamBlue.getBase());
 			String msg = gson.toJson(tfg);
 			JeroMQQueue jmqq = JeroMQQueue.getInstance();
 			jmqq.sendMsg(TransferObject.TYPE_GAME_STATUS, msg, senderID);
@@ -103,6 +103,22 @@ public class FlagGame extends Game {
 						teamRed.addPlayer(new Player(teamRed,tfg2.teamRed.get(i),tfg2.teamRedPos.get(i),tfg2.teamRedSpeed.get(i),tfg2.teamRedLMA.get(i),teamRed.userInTeam));
 					}
 				}
+				for (int i = 0; i<tfg2.teamBlue.size();i++){
+					boolean playerExists=false;
+					for(Player player: teamBlue.players){
+						if(player.getName().contentEquals(tfg2.teamBlue.get(i))){
+							playerExists=true;
+							player.setLastMarkedAt(tfg2.teamBlueLMA.get(i));
+							player.updatePlayer(tfg2.teamBlueSpeed.get(i), tfg2.teamBluePos.get(i), teamBlue.userInTeam);
+						}
+					}
+					if (!playerExists){
+						teamBlue.addPlayer(new Player(teamBlue,tfg2.teamBlue.get(i),tfg2.teamBluePos.get(i),tfg2.teamBlueSpeed.get(i),tfg2.teamBlueLMA.get(i),teamBlue.userInTeam));
+					}
+				}
+				teamBlue.setBase(tfg2.teamBlueBase);
+				teamRed.setBase(tfg2.teamRedBase);
+				
 			}
 			break;
 		case TransferObject.TYPE_PLAYER_MARKED:

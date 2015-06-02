@@ -9,4 +9,6 @@ public class Const {
 	public static final long markedInms = 60000;
 	public static final long markedCdInMs = 180000 ;
 	public static final long scanCdinMs= 300000;
+	public static final long scannerDuration = 30000;
+	public static final float scannerRange = 10;
 }

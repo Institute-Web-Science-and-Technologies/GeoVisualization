@@ -1,5 +1,7 @@
 package com.example.guiprototype;
 
+import geoviz.communication.JeroMQQueue;
+import geoviz.communication.TransferObject;
 import geoviz.game.Game;
 import geoviz.game.snake.SnakeGame;
 
@@ -7,6 +9,7 @@ import com.example.adapter.TabsPagerAdapter;
 
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 
 public class SwipeScreenSnake extends SwipeScreen {
@@ -47,5 +50,27 @@ public class SwipeScreenSnake extends SwipeScreen {
 				});
 
 
+	}
+	@Override
+	public void connect(String gameID) {
+		if (Game.getGame()!=null){
+			poller.deleteSubscription(Game.getGame().gameID);
+			Game.getGame().clearScreen();
+			if (gameID.startsWith("1")){
+				Intent intent= new Intent(this,SelectFlagTeam.class);
+				intent.putExtra(MainActivity.EXTRA_USER, userName);
+				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
+				startActivity(intent);
+			}
+		}
+		Game.init(new SnakeGame(gameID,this));
+		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
+		//if (gameID.startsWith("0"))
+		
+		//else
+		//	Game.init(new FlagGame(gameID,this));
+		poller.addSubscription(gameID);
+		
 	}
 }
