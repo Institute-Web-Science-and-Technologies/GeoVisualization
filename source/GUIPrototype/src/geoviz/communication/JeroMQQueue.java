@@ -115,6 +115,12 @@ public class JeroMQQueue {
     	String json = gson.toJson(msg);
     	add(type +","+recipient+","+game.userID+","+json);		
 	}
+	
+	public void sendToServer(int type,LatLng pos, String team,String recipient){
+		TransferToServerObject o = new TransferToServerObject(pos.latitude,pos.longitude,team);
+		String json = gson.toJson(o);
+		add(type+","+recipient+","+Game.getGame().userID+","+json);
+	}
 		
 	public void sendMsg(int type, String recipient){
 		Game game= Game.getGame();

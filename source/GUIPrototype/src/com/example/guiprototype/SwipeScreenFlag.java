@@ -328,7 +328,8 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 
 	
 	public void setBase(View view){
-		FlagGame flaggame = (FlagGame) Game.getGame();
+		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		//jmqq.sendMsg(
 		
 	}
 }

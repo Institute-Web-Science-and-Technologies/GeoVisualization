@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class GoogleStaticMapLoader {
 	private BufferedImage img;
 	private String []argb;
-	GoogleStaticMapLoader(){
+	public GoogleStaticMapLoader(){
 	}
 	
 	//createFlag creates a Flag in a radius (actually it's up to a square) around x and y
