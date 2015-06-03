@@ -3,7 +3,7 @@
 \BOOKMARK [1][-]{section.2.1}{Umsetzung virtueller Spiele in der physischen Welt}{chapter.2}% 3
 \BOOKMARK [1][-]{section.2.2}{Integration einer virtuellen Welt in Bewegungsspiele}{chapter.2}% 4
 \BOOKMARK [1][-]{section.2.3}{Related Work}{chapter.2}% 5
-\BOOKMARK [0][-]{chapter.3}{Spielkonzepte}{}% 6
+\BOOKMARK [0][-]{chapter.3}{Spielfeatures}{}% 6
 \BOOKMARK [1][-]{section.3.1}{Erweiterte Realit\344t}{chapter.3}% 7
 \BOOKMARK [1][-]{section.3.2}{Benutzer Interface}{chapter.3}% 8
 \BOOKMARK [1][-]{section.3.3}{Mehrspieler-Features}{chapter.3}% 9
@@ -22,13 +22,15 @@
 \BOOKMARK [1][-]{section.4.5}{GUI}{chapter.4}% 22
 \BOOKMARK [1][-]{section.4.6}{Sensorik}{chapter.4}% 23
 \BOOKMARK [0][-]{chapter.5}{Implementation von Beispielapps}{}% 24
-\BOOKMARK [1][-]{section.5.1}{Snake}{chapter.5}% 25
-\BOOKMARK [2][-]{subsection.5.1.1}{Spielidee}{section.5.1}% 26
-\BOOKMARK [2][-]{subsection.5.1.2}{Spiellogik}{section.5.1}% 27
-\BOOKMARK [2][-]{subsection.5.1.3}{Umgesetzte Spielkonzepte}{section.5.1}% 28
-\BOOKMARK [1][-]{section.5.2}{Flaggenspiel}{chapter.5}% 29
-\BOOKMARK [2][-]{subsection.5.2.1}{Spiellogik}{section.5.2}% 30
-\BOOKMARK [2][-]{subsection.5.2.2}{Umgesetzte Features}{section.5.2}% 31
-\BOOKMARK [0][-]{chapter.6}{Fazit}{}% 32
-\BOOKMARK [0][-]{chapter.7}{Ausblick}{}% 33
-\BOOKMARK [0][-]{appendix.A}{Messergebnisse}{}% 34
+\BOOKMARK [1][-]{section.5.1}{Allgemein}{chapter.5}% 25
+\BOOKMARK [2][-]{subsection.5.1.1}{Spiellogik}{section.5.1}% 26
+\BOOKMARK [1][-]{section.5.2}{Snake}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.2.1}{Spielidee}{section.5.2}% 28
+\BOOKMARK [2][-]{subsection.5.2.2}{Spiellogik}{section.5.2}% 29
+\BOOKMARK [2][-]{subsection.5.2.3}{Umgesetzte Spielkonzepte}{section.5.2}% 30
+\BOOKMARK [1][-]{section.5.3}{Flaggenspiel}{chapter.5}% 31
+\BOOKMARK [2][-]{subsection.5.3.1}{Spiellogik}{section.5.3}% 32
+\BOOKMARK [2][-]{subsection.5.3.2}{Umgesetzte Features}{section.5.3}% 33
+\BOOKMARK [0][-]{chapter.6}{Fazit}{}% 34
+\BOOKMARK [0][-]{chapter.7}{Ausblick}{}% 35
+\BOOKMARK [0][-]{appendix.A}{Messergebnisse}{}% 36
