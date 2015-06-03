@@ -4,13 +4,21 @@
 
 
 \subsubsection*{Client}
-\textsc{\textit{Markieren: }}
-Auf der Client-Seite wird die Sichtbarkeit der Spieler und Objekte (Flaggen und Basen) gehandhabt. SÃ¤mtliche Positionen sind den GerÃ¤ten bekannt, aber nicht alle sichtbar. Damit verbunden sind auch die FunktionalitÃ¤ten des Markieren und Scannens. FÃ¼r das Markieren werden jeweils die beiden Koordinaten des Markierenden (A) und des Markierten (B), sowie den Sichtkegel von A und eine Reichweite benÃ¶tigt. 
-FÃ¼r den Sichtkegel benÃ¶tigt man einen Orientierungswinkel ($\alpha$), welche mittels der Sensoren fÃ¼r Orientierung (s. MUSS noch geschrieben werden) ermittelt wird, sowie einen vorher festgelegten Winkel fÃ¼r den Sichtbereich ($\beta$). Nun wird der Winkel der beiden Punkte A und B ($\gamma$) bestimmt (s. TEXT ÃœBER ORTHODROME DER NOCH GESCHRIEBEN WERDEN MUSS).
+Auf der Client-Seite wird die Sichtbarkeit der Spieler und Objekte (Flaggen und Basen) gehandhabt.
 
-Liegt $\gamma$ im Intervall $[ \alpha - \frac{\beta}{2}; \alpha + \frac{\beta}{2}]$ und ist die Distanz zwischen A und B innerhalb der Reichweite, so gilt B als markiert. Ãœber eine Nachricht wird den anderen Teammitgliedern mitgeteilt das B jetzt markiert und somit fÃ¼r eine gewisse Zeit sichtbar ist. A kann fÃ¼r eine vordefinierte Zeit keine weiteren Gegner markieren.
+\paragraph{Markieren}
+ Sämtliche Positionen sind den Gerten bekannt, aber nicht alle sichtbar. Damit verbunden sind auch die Funktionalitäten des Markieren und Scannens. Für das Markieren werden jeweils die beiden Koordinaten des Markierenden (A) und des Markierten (B), sowie den Sichtkegel von A und eine Reichweite benötigt. 
+F?r den Sichtkegel benötigt man einen Orientierungswinkel ($\alpha$), welche mittels der Sensoren für Orientierung (s. MUSS noch geschrieben werden) ermittelt wird, sowie einen vorher festgelegten Winkel für den Sichtbereich ($\beta$). Nun wird der Winkel der beiden Punkte A und B ($\gamma$) bestimmt (s. TEXT ÜBER ORTHODROME DER NOCH GESCHRIEBEN WERDEN MUSS).
 
-\textsc{\textit{Scannen: }}
-Um einen festgelegten Radius eines Spielers nach Gegnern zu scannen, wird die Distanz (s. TEXT ÃœBER ORTHODROME) zwischen dem Scannenden (C) und allen gegnerischen Spielern ermittelt. C werden, fÃ¼r eine kurze Zeit, alle gegnerischen Spieler angezeigt, die sich innerhalb eines bestimmten Distanzwertes befinden. Die MÃ¶glichkeit zu Scannen steht C fÃ¼r eine gewisse Zeit nicht mehr zur VerfÃ¼gung.
 
-Es existiert eine stÃ¤ndig aktive GeschwindigkeitsÃ¼berprÃ¼fung der Spieler durch ihre Koordinaten (s. \ref{locationManager}). Wenn eine feste Maximalgeschwindigkeit durch einen Spieler Ã¼berschritten wird, schickt der entsprechende Client eine Nachricht an alle gegnerischen GerÃ¤te, dass dieser angezeigt werden soll. Wird die Maximalgeschwindigkeit wieder unterschritten, ist der Betroffene wieder unsichtbar fÃ¼r die Gegner.
+Liegt $\gamma$ im Intervall $[ \alpha - \frac{\beta}{2}; \alpha + \frac{\beta}{2}]$ und ist die Distanz zwischen A und B innerhalb der Reichweite, so gilt B als markiert. Über eine Nachricht wird den anderen Teammitgliedern mitgeteilt das B jetzt markiert und somit für eine gewisse Zeit sichtbar ist. A kann für eine vordefinierte Zeit keine weiteren Gegner markieren.
+
+\paragraph{Scannen}
+
+Um einen festgelegten Radius eines Spielers nach Gegnern zu scannen, wird die Distanz (s. TEXT ÜBER ORTHODROME) zwischen dem Scannenden (C) und allen gegnerischen Spielern ermittelt. C werden, für eine kurze Zeit, alle gegnerischen Spieler angezeigt, die sich innerhalb eines bestimmten Distanzwertes befinden. Die Möglichkeit zu Scannen steht C für eine gewisse Zeit nicht mehr zur Verfügung.
+
+\paragraph{Geschwindigkeitsüberprüfung}
+Es existiert eine ständig aktive Geschwindigkeitsüberprüfung der Spieler durch ihre Koordinaten (s. \ref{locationManager}). Wenn eine feste Maximalgeschwindigkeit durch einen Spieler überschritten wird, schickt der entsprechende Client eine Nachricht an alle gegnerischen Geräte, dass dieser angezeigt werden soll. Wird die Maximalgeschwindigkeit wieder unterschritten, ist der Betroffene wieder unsichtbar für die Gegner
+
+\paragraph{Basen- und Flaggenplatzierung}
+Die Basis eines Teams wird vom ersten Teammitglied gesetzt, welches auf den "`set Base"' Button klickt. Als Zentrum wird die momentane Position des Spielers genommen. Die Darstellung erfolgt als Kreis. Nun wird in einem vorher festgelegtem Radius um die Basis zufällig die Teamflagge platziert. Die Auswahl für eine gültige Koordinate trifft dabei der Server und teilt dies den entsprechenden Mitspielern über eine Nachricht mit. Die aktuelle Position der Flagge wird jedoch dem eigenen Team nicht angezeigt. Wird die Flagge von einem Mitspieler des gegnerischen Team gestohlen, werden die betroffenen Spieler über einen Vibrationsalarm informiert. Auch wird die letzte Position der Flagge vorläufig angezeigt. Wenn der Flaggenträger gestoppt wird, generiert der Server wieder eine gültige Position für eine neue Flagge 

@@ -49,6 +49,10 @@
 \contentsline {subsection}{\numberline {5.1.3}Umgesetzte Spielkonzepte}{32}{subsection.5.1.3}
 \contentsline {section}{\numberline {5.2}Flaggenspiel}{32}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Spiellogik}{33}{subsection.5.2.1}
+\contentsline {paragraph}{Markieren}{33}{section*.52}
+\contentsline {paragraph}{Scannen}{33}{section*.53}
+\contentsline {paragraph}{Geschwindigkeits\"uberpr\"ufung}{34}{section*.54}
+\contentsline {paragraph}{Basen- und Flaggenplatzierung}{34}{section*.55}
 \contentsline {subsection}{\numberline {5.2.2}Umgesetzte Features}{34}{subsection.5.2.2}
 \contentsline {chapter}{\numberline {6}Fazit}{35}{chapter.6}
 \contentsline {chapter}{\numberline {7}Ausblick}{36}{chapter.7}
