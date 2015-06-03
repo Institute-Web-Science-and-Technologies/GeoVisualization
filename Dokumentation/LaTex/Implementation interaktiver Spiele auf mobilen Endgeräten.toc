@@ -34,6 +34,7 @@
 \contentsline {section}{\numberline {4.2}Kollisionsabfrage}{18}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{18}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{19}{subsection.4.2.2}
+\contentsline {subsubsection}{Distanzmessung auf dem Globus}{20}{section*.32}
 \contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{20}{section.4.3}
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{21}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Serverseitige und clientseitige Logik}{21}{subsection.4.4.1}
