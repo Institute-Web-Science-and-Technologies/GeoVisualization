@@ -16,7 +16,7 @@
 * Wie funktioniert das?
 
 ## Baustellen in der Doku
-hier einige Beispiele. Genaueres ist immer Noch in meinen Anmerkungen vom 27_05_2015
+hier einige Beispiele. Genaueres ist immer noch in meinen Anmerkungen vom 27_05_2015
 ### 4.2
 * Fazit wofür wir uns entschieden haben und warum
 
