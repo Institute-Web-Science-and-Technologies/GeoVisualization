@@ -29,7 +29,7 @@ hier einige Beispiele. Genaueres ist immer Noch in meinen Anmerkungen vom 27_05_
 
 * Was ist mit Skalierbarkeit gemeint? Nur mit dem Begriff umsich zu werfen reicht nicht
 * Wird wirklich Internet-Bandbreite gespart? Wenn ja wie? Ist vieleicht der Traffic gemeint? Der ist limitiert und legen darauf nicht meines wissens nicht besonders viel wert.
-* Nicht ersichtlich im Text wofür wir uns entschieden haben. Laut der Tabelle bietet der Thin-Client mehr vorteile, weshalb haben wir den Fat-CLient?
+* Nicht ersichtlich im Text wofür wir uns entschieden haben. Laut der Tabelle bietet der Thin-Client mehr Vorteile, weshalb haben wir den Fat-CLient?
 
 ### 4.4.3
 * Es ist möglich den Server auch in XMPP in Java umzusetzen.
