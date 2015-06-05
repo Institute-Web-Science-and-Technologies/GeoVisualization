@@ -13,11 +13,13 @@ Alternativ kann man die Logik vorrangig clientseitig implementieren.
 Dabei müssen die (Fat-)Clients  den Großteil der Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte, während der Server entlastet wird. 
 Aktuelle Smartphones könnten die entwickelte Anwendung jedoch mühelos ausführen.
 %Diese haben sich als genügend leistungsfähig erwiesen.
-Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert Skalierbarkeit, Wartbarkeit und Erweiterbarkeit. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
-Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. Im implementierten Capture-the-Flag-Spielmodus muss beispielsweise bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, wie die Sichtbarkeit für andere Spieler, die der Fat-Client selber berechnet.
-Dieser Punkt war ausschlaggebend, da bei mobilen Endgeräten die Internet-Bandbreite eine stark limitierte Ressource ist \cite{schaeffer}.
+Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert theoretisch Wartbarkeit und Erweiterbarkeit. Da die Implementation definitiv eine Internetverbindung benötigt, könnte theoretisch der Server mit einer Updatefunktionalität versehen werden. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
+%Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. 
+Im Fall der Implementation würde bei einer Thin-Client-Architektur um einiges mehr Informationen hin und her geschickt werden. Der Server müsste z.B. jeweils auf die aktuellen Spielinformationen (z.B. Positionsdaten) von allen Clients warten, Tests haben gezeigt das die Updateintervalle von Gerät zu Gerät unterschiedlich sind und zum teil durch äußere Einflüsse (z.B. Wetter) verzögert werden können. Aus allen Updates berechnet der Server dann den aktuellen Spiel-Zustand, welcher wieder an alle Geräte übertragen werden muss. Hierbei muss die korrekte Übertragung sichergestellt sein. Nun würde der Zyklus wieder von vorne beginnen. Wenn man jetzt noch etwaige Verbindungsprobleme berücksichtigt wäre die Spielgeschwindigkeit überaus langsam. 
 
-Ein großer Vorteil bei mobilen Anwendungen ist, dass im Falle einer unterbrochenen Internetverbindung Fat-Clients einige Zeit autonom ohne Kontakt mit dem Server weiterarbeiten können. Je länger die Unterbrechung jedoch andauert, desto gravierender unterscheiden sich die Zustände der einzelnen Clients.
+Bei einer Fat-Client-Architektur hingegen würden Clients die Spielinformationen schnellst möglich an den Server schicken, welcher diese nur weiterleiten muss. Wenn es zu Übertragungsverzögerungen kommt, können ein- und ausgehende Spielinformationen in Warteschleifen platziert werden. 
+Im implementierten Capture-the-Flag-Spielmodus muss beispielsweise bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, wie die Sichtbarkeit für andere Spieler, die der Fat-Client selber berechnet.
+Die Spielgeschwindigkeit wäre also nur abhängig von der Rechen- bzw. Sensorleistung der Clients, sowie der möglichen Übertragungsgeschwindigkeit. Durch Verzögerungen kann es zwar immer noch für den Endnutzer zu unvorhergesehen oder falsch erscheinenden Interaktionsergebnissen kommen, z.B. wer bei der Snake-Implementation mit wem kollidiert, ist aber in unserer Implementation zu vernachlässigen. Es wird vor allem Wert auf Spielgeschwindigkeit gelegt. Dieser Punkt war auch ausschlaggebend dafür, das in diesem Projekt eine Thin-Client-Architektur gewählt wurde\cite{schaeffer}.
 
 \begin{center}
 \begin{tabular}{l|l}
@@ -26,10 +28,9 @@ Ein großer Vorteil bei mobilen Anwendungen ist, dass im Falle einer unterbrochen
 	 - Datenübertragung & + Datenübertragung \\
 	 - Zustand doppelt modelliert & + Server-Zustand nicht nötig \\
 	 + zentraler, definitiver Zustand &  - verteilter Zustand \\
-	 + Rechenleistung & - Rechenleistung \\
-	 + Skalierbarkeit & - Skalierbarkeit \\
-	 + Wartbarkeit & - Wartbarkeit \\
-	 + Erweiterbarkeit & - Erweiterbarkeit \\
+	 (+) Wartbarkeit & (-) Wartbarkeit \\
+	 (+) Erweiterbarkeit & (-) Erweiterbarkeit \\
+	 - Spielgeschwindigkeit & + Spielgeschwindigkeit \\
 \end{tabular}
 \end{center}
 

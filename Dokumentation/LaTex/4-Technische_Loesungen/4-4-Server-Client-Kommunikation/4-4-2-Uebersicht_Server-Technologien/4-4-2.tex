@@ -6,10 +6,14 @@
 
 %Pull-Kommunikation über HTTP-Requests umgesetzt hat eine nicht hinnehmbare Verzögerung bewirkt.
 %Die finale Implementation verwendet daher Push-Kommunikation. 
-Eine spezialisierte Server-Architektur, die \textit{message passing} mit Push-Kom\-mu\-ni\-ka\-tion umsetzt, ist XMPP \cite{xmpp}. Es wurde jedoch eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen und notfalls Berechnungen auf den Server auslagern zu können.
-Im Falle mobiler Endgeräte muss Push-Kommunikation über Sockets laufen, da diese nicht zuverlässig über eine IP-Adresse angesprochen werden können.
- Wir haben die Publish-Subscribe-Architektur jeweils mit Hilfe von WebSockets und ZeroMQ\footnote{\url{http://zeromq.org/}} umgesetzt und beide Ansätze verglichen. 
-Die auf WebSockets aufbauende Lösung haben wir mit Node.js\footnote{\url{https://nodejs.org/}} implementiert.
-Die andere Lösung verwendet
-JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}}, eine Implementation von ZeroMQ in Java. 
-  Wir haben uns für JeroMQ entschieden, da es so möglich war, den Server in Java umzusetzen und so Server und Client in der selben Programmiersprache zu implementieren.
+
+%Eine spezialisierte Server-Architektur, die \textit{message passing} mit Push-Kom\-mu\-ni\-ka\-tion umsetzt, ist XMPP \cite{xmpp}. Es wurde jedoch eine allgemeine Server-Lösung bevorzugt, um die Flexibilität zu erhöhen und notfalls Berechnungen auf den Server auslagern zu können.
+%Im Falle mobiler Endgeräte muss Push-Kommunikation über Sockets laufen, da diese nicht zuverlässig über eine IP-Adresse angesprochen werden können.
+%Wir haben die Publish-Subscribe-Architektur jeweils mit Hilfe von WebSockets und ZeroMQ\footnote{\url{http://zeromq.org/}} umgesetzt und beide Ansätze verglichen. 
+%Die auf WebSockets aufbauende Lösung haben wir mit Node.js\footnote{\url{https://nodejs.org/}} implementiert.
+%Die andere Lösung verwendet
+%JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}}, eine Implementation von ZeroMQ in Java. 
+%Wir haben uns für JeroMQ entschieden, da es so möglich war, den Server in Java umzusetzen und so Server und Client in der selben Programmiersprache zu implementieren.
+
+Die Kommunikation zwischen mobilen Endgeräten kann sich als schwierig erweisen, da sich deren IP-Adresse jederzeit ändern kann. Die Einrichtung eines Servers, der die Kommunikation regelt ist also sinnvoll. 
+Um Nachrichten zwischen Clients austauschen zu können wurde sich in diesem Praktikum für \textit{message passing} mit Push-Kom\-mu\-ni\-ka\-tion entschieden. Zu beginn haben wir mit einem Node.js Server \footnote{\url{https://nodejs.org/}} und URLConnection \footnote{\url{http://developer.android.com/reference/java/net/URLConnection.html}} auf der Client-Seite experimentiert. Dies wurde jedoch aufgrund langer Antwortzeiten wieder verworfen. In einem weiterem Experiment wurde Nachrichtenaustausch-Bibliothek ZeroMQ verwendet. Hierbei wurde der Server in Java mit JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}} realisiert. Hier wurden weitaus kürzere Antwortzeiten erreicht, weshalb sich für diese Lösung entschieden wurde. Zudem ist es so möglich den Server ebenfalls in selben Programmiersprache wie den Client (Java) zu implementieren, was das arbeiten ein wenig angenehmer macht.
