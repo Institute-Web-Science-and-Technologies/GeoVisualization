@@ -3,7 +3,7 @@
 \section{Allgemein}
 \subsection{Spiellogik}
 \subsubsection{Server}
-Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, über das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, über das die Nachrichten an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: einer Adresse, dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu übermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client, oder alle Clients die sich in einer Spielsession befinden, sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. , Um mehrere Spielinstanzen gleichzeitig verwalten zu können, hält er aber eine Liste aller laufenden Spiele samt Informationen darüber, welcher Spieler an welchem Spiel teilnimmt. Wenn eine Nachricht vom Typ \glqq create\_game\grqq empfangen wird trägt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine entsprechende Nachricht anfragt.
+Der implementierte Server arbeitet mit Java und ZeroMQ. Er ï¿½ffnet zwei Kommunikationskanï¿½le mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, ï¿½ber das die Endgerï¿½te Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, ï¿½ber das die Nachrichten an Gruppen von Endgerï¿½ten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: einer Adresse, dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu ï¿½bermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client, oder alle Clients die sich in einer Spielsession befinden, sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. , Um mehrere Spielinstanzen gleichzeitig verwalten zu kï¿½nnen, hï¿½lt er aber eine Liste aller laufenden Spiele samt Informationen darï¿½ber, welcher Spieler an welchem Spiel teilnimmt. Wenn eine Nachricht vom Typ \glqq create\_game\grqq empfangen wird trï¿½gt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie ï¿½ber eine entsprechende Nachricht anfragt.
 
 
 
@@ -17,6 +17,12 @@ Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunika
 \end{figure}
 
 \subsubsection{Client}
+Unsere Android-Applikation besteht aus drei Fragmenten zwischen denen man durch Wischen wechseln kann. Das erste Fragment ist ein Chat Ã¼ber den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden kÃ¶nnen.
+Das zweite Fragment ist die Karte auf der wir unser Spiel darstellen.  
+FÃ¼r die Darstellung der Karte verwenden wir GoogleMaps. 
+Im dritten Fragment kann ein Spieler eine neue Spielinstanz erstellen oder einem bereits laufendem Spiel beitreten. Die Liste der momentan laufenden Spiele wird per Knopfdruck vom Server abgefragt. Wenn man einer laufenden Session beitritt wird Ã¼ber den Server eine Anfrage des aktuellen Status des Spiels an alle momentanen Mitspieler gesendet, welche den Zustand des Spiels alle an den anfragenden Client zurÃ¼ck senden. Dieser beachtet nur die erste Nachricht und verwirft den Rest.
+Des weiteren lÃ¤uft ein LocationClient, welcher immer die aktuelle Position als Nachricht an alle Spieler der selben Spielinstanz weiterschickt. 
+
 \input{5-Implementation_von_Beispielapps/5-1-Snake/5-1_index.tex}
 \input{5-Implementation_von_Beispielapps/5-2-Verstecken/5-2_index.tex}
 

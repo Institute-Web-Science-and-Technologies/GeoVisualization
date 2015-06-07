@@ -8,14 +8,14 @@ Auf der Client-Seite wird die Sichtbarkeit der Spieler und Objekte (Flaggen und 
 
 \paragraph{Markieren}
  Sämtliche Positionen sind den Gerten bekannt, aber nicht alle sichtbar. Damit verbunden sind auch die Funktionalitäten des Markieren und Scannens. Für das Markieren werden jeweils die beiden Koordinaten des Markierenden (A) und des Markierten (B), sowie den Sichtkegel von A und eine Reichweite benötigt. 
-F?r den Sichtkegel benötigt man einen Orientierungswinkel ($\alpha$), welche mittels der Sensoren für Orientierung (s. MUSS noch geschrieben werden) ermittelt wird, sowie einen vorher festgelegten Winkel für den Sichtbereich ($\beta$). Nun wird der Winkel der beiden Punkte A und B ($\gamma$) bestimmt (s. TEXT ÜBER ORTHODROME DER NOCH GESCHRIEBEN WERDEN MUSS).
+F?r den Sichtkegel benötigt man einen Orientierungswinkel ($\alpha$), welche mittels der Sensoren für Orientierung (s. \ref{orientierung}) ermittelt wird, sowie einen vorher festgelegten Winkel für den Sichtbereich ($\beta$). Nun wird der Winkel der beiden Punkte A und B ($\gamma$) bestimmt (s. \ref{abstandsmessung}).
 
 
 Liegt $\gamma$ im Intervall $[ \alpha - \frac{\beta}{2}; \alpha + \frac{\beta}{2}]$ und ist die Distanz zwischen A und B innerhalb der Reichweite, so gilt B als markiert. Über eine Nachricht wird den anderen Teammitgliedern mitgeteilt das B jetzt markiert und somit für eine gewisse Zeit sichtbar ist. A kann für eine vordefinierte Zeit keine weiteren Gegner markieren.
 
 \paragraph{Scannen}
 
-Um einen festgelegten Radius eines Spielers nach Gegnern zu scannen, wird die Distanz (s. TEXT ÜBER ORTHODROME) zwischen dem Scannenden (C) und allen gegnerischen Spielern ermittelt. C werden, für eine kurze Zeit, alle gegnerischen Spieler angezeigt, die sich innerhalb eines bestimmten Distanzwertes befinden. Die Möglichkeit zu Scannen steht C für eine gewisse Zeit nicht mehr zur Verfügung.
+Um einen festgelegten Radius eines Spielers nach Gegnern zu scannen, wird die Distanz (s. \ref{abstandsmessung}) zwischen dem Scannenden (C) und allen gegnerischen Spielern ermittelt. C werden, für eine kurze Zeit, alle gegnerischen Spieler angezeigt, die sich innerhalb eines bestimmten Distanzwertes befinden. Die Möglichkeit zu Scannen steht C für eine gewisse Zeit nicht mehr zur Verfügung.
 
 \paragraph{Geschwindigkeitsüberprüfung}
 Es existiert eine ständig aktive Geschwindigkeitsüberprüfung der Spieler durch ihre Koordinaten (s. \ref{locationManager}). Wenn eine feste Maximalgeschwindigkeit durch einen Spieler überschritten wird, schickt der entsprechende Client eine Nachricht an alle gegnerischen Geräte, dass dieser angezeigt werden soll. Wird die Maximalgeschwindigkeit wieder unterschritten, ist der Betroffene wieder unsichtbar für die Gegner

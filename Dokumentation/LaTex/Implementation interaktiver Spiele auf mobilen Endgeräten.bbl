@@ -27,6 +27,13 @@
   2015. --
 \newblock [abgerufen am 09. Mai 2015]
 
+\bibitem[Fil93]{filler1993euklidische}
+\textsc{Filler}, A.:
+\newblock \emph{Euklidische und nichteuklidische Geometrie}.
+\newblock BI-Wiss.-Verlag, 1993 (Mathematische Texte).
+\newblock \url{https://books.google.de/books?id=7UzvAAAAMAAJ}. --
+\newblock ISBN 9783411163717
+
 \bibitem[Goo15]{ingress}
 \textsc{Google}:
 \newblock \emph{Willkommen bei Ingress}.
@@ -41,6 +48,13 @@
   \url{http://www.giga.de/spiele/pacman/news/pac-man-spielen-in-google-maps-jetzt/},
   2015. --
 \newblock [abgerufen am 28. April 2015]
+
+\bibitem[Mee98]{meeus1998astronomical}
+\textsc{Meeus}, J.:
+\newblock \emph{Astronomical Algorithms}.
+\newblock Willmann-Bell, 1998
+  \url{https://books.google.de/books?id=jYynOwAACAAJ}. --
+\newblock ISBN 9780943396637
 
 \bibitem[MKH06]{gpsacc}
 \textsc{Modsching}, Marko ; \textsc{Kramer}, Ronny  ; \textsc{Hagen}, Klaus

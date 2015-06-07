@@ -9,7 +9,6 @@ Eine mobile Applikation empfängt also das Signal mit der ID und berechnet anhand
 
 \subsection*{Kompass}
 Heute besitzen alle gängigen Smartphones eine Kompass-Funktionalität, die von mobilen Applikationen genutzt werden kann. 
-%Doch wie funktioniert das?
 Ganz allgemein richtet sich ein Kompass nach dem Magnetfeld der Erde. Er ist mit einer magnetischen Nadel ausgestattet, die sich auf den Nordpol einstellt.
 In Smartphones ist ein kleines Magnetometer integriert, mit dem sich das Magnetfeld der Erde messen lässt. Zudem bestimmt das Smartphone seine Position und Neigung anhand von anderer Sensorik. Das Gerät kombiniert all diese Informationen und bestimmt somit die Richtung.
 
@@ -19,6 +18,9 @@ In modernen Smartphones ist solch ein Sensor verbaut. Dieser lässt sich in mobil
 
 Des weiteren kann auch durch GPS die Geschwindigkeit ermittelt werden. Moderne GPS-Geräte speichern permanent ihre letzten Positionen. Somit können sie anhand der zurückgelegten Strecke mit Hinzunahme der benötigten Zeit ein recht genaues Geschwindigkeitsergebnis bestimmen.
 
+\subsection*{Orientierung}\label{orientierung}
+Smartphones sind in der Lage über die internen Sensoren etwas über ihre Ausrichtung zu erfahren. Hierbei werden das Accelerometer und das Magnetometer verwendet um eine Rotationsmatrix zu generieren.
+Daraus kann dann die Orientierung Errechnet werden.
 \subsection*{Thermometer}
 Smartphones besitzen einen Wärmesensor, der genutzt werden kann um die Temperatur zu messen. Allerdings wird dieser meist durch die Betriebstemperatur beeinflusst und liefert daher nicht immer korrekte Werte für die Außentemperatur. Aus diesem Grund werden die Messwerte von Thermometer Apps meist aus dem örtlichen Wetterinformationsnetz bezogen. 
 Die Innentemperatur hingegen wird tatsächlich durch den integrierten Wärmesensor bestimmt. Dazu muss das Gerät sich aber eine gewisse Zeit im Standby Betrieb befinden, damit die Temperatur des Akkus das Ergebnis nicht verfälscht.

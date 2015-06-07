@@ -1,25 +1,30 @@
-\subsection{Kollisionsabfrage über Abstandsmessung}
-Jedes Spiel verwendet unterschiedliche virtuelle und tatsächliche Objekte. Diese werden zur Kollisionsabfrage in mehrere Kategorien eingeteilt.
-Objekte sind entweder beweglich oder unbeweglich und entweder solide oder unsolide.
-Bei der Kollisionsabfrage können solide Objekte die passive Rolle und bewegliche Objekte die aktive Rolle einnehmen. 
-Solide bewegliche Objekte können je nach Situation entweder aktiv oder passiv sein und unter Umständen auch mit sich selber kollidieren.
-Jedes bewegliche Objekt nimmt, nachdem seine Positionsdaten geändert wurden, die Rolle des aktiven Objekts ein. Das aktive Objekt wird dann mit jedem soliden Objekt verglichen, das dann die Rolle des passiven Objekts annimmt. Im Falle einer Kollision wird abhängig von den beteiligten Objekten ein entsprechender Effekt ausgelöst.
 
-Die meisten Objekte haben Hitboxen in Form eines Kreises.
-Die Android API stellt eine Methode zur Verfügung, die die Entfernung zwischen zwei Punkten, die über geographische Koordinaten bestimmt sind, berechnet \footnote{\url{http://developer.android.com/reference/android/location/Location.html}}. Damit kann die Kollisionsabfrage über Abstandsmessung implementiert werden.
-Es wird eine Kollision ausgelöst, falls beide Objekte Kreise sind und die Entfernung zwischen ihren Kreismittelpunkten kleiner ist, als die Summe der Radien.
-
-$|M_{aktiv}-M_{passiv}|<r_{aktiv}+r_{passiv}$
-
-
-Beim Snake-Spiel müssen hingegen vier Fälle unterscheiden werden: sowohl das aktive, wie auch das passive beteiligte Objekt können jeweils einen Kreis oder einen Kette von Kreisen (eine Schlange) als Hitbox haben. Die Schlange wird als Polygonzug von Punkten realisiert. Jeder Eckpunkt ist dabei der Mittelpunkt einer kreisförmigen Hitbox (Glied). Die Strecke zwischen zwei aufeinanderfolgenden Eckpunkten des Polygonzuges ist dabei ein Segment der Schlange.
-Das aktive Objekt ist bei Snake immer ein Spieler, also eine Schlange.
-Das passive Objekt kann ein aufsammelbares Bonus-Objekt, ein anderer Spieler oder der aktive Spieler selber sein.
-Das aktive Objekt ist ein Polygonzug, trotzdem müssen nur Kollisionen mit dessen erstem Element (dem Kopf der Schlange) berücksichtigt werden, da Kollisionen mit dem Schwanz der Schlange immer von anderen Objekten ausgelöst werden
-Bei einer Kollision mit einer Schlange als passives Objekt, wird jeder Eckpunkt des Polygonzuges auf Kollision mit dem aktiven Objekt geprüft. Die Kollision zwischen dem aktiven Objekt und einem Glied der passiven Schlange, also einem Kreis um einem Eckpunkte des Polygonzugs, führt zur Kollision mit der Schlange. 
-
-Während Abstandsmessung als Kriterium für Kollision von Kreisen gut funktioniert, muss bei der Kollision von Polygonzügen darauf geachtet werden, dass die Radien der kreisförmigen Hitboxen genügend groß gewählt werden, damit sich auch bei schwankender Genauigkeit der GPS-Werte und damit sehr unregelmäßigen Abständen zwischen den Gliedern der Schlange, die Hitboxen aufeinanderfolgender Glieder überschneiden. 
-
-Im Experiment wurde bei guten Bedingungen eine Abweichung der ermittelten Positionen von den tatsächlichen von circa vier Metern gemessen (siehe Anhang \ref{app}).
-In der Praxis hat sich aber ein Radius von zwei Metern als ausreichend erwiesen, da die Spieler die Diskrepanz zwischen realer und virtueller Welt bemerken und gegebenenfalls gegensteuern können. Auch ist ein Radius von zwei Metern fein genug, um das Hindurchlaufen durch eine Schlange zu verhindern.
-Gleichzeitig bringt der geringere Radius den Vorteil, dass das Spiel auch auf kleineren Arealen gespielt werden kann und Spieler schärfere Kurven laufen können ohne Selbstkollisionen zu riskieren.
+Sämtliche Objekte in der Implementation (Spieler, virtuelle Objekte) liegen jeweils nur als Geopositionen (Breiten und Längengrad) vor, mit denen dann gearbeitet wird. Direkte Kollisionen zwischen zwei Objekten sind allein schon in der Theorie äußerst selten. In der Praxis kommt noch die Ungenauigkeit der Sensoren Hinzu. In der Implementation werden Kollisionen benötigt, damit Spieler z.B. in der Lage sind virtuelle Objekte einzusammeln oder eine Kollision zwischen 2 Spieler (Snakespiel) zu realisieren. Im folgenden werden 2 Herangehensweisen vorgestellt.
+\subsection{Kollisionsabfrage über Abstandsmessung}\label{abstandsmessung}
+%Jedes Spiel verwendet unterschiedliche virtuelle und tatsächliche Objekte. Diese werden zur Kollisionsabfrage in mehrere Kategorien eingeteilt.
+%Objekte sind entweder beweglich oder unbeweglich und entweder solide oder unsolide.
+%Bei der Kollisionsabfrage können solide Objekte die passive Rolle und bewegliche Objekte die aktive Rolle einnehmen. 
+%Solide bewegliche Objekte können je nach Situation entweder aktiv oder passiv sein und unter Umständen auch mit sich selber kollidieren.
+%Jedes bewegliche Objekt nimmt, nachdem seine Positionsdaten geändert wurden, die Rolle des aktiven Objekts ein. Das aktive Objekt wird dann mit jedem soliden Objekt verglichen, das dann die Rolle des passiven Objekts annimmt. Im Falle einer Kollision wird abhängig von den beteiligten Objekten ein entsprechender Effekt ausgelöst.
+%
+%Die meisten Objekte haben Hitboxen in Form eines Kreises.
+%Die Android API stellt eine Methode zur Verfügung, die die Entfernung zwischen zwei Punkten, die über geographische Koordinaten bestimmt sind, berechnet \footnote{\url{http://developer.android.com/reference/android/location/Location.html}}. Damit kann die Kollisionsabfrage über Abstandsmessung implementiert werden.
+%Es wird eine Kollision ausgelöst, falls beide Objekte Kreise sind und die Entfernung zwischen ihren Kreismittelpunkten kleiner ist, als die Summe der Radien.
+%
+%$|M_{aktiv}-M_{passiv}|<r_{aktiv}+r_{passiv}$
+%
+%
+%Beim Snake-Spiel müssen hingegen vier Fälle unterscheiden werden: sowohl das aktive, wie auch das passive beteiligte Objekt können jeweils einen Kreis oder einen Kette von Kreisen (eine Schlange) als Hitbox haben. Die Schlange wird als Polygonzug von Punkten realisiert. Jeder Eckpunkt ist dabei der Mittelpunkt einer kreisförmigen Hitbox (Glied). Die Strecke zwischen zwei aufeinanderfolgenden Eckpunkten des Polygonzuges ist dabei ein Segment der Schlange.
+%Das aktive Objekt ist bei Snake immer ein Spieler, also eine Schlange.
+%Das passive Objekt kann ein aufsammelbares Bonus-Objekt, ein anderer Spieler oder der aktive Spieler selber sein.
+%Das aktive Objekt ist ein Polygonzug, trotzdem müssen nur Kollisionen mit dessen erstem Element (dem Kopf der Schlange) berücksichtigt werden, da Kollisionen mit dem Schwanz der Schlange immer von anderen Objekten ausgelöst werden
+%Bei einer Kollision mit einer Schlange als passives Objekt, wird jeder Eckpunkt des Polygonzuges auf Kollision mit dem aktiven Objekt geprüft. Die Kollision zwischen dem aktiven Objekt und einem Glied der passiven Schlange, also einem Kreis um einem Eckpunkte des Polygonzugs, führt zur Kollision mit der Schlange. 
+%
+%Während Abstandsmessung als Kriterium für Kollision von Kreisen gut funktioniert, muss bei der Kollision von Polygonzügen darauf geachtet werden, dass die Radien der kreisförmigen Hitboxen genügend groß gewählt werden, damit sich auch bei schwankender Genauigkeit der GPS-Werte und damit sehr unregelmäßigen Abständen zwischen den Gliedern der Schlange, die Hitboxen aufeinanderfolgender Glieder überschneiden. 
+%
+%Im Experiment wurde bei guten Bedingungen eine Abweichung der ermittelten Positionen von den tatsächlichen von circa vier Metern gemessen (siehe Anhang \ref{app}).
+%In der Praxis hat sich aber ein Radius von zwei Metern als ausreichend erwiesen, da die Spieler die Diskrepanz zwischen realer und virtueller Welt bemerken und gegebenenfalls gegensteuern können. Auch ist ein Radius von zwei Metern fein genug, um das Hindurchlaufen durch eine Schlange zu verhindern.
+%Gleichzeitig bringt der geringere Radius den Vorteil, dass das Spiel auch auf kleineren Arealen gespielt werden kann und Spieler schärfere Kurven laufen können ohne Selbstkollisionen zu riskieren.
+Eine Möglichkeit Kollisionen zu realisieren, ist über Abstandsmessung. Wenn z.B. ein Spieler nahe genug ist einem anderen Objekt befindet, kann eine Kollision ausgelöst werden. Eine einfache Bestimmung der Vektorlänge zwischen zwei Punkten reicht hierbei leider nicht aus, um die Distanz zwischen 2 Punkten genau genug zu bestimmen. Man benötigt hierbei die Orthodrome\cite{meeus1998astronomical}, also die kürzeste Distanz zwischen 2 Punkten auf einer Kugeloberfläche. Mittels Formeln der sphärischen Trigonometrie\cite{filler1993euklidische} lassen sich erst mal die Winkel zwischen einem Punkt A und einem Punkt B bestimmen. Beide Punkte haben jeweils eine Geographische Breite ($\beta$) und Länge ($\lambda$) und werden zur besseren Lesbarkeit folgendermaßen dargestellt: $A(\beta_{A}, \lambda_{A}) $, $B(\beta_{B}, \lambda_{B}) $. Nun kann der Winkel so bestimmt werden: \newline
+$\phi = \arccos(sin(\beta_{A}) \cdot sin(\beta_{B}) + cos(\beta_{A}) \cdot cos((\beta_{B}) \cdot cos(\lambda_{B} - \lambda_{A} )) $.
+Das Ergebnis muss nun mit dem Erdradius multipliziert werden um die Länge zu erhalten.
