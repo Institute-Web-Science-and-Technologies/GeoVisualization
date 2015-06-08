@@ -17,10 +17,11 @@ public class Team {
 	public List<Player> players;
 	private int points;
 	private LatLng base = null;
-	private LatLng flag = null;
+	private LatLng enemyFlag = null;
 	private Circle baseCircle;
 	private final FlagGame game;
 	private Marker flagMarker = null;
+	public boolean enemyFlagPickedUp = false;
 	public boolean userInTeam;
 	int color;
 
@@ -42,22 +43,22 @@ public class Team {
 		players.remove(player);
 	}
 	
-	public int updatePlayers (String player, float speed, LatLng pos ){
+	public int updatePlayers (String player, float speed, LatLng pos,boolean isUser ){
 		for (Player p : players) {
 			if (p.getName().contentEquals(player)) {
-				p.updatePlayer(speed,pos,userInTeam);
+				p.updatePlayer(speed,pos,userInTeam,isUser);
 				return 1;
 			}
 		}
 		return 0;
 	}
 	
-	public LatLng getFlag(){
-		return flag;
+	public LatLng getEnemyFlag(){
+		return enemyFlag;
 	}
 	
-	public void setFlag(LatLng flag){
-		this.flag = flag;
+	public void setEnemyFlag(LatLng flag){
+		this.enemyFlag = flag;
 		if (flagMarker == null){
 			game.getActivity().runOnUiThread(new Runnable(){
 
@@ -68,7 +69,7 @@ public class Team {
 				}
 				
 			});
-			if(color==Color.RED){
+			if(color==Color.BLUE){
 				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_flag));
 			} else {
 				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.blue_flag));
@@ -77,7 +78,7 @@ public class Team {
 			//flagMarker.setIcon(icon);
 		}
 		flagMarker.setPosition(flag);
-		if (userInTeam){
+		if (!userInTeam){
 			flagMarker.setVisible(false);
 		}
 		

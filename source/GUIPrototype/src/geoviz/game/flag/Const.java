@@ -11,4 +11,7 @@ public class Const {
 	public static final long scanCdinMs= 300000;
 	public static final long scannerDuration = 30000;
 	public static final float scannerRange = 10;
+	public static final float flagPickupRadius = 5;
+	public static final long vibrateTimeInMs = 1000;
+	public static final long flagVisibilityTimerInMs = 60000; 
 }

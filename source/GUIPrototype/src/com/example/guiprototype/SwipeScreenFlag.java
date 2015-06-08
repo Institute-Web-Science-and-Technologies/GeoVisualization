@@ -280,7 +280,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 			}
 
 		}
-		Game.init(new FlagGame(gameID,this,this.team));
+		Game.init(new FlagGame(gameID,this,this.team,this.userName));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);

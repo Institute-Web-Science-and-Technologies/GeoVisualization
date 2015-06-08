@@ -3,10 +3,17 @@ package geoviz.game.flag;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.os.CountDownTimer;
+import android.os.Vibrator;
 
+import com.example.fragments.MapScreenFragment;
+import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,11 +27,14 @@ public class FlagGame extends Game {
 	private boolean receivedStatus=false;
 	private Team teamRed;
 	private Team teamBlue;
+	public String userName;
+	private Marker flagMarker= null;
 	private Gson gson = new GsonBuilder().create();
 	
-	public FlagGame(String gameID, SwipeScreen swipescreen,String team){
+	public FlagGame(String gameID, SwipeScreen swipescreen,String team, String userName){
 		this.gameID=gameID;
 		this.swipeScreen=swipescreen;
+		this.userName=userName;
 		teamRed = new Team(Color.RED,this);
 		teamBlue = new Team(Color.BLUE,this);
 		if(team.contentEquals("teamBlue")){
@@ -50,8 +60,9 @@ public class FlagGame extends Game {
 	public void update(TransferObject o) {
 		switch (o.msgType){
 		case TransferObject.TYPE_COORD:
-			if(teamRed.updatePlayers(o.senderName, o.speed, o.pos)==0)
-				teamBlue.updatePlayers(o.senderName, o.speed, o.pos);
+			boolean isUser = o.senderName.contentEquals(userName);
+			if(teamRed.updatePlayers(o.senderName, o.speed, o.pos,isUser)==0)
+				teamBlue.updatePlayers(o.senderName, o.speed, o.pos,isUser);
 			break;
 		case TransferObject.TYPE_JOIN_GAME:
 			String senderID = o.senderID;
@@ -79,7 +90,7 @@ public class FlagGame extends Game {
 					teamRedPos, teamBluePos,
 					teamRedSpeed, teamBlueSpeed,
 					teamRedLMA, teamBlueLMA,
-					teamRed.getFlag(), teamBlue.getFlag(), teamRed.getBase(),
+					teamRed.getEnemyFlag(), teamBlue.getEnemyFlag(), teamRed.getBase(),
 					teamBlue.getBase());
 			String msg = gson.toJson(tfg);
 			JeroMQQueue jmqq = JeroMQQueue.getInstance();
@@ -95,7 +106,7 @@ public class FlagGame extends Game {
 						if (player.getName().contentEquals(tfg2.teamRed.get(i))){
 							playerExists = true;
 							player.setLastMarkedAt(tfg2.teamRedLMA.get(i));
-							player.updatePlayer(tfg2.teamRedSpeed.get(i), tfg2.teamRedPos.get(i), teamRed.userInTeam);
+							player.updatePlayer(tfg2.teamRedSpeed.get(i), tfg2.teamRedPos.get(i), teamRed.userInTeam,false);
 
 						}
 					}
@@ -109,7 +120,7 @@ public class FlagGame extends Game {
 						if(player.getName().contentEquals(tfg2.teamBlue.get(i))){
 							playerExists=true;
 							player.setLastMarkedAt(tfg2.teamBlueLMA.get(i));
-							player.updatePlayer(tfg2.teamBlueSpeed.get(i), tfg2.teamBluePos.get(i), teamBlue.userInTeam);
+							player.updatePlayer(tfg2.teamBlueSpeed.get(i), tfg2.teamBluePos.get(i), teamBlue.userInTeam,false);
 						}
 					}
 					if (!playerExists){
@@ -118,6 +129,9 @@ public class FlagGame extends Game {
 				}
 				teamBlue.setBase(tfg2.teamBlueBase);
 				teamRed.setBase(tfg2.teamRedBase);
+				//flags in tfg2 are marked by from which team class they came from atm
+				teamBlue.setEnemyFlag(tfg2.teamBlueFlag);
+				teamRed.setEnemyFlag(tfg2.teamRedFlag);
 				
 			}
 			break;
@@ -139,6 +153,81 @@ public class FlagGame extends Game {
 			else 
 				teamRed.addPlayer(new Player(teamRed,o.senderName));
 			break;
+		case TransferObject.TYPE_SET_FLAG:
+			if(o.msg.contentEquals("teamBlue")){
+				teamBlue.setEnemyFlag(o.pos);
+			}
+			else{
+				teamRed.setEnemyFlag(o.pos);
+			}
+			break;
+		case TransferObject.TYPE_PICKUP_FLAG:
+			List<Player> allPlayers = new LinkedList<Player>(teamBlue.players);
+			allPlayers.addAll(teamRed.players);
+			for (Player p: allPlayers){
+				if (p.getName().equals(o.senderName)){
+					p.setHasFlag(true);
+					p.getTeam().enemyFlagPickedUp = true;
+				}
+					
+			}
+			if (o.msg.contentEquals("teamBLue") && teamRed.userInTeam){
+				Vibrator v = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+				v.vibrate(Const.vibrateTimeInMs);
+				final FlagGame me = this;
+				
+				
+				this.getActivity().runOnUiThread(new Runnable(){
+
+					@Override
+					public void run() {
+						MapScreenFragment msf = (MapScreenFragment) me.getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
+						flagMarker = msf.initMarker();
+					}
+					
+				});
+				flagMarker.setPosition(o.pos);
+				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_flag));
+				
+				
+				new CountDownTimer(Const.flagVisibilityTimerInMs, 1000) {
+
+				     public void onTick(long millisUntilFinished) {
+				    	
+				     }
+
+				     public void onFinish() {
+				    	flagMarker.remove();
+				     }
+				  }.start();
+			} if (o.msg.contentEquals("teamRed") && teamBlue.userInTeam) {
+				Vibrator v = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+				v.vibrate(Const.vibrateTimeInMs);
+				final FlagGame me = this;
+				
+				
+				this.getActivity().runOnUiThread(new Runnable(){
+
+					@Override
+					public void run() {
+						MapScreenFragment msf = (MapScreenFragment) me.getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
+						flagMarker = msf.initMarker();
+					}
+					
+				});
+				flagMarker.setPosition(o.pos);
+				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.blue_flag));
+				new CountDownTimer(Const.flagVisibilityTimerInMs, 1000) {
+
+				     public void onTick(long millisUntilFinished) {
+				    	
+				     }
+
+				     public void onFinish() {
+				    	flagMarker.remove();
+				     }
+				  }.start();
+			}
 		default : break;
 		}
 

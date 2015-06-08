@@ -20,7 +20,9 @@ public class TransferObject implements Serializable {
 			TYPE_SNAKE_WINS = 9,
 			TYPE_PLAYER_MARKED = 10,
 			TYPE_JOIN_TEAM = 11,
-			TYPE_SET_BASE = 12;
+			TYPE_SET_BASE = 12,
+			TYPE_SET_FLAG = 14,
+			TYPE_PICKUP_FLAG = 15;
 
 
 	

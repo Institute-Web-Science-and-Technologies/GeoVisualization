@@ -1,7 +1,12 @@
 package geoviz.game.flag;
 
+import geoviz.communication.JeroMQQueue;
+import geoviz.communication.TransferObject;
+import geoviz.game.Functions;
+
 import java.util.Date;
 
+import android.graphics.Color;
 import android.location.Location;
 
 import com.example.fragments.MapScreenFragment;
@@ -63,7 +68,7 @@ public class Player {
 			}
 		});
 		posMarker.setFillColor(team.color);
-		updatePlayer(speed,pos,playerInTeam);
+		updatePlayer(speed,pos,playerInTeam,false);
 	}
 
 	public String getName() {
@@ -131,11 +136,20 @@ public class Player {
 		this.speed=speed;
 	}
 
-	public void updatePlayer(float speed, LatLng pos, boolean userInTeam) {
+	public void updatePlayer(float speed, LatLng pos, boolean userInTeam,boolean isUser) {
 		position = pos;
 		this.speed= speed;
+		if(isUser && !team.enemyFlagPickedUp){
+			if(Functions.distance(pos, team.getEnemyFlag()) < Const.flagPickupRadius){
+				JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				if(team.color == Color.BLUE)
+					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos, "teamBlue", team.getGame().gameID);
+				else
+					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos, "teamRed", team.getGame().gameID);
+			}
+		}
 		if (hasFlag)
-			team.setFlag(pos);
+			team.setEnemyFlag(pos);
 		if (userInTeam){
 			posMarker.setCenter(pos);
 			posMarker.setVisible(true);

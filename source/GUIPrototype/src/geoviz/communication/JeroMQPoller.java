@@ -3,6 +3,7 @@ package geoviz.communication;
 import geoviz.game.Game;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.fragments.ChatScreenFragment;
 import com.example.fragments.GamesScreenFragment;
 import com.example.guiprototype.R;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -120,6 +122,9 @@ public class JeroMQPoller {
 					case TransferObject.TYPE_GAME_STATUS:
 						handleGameStatus(msg);
 						break;
+					case TransferObject.TYPE_SET_FLAG:
+						handleSetFlag(msg);
+						break;
 					default:
 						TransferObject t = gson.fromJson(msg, TransferObject.class);
 						Game.getGame().update(t);
@@ -158,6 +163,17 @@ public class JeroMQPoller {
 				}
 
 			}
+
+			private void handleSetFlag(String msg) {
+				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+				
+				TransferObject t =new TransferObject(TransferObject.TYPE_SET_FLAG, ttso.team, null,
+				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
+				Game.getGame().update(t);
+			
+			}
+
+	
 
 			private void handleGameStatus(String msg) {
 				// TODO Auto-generated method stub
