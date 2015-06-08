@@ -1,7 +1,7 @@
 \subsection{Spiellogik}
 
 \subsubsection*{Server}
-
+Der Server wird hier noch mit einer Zusatzfunktion ausgestattet. Er generiert nach vorher festgelegten Bedingung gültige Flaggenpunkte. In diesem Fall zählen Straßen als gültige Punkte. Der Server ruft über GoogleStaticMap einen Kartenabschnitt ab, auf dem der Flaggenpunkt generiert werden soll. Nun wird ein zufälliger Pixel in der Mitte des Bildes nach der Farbe überprüft. Stimmt dieser mit der Farbe von Straßen überein, wird diese Position als gültig zurück übertragen und der Flaggenpunkt kann generiert werden. Ist die Farbe ungültig wird ein entsprechender neuer Kartenabschnitt aufgerufen und die Prozedur beginnt erneut.
 
 \subsubsection*{Client}
 Auf der Client-Seite wird die Sichtbarkeit der Spieler und Objekte (Flaggen und Basen) gehandhabt.

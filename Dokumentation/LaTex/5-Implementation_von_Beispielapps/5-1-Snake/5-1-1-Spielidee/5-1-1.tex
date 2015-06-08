@@ -1,3 +1,27 @@
+\label{implementation}
+\section{Allgemein}
+\subsection{Spiellogik}
+\subsubsection{Server}
+Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, ?ber das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, über das die Nachrichten an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: einer Adresse, dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu ?bermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client, oder alle Clients die sich in einer Spielsession befinden, sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. , Um mehrere Spielinstanzen gleichzeitig verwalten zu k?nnen, h?lt er aber eine Liste aller laufenden Spiele samt Informationen darüber, welcher Spieler an welchem Spiel teilnimmt. Wenn eine Nachricht vom Typ \glqq create\_game\grqq empfangen wird trägt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine entsprechende Nachricht anfragt.
+
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=1\textwidth]{img/snake.png}
+	\end{center}
+	
+	\caption{UML-Diagramm zur Spiellogik}
+	\label{fig:snake}
+\end{figure}
+
+\subsubsection{Client}
+Unsere Android-Applikation besteht aus drei Fragmenten zwischen denen man durch Wischen wechseln kann. Das erste Fragment ist ein Chat über den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden können.
+Das zweite Fragment ist die Karte auf der wir unser Spiel darstellen.  
+Für die Darstellung der Karte verwenden wir GoogleMaps. 
+Im dritten Fragment kann ein Spieler eine neue Spielinstanz erstellen oder einem bereits laufendem Spiel beitreten. Die Liste der momentan laufenden Spiele wird per Knopfdruck vom Server abgefragt. Wenn man einer laufenden Session beitritt wird über den Server eine Anfrage des aktuellen Status des Spiels an alle momentanen Mitspieler gesendet, welche den Zustand des Spiels alle an den anfragenden Client zurück senden. Dieser beachtet nur die erste Nachricht und verwirft den Rest.
+Des weiteren läuft ein LocationClient, welcher immer die aktuelle Position als Nachricht an alle Spieler der selben Spielinstanz weiterschickt. 
+
 \subsection{Spielidee}
 Das erste Spiel, das wir umsetzen, ist das schon mehrfach erwähnte Snake. Die Grundregeln von Snake sind nahezu jedem bekannt, da es auf nahezu allen Nokia-Handys der 90er Jahre mitgeliefert wurde.
 In der implementierten Beispielapplikation verkörpert jeder Spieler  eine Schlange. Der Kopf der virtuellen Schlange befindet sich auf der Spielerposition. Sobald der Spieler sich anfängt zu bewegen, zieht er einen Schwanz hinter sich her, der aus mehreren Gliedern besteht. Die Anzahl der Glieder und damit die Länge des Schwanzes entspricht dem Punktestand des Spielers. Der Spieler muss versuchen, mit dem Kopf zufällig platzierte Bonusobjekte (Hühner/ Chickens) einzusammeln und muss gleichzeitig vermeiden mit seinem eigenen Schwanz oder einer anderen Schlange zu kollidieren.

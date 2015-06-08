@@ -41,6 +41,13 @@
   --
 \newblock [abgerufen am 28. April 2015]
 
+\bibitem[Len06]{lenze2006basiswissen}
+\textsc{Lenze}, B.:
+\newblock \emph{Basiswissen Lineare Algebra}.
+\newblock W3L-Verlag, 2006 (Mathematik lernen).
+\newblock \url{https://books.google.de/books?id=iqxREM6KCygC}. --
+\newblock ISBN 9783937137810
+
 \bibitem[Mac15]{pacman}
 \textsc{Maciej}, Martin:
 \newblock \emph{Pacman spielen in Google Maps}.
