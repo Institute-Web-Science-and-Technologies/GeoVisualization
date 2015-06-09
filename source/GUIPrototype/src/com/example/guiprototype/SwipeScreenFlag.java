@@ -158,8 +158,11 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 									.bearingTo(pl) <= orientationAngle
 									+ (Const.markerAngleInDegree / 2))) {
 						JeroMQQueue jmqq = JeroMQQueue.getInstance();
-						jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
-								player.getName(), flaggame.gameID);
+						if (!player.hasFlag())
+							jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
+									player.getName(), flaggame.gameID);
+						else
+							jmqq.sendToServer(TransferObject.TYPE_FLAGCARRIER_SHOT, flaggame.getTeamRed().getBase(), "teamBlue", flaggame.gameID);
 					}
 				}
 			} else {
@@ -175,8 +178,11 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 									.bearingTo(pl) <= orientationAngle
 									+ (Const.markerAngleInDegree / 2))) {
 						JeroMQQueue jmqq = JeroMQQueue.getInstance();
-						jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
-								player.getName(), flaggame.gameID);
+						if (!player.hasFlag())
+							jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
+									player.getName(), flaggame.gameID);
+						else
+							jmqq.sendToServer(TransferObject.TYPE_FLAGCARRIER_SHOT, flaggame.getTeamBlue().getBase(), "teamRed", flaggame.gameID);
 					}
 				}
 

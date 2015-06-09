@@ -10,6 +10,7 @@ public class TransferFlagGame {
 	List<Float>  teamRedSpeed,teamBlueSpeed;
 	List<Long> teamRedLMA,teamBlueLMA;
 	LatLng teamRedFlag,teamBlueFlag,teamRedBase,teamBlueBase;
+	int teamRedPoints,teamBluePoints;
 	
 	
 	
@@ -18,7 +19,7 @@ public class TransferFlagGame {
 			List<Float> teamRedSpeed, List<Float> teamBlueSpeed,
 			List<Long> teamRedLMA, List<Long> teamBlueLMA,
 			LatLng teamRedFlag, LatLng teamBlueFlag, LatLng teamRedBase,
-			LatLng teamBlueBase) {
+			LatLng teamBlueBase,int teamBluePoints,int teamRedPoints) {
 		this.teamRed = teamRed;
 		this.teamBlue = teamBlue;
 		this.teamRedPos = teamRedPos;
@@ -31,6 +32,8 @@ public class TransferFlagGame {
 		this.teamBlueFlag = teamBlueFlag;
 		this.teamRedBase = teamRedBase;
 		this.teamBlueBase = teamBlueBase;
+		this.teamRedPoints=teamRedPoints;
+		this.teamBluePoints=teamBluePoints;
 	}
 	
 

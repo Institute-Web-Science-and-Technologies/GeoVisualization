@@ -13,5 +13,6 @@ public class Const {
 	public static final float scannerRange = 10;
 	public static final float flagPickupRadius = 5;
 	public static final long vibrateTimeInMs = 1000;
-	public static final long flagVisibilityTimerInMs = 60000; 
+	public static final long flagVisibilityTimerInMs = 60000;
+	public static final float gainPointRadius = 5; 
 }

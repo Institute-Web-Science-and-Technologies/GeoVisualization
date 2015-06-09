@@ -22,7 +22,9 @@ public class TransferObject implements Serializable {
 			TYPE_JOIN_TEAM = 11,
 			TYPE_SET_BASE = 12,
 			TYPE_SET_FLAG = 14,
-			TYPE_PICKUP_FLAG = 15;
+			TYPE_PICKUP_FLAG = 15,
+			TYPE_FLAGCARRIER_SHOT = 16,
+			TYPE_DELIVER_FLAG = 17;
 
 
 	
