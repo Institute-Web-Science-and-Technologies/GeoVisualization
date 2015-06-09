@@ -305,11 +305,15 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		}
 		if (!gsf.games.contains(gameId)){
 		gsf.games.add(gameId);
+		if(gameId.startsWith("0"))
+			gsf.gamenames.add("Snakegame von "+ userName);
+		else
+			gsf.gamenames.add("Flaggame von "+ userName);
 		}
 		connect(gameId);
 		gsf.adapter.notifyDataSetChanged();
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendMsg(TransferObject.TYPE_CREATE, gameId);
+		jmqq.sendMsg(TransferObject.TYPE_CREATE, gameId +";"+userName);
 	}
 	
 	public void updateGameList(View view){

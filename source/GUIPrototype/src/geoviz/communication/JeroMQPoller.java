@@ -196,8 +196,14 @@ public class JeroMQPoller {
 						.getSupportFragmentManager().findFragmentByTag(
 								"android:switcher:" + R.id.pager + ":2");
 				gsf.games = new LinkedList<String>();
+				gsf.gamenames = new LinkedList<String>();
 				for (String game : games) {
-					gsf.games.add(game);
+					String[] names = game.split(";");
+					gsf.games.add(names[0]);
+					if (names[0].startsWith("0"))
+						gsf.gamenames.add("Snakegame von "+ names[1]);
+					else
+						gsf.gamenames.add("Flaggame von "+ names[1]);
 				}
 				activity.runOnUiThread(new Runnable(){
 

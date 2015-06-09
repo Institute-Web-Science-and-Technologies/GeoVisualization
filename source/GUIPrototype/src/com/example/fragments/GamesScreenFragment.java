@@ -26,9 +26,11 @@ public class GamesScreenFragment extends Fragment {
 
 
 	public List<String> games;
-	
+	public List<String> gamenames;
 	public ArrayAdapter<String> adapter;
 	private GamesScreenFragmentCallbacks callbacks;
+
+
 	
 	
 	
@@ -45,6 +47,7 @@ public class GamesScreenFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		games = new ArrayList<String>();
+		gamenames = new ArrayList<String>();
 	}
 
 
@@ -58,7 +61,7 @@ public class GamesScreenFragment extends Fragment {
 
 	
 		adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, games);
+				android.R.layout.simple_list_item_1, gamenames);
 		
 		ListView lv =(ListView) rootView.findViewById(R.id.gameListView);
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
