@@ -26,6 +26,7 @@ public class ReqRepPublisher {
 	private ZMQ.Socket replier;
 	private ZMQ.Socket publisher;
 	private List<String> games;
+	private Map<String, String> gameCreators;
 	private Map<String, Date> gameList;
 	private Gson gson;
 	private GoogleStaticMapLoader gsml;
@@ -41,6 +42,7 @@ public class ReqRepPublisher {
 		items.register(publisher, ZMQ.Poller.POLLIN);
 		System.out.println("Server started.");
 		games = new LinkedList<String>();
+		gameCreators = new HashMap<String,String>();
 		gameList = new HashMap<String,Date>();
 		gson = new GsonBuilder().create();
 		gsml = new GoogleStaticMapLoader();
@@ -179,16 +181,24 @@ public class ReqRepPublisher {
 	private void handleGetGamelist(String senderID, String msg, int msgType) {
 		long time = new Date().getTime();
 		for (String game : gameList.keySet()){
-			if (time - gameList.get(game).getTime() > 3600000)
+			if (time - gameList.get(game).getTime() > 3600000){
 				gameList.remove(game);
+				gameCreators.remove(game);
+				}
 		}
-			
+		List<String> gameIDs = new LinkedList<String>(gameList.keySet());
+ 		List<String> games = new LinkedList<String>();
+ 		for (int i =0; i<gameIDs.size(); i++){
+ 			games.add(gameIDs.get(i)+";"+gameCreators.get(gameIDs.get(i)));
+ 		}
 		String replie = gson.toJson(games);
 		send(senderID,msgType,replie);
 	}
 	private void handleCreate(String gameID, String msg, int msgType) {
-		games.add(gameID);
-		gameList.put(gameID, new Date());
+		//games.add(gameID);
+		String[] names = gameID.split(";");
+		gameList.put(names[0], new Date());
+		gameCreators.put(names[0], names[1]);
 		replier.send("");
 		
 	}
