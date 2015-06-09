@@ -8,6 +8,7 @@ import android.graphics.Color;
 
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
+import com.example.guiprototype.SwipeScreenFlag;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,7 +22,7 @@ public class Team {
 	private Circle baseCircle;
 	private final FlagGame game;
 	private Marker flagMarker = null;
-	public boolean enemyFlagPickedUp = false;
+	public boolean enemyFlagPickedUp = true;
 	public boolean userInTeam;
 	int color;
 
@@ -59,6 +60,7 @@ public class Team {
 	
 	public void setEnemyFlag(LatLng flag){
 		this.enemyFlag = flag;
+		this.enemyFlagPickedUp = false;
 		if (flagMarker == null){
 			game.getActivity().runOnUiThread(new Runnable(){
 
@@ -112,10 +114,24 @@ public class Team {
 			});
 		}
 	}
+	
+	public int getPoints(){
+		return points;
+	}
+	public void setPoints(int points){
+		this.points=points;
+	}
+	public void resetPoints(){
+		points = 0;
+	}
 	public void gainPoint(){
 		points++;
 		if (points >= Const.maxpoints){
-			// send victory msg
+			SwipeScreenFlag swf = (SwipeScreenFlag) game.getActivity();
+			swf.resetPoints();
+			game.getTeamBlue().resetPoints();
+			game.getTeamRed().resetPoints();
+			
 		}
 	}
 	

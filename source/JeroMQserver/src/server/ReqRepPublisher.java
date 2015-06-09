@@ -1,8 +1,12 @@
 package server;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Map;
+import getPixelFromPicture.GoogleStaticMapLoader;
 import org.zeromq.ZMQ;
 
 import com.google.gson.Gson;
@@ -13,11 +17,18 @@ public class ReqRepPublisher {
 			TYPE_ADD_CHICKEN=2,
 			TYPE_KILL_CHICKEN=3,
 			TYPE_CREATE=4,
-			TYPE_GET_GAMELIST=5;
+			TYPE_GET_GAMELIST=5,
+			TYPE_SET_BASE = 12,
+			TYPE_REQUEST_FLAG = 13,
+			TYPE_SET_FLAG = 14,
+			TYPE_FLAGCARRIER_SHOT = 16,
+			TYPE_DELIVER_FLAG = 17;
 	private ZMQ.Socket replier;
 	private ZMQ.Socket publisher;
 	private List<String> games;
+	private Map<String, Date> gameList;
 	private Gson gson;
+	private GoogleStaticMapLoader gsml;
 	public  void startServer() {
 		System.out.println("Starting server ..");
 		ZMQ.Context context = ZMQ.context(1);
@@ -30,7 +41,9 @@ public class ReqRepPublisher {
 		items.register(publisher, ZMQ.Poller.POLLIN);
 		System.out.println("Server started.");
 		games = new LinkedList<String>();
+		gameList = new HashMap<String,Date>();
 		gson = new GsonBuilder().create();
+		gsml = new GoogleStaticMapLoader();
 	
 		
 		while (!Thread.currentThread().isInterrupted()) {
@@ -41,31 +54,43 @@ public class ReqRepPublisher {
 				String msg = new String(message);
 				System.out.println(msg);
 				int msgType = Integer.parseInt(msg.split(",")[0]);
-				String receiverID = msg.split(",")[1];
+				String gameID = msg.split(",")[1];
 				String senderID= msg.split(",")[2];
 				msg = msg.substring(msg.indexOf("{"),msg.length());
 				
 				switch (msgType){
 				case TYPE_COORD:
-					handleCoord(receiverID,msg,msgType);
+					handleCoord(gameID,msg,msgType);
 					break;
 				case TYPE_ADD_CHICKEN:
-					handleAddChicken(receiverID,msg,msgType);
+					handleAddChicken(gameID,msg,msgType);
 					break;
 				case TYPE_KILL_CHICKEN:
-					handleKillChicken(receiverID,msg,msgType);
+					handleKillChicken(gameID,msg,msgType);
 					break;
 				case TYPE_CREATE:
-					handleCreate(receiverID,msg,msgType);
+					handleCreate(gameID,msg,msgType);
 					break;
 				case TYPE_GET_GAMELIST:
-					handleGetGamelist(receiverID,msg,msgType);
+					handleGetGamelist(senderID,msg,msgType);
 					break;
 				case TYPE_MSG:
-					handleMsg(receiverID,msg,msgType);
+					handleMsg(gameID,msg,msgType);
+					break;
+				case TYPE_SET_BASE:
+					handleSetBase(gameID,msg,msgType);
+					break;
+				case TYPE_REQUEST_FLAG:
+					handleRequestFlag(gameID,msg,msgType);
+					break;
+				case TYPE_FLAGCARRIER_SHOT:
+					handleFlagcarrierShot(gameID,msg,msgType);
+					break;
+				case TYPE_DELIVER_FLAG:
+					handleDeliverFlag(gameID,msg,msgType);
 					break;
 				default:
-					send(receiverID,msgType,msg);
+					send(gameID,msgType,msg);
 					break;
 				
 				}
@@ -80,16 +105,90 @@ public class ReqRepPublisher {
 		context.term();
 		
 	}
+	private void handleDeliverFlag(String gameID, String msg, int msgType) {
+		send(gameID,msgType,msg);
+		TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+		double [] latlong = null;
+		try {
+			 latlong = gsml.createFlag(ttso.latitude, ttso.longitude, 500);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ttso.latitude=latlong[0];
+		ttso.longitude=latlong[1];
+		String flagMsg = gson.toJson(ttso);
+		publisher.sendMore(gameID);
+		publisher.sendMore(TYPE_SET_FLAG+"");
+		publisher.send(flagMsg);
+		
+	}
+	private void handleFlagcarrierShot(String gameID, String msg, int msgType) {
+		send(gameID,msgType,msg);
+		TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+		double [] latlong = null;
+		try {
+			 latlong = gsml.createFlag(ttso.latitude, ttso.longitude, 500);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ttso.latitude=latlong[0];
+		ttso.longitude=latlong[1];
+		String flagMsg = gson.toJson(ttso);
+		publisher.sendMore(gameID);
+		publisher.sendMore(TYPE_SET_FLAG+"");
+		publisher.send(flagMsg);
+	}
+	private void handleRequestFlag(String gameID, String msg, int msgType) {
+		TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+		double [] latlong = null;
+		try{
+			latlong = gsml.createFlag(ttso.latitude, ttso.longitude, 500);
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		ttso.latitude=latlong[0];
+		ttso.longitude=latlong[1];
+		String reply = gson.toJson(ttso);
+		send(gameID,TYPE_SET_FLAG,reply);
+		
+	}
+	private void handleSetBase(String gameID, String msg, int msgType) {
+		send(gameID,msgType,msg);
+		TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+		double [] latlong = null;
+		try {
+			 latlong = gsml.createFlag(ttso.latitude, ttso.longitude, 500);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ttso.latitude=latlong[0];
+		ttso.longitude=latlong[1];
+		String flagMsg = gson.toJson(ttso);
+		publisher.sendMore(gameID);
+		publisher.sendMore(TYPE_SET_FLAG+"");
+		publisher.send(flagMsg);
+		
+		
+	}
 	private void handleMsg(String gameID, String msg, int msgType) {
 		send(gameID,msgType,msg);
 	}
 	private void handleGetGamelist(String senderID, String msg, int msgType) {
-		
+		long time = new Date().getTime();
+		for (String game : gameList.keySet()){
+			if (time - gameList.get(game).getTime() > 3600000)
+				gameList.remove(game);
+		}
+			
 		String replie = gson.toJson(games);
 		send(senderID,msgType,replie);
 	}
 	private void handleCreate(String gameID, String msg, int msgType) {
 		games.add(gameID);
+		gameList.put(gameID, new Date());
 		replier.send("");
 		
 	}
@@ -101,6 +200,7 @@ public class ReqRepPublisher {
 	}
 	private void handleCoord(String gameID, String msg, int msgType) {
 		send(gameID,msgType,msg);
+		gameList.put(gameID, new Date());
 	}
 	public void send(String Filter, int msgType, String msg){
 		publisher.sendMore(Filter);

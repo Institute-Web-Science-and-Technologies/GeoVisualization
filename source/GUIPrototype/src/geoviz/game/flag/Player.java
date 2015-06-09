@@ -95,7 +95,7 @@ public class Player {
 		this.position = position;
 	}
 
-	public boolean isHasFlagasFlag() {
+	public boolean hasFlag() {
 		return hasFlag;
 	}
 
@@ -148,8 +148,18 @@ public class Player {
 					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos, "teamRed", team.getGame().gameID);
 			}
 		}
-		if (hasFlag)
+		if (hasFlag){
 			team.setEnemyFlag(pos);
+			if (Functions.distance(pos, team.getBase()) < Const.gainPointRadius){
+				JeroMQQueue jmqq = JeroMQQueue.getInstance();
+				if(team.color == Color.BLUE){
+					jmqq.sendToServer(TransferObject.TYPE_DELIVER_FLAG, team.getGame().getTeamRed().getBase(), "teamBlue", team.getGame().gameID);
+				}
+				else {
+					jmqq.sendToServer(TransferObject.TYPE_DELIVER_FLAG, team.getGame().getTeamBlue().getBase(), "teamRed", team.getGame().gameID);
+				}	
+			}
+			}
 		if (userInTeam){
 			posMarker.setCenter(pos);
 			posMarker.setVisible(true);

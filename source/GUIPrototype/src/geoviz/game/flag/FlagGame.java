@@ -11,6 +11,7 @@ import android.os.Vibrator;
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
+import com.example.guiprototype.SwipeScreenFlag;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -91,7 +92,7 @@ public class FlagGame extends Game {
 					teamRedSpeed, teamBlueSpeed,
 					teamRedLMA, teamBlueLMA,
 					teamRed.getEnemyFlag(), teamBlue.getEnemyFlag(), teamRed.getBase(),
-					teamBlue.getBase());
+					teamBlue.getBase(),teamRed.getPoints(),teamBlue.getPoints());
 			String msg = gson.toJson(tfg);
 			JeroMQQueue jmqq = JeroMQQueue.getInstance();
 			jmqq.sendMsg(TransferObject.TYPE_GAME_STATUS, msg, senderID);
@@ -132,6 +133,8 @@ public class FlagGame extends Game {
 				//flags in tfg2 are marked by from which team class they came from atm
 				teamBlue.setEnemyFlag(tfg2.teamBlueFlag);
 				teamRed.setEnemyFlag(tfg2.teamRedFlag);
+				teamBlue.setPoints(tfg2.teamBluePoints);
+				teamRed.setPoints(tfg2.teamRedPoints);
 				
 			}
 			break;
@@ -228,6 +231,56 @@ public class FlagGame extends Game {
 				     }
 				  }.start();
 			}
+		case TransferObject.TYPE_SET_BASE:
+			if (o.msg.contentEquals("teamBlue")){
+				teamBlue.setBase(o.pos);
+			}
+			else {
+				teamRed.setBase(o.pos);
+			}
+			break;
+		case TransferObject.TYPE_FLAGCARRIER_SHOT:
+			if (o.msg.contentEquals("teamBlue")){
+				for(Player p : teamBlue.players){
+					if(p.hasFlag()){
+						p.setHasFlag(false);
+						break;
+					}
+				}
+			}
+			else {
+				for(Player p : teamRed.players){
+					if(p.hasFlag()){
+						p.setHasFlag(false);
+						break;
+					}
+				}
+			}
+			break;
+		case TransferObject.TYPE_DELIVER_FLAG:
+			if (o.msg.contentEquals("teamBlue")){
+				for(Player p : teamBlue.players){
+					if(p.hasFlag()){
+						p.setHasFlag(false);
+						p.getTeam().gainPoint();
+						SwipeScreenFlag swf = (SwipeScreenFlag) swipeScreen;
+						swf.addBluePoint();
+						break;
+					}
+				}
+			}
+			else {
+				for(Player p : teamRed.players){
+					if(p.hasFlag()){
+						p.setHasFlag(false);
+						p.getTeam().gainPoint();
+						SwipeScreenFlag swf = (SwipeScreenFlag) swipeScreen;
+						swf.addRedPoint();
+						break;
+					}
+				}
+			}
+			break;
 		default : break;
 		}
 

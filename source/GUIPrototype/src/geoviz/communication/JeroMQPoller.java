@@ -125,43 +125,45 @@ public class JeroMQPoller {
 					case TransferObject.TYPE_SET_FLAG:
 						handleSetFlag(msg);
 						break;
+					case TransferObject.TYPE_SET_BASE:
+						handleSetBase(msg);
+						break;
+					case TransferObject.TYPE_FLAGCARRIER_SHOT:
+						handleFlagcarrierShot(msg);
+						break;
+					case TransferObject.TYPE_DELIVER_FLAG:
+						handleDeliverFlag(msg);
+						break;
 					default:
 						TransferObject t = gson.fromJson(msg, TransferObject.class);
 						Game.getGame().update(t);
 						break;
 					}
-					/*
-					 * String msg = subscriber.recvStr(); msg =
-					 * msg.substring(msg.indexOf("{"),msg.length()); final
-					 * TransferObject t = gson.fromJson(msg,
-					 * TransferObject.class); if (t.msgType ==
-					 * TransferObject.TYPE_MSG) activity.runOnUiThread(new
-					 * Runnable() {
-					 * 
-					 * @Override public void run() {
-					 * 
-					 * SimpleDateFormat dateFormat = new SimpleDateFormat(
-					 * "HH:mm:ss"); ScrollView sv = (ScrollView) activity
-					 * .findViewById(R.id.fragmentScrollView1); TextView
-					 * scrollTv = (TextView) activity
-					 * .findViewById(R.id.fragmentChatLog); if (sv != null &&
-					 * scrollTv != null) { scrollTv.append(t.senderName + " " +
-					 * dateFormat.format(t.timeStamp) + " :" + t.msg + "\n");
-					 * sv.fullScroll(View.FOCUS_DOWN); } else {
-					 * ChatScreenFragment csf = (ChatScreenFragment) activity
-					 * .getSupportFragmentManager() .findFragmentByTag(
-					 * "android:switcher:" + R.id.pager + ":0"); if (csf !=
-					 * null) csf.msgs += t.senderName + " " + dateFormat
-					 * .format(t.timeStamp) + " :" + t.msg + "\n"; } }
-					 * 
-					 * }); if (t.msgType != TransferObject.TYPE_MSG) {
-					 * Game.getGame().update(t);
-					 * 
-					 * }
-					 */
 
 				}
 
+			}
+
+			private void handleDeliverFlag(String msg) {
+				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+				TransferObject t =new TransferObject(TransferObject.TYPE_FLAGCARRIER_SHOT, ttso.team, null,
+				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
+				Game.getGame().update(t);
+				
+			}
+
+			private void handleFlagcarrierShot(String msg) {
+				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+				TransferObject t =new TransferObject(TransferObject.TYPE_FLAGCARRIER_SHOT, ttso.team, null,
+				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
+				Game.getGame().update(t);
+			}
+
+			private void handleSetBase(String msg) {
+				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
+				TransferObject t =new TransferObject(TransferObject.TYPE_SET_BASE, ttso.team, null,
+				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
+				Game.getGame().update(t);
 			}
 
 			private void handleSetFlag(String msg) {
