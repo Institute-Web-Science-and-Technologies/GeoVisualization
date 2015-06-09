@@ -26,6 +26,7 @@ public class GamesScreenFragment extends Fragment {
 
 
 	public List<String> games;
+	
 	public ArrayAdapter<String> adapter;
 	private GamesScreenFragmentCallbacks callbacks;
 	

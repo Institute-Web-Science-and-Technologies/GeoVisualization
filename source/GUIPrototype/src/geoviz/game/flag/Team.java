@@ -6,7 +6,7 @@ import java.util.Map;
 
 import android.graphics.Color;
 
-import com.example.fragments.MapScreenFragment;
+import geoviz.flag.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreenFlag;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -67,22 +67,23 @@ public class Team {
 				@Override
 				public void run() {
 					MapScreenFragment msf = (MapScreenFragment) game.getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-					flagMarker = msf.initMarker();
+					flagMarker = msf.initMarker(enemyFlag);
+					if(color==Color.BLUE){
+						flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_flag));
+					} else {
+						flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.blue_flag));
+					}
+					if (!userInTeam){
+						flagMarker.setVisible(false);
+					}
 				}
 				
 			});
-			if(color==Color.BLUE){
-				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_flag));
-			} else {
-				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.blue_flag));
-			}
+			
 			
 			//flagMarker.setIcon(icon);
 		}
-		flagMarker.setPosition(flag);
-		if (!userInTeam){
-			flagMarker.setVisible(false);
-		}
+		
 		
 	}
 	
@@ -100,8 +101,7 @@ public class Team {
 				@Override
 				public void run() {
 					MapScreenFragment msf = (MapScreenFragment) game.getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-					baseCircle = msf.initCircle();
-					baseCircle.setCenter(base);
+					baseCircle = msf.initCircle(base,5);
 					if(color == Color.BLUE){
 						baseCircle.setFillColor(Color.argb(125, 0, 0, 255));
 						}

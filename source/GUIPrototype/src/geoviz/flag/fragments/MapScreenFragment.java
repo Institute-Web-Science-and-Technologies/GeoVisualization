@@ -32,6 +32,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -190,6 +191,14 @@ public class MapScreenFragment extends Fragment {
         
 	}
 	
+	public Circle initCircle(LatLng pos,double rad){
+		return mMap.addCircle(new CircleOptions().radius(rad).center(pos));
+	}
+	
+	
+	public Marker  initMarker(LatLng position){
+		return this.mMap.addMarker(new MarkerOptions().position(position));
+	}
 	
 	private Marker initBase(String colorString, LatLng position) {
 		int colorInt = Color.parseColor(colorString);

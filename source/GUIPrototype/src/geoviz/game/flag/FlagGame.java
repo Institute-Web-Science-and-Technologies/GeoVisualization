@@ -8,7 +8,7 @@ import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 
-import com.example.fragments.MapScreenFragment;
+import geoviz.flag.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
 import com.example.guiprototype.SwipeScreenFlag;
@@ -28,25 +28,26 @@ public class FlagGame extends Game {
 	private boolean receivedStatus=false;
 	private Team teamRed;
 	private Team teamBlue;
-	public String userName;
 	private Marker flagMarker= null;
 	private Gson gson = new GsonBuilder().create();
 	
-	public FlagGame(String gameID, SwipeScreen swipescreen,String team, String userName){
+	public FlagGame(String gameID, SwipeScreen swipescreen, String userName){
 		this.gameID=gameID;
 		this.swipeScreen=swipescreen;
 		this.userName=userName;
 		teamRed = new Team(Color.RED,this);
 		teamBlue = new Team(Color.BLUE,this);
+	
+		
+	}
+	public void setTeam(String team){
 		if(team.contentEquals("teamBlue")){
 			teamBlue.userInTeam= true;
 		}
 		else {
 			teamRed.userInTeam = true;
 		}
-		
 	}
-	
 	public Team getTeamRed() {
 		return teamRed;
 	}
@@ -98,7 +99,7 @@ public class FlagGame extends Game {
 			jmqq.sendMsg(TransferObject.TYPE_GAME_STATUS, msg, senderID);
 			break;
 		case TransferObject.TYPE_GAME_STATUS:
-			if (!receivedStatus){
+			if (o.senderName!= this.userName && !receivedStatus){
 				receivedStatus = true;
 				TransferFlagGame tfg2 = gson.fromJson(o.msg, TransferFlagGame.class);
 				for (int i = 0; i<tfg2.teamRed.size();i++){
@@ -179,18 +180,19 @@ public class FlagGame extends Game {
 				v.vibrate(Const.vibrateTimeInMs);
 				final FlagGame me = this;
 				
-				
+				final LatLng position = o.pos;
 				this.getActivity().runOnUiThread(new Runnable(){
 
 					@Override
 					public void run() {
 						MapScreenFragment msf = (MapScreenFragment) me.getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-						flagMarker = msf.initMarker();
+						flagMarker = msf.initMarker(position);
+						flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_flag));
 					}
 					
 				});
-				flagMarker.setPosition(o.pos);
-				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.red_flag));
+				
+				
 				
 				
 				new CountDownTimer(Const.flagVisibilityTimerInMs, 1000) {
@@ -207,19 +209,19 @@ public class FlagGame extends Game {
 				Vibrator v = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 				v.vibrate(Const.vibrateTimeInMs);
 				final FlagGame me = this;
-				
+				final LatLng position = o.pos;
 				
 				this.getActivity().runOnUiThread(new Runnable(){
 
 					@Override
 					public void run() {
 						MapScreenFragment msf = (MapScreenFragment) me.getActivity().getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-						flagMarker = msf.initMarker();
+						flagMarker = msf.initMarker(position);
+						flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.blue_flag));
 					}
 					
 				});
-				flagMarker.setPosition(o.pos);
-				flagMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.blue_flag));
+				
 				new CountDownTimer(Const.flagVisibilityTimerInMs, 1000) {
 
 				     public void onTick(long millisUntilFinished) {

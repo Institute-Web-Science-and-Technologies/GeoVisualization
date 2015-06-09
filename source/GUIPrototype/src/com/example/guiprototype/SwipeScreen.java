@@ -286,9 +286,9 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		String gameType= (String) spinner.getSelectedItem();
 		String gameId;
 		if (gameType.compareTo("Snake")==0)
-			gameId = "GameType: Snake" +  " Host: "+ this.userName;
+			gameId = gameType + this.userID;
 		else
-			gameId = "GameType: FlagGame" + " Host: "+ this.userName;
+			gameId = gameType + this.userID;
 		
 		if (gameType.compareTo("Snake")==0 && !Game.getGame().gameID.startsWith("0")){
 			Intent intent = new Intent (this, SwipeScreenSnake.class);
@@ -297,6 +297,7 @@ public abstract class SwipeScreen extends FragmentActivity implements
 			startActivity(intent);
 		}
 		else if(gameType.compareTo("Flaggame")==0 && !Game.getGame().gameID.startsWith("1")){
+			Toast.makeText(this, gameId, Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this, SelectFlagTeam.class);
 			intent.putExtra(MainActivity.EXTRA_USER, userName);
 			intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);

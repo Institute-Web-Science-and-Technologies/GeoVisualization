@@ -9,11 +9,12 @@ import java.util.Date;
 import android.graphics.Color;
 import android.location.Location;
 
-import com.example.fragments.MapScreenFragment;
+import geoviz.flag.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class Player {
 	private String name;
@@ -23,9 +24,10 @@ public class Player {
 	private boolean hasFlag;
 	private long lastMarkedAt;
 	private float speed;
-	private Circle posMarker;
+	//private Circle posMarker;
 	private final Team team;
 	private long lastScannedAt;
+	private Marker posMarker;
 
 	public void setLastScannedAt(long lastScannedAt) {
 		this.lastScannedAt = lastScannedAt;
@@ -46,12 +48,12 @@ public class Player {
 			public void run() {
 
 				MapScreenFragment msf = (MapScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-				posMarker = msf.initCircle();
+				posMarker = msf.initMarker(240, new LatLng(50.4768685,7.7396053), "me");
 
 
 			}
 		});
-		posMarker.setFillColor(team.color);
+		//posMarker.setFillColor(team.color);
 	}
 	
 	public Player(Team team, String name, LatLng pos, float speed, long lastMarkedAt, boolean playerInTeam){
@@ -64,10 +66,10 @@ public class Player {
 			@Override
 			public void run() {
 				MapScreenFragment msf = (MapScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-				posMarker = msf.initCircle();	
+				posMarker = msf.initMarker(240, new LatLng(50.4768685,7.7396053), "me");
 			}
 		});
-		posMarker.setFillColor(team.color);
+		//posMarker.setFillColor(team.color);
 		updatePlayer(speed,pos,playerInTeam,false);
 	}
 
@@ -115,13 +117,13 @@ public class Player {
 		return speed;
 	}
 
-	public Circle getPosMarker() {
+	/*public Circle getPosMarker() {
 		return posMarker;
 	}
 
 	public void setPosMarker(Circle posMarker) {
 		this.posMarker = posMarker;
-	}
+	}*/
 
 	public Team getTeam() {
 		return team;
@@ -161,15 +163,47 @@ public class Player {
 			}
 			}
 		if (userInTeam){
-			posMarker.setCenter(pos);
-			posMarker.setVisible(true);
+			//posMarker.setCenter(pos);
+			final LatLng position1 = pos;
+			team.getGame().getActivity().runOnUiThread(new Runnable(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					posMarker.setPosition(position1);
+					posMarker.setVisible(true);
+					
+				}
+				
+			});
+			
 		}
 		else if (isVisible()){
-			posMarker.setCenter(pos);
-			posMarker.setVisible(true);
+			//posMarker.setCenter(pos);
+			final LatLng position1 = pos;
+			team.getGame().getActivity().runOnUiThread(new Runnable(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					posMarker.setPosition(position1);
+					posMarker.setVisible(true);
+					
+				}
+				
+			});
 		}
 		else {
-			posMarker.setVisible(false);
+			team.getGame().getActivity().runOnUiThread(new Runnable(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					posMarker.setVisible(false);
+					
+				}
+				
+			});
 		}
 
 	}

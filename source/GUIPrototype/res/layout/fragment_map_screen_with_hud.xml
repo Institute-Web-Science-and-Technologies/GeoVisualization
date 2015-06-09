@@ -104,7 +104,7 @@
                 android:id="@+id/fragmentButtonScan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="addRedPoint"
+                android:onClick="scan"
                 android:text="scan" >
             </Button>
 

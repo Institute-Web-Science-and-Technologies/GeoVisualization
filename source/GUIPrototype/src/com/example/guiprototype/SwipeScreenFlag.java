@@ -86,6 +86,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 
 		Intent intent = getIntent();
 		team = intent.getStringExtra(SelectFlagTeam.EXTRA_TEAM);
+		((FlagGame) Game.getGame()).setTeam(team);
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM, team,
 				intent.getStringExtra(MainActivity.EXTRA_GAMEID));
@@ -286,16 +287,16 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 			}
 
 		}
-		Game.init(new FlagGame(gameID,this,this.team,this.userName));
+		Game.init(new FlagGame(gameID,this,this.userName));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		
+		poller.addSubscription(gameID);
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
 		//if (gameID.startsWith("0"))
 		
 		//else
 		//	Game.init(new FlagGame(gameID,this));
-		poller.addSubscription(gameID);
+		
 		
 	}
 	
@@ -305,7 +306,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		new CountDownTimer(Const.markedCdInMs, 1000) {
 
 		     public void onTick(long millisUntilFinished) {
-		    	 mCooldown.setText("seconds remaining: " + millisUntilFinished / 1000);
+		    	 mCooldown.setText("" + millisUntilFinished / 1000);
 		     }
 
 		     public void onFinish() {
@@ -321,7 +322,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		new CountDownTimer(Const.scanCdinMs, 1000) {
 
 		     public void onTick(long millisUntilFinished) {
-		    	 sCooldown.setText("seconds remaining: " + millisUntilFinished / 1000);
+		    	 sCooldown.setText("" + millisUntilFinished / 1000);
 		     }
 
 		     public void onFinish() {
@@ -335,7 +336,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 	
 	public void setBase(View view){
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		//jmqq.sendMsg(
+		jmqq.sendToServer(TransferObject.TYPE_SET_BASE, this.getOwnLocation(), team, Game.getGame().gameID);
 		
 	}
 }
