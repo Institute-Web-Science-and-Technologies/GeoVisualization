@@ -1,17 +1,19 @@
-Um die oben genannten Spiele um einen virtuellen Teil erweitern zu können werden Konzepte benötigt. Eine von uns getroffene Auswahl wird im folgenden beschrieben. 
+Um die oben genannten Spiele um einen virtuellen Teil erweitern zu können werden Features benötigt. Eine von uns getroffene Auswahl wird im folgenden beschrieben. 
 
 \section{Erweiterte Realität}
-Konzepte, die explizit die Realität erweitern und dadurch einen Mehrwert zum Spiel beitragen.
+Features, die explizit die Realität erweitern und dadurch einen Mehrwert zum Spiel beitragen.
 
 
 \subsubsection{Integration virtueller Objekte in die physische Umgebung}\label{sec:integration-virtueller-objekte-in-die-physische-umgebung}
 Um ein virtuelles Spiel in die physische Umgebung integrieren zu können, müssen auch alle Objekte des virtuellen Spieles in die physische Umgebung gebracht werden. Dies kann z.B. auf einer virtuellen Karte, die die Wirklichkeit widerspiegelt, geschehen.
 
-Zum Beispiel die Items bei unserem Spiel Snake, die es einzusammeln gilt, werden auf einer Karte auf dem Smartphone dargestellt und durch einen eingeschränkten Zufall platziert. Bei dem ein oder anderen Spiel soll es eine Basis für jedes Team geben. Dabei bietet sich an, dieses auf eine relativ freie Fläche festzusetzen. Generell sollte darauf geachtet werden, dass die Objekte nicht innerhalb eines Gebäudes landen oder in nicht begehbares/erreichbares Terrain platziert werden.
+Zum Beispiel die Items bei unserem Spiel Snake, die es einzusammeln gilt, werden auf einer Karte auf dem Smartphone dargestellt und durch einen eingeschränkten Zufall platziert. Bei dem ein oder anderen Spiel soll es eine Basis für jedes Team geben. Dabei bietet sich an, dieses auf eine relativ freie Fläche festzusetzen. Generell sollte darauf geachtet werden, dass die Objekte nicht innerhalb eines Gebäudes plaziert werden, da der GPS-Sensor nur sehr ungenau oder garnicht funktioniert. Auch sollte darauf geachtet werden,dass  die Objekte nicht in unerreichbares Terrain platziert werden.
 
 
 
-Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden. Die Kartendarstellung (s. \ref{kartendarstellung}) hilft enorm die Objekte in die physische Welt einzuarbeiten, da sie lediglich auf der Karte eingefügt werden müssen. Mit der Kollisionsabfrage (s. \ref{kollisionsabfrage}) kann eine Kollision zweier Objekte, zum Beispiel eine "`Snake"' mit einem "`Item"', verwirklicht werden. Die Positionsabfrage wird unter anderem dafür benötigt um sicherzustellen, dass das Objekt in der Nähe des Spielers erstellt wird. (s. \ref{positionsermittlung}).
+Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden. Die Kartendarstellung (s. \ref{kartendarstellung}) hilft enorm die Objekte in die physische Welt einzuarbeiten, da sie lediglich auf der Karte eingefügt werden müssen. Mit der Kollisionsabfrage (s. \ref{kollisionsabfrage}) kann eine Kollision zweier Objekte, zum Beispiel eine "`Snake"' mit einem "`Item"', verwirklicht werden. 
+
+%Die Positionsabfrage wird unter anderem dafür benötigt um sicherzustellen, dass das Objekt in der Nähe des Spielers erstellt wird. (s. \ref{positionsermittlung}).
 
 \subsubsection{Darstellung der physischen und virtuellen Umgebung}\label{sec:darstellung-der-physischen-und-virtuellen-umgebung}
 
@@ -37,4 +39,6 @@ Dazu werden die Kollisionsabfrage (s. \ref{kollisionsabfrage}) und die  Position
 \subsubsection{Einsammeln von Objekten}\label{sec:einsammeln-von-objekten}
 Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal gegeben werden.
 
- Erreicht werden kann dies durch die Positionsermittlung (s. \ref{positionsermittlung}) und die Kollisionsabfrage (s. \ref{kollisionsabfrage}). Für weitere Bestätigungssignale sind auch andere Sensorik (s. \ref{sensorik}) von Vorteil.
+ Erreicht werden kann dies durch die Positionsermittlung (s. \ref{positionsermittlung}) und die Kollisionsabfrage (s. \ref{kollisionsabfrage}). 
+ 
+ %Für weitere Bestätigungssignale sind auch andere Sensorik (s. \ref{sensorik}) von Vorteil.
