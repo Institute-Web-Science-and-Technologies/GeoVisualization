@@ -8,8 +8,8 @@ Alternativ kann man Kollisionsabfrage auch über Linienintersektion lösen. Bei de
  
 
 
-
-Diese Methode zur Kollisionsabfrage hat den Vorteil, dass sie eindeutige Kollisionen unabhängig von der Updategeschwindigkeit des GPS-Posi\-tions\-er\-mitt\-lungs\-diens\-tes erkennt.
+%
+%Diese Methode zur Kollisionsabfrage hat den Vorteil, dass sie eindeutige Kollisionen unabhängig von der Updategeschwindigkeit des GPS-Posi\-tions\-er\-mitt\-lungs\-diens\-tes erkennt.
 
 \subsubsection{Entscheidung}
 In diesem Projekt wurde sich für die Kollisionsabfrage über Abstandmessung entschieden. Da wir unsere Kollisionsabfrage für mehrere Spiele verwenden wollten, haben wir uns für eine Lösung entschieden, die nicht nur für zwei Linien funktioniert. Die Kollisionsabfrage über Linienintersektion wäre nur im Fall des Snakespiels eine gute Lösung gewesen und auch nur für das Beispiel der zwei Schlangen. In Tests mit der Abstandsmessung im Snakespiel wurden zufriedenstellende Ergebnisse erzielt. Aus Gründen der Zeit- und Testersparnis wurde eine schon implementierte Funktion von Android verwendet \footnote{\url{http://developer.android.com/reference/android/location/Location.html}}. Hierbei wird bei der Abstandsmessung berücksichtigt, dass die Erde ein Ellipsoid und keine Kugel ist. 

@@ -5,15 +5,14 @@
 
 Um den Zustand der einzelnen mobilen Geräte zu synchronisieren und Chat-Nachrichten zu übertragen, ist ein Server nötig.
 Hierzu bieten sich zwei unterschiedliche Modelle an.
-Bei der klassischen Server-Client-Architektur übernimmt der Server einen Großteil der Berechnungen.
-Der Server hält einen zentralen, im Zweifelsfall gültigen, Status.
-Die (Thin-)Clients übertragen die Nutzereingaben und Sensordaten an den Server, der daraus einen neuen Zustand ermittelt und diesen den Clients mitteilt.
+Eine Möglichkeit wäre eine serverlastige Server-Client-Architektur. Hierbei übernimmt der Server einen Großteil der Berechnungen und Logik.Bei den Clients kann man von Thin-Clients sprechen. In einer theoretischen Implementation hält der Server einen zentralen, im gültigen, Status.
+Die Thin-Clients übertragen die Nutzereingaben und Sensordaten an den Server, der daraus einen neuen Zustand ermittelt und diesen den Clients mitteilt.
 
-Alternativ kann man die Logik vorrangig clientseitig implementieren. 
-Dabei müssen die (Fat-)Clients  den Großteil der Berechnungen übernehmen. Dies fordert leistungsfähigere Endgeräte, während der Server entlastet wird. 
+Alternativ kann man Berechnungen und Logik vorrangig clientlastig implementieren (Fat-Clients). 
+ Dies fordert leistungsfähigere Endgeräte, während der Server entlastet wird. 
 Aktuelle Smartphones könnten die entwickelte Anwendung jedoch mühelos ausführen.
 %Diese haben sich als genügend leistungsfähig erwiesen.
-Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik redundant auf jedem Client vorliegt. Dies verringert theoretisch Wartbarkeit und Erweiterbarkeit. Da die Implementation definitiv eine Internetverbindung benötigt, könnte theoretisch der Server mit einer Updatefunktionalität versehen werden. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
+Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik auf jedem Client vorliegt. Eine clientlastige Implementation verringert theoretisch Wartbarkeit und Erweiterbarkeit. Da die Implementation definitiv eine Internetverbindung benötigt, könnte theoretisch der Server mit einer Updatefunktionalität versehen werden. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
 %Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. 
 Im Fall der Implementation würde bei einer Thin-Client-Architektur um einiges mehr Informationen hin und her geschickt werden. Der Server müsste z.B. jeweils auf die aktuellen Spielinformationen (z.B. Positionsdaten) von allen Clients warten, Tests haben gezeigt das die Updateintervalle von Gerät zu Gerät unterschiedlich sind und zum teil durch äußere Einflüsse (z.B. Wetter) verzögert werden können. Aus allen Updates berechnet der Server dann den aktuellen Spiel-Zustand, welcher wieder an alle Geräte übertragen werden muss. Hierbei muss die korrekte Übertragung sichergestellt sein. Nun würde der Zyklus wieder von vorne beginnen. Wenn man jetzt noch etwaige Verbindungsprobleme berücksichtigt wäre die Spielgeschwindigkeit überaus langsam. 
 
@@ -25,7 +24,6 @@ Die Spielgeschwindigkeit wäre also nur abhängig von der Rechen- bzw. Sensorleist
 \begin{tabular}{l|l}
 	Thin-Client & Fat-Client \\
 	\hline
-	 - Datenübertragung & + Datenübertragung \\
 	 - Zustand doppelt modelliert & + Server-Zustand nicht nötig \\
 	 + zentraler, definitiver Zustand &  - verteilter Zustand \\
 	 (+) Wartbarkeit & (-) Wartbarkeit \\
@@ -44,4 +42,4 @@ Dies verbraucht zusätzliche Bandbreite und führt zu einer Verzögerung der Aktual
 
 Die Kommunikation zwischen Server und Client haben wir mit Hilfe von \textit{message passing} realisiert. \textit{Message passing} ist eine Variante des Publish"=Subscribe"=Patterns, bei dem der Server keinen Zustand hält, sondern bloß eingehende Nachrichten an alle Clients weiterleitet, die den entsprechen Nachrichtentyp abonniert haben.
 Dabei werden alle Berechnungen vom Client ausgeführt.
-Dadurch verringert sich die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{eugster}.
+Dadurch verringert sich die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{eugster}.\textbf{}
