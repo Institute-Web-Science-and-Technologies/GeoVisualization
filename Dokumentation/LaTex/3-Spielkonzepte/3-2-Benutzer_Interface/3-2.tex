@@ -17,7 +17,7 @@ Konzepte, die hauptsächlich dazu dienen mit dem Spieler zu interagieren und sehr
 
 Eine Richtungsangabe kann eine Karte ersetzen. Sei es um bei „Capture the Flag“ die Richtung der Fahne des Gegners anzuzeigen oder für „Snake“ das nächste einzusammelnde Item. Auch ein Kompass dient als Richtungsangabe und findet beim oben erwähnten "`Geocaching"' teilweise seinen Einsatz.
 
-Die technischen Lösungen für eine Richtungsangabe sind unter Positionsermittlung (s. \ref{positionsermittlung}), GUI (s. \ref{gui}) und Andere Sensorik (s. \ref{sensorik}) zu finden.
+Die technischen Lösungen für eine Richtungsangabe sind unter Positionsermittlung (s. \ref{positionsermittlung}), GUI (s. \ref{gui}) und Andere Sensorik (s. \ref{sensorik}) beschrieben.
 
 \subsubsection{Akustische und haptische Orientierungshilfen}
 
@@ -30,14 +30,15 @@ Zur Bestätigung einer Kollision wird die Kollisionsabfrage (s. \ref{kollisionsab
 
 
 \subsubsection{Geschwindigkeitsmessung}
+
 Um das Spielgeschehen besser zu kontrollieren zu können, kann eine Messung der
 Geschwindigkeit von Vorteil sein. Möchten wir z.B. bei Capture the Flag dem Fahnenträger nicht erlauben eine gewisse Geschwindigkeit zu überschreiten, ist eine Geschwindigkeitsmessung unabdingbar.
 
 
-%Um diese umsetzen zu können wird Positionsermittlung (s. \ref{positionsermittlung}), Server-Client-Kommunikation (s. \ref{kommunikation}) und Andere Sensorik (s. \ref{sensorik}) benötigt.
+Um diese umsetzen zu können wird entweder der Accelerometer-Sensor oder der GPS-Sensor benötigt. (s. \ref{geschwindigkeitsmessung})
 
 
 \subsubsection{Mensch-Maschine-Kommunikation}\label{sec:mensch-maschine-kommunikation}
-Das komplette Spielgeschehen lebt von der Integrierung der mobilen Endgeräten und der Kommunikation zwischen Mensch und Gerät. Wird auf dem Endgerät eine Richtungsanzeige eingeblendet, muss der Spieler insofern reagieren, dass er sich in die richtige Richtung dreht. Wenn er etwas einsammeln möchte, kann es erforderlich sein, dass ein Button gedrückt wird.
+Das komplette Spielgeschehen funktioniert nur durch die Kommunikation zwischen Mensch und Maschine mit Hilfe von mobilen Endgeräten. Zum Beispiel kann man eine Richtungsanzeige (Maschine) verwenden, damit der Spieler (Mensch) weiß, dass er sich in eine bestimmte Richtung drehen soll, während das Spiel (Maschine) mit Magnetfeld-Sensor und Accelerometer Spieler-Bewegung erfasst und darauf reagiert. Oder man löst Kämpfe oder das Aufsammeln von Objekten, indem man Buttons auf dem Smartphone anzeigt, die von den Spielern gedrückt werden müssen.
 
 Dafür wird die GUI (s. \ref{gui}) bzw. die Kartendarstellung (s. \ref{kartendarstellung}) benötigt.
