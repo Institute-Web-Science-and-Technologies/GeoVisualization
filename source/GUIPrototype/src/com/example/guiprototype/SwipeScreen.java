@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,8 @@ import com.google.android.gms.maps.model.LatLng;
 public abstract class SwipeScreen extends FragmentActivity implements
 		ActionBar.TabListener, GooglePlayServicesClient.ConnectionCallbacks,
 
-		LocationListener, GooglePlayServicesClient.OnConnectionFailedListener ,GamesScreenFragmentCallbacks {
+		LocationListener, GooglePlayServicesClient.OnConnectionFailedListener,
+		GamesScreenFragmentCallbacks {
 
 	protected ViewPager viewPager;
 	protected TabsPagerAdapter mAdapter;
@@ -71,11 +73,9 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		return userID;
 	}
 
-
 	public String getUserName() {
 		return userName;
 	}
-
 
 	protected String[] tabs = { "Chat", "Map", "Games" };
 	protected Location mCurrentLocation;
@@ -102,54 +102,49 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		// get user name
 		Intent intent = getIntent();
 		userName = intent.getStringExtra(MainActivity.EXTRA_USER);
-		
-		// Initialisierung
-		//viewPager = (ViewPager) findViewById(R.id.pager);
-		//actionBar = getActionBar();
-		//mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
-		//viewPager.setAdapter(mAdapter);
+		// Initialisierung
+		// viewPager = (ViewPager) findViewById(R.id.pager);
+		// actionBar = getActionBar();
+		// mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+		// viewPager.setAdapter(mAdapter);
 		// actionBar.setHomeButtonEnabled(false);
-		//actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		// actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		__instance = this;
 
-		//Game.init(new SnakeGame("0", this));
-		//Game.init(new AntGame("0"));
-
+		// Game.init(new SnakeGame("0", this));
+		// Game.init(new AntGame("0"));
 
 		poller = new JeroMQPoller(this);
 		poller.addSubscription(userID);
 		poller.poll();
+
 		connect(intent.getStringExtra(MainActivity.EXTRA_GAMEID));
 
-
 		// Tabs der Actionbar hinzuf�gen
-		//for (String tab_name : tabs) {
-		//	actionBar.addTab(actionBar.newTab().setText(tab_name)
-		//			.setTabListener(this));
-		//}
+		// for (String tab_name : tabs) {
+		// actionBar.addTab(actionBar.newTab().setText(tab_name)
+		// .setTabListener(this));
+		// }
 
 		/**
 		 * Sorgt daf�r das beim wischen den entsprechden Tab ausgew�hlt wird
 		 * */
-		/*viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int position) {
-				// on changing the page
-				// make respected tab selected
-				actionBar.setSelectedNavigationItem(position);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});*/
+		/*
+		 * viewPager.setOnPageChangeListener(new
+		 * ViewPager.OnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int position) { // on changing
+		 * the page // make respected tab selected
+		 * actionBar.setSelectedNavigationItem(position); }
+		 * 
+		 * @Override public void onPageScrolled(int arg0, float arg1, int arg2)
+		 * { }
+		 * 
+		 * @Override public void onPageScrollStateChanged(int arg0) { } });
+		 */
 
 		// new JeroMQPoller(this, serverIP).poll();
 
@@ -232,17 +227,19 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 		this.mCurrentLocation = mLocationClient.getLastLocation();
 	}
-	
-	float MIN_GPS_QUALITY=1000;
-	boolean gps_quality_reached=false;
+
+	float MIN_GPS_QUALITY = 1000;
+	boolean gps_quality_reached = false;
 
 	@Override
 	public void onLocationChanged(Location location) {
 		this.mCurrentLocation = location;
-		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+		LatLng latLng = new LatLng(location.getLatitude(),
+				location.getLongitude());
 		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(latLng);
 		MapScreenFragment.getMSF().mMap.animateCamera(cameraUpdate);
-		//Toast.makeText(this, location.getAccuracy()+"", Toast.LENGTH_SHORT).show();
+		// Toast.makeText(this, location.getAccuracy()+"",
+		// Toast.LENGTH_SHORT).show();
 		/*
 		 * TransferObject msg = new TransferObject(1, "", Calendar
 		 * .getInstance().getTime(), userID, userName, new LatLng
@@ -250,16 +247,16 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		 * location.getLongitude()),Game.getGame().gameID); final String json =
 		 * gson.toJson(msg); JeroMQQueue.getInstance().add(json);
 		 */
-		
-		if(location.getAccuracy()<MIN_GPS_QUALITY)
-			gps_quality_reached=true;
-		
-		if(gps_quality_reached)
-		JeroMQQueue.getInstance()
-				.sendMsg(
-						TransferObject.TYPE_COORD,
-						new LatLng(location.getLatitude(), location
-								.getLongitude()), Game.getGame().gameID);
+
+		if (location.getAccuracy() < MIN_GPS_QUALITY)
+			gps_quality_reached = true;
+
+		if (gps_quality_reached)
+			JeroMQQueue.getInstance()
+					.sendMsg(
+							TransferObject.TYPE_COORD,
+							new LatLng(location.getLatitude(), location
+									.getLongitude()), Game.getGame().gameID);
 
 	}
 
@@ -282,54 +279,55 @@ public abstract class SwipeScreen extends FragmentActivity implements
 	public void createGame(View view) {
 		GamesScreenFragment gsf = (GamesScreenFragment) getSupportFragmentManager()
 				.findFragmentByTag("android:switcher:" + R.id.pager + ":2");
-		Spinner spinner =(Spinner)findViewById(R.id.gameTypeSpinner);
-		String gameType= (String) spinner.getSelectedItem();
+		Spinner spinner = (Spinner) findViewById(R.id.gameTypeSpinner);
+		String gameType = (String) spinner.getSelectedItem();
 		String gameId;
-		if (gameType.compareTo("Snake")==0)
-			gameId = gameType + this.userID;
+		if (gameType.compareTo("Snake") == 0)
+			gameId = Game.TYPE_SNAKE + this.userID;
 		else
-			gameId = gameType + this.userID;
-		
-		if (gameType.compareTo("Snake")==0 && !Game.getGame().gameID.startsWith("0")){
-			Intent intent = new Intent (this, SwipeScreenSnake.class);
+			gameId = Game.TYPE_FLAG + this.userID;
+		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		jmqq.sendMsg(TransferObject.TYPE_CREATE, gameId + ";" + userName);
+		if (gameType.compareTo("Snake") == 0
+				&& !Game.getGame().gameID.startsWith("0")) {
+			Intent intent = new Intent(this, SwipeScreenSnake.class);
 			intent.putExtra(MainActivity.EXTRA_USER, userName);
-			intent.putExtra(MainActivity.EXTRA_GAMEID,gameId);
+			intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);
 			startActivity(intent);
-		}
-		else if(gameType.compareTo("Flaggame")==0 && !Game.getGame().gameID.startsWith("1")){
+		} else if (gameType.compareTo("Flaggame") == 0
+				&& !Game.getGame().gameID.startsWith("1")) {
 			Toast.makeText(this, gameId, Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this, SelectFlagTeam.class);
 			intent.putExtra(MainActivity.EXTRA_USER, userName);
 			intent.putExtra(MainActivity.EXTRA_GAMEID, gameId);
 			startActivity(intent);
+		} else {
+			if (!gsf.games.contains(gameId)) {
+				gsf.games.add(gameId);
+				if (gameId.startsWith("0"))
+					gsf.gamenames.add("Snakegame von " + userName);
+				else
+					gsf.gamenames.add("Flaggame von " + userName);
+			}
+			gsf.adapter.notifyDataSetChanged();
+			connect(gameId);
 		}
-		if (!gsf.games.contains(gameId)){
-		gsf.games.add(gameId);
-		if(gameId.startsWith("0"))
-			gsf.gamenames.add("Snakegame von "+ userName);
-		else
-			gsf.gamenames.add("Flaggame von "+ userName);
-		}
-		connect(gameId);
-		gsf.adapter.notifyDataSetChanged();
+	}
+
+	public void updateGameList(View view) {
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendMsg(TransferObject.TYPE_CREATE, gameId +";"+userName);
+		Log.d("userid", userID);
+		jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, userID);
 	}
-	
-	public void updateGameList(View view){
-	JeroMQQueue jmqq = JeroMQQueue.getInstance();
-	jmqq.sendMsg(TransferObject.TYPE_GET_GAMELIST, userID);
-	}
-	/*public void createGame(View view){
-		Intent intent = new Intent (this, SwipeScreenFlag.class);
-    	intent.putExtra(MainActivity.EXTRA_USER, userName);
-    	startActivity(intent);
-	}
-	public void updateGameList(View view){
-		Intent intent = new Intent (this, SwipeScreenSnake.class);
-		intent.putExtra(MainActivity.EXTRA_USER, userName);
-		startActivity(intent);
-	}*/
+
+	/*
+	 * public void createGame(View view){ Intent intent = new Intent (this,
+	 * SwipeScreenFlag.class); intent.putExtra(MainActivity.EXTRA_USER,
+	 * userName); startActivity(intent); } public void updateGameList(View
+	 * view){ Intent intent = new Intent (this, SwipeScreenSnake.class);
+	 * intent.putExtra(MainActivity.EXTRA_USER, userName);
+	 * startActivity(intent); }
+	 */
 	public void sendMessage(View view) {
 		final EditText autotextview = (EditText) findViewById(R.id.fragmentChatMessage);
 		final String m = autotextview.getText().toString();
@@ -363,31 +361,33 @@ public abstract class SwipeScreen extends FragmentActivity implements
 
 	@Override
 	public void connect(String gameID) {
-		if (Game.getGame()!=null){
+		if (Game.getGame() != null) {
 			poller.deleteSubscription(Game.getGame().gameID);
 			Game.getGame().clearScreen();
-			if (!Game.getGame().gameID.startsWith("0") && gameID.startsWith("0")){
-				Intent intent= new Intent(this,SwipeScreenSnake.class);
+			if (!Game.getGame().gameID.startsWith("0")
+					&& gameID.startsWith("0")) {
+				Intent intent = new Intent(this, SwipeScreenSnake.class);
 				intent.putExtra(MainActivity.EXTRA_USER, userName);
 				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
 				startActivity(intent);
 			}
-			if (!Game.getGame().gameID.startsWith("1") && gameID.startsWith("1")){
-				Intent intent= new Intent(this,SelectFlagTeam.class);
+			if (!Game.getGame().gameID.startsWith("1")
+					&& gameID.startsWith("1")) {
+				Intent intent = new Intent(this, SelectFlagTeam.class);
 				intent.putExtra(MainActivity.EXTRA_USER, userName);
 				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
 				startActivity(intent);
 			}
 		}
-		Game.init(new SnakeGame(gameID,this));
+		Game.init(new SnakeGame(gameID, this));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
-		//if (gameID.startsWith("0"))
-		
-		//else
-		//	Game.init(new FlagGame(gameID,this));
+		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME, gameID);
+		// if (gameID.startsWith("0"))
+
+		// else
+		// Game.init(new FlagGame(gameID,this));
 		poller.addSubscription(gameID);
-		
+
 	}
 
 }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.util.Log;
 
 import geoviz.flag.fragments.MapScreenFragment;
 import com.example.guiprototype.R;
@@ -35,6 +36,7 @@ public class FlagGame extends Game {
 		this.gameID=gameID;
 		this.swipeScreen=swipescreen;
 		this.userName=userName;
+		this.userID=swipeScreen.getUserID();
 		teamRed = new Team(Color.RED,this);
 		teamBlue = new Team(Color.BLUE,this);
 	
@@ -67,6 +69,7 @@ public class FlagGame extends Game {
 				teamBlue.updatePlayers(o.senderName, o.speed, o.pos,isUser);
 			break;
 		case TransferObject.TYPE_JOIN_GAME:
+			if (o.senderName.contentEquals( this.userName)){
 			String senderID = o.senderID;
 			List<String> tR = new LinkedList<String>();
 			List<String> tB = new LinkedList<String>();
@@ -97,9 +100,10 @@ public class FlagGame extends Game {
 			String msg = gson.toJson(tfg);
 			JeroMQQueue jmqq = JeroMQQueue.getInstance();
 			jmqq.sendMsg(TransferObject.TYPE_GAME_STATUS, msg, senderID);
+			}
 			break;
 		case TransferObject.TYPE_GAME_STATUS:
-			if (o.senderName!= this.userName && !receivedStatus){
+			if (!o.senderName.contentEquals(this.userName) && !receivedStatus){
 				receivedStatus = true;
 				TransferFlagGame tfg2 = gson.fromJson(o.msg, TransferFlagGame.class);
 				for (int i = 0; i<tfg2.teamRed.size();i++){
@@ -129,10 +133,14 @@ public class FlagGame extends Game {
 						teamBlue.addPlayer(new Player(teamBlue,tfg2.teamBlue.get(i),tfg2.teamBluePos.get(i),tfg2.teamBlueSpeed.get(i),tfg2.teamBlueLMA.get(i),teamBlue.userInTeam));
 					}
 				}
+				if (tfg2.teamBlueBase != null)
 				teamBlue.setBase(tfg2.teamBlueBase);
+				if(tfg2.teamRedBase!= null)
 				teamRed.setBase(tfg2.teamRedBase);
 				//flags in tfg2 are marked by from which team class they came from atm
+				if (tfg2.teamBlueFlag != null)
 				teamBlue.setEnemyFlag(tfg2.teamBlueFlag);
+				if (tfg2.teamRedFlag != null)
 				teamRed.setEnemyFlag(tfg2.teamRedFlag);
 				teamBlue.setPoints(tfg2.teamBluePoints);
 				teamRed.setPoints(tfg2.teamRedPoints);
@@ -152,6 +160,7 @@ public class FlagGame extends Game {
 			}
 			break;
 		case TransferObject.TYPE_JOIN_TEAM:
+			Log.d("null", o.msg);
 			if (o.msg.contentEquals("teamBlue"))
 				teamBlue.addPlayer(new Player(teamBlue,o.senderName));
 			else 

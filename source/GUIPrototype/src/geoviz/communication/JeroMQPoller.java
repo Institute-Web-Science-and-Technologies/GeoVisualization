@@ -92,6 +92,7 @@ public class JeroMQPoller {
 					final String msgType = subscriber.recvStr();
 					final String msg = subscriber.recvStr();
 					Log.d("mytag", msgType);
+					Log.d("subscriptions",subscriptions.toString());
 					
 					
 					switch (Integer.parseInt(msgType)) {
@@ -191,20 +192,29 @@ public class JeroMQPoller {
 
 			private void handleGetGameList(String msg) {
 				// TODO Auto-generated method stub
-				String[] games = gson.fromJson(msg, String[].class);
+				final String[] games = gson.fromJson(msg, String[].class);
+				activity.runOnUiThread(new Runnable(){
+					@Override
+					public void run() {
+						//for (String game : gsf.gamenames)
+						Toast.makeText(activity, "hi", Toast.LENGTH_SHORT).show();
+						
+					}
+				});
 				final GamesScreenFragment gsf = (GamesScreenFragment) activity
 						.getSupportFragmentManager().findFragmentByTag(
 								"android:switcher:" + R.id.pager + ":2");
 				gsf.games = new LinkedList<String>();
 				gsf.gamenames = new LinkedList<String>();
 				for (String game : games) {
-					String[] names = game.split(";");
+					final String[] names = game.split(";");
 					gsf.games.add(names[0]);
 					if (names[0].startsWith("0"))
 						gsf.gamenames.add("Snakegame von "+ names[1]);
 					else
 						gsf.gamenames.add("Flaggame von "+ names[1]);
 				}
+			
 				activity.runOnUiThread(new Runnable(){
 
 					@Override

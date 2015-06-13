@@ -21,6 +21,9 @@ Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunika
 
 \subsubsection{Client}
 Unsere Android-Applikation besteht aus drei Fragmenten zwischen denen man durch Wischen wechseln kann. Das erste Fragment ist ein Chat über den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden können.
+
+Im Hintergrund laufen zwei Threads für die Kommunikation. Der eine kümmert sich um den Empfang von Nachrichten und beinhaltet einen ZeroMQ-Subscriber-Socket. Dieser empfängt alle Nachrichten, die vom Publisher"=Socket auf dem Server direkt an die ID des Clients oder die ID des Spiels, in dem er sich befindet, adressiert sind. Der zweite Thread sendet Nachrichten an den Server. 
+
 Das zweite Fragment ist die Karte auf der wir unser Spiel darstellen.  
 Für die Darstellung der Karte verwenden wir GoogleMaps. 
 Im dritten Fragment kann ein Spieler eine neue Spielinstanz erstellen oder einem bereits laufendem Spiel beitreten. Die Liste der momentan laufenden Spiele wird per Knopfdruck vom Server abgefragt. Wenn man einer laufenden Session beitritt wird über den Server eine Anfrage des aktuellen Status des Spiels an alle momentanen Mitspieler gesendet, welche den Zustand des Spiels alle an den anfragenden Client zurück senden. Dieser beachtet nur die erste Nachricht und verwirft den Rest.

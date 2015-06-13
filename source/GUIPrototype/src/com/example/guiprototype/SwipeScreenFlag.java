@@ -94,7 +94,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		magnetometer = sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		
+
 	}
 
 	public void toogleMark(View view) {
@@ -149,84 +149,98 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 			if (flaggame.getTeamBlue().userInTeam) {
 				for (Player player : flaggame.getTeamRed().players) {
 					Location pl = new Location("pl");
-					pl.setLatitude(player.getPosition().latitude);
-					pl.setLongitude(player.getPosition().longitude);
+					if (player.getPosition() != null) {
+						pl.setLatitude(player.getPosition().latitude);
+						pl.setLongitude(player.getPosition().longitude);
 
-					if (Functions.distance(this.getOwnLocation(),
-							player.getPosition()) <= Const.markerRange
-							&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
-									- (Const.markerAngleInDegree / 2) && mCurrentLocation
-									.bearingTo(pl) <= orientationAngle
-									+ (Const.markerAngleInDegree / 2))) {
-						JeroMQQueue jmqq = JeroMQQueue.getInstance();
-						if (!player.hasFlag())
-							jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
-									player.getName(), flaggame.gameID);
-						else
-							jmqq.sendToServer(TransferObject.TYPE_FLAGCARRIER_SHOT, flaggame.getTeamRed().getBase(), "teamBlue", flaggame.gameID);
+						if (Functions.distance(this.getOwnLocation(),
+								player.getPosition()) <= Const.markerRange
+								&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
+										- (Const.markerAngleInDegree / 2) && mCurrentLocation
+										.bearingTo(pl) <= orientationAngle
+										+ (Const.markerAngleInDegree / 2))) {
+							JeroMQQueue jmqq = JeroMQQueue.getInstance();
+							if (!player.hasFlag())
+								jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
+										player.getName(), flaggame.gameID);
+							else
+								jmqq.sendToServer(
+										TransferObject.TYPE_FLAGCARRIER_SHOT,
+										flaggame.getTeamRed().getBase(),
+										"teamBlue", flaggame.gameID);
+						}
 					}
 				}
 			} else {
 				for (Player player : flaggame.getTeamRed().players) {
 					Location pl = new Location("pl");
-					pl.setLatitude(player.getPosition().latitude);
-					pl.setLongitude(player.getPosition().longitude);
+					if (player.getPosition() != null) {
+						pl.setLatitude(player.getPosition().latitude);
+						pl.setLongitude(player.getPosition().longitude);
 
-					if (Functions.distance(this.getOwnLocation(),
-							player.getPosition()) <= Const.markerRange
-							&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
-									- (Const.markerAngleInDegree / 2) && mCurrentLocation
-									.bearingTo(pl) <= orientationAngle
-									+ (Const.markerAngleInDegree / 2))) {
-						JeroMQQueue jmqq = JeroMQQueue.getInstance();
-						if (!player.hasFlag())
-							jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
-									player.getName(), flaggame.gameID);
-						else
-							jmqq.sendToServer(TransferObject.TYPE_FLAGCARRIER_SHOT, flaggame.getTeamBlue().getBase(), "teamRed", flaggame.gameID);
+						if (Functions.distance(this.getOwnLocation(),
+								player.getPosition()) <= Const.markerRange
+								&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
+										- (Const.markerAngleInDegree / 2) && mCurrentLocation
+										.bearingTo(pl) <= orientationAngle
+										+ (Const.markerAngleInDegree / 2))) {
+							JeroMQQueue jmqq = JeroMQQueue.getInstance();
+							if (!player.hasFlag())
+								jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
+										player.getName(), flaggame.gameID);
+							else
+								jmqq.sendToServer(
+										TransferObject.TYPE_FLAGCARRIER_SHOT,
+										flaggame.getTeamBlue().getBase(),
+										"teamRed", flaggame.gameID);
+						}
 					}
 				}
 
 			}
+			markIsReady = false;
 			startMarkCooldown();
-		}else{
-			//Feedback that mark isn't Ready
+		} else {
+			// Feedback that mark isn't Ready
 		}
 
 	}
-	
 
 	public void scan(View view) {
-		if(scanIsReady==true){
-		FlagGame flaggame = (FlagGame) Game.getGame();
+		if (scanIsReady == true) {
+			FlagGame flaggame = (FlagGame) Game.getGame();
 
-		if (flaggame.getTeamBlue().userInTeam) {
-			for (Player player : flaggame.getTeamRed().players) {
-				Location pl = new Location("pl");
-				pl.setLatitude(player.getPosition().latitude);
-				pl.setLongitude(player.getPosition().longitude);
+			if (flaggame.getTeamBlue().userInTeam) {
+				for (Player player : flaggame.getTeamRed().players) {
+					if (player.getPosition() != null) {
+						Location pl = new Location("pl");
+						pl.setLatitude(player.getPosition().latitude);
+						pl.setLongitude(player.getPosition().longitude);
 
-				if (Functions.distance(this.getOwnLocation(),
-						player.getPosition()) <= Const.scannerRange) {
-					player.setLastScannedAt(new Date().getTime());
+						if (Functions.distance(this.getOwnLocation(),
+								player.getPosition()) <= Const.scannerRange) {
+							player.setLastScannedAt(new Date().getTime());
+						}
+					}
+				}
+			} else {
+				for (Player player : flaggame.getTeamBlue().players) {
+					if (player.getPosition() != null) {
+						Location pl = new Location("pl");
+						pl.setLatitude(player.getPosition().latitude);
+						pl.setLongitude(player.getPosition().longitude);
+
+						if (Functions.distance(this.getOwnLocation(),
+								player.getPosition()) <= Const.scannerRange) {
+							player.setLastScannedAt(new Date().getTime());
+						}
+					}
 				}
 			}
+			scanIsReady = false;
+			startScanCooldown();
 		} else {
-			for (Player player : flaggame.getTeamBlue().players) {
-				Location pl = new Location("pl");
-				pl.setLatitude(player.getPosition().latitude);
-				pl.setLongitude(player.getPosition().longitude);
-
-				if (Functions.distance(this.getOwnLocation(),
-						player.getPosition()) <= Const.scannerRange) {
-					player.setLastScannedAt(new Date().getTime());
-				}
-			}
-			
-		}
-		 startScanCooldown();
-		}else{
-			//Feedback that scan isn't ready
+			// Feedback that scan isn't ready
 		}
 	}
 
@@ -273,70 +287,70 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		}
 
 	}
-	
+
 	@Override
 	public void connect(String gameID) {
-		if (Game.getGame()!=null){
+		if (Game.getGame() != null) {
 			poller.deleteSubscription(Game.getGame().gameID);
 			Game.getGame().clearScreen();
-			if (gameID.startsWith("0")){
-				Intent intent= new Intent(this,SwipeScreenSnake.class);
+			if (gameID.startsWith("0")) {
+				Intent intent = new Intent(this, SwipeScreenSnake.class);
 				intent.putExtra(MainActivity.EXTRA_USER, userName);
 				intent.putExtra(MainActivity.EXTRA_GAMEID, gameID);
 				startActivity(intent);
 			}
 
 		}
-		Game.init(new FlagGame(gameID,this,this.userName));
+		Game.init(new FlagGame(gameID, this, this.userName));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		poller.addSubscription(gameID);
-		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);
-		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME,gameID);
-		//if (gameID.startsWith("0"))
-		
-		//else
-		//	Game.init(new FlagGame(gameID,this));
-		
-		
+		// jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);
+		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME, gameID);
+		// if (gameID.startsWith("0"))
+
+		// else
+		// Game.init(new FlagGame(gameID,this));
+
 	}
-	
-	public void startMarkCooldown(){
+
+	public void startMarkCooldown() {
 		final TextView mCooldown = (TextView) findViewById(R.id.fragmentMarkCooldown);
-		
+
 		new CountDownTimer(Const.markedCdInMs, 1000) {
 
-		     public void onTick(long millisUntilFinished) {
-		    	 mCooldown.setText("" + millisUntilFinished / 1000);
-		     }
+			public void onTick(long millisUntilFinished) {
+				mCooldown.setText("" + millisUntilFinished / 1000);
+			}
 
-		     public void onFinish() {
-		    	 mCooldown.setText("Ready");
-		    	 markIsReady=true;
-		     }
-		  }.start();
+			public void onFinish() {
+				mCooldown.setText("Ready");
+				markIsReady = true;
+			}
+		}.start();
 
 	}
-	public void startScanCooldown(){
+
+	public void startScanCooldown() {
 		final TextView sCooldown = (TextView) findViewById(R.id.fragmentScanCooldown);
-		
+
 		new CountDownTimer(Const.scanCdinMs, 1000) {
 
-		     public void onTick(long millisUntilFinished) {
-		    	 sCooldown.setText("" + millisUntilFinished / 1000);
-		     }
+			public void onTick(long millisUntilFinished) {
+				sCooldown.setText("" + millisUntilFinished / 1000);
+			}
 
-		     public void onFinish() {
-		    	 sCooldown.setText("Ready");
-		    	 scanIsReady=true;
-		     }
-		  }.start();
+			public void onFinish() {
+				sCooldown.setText("Ready");
+				scanIsReady = true;
+			}
+		}.start();
 
 	}
 
-	
-	public void setBase(View view){
+	public void setBase(View view) {
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendToServer(TransferObject.TYPE_SET_BASE, this.getOwnLocation(), team, Game.getGame().gameID);
-		
+		jmqq.sendToServer(TransferObject.TYPE_SET_BASE, this.getOwnLocation(),
+				team, Game.getGame().gameID);
+
 	}
 }
