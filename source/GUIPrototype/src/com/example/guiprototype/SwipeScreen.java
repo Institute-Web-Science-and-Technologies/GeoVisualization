@@ -117,12 +117,13 @@ public abstract class SwipeScreen extends FragmentActivity implements
 		// Game.init(new SnakeGame("0", this));
 		// Game.init(new AntGame("0"));
 
-		poller = new JeroMQPoller(this);
-		poller.addSubscription(userID);
-		poller.poll();
+		
 
 		connect(intent.getStringExtra(MainActivity.EXTRA_GAMEID));
-
+		poller = new JeroMQPoller(this, Game.getGame());
+		poller.addSubscription(userID);
+		poller.addSubscription(intent.getStringExtra(MainActivity.EXTRA_GAMEID));
+		poller.poll();
 		// Tabs der Actionbar hinzuf�gen
 		// for (String tab_name : tabs) {
 		// actionBar.addTab(actionBar.newTab().setText(tab_name)

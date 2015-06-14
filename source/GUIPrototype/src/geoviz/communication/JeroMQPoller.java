@@ -29,12 +29,14 @@ public class JeroMQPoller {
 	final FragmentActivity activity;
 	final String serverIP;
 	final List<String> subscriptions;
+	final Game game;
 
 
-	public JeroMQPoller(FragmentActivity self) {
+	public JeroMQPoller(FragmentActivity self, Game game) {
 		super();
 		this.activity = self;
 		this.serverIP = Const.serverIP;
+		this.game = game;
 
 		subscriptions = new LinkedList<String>();
 	}
@@ -137,7 +139,7 @@ public class JeroMQPoller {
 						break;
 					default:
 						TransferObject t = gson.fromJson(msg, TransferObject.class);
-						Game.getGame().update(t);
+						game.update(t);
 						break;
 					}
 
@@ -149,7 +151,7 @@ public class JeroMQPoller {
 				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
 				TransferObject t =new TransferObject(TransferObject.TYPE_FLAGCARRIER_SHOT, ttso.team, null,
 				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
-				Game.getGame().update(t);
+				game.update(t);
 				
 			}
 
@@ -157,14 +159,14 @@ public class JeroMQPoller {
 				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
 				TransferObject t =new TransferObject(TransferObject.TYPE_FLAGCARRIER_SHOT, ttso.team, null,
 				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 
 			private void handleSetBase(String msg) {
 				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
 				TransferObject t =new TransferObject(TransferObject.TYPE_SET_BASE, ttso.team, null,
 				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 
 			private void handleSetFlag(String msg) {
@@ -172,7 +174,7 @@ public class JeroMQPoller {
 				
 				TransferObject t =new TransferObject(TransferObject.TYPE_SET_FLAG, ttso.team, null,
 				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
-				Game.getGame().update(t);
+				game.update(t);
 			
 			}
 
@@ -181,13 +183,13 @@ public class JeroMQPoller {
 			private void handleGameStatus(String msg) {
 				// TODO Auto-generated method stub
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 
 			private void handleJoin(String msg) {
 				// TODO Auto-generated method stub
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 
 			private void handleGetGameList(String msg) {
@@ -234,13 +236,13 @@ public class JeroMQPoller {
 
 			private void handleKillChicken(String msg) {
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
-				Game.getGame().update(t);
+				game.update(t);
 
 			}
 
 			private void handleAddChicken(String msg) {
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 
 			private void handleMsg(String msg) {
@@ -281,11 +283,11 @@ public class JeroMQPoller {
 			}
 			private void handleSnakeDied(String msg){
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 			private void handleCoord(String msg) {
 				TransferObject t = gson.fromJson(msg, TransferObject.class);
-				Game.getGame().update(t);
+				game.update(t);
 			}
 
 		}).start();

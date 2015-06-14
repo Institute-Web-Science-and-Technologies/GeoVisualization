@@ -151,7 +151,7 @@ public class Player {
 			}
 		}
 		if (hasFlag){
-			team.setEnemyFlag(pos);
+			team.changeEnemyFlagPosition(pos);
 			if (Functions.distance(pos, team.getBase()) < Const.gainPointRadius){
 				JeroMQQueue jmqq = JeroMQQueue.getInstance();
 				if(team.color == Color.BLUE){

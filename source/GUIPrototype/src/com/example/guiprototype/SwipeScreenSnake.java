@@ -54,7 +54,8 @@ public class SwipeScreenSnake extends SwipeScreen {
 	@Override
 	public void connect(String gameID) {
 		if (Game.getGame()!=null){
-			poller.deleteSubscription(Game.getGame().gameID);
+			if (poller != null)
+				poller.deleteSubscription(Game.getGame().gameID);
 			Game.getGame().clearScreen();
 			if (gameID.startsWith("1")){
 				Intent intent= new Intent(this,SelectFlagTeam.class);
@@ -70,7 +71,8 @@ public class SwipeScreenSnake extends SwipeScreen {
 		
 		//else
 		//	Game.init(new FlagGame(gameID,this));
-		poller.addSubscription(gameID);
+		if (poller != null)
+			poller.addSubscription(gameID);
 		
 	}
 }

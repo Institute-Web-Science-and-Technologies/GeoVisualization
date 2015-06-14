@@ -131,4 +131,14 @@ public class JeroMQQueue {
     	add(type +","+recipient+","+game.userID+","+json);
 	}
 
+	public void sendMsg(int type,LatLng loc,float speed, String recipient, boolean teamRed) {
+		Game game= Game.getGame();
+    	TransferObject msg = new TransferObject(type, "", Calendar
+				.getInstance().getTime(),game.userID , game.userName, loc,speed,Game.getGame().gameID,teamRed);
+
+    	String json = gson.toJson(msg);
+    	add(type +","+recipient+","+game.userID+","+json);
+		
+	}
+
 }

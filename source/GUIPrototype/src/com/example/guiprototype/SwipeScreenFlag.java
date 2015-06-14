@@ -30,6 +30,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -45,6 +46,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 	protected boolean scanIsReady = true;
 	protected boolean markIsReady = true;
 	float orientationValues[] = new float[3];
+	FlagGame currentGame;
 
 	public String team;
 
@@ -86,11 +88,13 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 
 		Intent intent = getIntent();
 		team = intent.getStringExtra(SelectFlagTeam.EXTRA_TEAM);
-		((FlagGame) Game.getGame()).setTeam(team);
+		currentGame = ((FlagGame) Game.getGame());
+		currentGame.setTeam(team);
+		/*
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM, team,
 				intent.getStringExtra(MainActivity.EXTRA_GAMEID));
-
+		 */
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		magnetometer = sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
@@ -135,16 +139,18 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 							TransferObject.TYPE_COORD,
 							new LatLng(location.getLatitude(), location
 									.getLongitude()), location.getSpeed(),
-							Game.getGame().gameID);
+							Game.getGame().gameID, currentGame.getTeamRed().userInTeam);
 	}
 
 	public void markPlayer(View view) {
 
 		if (markIsReady == true) {
+			Log.d("marker", "marker used");
 			float orientationAngle = (float) Math
 					.toDegrees(orientationValues[0]);
 			if (orientationAngle < 0)
 				orientationAngle = 360f - orientationAngle;
+			Log.d("marker", "orientationangle = "+orientationAngle);
 			FlagGame flaggame = (FlagGame) Game.getGame();
 			if (flaggame.getTeamBlue().userInTeam) {
 				for (Player player : flaggame.getTeamRed().players) {
@@ -152,7 +158,9 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						pl.setLatitude(player.getPosition().latitude);
 						pl.setLongitude(player.getPosition().longitude);
-
+						Log.d("marker","redplayer at lat: "+ pl.getLatitude()+" long: "+pl.getLongitude());
+						Log.d("marker","redplayer distance: "+Functions.distance(this.getOwnLocation(), player.getPosition()));
+						Log.d("marker","redplayer bearingAngle: "+mCurrentLocation.bearingTo(pl));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.markerRange
 								&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
@@ -177,7 +185,9 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						pl.setLatitude(player.getPosition().latitude);
 						pl.setLongitude(player.getPosition().longitude);
-
+						Log.d("marker","blueplayer at lat: "+ pl.getLatitude()+" long: "+pl.getLongitude());
+						Log.d("marker","blueplayer distance: "+Functions.distance(this.getOwnLocation(), player.getPosition()));
+						Log.d("marker","blueplayer bearingAngle: "+mCurrentLocation.bearingTo(pl));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.markerRange
 								&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
@@ -208,6 +218,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 
 	public void scan(View view) {
 		if (scanIsReady == true) {
+			Log.d("scanner","scanner used");
 			FlagGame flaggame = (FlagGame) Game.getGame();
 
 			if (flaggame.getTeamBlue().userInTeam) {
@@ -215,8 +226,10 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						Location pl = new Location("pl");
 						pl.setLatitude(player.getPosition().latitude);
+						Log.d("scanner", "teamRedPlayer "+player.getName() +" lat: "+ pl.getLatitude());
 						pl.setLongitude(player.getPosition().longitude);
-
+						Log.d("scanner", "teamRedPlayer "+player.getName() +" long:" +pl.getLongitude());
+						Log.d("scanner", "teamRedPlayer distance; "+ Functions.distance(this.getOwnLocation(), player.getPosition()));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.scannerRange) {
 							player.setLastScannedAt(new Date().getTime());
@@ -228,8 +241,10 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						Location pl = new Location("pl");
 						pl.setLatitude(player.getPosition().latitude);
+						Log.d("scanner", "teamBluePlayer "+player.getName() +" lat: "+ pl.getLatitude());
 						pl.setLongitude(player.getPosition().longitude);
-
+						Log.d("scanner", "teamBluePlayer "+player.getName() +" long:" +pl.getLongitude());
+						Log.d("scanner", "teamBluePlayer distance; "+ Functions.distance(this.getOwnLocation(), player.getPosition()));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.scannerRange) {
 							player.setLastScannedAt(new Date().getTime());
@@ -291,7 +306,8 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 	@Override
 	public void connect(String gameID) {
 		if (Game.getGame() != null) {
-			poller.deleteSubscription(Game.getGame().gameID);
+			if (poller != null)
+				poller.deleteSubscription(Game.getGame().gameID);
 			Game.getGame().clearScreen();
 			if (gameID.startsWith("0")) {
 				Intent intent = new Intent(this, SwipeScreenSnake.class);
@@ -303,6 +319,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		}
 		Game.init(new FlagGame(gameID, this, this.userName));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		if (poller != null)
 		poller.addSubscription(gameID);
 		// jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME, gameID);

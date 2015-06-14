@@ -36,6 +36,7 @@ public class TransferObject implements Serializable {
 	public java.util.Date timeStamp;
 	public String senderID;
 	public String senderName;
+	public boolean teamRed;
 
 	
 	
@@ -59,6 +60,7 @@ public class TransferObject implements Serializable {
 		this.senderName = senderName;
 		this.pos=location;
 		this.gameID=gameID;
+		this.teamRed = false;
 	}
 	
 	public TransferObject(int msgType,String msg, Date timeStamp,String senderID,String senderName,LatLng location,float speed, String gameID){
@@ -71,8 +73,20 @@ public class TransferObject implements Serializable {
 		this.pos=location;
 		this.gameID=gameID;
 		this.speed=speed;
+		this.teamRed = false;
 	}
 	
-	
+	public TransferObject(int msgType,String msg, Date timeStamp,String senderID,String senderName,LatLng location,float speed, String gameID, boolean teamRed){
+		super();
+		this.msgType=msgType;
+		this.msg = msg;
+		this.timeStamp = timeStamp;
+		this.senderID = senderID;
+		this.senderName = senderName;
+		this.pos=location;
+		this.gameID=gameID;
+		this.speed=speed;
+		this.teamRed = teamRed;
+	}
 		
 }

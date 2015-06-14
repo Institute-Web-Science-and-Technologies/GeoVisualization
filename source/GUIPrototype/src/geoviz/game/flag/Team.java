@@ -30,6 +30,7 @@ public class Team {
 		points=0;
 		this.game=game;
 		players= new LinkedList<Player>();
+		this.color = color;
 	}
 	
 	public FlagGame getGame() {
@@ -51,14 +52,23 @@ public class Team {
 				return 1;
 			}
 		}
+		players.add(new Player(this, player, pos, speed, 0, userInTeam));
 		return 0;
 	}
 	
 	public LatLng getEnemyFlag(){
 		return enemyFlag;
 	}
-	
-	public void setEnemyFlag(LatLng flag){
+	public void changeEnemyFlagPosition (LatLng flag){
+		this.enemyFlag = flag;
+		game.getActivity().runOnUiThread(new Runnable(){
+			@Override
+			public void run(){
+				flagMarker.setPosition(enemyFlag);
+			}
+		});
+	}
+	public void setNewEnemyFlag(LatLng flag){
 		this.enemyFlag = flag;
 		this.enemyFlagPickedUp = false;
 		if (flagMarker == null){
