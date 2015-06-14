@@ -39,28 +39,28 @@
 \contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{21}{section.4.3}
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{22}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Serverseitige und clientseitige Logik}{22}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Publish-Subscribe-Pattern}{23}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Server-Technologien}{24}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}ZeroMQ}{24}{subsection.4.4.4}
-\contentsline {section}{\numberline {4.5}GUI}{25}{section.4.5}
-\contentsline {section}{\numberline {4.6}Sensorik}{29}{section.4.6}
-\contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}Allgemein}{31}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Spiellogik}{31}{subsection.5.1.1}
-\contentsline {subsubsection}{Server}{31}{section*.44}
-\contentsline {subsubsection}{Client}{32}{section*.45}
-\contentsline {section}{\numberline {5.2}Snake}{33}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Spielidee}{33}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Spiellogik}{34}{subsection.5.2.2}
-\contentsline {paragraph}{Darstellung der Schlange:}{34}{section*.49}
-\contentsline {paragraph}{Objekte aufsammeln:}{34}{section*.50}
-\contentsline {paragraph}{Kollision:}{34}{section*.51}
-\contentsline {section}{\numberline {5.3}Flaggenspiel}{35}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Spiellogik}{37}{subsection.5.3.1}
-\contentsline {paragraph}{Markieren:}{37}{section*.56}
-\contentsline {paragraph}{Scannen:}{37}{section*.57}
-\contentsline {paragraph}{Geschwindigkeits\"uberpr\"ufung:}{38}{section*.58}
-\contentsline {paragraph}{Basen- und Flaggenplatzierung:}{38}{section*.59}
-\contentsline {chapter}{\numberline {6}Fazit}{39}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ausblick}{40}{chapter.7}
-\contentsline {chapter}{\numberline {A}Messergebnisse}{41}{appendix.A}
+\contentsline {subsection}{\numberline {4.4.2}Push- versus Pull Kommunikation}{23}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Kommunikations-Technologien}{23}{subsection.4.4.3}
+\contentsline {section}{\numberline {4.5}User-Interface}{24}{section.4.5}
+\contentsline {section}{\numberline {4.6}Sensorik}{24}{section.4.6}
+\contentsline {chapter}{\numberline {5}Implementation von Beispielspielen}{26}{chapter.5}
+\contentsline {section}{\numberline {5.1}Allgemein}{26}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}GUI}{26}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Spiellogik}{30}{subsection.5.1.2}
+\contentsline {subsubsection}{Server}{30}{section*.45}
+\contentsline {subsubsection}{Client}{31}{section*.46}
+\contentsline {section}{\numberline {5.2}Snake}{32}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Spielidee}{32}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Spiellogik}{32}{subsection.5.2.2}
+\contentsline {paragraph}{Darstellung der Schlange:}{32}{section*.50}
+\contentsline {paragraph}{Objekte aufsammeln:}{33}{section*.51}
+\contentsline {paragraph}{Kollision:}{33}{section*.52}
+\contentsline {section}{\numberline {5.3}Flaggenspiel}{34}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Spiellogik}{36}{subsection.5.3.1}
+\contentsline {paragraph}{Markieren:}{36}{section*.57}
+\contentsline {paragraph}{Scannen:}{36}{section*.58}
+\contentsline {paragraph}{Geschwindigkeits\"uberpr\"ufung:}{37}{section*.59}
+\contentsline {paragraph}{Basen- und Flaggenplatzierung:}{37}{section*.60}
+\contentsline {chapter}{\numberline {6}Fazit}{38}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ausblick}{39}{chapter.7}
+\contentsline {chapter}{\numberline {A}Messergebnisse}{40}{appendix.A}

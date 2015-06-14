@@ -1,25 +1,37 @@
+\section{User-Interface}
+\subsection* {GUI}
+Die GUI (\textit{graphical user interface}) wurde in unserer Implementation mit Android und den GooglePlay Services (einschließlich Google Maps) umgesetzt. Die für den Benutzer sichtbaren Bildschirme werden in der Entwicklung mit Android in Activities\footnote{\url{https://developer.android.com/guide/components/activities.html}} organisiert. Diese enthalten Informationen über das Layout, sowie Funktionalitäten des Bildschirms.
+Die mitgelieferten
+Mög\-lich\-kei\-ten des Android SDK waren für die GUI-Umsetzung dieses Projektes vollkommen zufriedenstellend.
+
+\subsection*{Haptisches Feedback}
+Die graphische Benutzeroberfläche kann durch Haptisches Feedback ergänzt werden. Haptisch bedeutet \glqq fühlbar\grqq oder \glqq berührbar\grqq. Bei Smartphones betrachten wir in diesem Zusammenhang den Vibrationsalarm. Dieser wird nativ dazu genutzt um dem Nutzer mitzuteilen, dass ein Anruf oder eine Nachricht eingegangen ist.
+% oder um Eingaben zu bestätigen. //Hä? wie werden Eingaben mit Vibrationsalarm bestätigt?
+Erzeugt werden die Vibrationen durch einen kleinen Motor, der durch eine Unwucht dafür sorgt, dass das Gehäuse vibriert. Bei einigen Geräten wird sogar der Lautsprecher dazu genutzt, indem er niedrigfrequente Töne erzeugt, die das Gehäuse in Schwingung versetzen.
+
 \section{Sensorik}\label{sensorik}
 
 \subsection*{BLEep}
-BLEep bezeichnet eine Technologie, die Bluetooth Sender nutzt um Signale mit anderen Geräten auszutauschen. BLE (auch bekannt als Bluetooth Low Energy) sendet auf einer Frequenz von 2,4 GHz und nutzt Bluetooth Version 4.0, welche auch heute von allen gängigen Smartphones unterstützt wird.
+BLEep bezeichnet eine Technologie, die Bluetooth Sender nutzt um Signale mit anderen Geräten auszutauschen. BLE (auch bekannt als Bluetooth Low Energy) sendet auf einer Frequenz von 2,4 GHz und nutzt Bluetooth Version 4.0, welche von allen gängigen Smartphones unterstützt wird.
 Ein BLEep Sender wird an einem Ort angebracht und sendet dauerhaft Signale an alle umliegenden Geräte. Die Reichweite des Senders liegt zwischen 15cm und 50m.
 Mobile Geräte empfangen das Signal und können an der Signalstärke die Entfernung zum Sensor bestimmen. Je schwächer das Signal, desto weiter ist die Entfernung.
 Jeder BLEep Sensor besitzt eine ID, womit dieser sich eindeutig identifizieren lässt.
-Eine mobile Applikation empfängt also das Signal mit der ID und berechnet anhand der Signalstärke die Entfernung. Aus diesem Kontext heraus können dann Interaktionen zwischen der mobilen App und dem Sensor durchgeführt werden. Dies ist auch mit mehreren Smartphones möglich, denn die Sensoren haben keine Begrenzung hinsichtlich der Anzahl der Geräte mit denen sie kommunizieren können. Auch kann ein Gerät mit mehreren Sensoren gleichzeitig interagieren, was Spielraum für weitere mögliche Szenarios lässt.
+Eine mobile Applikation empfängt also das Signal mit der ID und berechnet anhand der Signalstärke die Entfernung. Aus diesem Kontext heraus können dann Interaktionen zwischen der mobilen App und dem Sensor durchgeführt werden. %inwiefern? Interaktionen ist sehr vage, meinst du eingebaute Interaktionen mit Bluetooth oder Interaktionen der bleep verwendenden app, z.B. das sie auf den Abstand reagiert indem sie vibriert?
+Dies ist auch mit mehreren Smartphones möglich, denn die Sensoren haben keine Begrenzung hinsichtlich der Anzahl der Geräte mit denen sie kommunizieren können. Auch kann ein Gerät mit mehreren Sensoren gleichzeitig interagieren, was Spielraum für weitere mögliche Szenarios lässt.
 
-\subsection*{Kompass}
-Heute besitzen alle gängigen Smartphones eine Kompass-Funktionalität, die von mobilen Applikationen genutzt werden kann. 
-Ganz allgemein richtet sich ein Kompass nach dem Magnetfeld der Erde. Er ist mit einer magnetischen Nadel ausgestattet, die sich auf den Nordpol einstellt.
-In Smartphones ist ein kleines Magnetometer integriert, mit dem sich das Magnetfeld der Erde messen lässt. Zudem bestimmt das Smartphone seine Position und Neigung anhand von anderer Sensorik. Das Gerät kombiniert all diese Informationen und bestimmt somit die Richtung.
+%\subsection*{Kompass}
+%Heute besitzen alle gängigen Smartphones eine Kompass-Funktionalität, die von mobilen Applikationen genutzt werden kann. 
+%Ganz allgemein richtet sich ein Kompass nach dem Magnetfeld der Erde. Er ist mit einer magnetischen Nadel ausgestattet, die sich auf den Nordpol einstellt.
+%In Smartphones ist ein kleines Magnetometer integriert, mit dem sich das Magnetfeld der Erde messen lässt. Zudem bestimmt das Smartphone seine Position und Neigung mit Hilfe des Accelerometers, indem es die Richtung Gravitation der Erde benutzt. Das Gerät kombiniert all diese Informationen und bestimmt somit die Richtung.
 
 \subsection*{Geschwindigkeitsmessung}\label{geschwindigkeitsmessung}
-Die Bewegungsgeschwindigkeit kann durch einen Be\-schleu\-ni\-gungs\-sen\-sor (auch Ac\-ce\-le\-ro\-me\-ter genannt) gemessen werden. Durch die auf ein Gerät wirkende Träg\-heits\-kraft kann bestimmt werden ob eine Geschwindigkeitszunahme oder -abnahme stattfindet. Anhand der mittleren Erdbeschleunigung lässt sich diese dann genau berechnen.
+Die Bewegungsgeschwindigkeit kann durch einen Be\-schleu\-ni\-gungs\-sen\-sor (auch Ac\-ce\-le\-ro\-me\-ter genannt) gemessen werden. Durch die auf ein Gerät wirkende Träg\-heit kann bestimmt werden ob eine Geschwindigkeitszunahme oder -abnahme stattfindet. Anhand der Erdbeschleunigung lässt sich diese genau berechnen.
 In modernen Smartphones ist solch ein Sensor verbaut. Dieser lässt sich in mobilen Applikationen dazu benutzen um die Geschwindigkeit des Nutzers zu ermitteln.
 
 Des weiteren kann auch durch GPS die Geschwindigkeit ermittelt werden. Moderne GPS-Geräte speichern permanent ihre letzten Positionen. Somit können sie anhand der zurückgelegten Strecke mit Hinzunahme der benötigten Zeit ein recht genaues Geschwindigkeitsergebnis bestimmen.
 
 \subsection*{Orientierung}\label{orientierung}
-Smartphones sind in der Lage über die internen Sensoren etwas über ihre Ausrichtung zu erfahren. Hierbei werden das Accelerometer und das Magnetometer verwendet um eine Rotationsmatrix zu generieren.
+Smartphones sind in der Lage über die internen Sensoren etwas über ihre Ausrichtung zu erfahren. Hierbei wird mit dem Accelerometer über die Erdanziehung die Ausrichung des Smartphones bestimmt und das Magnetometer verwendet um eine Rotationsmatrix zu generieren.
 Daraus kann dann die Orientierung Errechnet werden.
 %
 %\subsection*{Thermometer}

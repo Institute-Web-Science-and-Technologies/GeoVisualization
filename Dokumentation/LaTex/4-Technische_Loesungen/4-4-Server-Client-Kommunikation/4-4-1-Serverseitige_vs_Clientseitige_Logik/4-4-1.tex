@@ -3,22 +3,19 @@
 \subsection{Serverseitige und clientseitige Logik}
 
 
-Um den Zustand der einzelnen mobilen Geräte zu synchronisieren und Chat-Nachrichten zu übertragen, ist ein Server nötig.
+Um den Zustand der einzelnen mobilen Geräte zu synchronisieren und Chat-Nachrichten zu übertragen, ist ein Server nötig. Die Kommunikation ausschließlich zwischen mobilen Endgeräten kann sich sonst als schwierig erweisen, da sich deren IP-Adresse jederzeit ändern kann. Die Einrichtung eines Servers, der die Kommunikation regelt ist folglich sinnvoll. 
+
 Hierzu bieten sich zwei unterschiedliche Modelle an.
-Eine Möglichkeit wäre eine serverlastige Server-Client-Architektur. Hierbei übernimmt der Server einen Großteil der Berechnungen und Logik.Bei den Clients kann man von Thin-Clients sprechen. In einer theoretischen Implementation hält der Server einen zentralen, im gültigen, Status.
+Eine Möglichkeit wäre eine serverlastige Server-Client-Architektur. Hierbei übernehmen die Clients einen möglichst geringen Teil der Berechnungen und Logik, man spricht hier von Thin-Clients, den Großteil übernimmt der Server. In einer theoretischen Implementation hält der Server einen zentralen, gültigen Status.
 Die Thin-Clients übertragen die Nutzereingaben und Sensordaten an den Server, der daraus einen neuen Zustand ermittelt und diesen den Clients mitteilt.
 
-Alternativ kann man Berechnungen und Logik vorrangig clientlastig implementieren (Fat-Clients). 
+Alternativ kann man Berechnungen und Logik vorrangig clientlastig implementieren, im Folgenden Fat-Clients. 
  Dies fordert leistungsfähigere Endgeräte, während der Server entlastet wird. 
 Aktuelle Smartphones könnten die entwickelte Anwendung jedoch mühelos ausführen.
+Eine clientlastige  Implementation hätte außerdem den Vorteil, dass bei vielen Nutzern die Rechenleistung hauptsächlich auf die Clients verteilt werden und dementsprechend der Server weniger leistungsstark sein muss. 
 %Diese haben sich als genügend leistungsfähig erwiesen.
-Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik auf jedem Client vorliegt. Eine clientlastige Implementation verringert theoretisch Wartbarkeit und Erweiterbarkeit. Da die Implementation definitiv eine Internetverbindung benötigt, könnte theoretisch der Server mit einer Updatefunktionalität versehen werden. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
+Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik auf jedem Client vorliegt. Eine clientlastige Implementation verringert theoretisch Wartbarkeit und Erweiterbarkeit. Da die Implementation definitiv eine Internetverbindung benötigt, könnte theoretisch der Server mit einer Update-Funktionalität versehen werden. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
 %Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. 
-Im Fall der Implementation würde bei einer Thin-Client-Architektur um einiges mehr Informationen hin und her geschickt werden. Der Server müsste z.B. jeweils auf die aktuellen Spielinformationen (z.B. Positionsdaten) von allen Clients warten, Tests haben gezeigt das die Updateintervalle von Gerät zu Gerät unterschiedlich sind und zum teil durch äußere Einflüsse (z.B. Wetter) verzögert werden können. Aus allen Updates berechnet der Server dann den aktuellen Spiel-Zustand, welcher wieder an alle Geräte übertragen werden muss. Hierbei muss die korrekte Übertragung sichergestellt sein. Nun würde der Zyklus wieder von vorne beginnen. Wenn man jetzt noch etwaige Verbindungsprobleme berücksichtigt wäre die Spielgeschwindigkeit überaus langsam. 
-
-Bei einer Fat-Client-Architektur hingegen würden Clients die Spielinformationen schnellst möglich an den Server schicken, welcher diese nur weiterleiten muss. Wenn es zu Übertragungsverzögerungen kommt, können ein- und ausgehende Spielinformationen in Warteschleifen platziert werden. 
-Im implementierten Capture-the-Flag-Spielmodus muss beispielsweise bloß der aktuelle Standpunkt eines Spielers übertragen werden, nicht die daraus resultierenden Daten, wie die Sichtbarkeit für andere Spieler, die der Fat-Client selber berechnet.
-Die Spielgeschwindigkeit wäre also nur abhängig von der Rechen- bzw. Sensorleistung der Clients, sowie der möglichen Übertragungsgeschwindigkeit. Durch Verzögerungen kann es zwar immer noch für den Endnutzer zu unvorhergesehen oder falsch erscheinenden Interaktionsergebnissen kommen, z.B. wer bei der Snake-Implementation mit wem kollidiert, ist aber in unserer Implementation zu vernachlässigen. Es wird vor allem Wert auf Spielgeschwindigkeit gelegt. Dieser Punkt war auch ausschlaggebend dafür, das in diesem Projekt eine Fat-Client-Architektur gewählt wurde\cite{schaeffer}.
 
 \begin{center}
 \begin{tabular}{l|l}
@@ -26,20 +23,27 @@ Die Spielgeschwindigkeit wäre also nur abhängig von der Rechen- bzw. Sensorleist
 	\hline
 	 - Zustand doppelt modelliert & + Server-Zustand nicht nötig \\
 	 + zentraler, definitiver Zustand &  - verteilter Zustand \\
+	 - hohe Serverlast & + niedrige Serverlast \\
 	 (+) Wartbarkeit & (-) Wartbarkeit \\
 	 (+) Erweiterbarkeit & (-) Erweiterbarkeit \\
-	 - Spielgeschwindigkeit & + Spielgeschwindigkeit \\
+	
 \end{tabular}
 \end{center}
 
-\subsection{Publish-Subscribe-Pattern}
-Das Publish-Subscribe-Pattern ist ein Entwurfsmuster für Server-Client -Kommunikation. Es gleicht dem Beobachter-Muster (\textit{observer pattern}).
-Die Kommunikation zwischen Server und Client wird dabei als Push"=Kommunikation umgesetzt:
-Die Clients nehmen die Rolle des Subscribers ein. Jeder Client meldet sich beim Server, der in der Rolle des Publishers fungiert, für bestimmte Typen von Nachrichten an. Tritt ein bestimmtes Ereignis auf, beispielsweise eine Änderung des Server-Zustands, informiert der Server aktiv alle Clients, die diese Art Ereignis abonniert haben, und schickt jedem eine Nachricht \cite{xmpp, eugster}.
 
-Im Gegensatz dazu wird bei der Pull-Kommunikation der Server ausschließlich auf Anfrage eines Clients aktiv. Falls der Client nicht bloß einzelne Berechnungen auf den Server auslagern soll, sondern Informationen über externe Ereignisse braucht, muss er in regelmäßigen Abständen diese Informationen beim Server anfragen. 
-Dies verbraucht zusätzliche Bandbreite und führt zu einer Verzögerung der Aktualisierung des Client-Zustands. Da die Bandbreite bei mobilen Geräten von vielen Faktoren negativ beeinflusst werden kann und Verzögerungen bei einem interaktiven Spiel stören können, wurden beide Faktoren als kritisch eingestuft. Daher wurde Push-Kommunikation verwendet. 
 
-Die Kommunikation zwischen Server und Client haben wir mit Hilfe von \textit{message passing} realisiert. \textit{Message passing} ist eine Variante des Publish"=Subscribe"=Patterns, bei dem der Server keinen Zustand hält, sondern bloß eingehende Nachrichten an alle Clients weiterleitet, die den entsprechen Nachrichtentyp abonniert haben.
-Dabei werden alle Berechnungen vom Client ausgeführt.
-Dadurch verringert sich die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{eugster}.\textbf{}
+\subsection{Push- versus Pull Kommunikation}
+Bei der Push-Kommunikation sendet der Server von sich aus Informationen, wenn z.B. ein Update bereitsteht. Im Fall unserer Implementation würde z.B. der Server ein Positionsupdate eines Spielers erhalten und dieses sofort an alle anderen Spieler weiterleiten. Dies hat den Vorteil, dass die Informationen so zeitnah wie möglich an alle Spieler übertragen werden. Dadurch kann bei Spielen in Echtzeit sichergestellt werden, dass bei jeder Spielerhandlung alle anderen Clients möglichst schnell aktualisiert werden.
+
+Im Gegensatz dazu wird bei der Pull-Kommunikation der Server ausschließlich auf Anfrage eines Clients aktiv. Falls der Client nicht bloß einzelne Berechnungen auf den Server auslagern soll, sondern Informationen über externe Ereignisse braucht, muss er in regelmäßigen Abständen diese Informationen beim Server anfragen.
+Bei sinnvoller Implementation hat man deutlich weniger Updates als bei der Push Kommunikation und benötigt daher weniger Bandbreite. 
+Da für unsere Echtzeit-Spiele update-Geschwindigkeit enorm wichtig ist und wir so zeitnah Updates schicken wollten wie möglich, haben wir uns für Push-Kommunikation entschieden. Wir realisieren diese Push-Kommunikation mit einem Entwurfsmuster für Server-Client-Kommunikation, dem Publish-Subscribe-Pattern.
+
+%Verlgeich mit Observerpattern
+
+Die Clients nehmen die Rolle des Subscribers ein. Jeder Client meldet sich beim Server, der in der Rolle des Publishers fungiert, für bestimmte Typen von Nachrichten an. Wenn der Server eine solche Nachricht von einem bestimmten Nachrichtentyp schickt, sendet er sie aktiv allen Clients, die diese Art Typ abonniert haben.
+%Die Kommunikation zwischen Server und Client haben wir mit Hilfe von \textit{message passing} realisiert. \textit{Message passing} ist eine Variante des Publish"=Subscribe"=Patterns, bei dem der Server keinen Zustand hält, sondern bloß eingehende Nachrichten an alle Clients weiterleitet, die den entsprechen Nachrichtentyp abonniert haben.
+%Dabei werden alle Berechnungen vom Client ausgeführt.
+%Dadurch verringert sich die Komplexität der Anwendung, da der Zustand nicht doppelt modelliert werden muss. Dies macht die Anwendung weniger fehleranfällig \cite{eugster}.\textbf{}
+
+%Nicht das was in der Quelle steht.

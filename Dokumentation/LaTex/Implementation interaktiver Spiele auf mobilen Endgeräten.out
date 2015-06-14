@@ -18,14 +18,14 @@
 \BOOKMARK [1][-]{section.4.3}{Kartendarstellung mit Android}{chapter.4}% 18
 \BOOKMARK [1][-]{section.4.4}{Server-Client-Kommunikation}{chapter.4}% 19
 \BOOKMARK [2][-]{subsection.4.4.1}{Serverseitige und clientseitige Logik}{section.4.4}% 20
-\BOOKMARK [2][-]{subsection.4.4.2}{Publish-Subscribe-Pattern}{section.4.4}% 21
-\BOOKMARK [2][-]{subsection.4.4.3}{Server-Technologien}{section.4.4}% 22
-\BOOKMARK [2][-]{subsection.4.4.4}{ZeroMQ}{section.4.4}% 23
-\BOOKMARK [1][-]{section.4.5}{GUI}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.6}{Sensorik}{chapter.4}% 25
-\BOOKMARK [0][-]{chapter.5}{Implementation von Beispielapps}{}% 26
-\BOOKMARK [1][-]{section.5.1}{Allgemein}{chapter.5}% 27
-\BOOKMARK [2][-]{subsection.5.1.1}{Spiellogik}{section.5.1}% 28
+\BOOKMARK [2][-]{subsection.4.4.2}{Push- versus Pull Kommunikation}{section.4.4}% 21
+\BOOKMARK [2][-]{subsection.4.4.3}{Kommunikations-Technologien}{section.4.4}% 22
+\BOOKMARK [1][-]{section.4.5}{User-Interface}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.6}{Sensorik}{chapter.4}% 24
+\BOOKMARK [0][-]{chapter.5}{Implementation von Beispielspielen}{}% 25
+\BOOKMARK [1][-]{section.5.1}{Allgemein}{chapter.5}% 26
+\BOOKMARK [2][-]{subsection.5.1.1}{GUI}{section.5.1}% 27
+\BOOKMARK [2][-]{subsection.5.1.2}{Spiellogik}{section.5.1}% 28
 \BOOKMARK [1][-]{section.5.2}{Snake}{chapter.5}% 29
 \BOOKMARK [2][-]{subsection.5.2.1}{Spielidee}{section.5.2}% 30
 \BOOKMARK [2][-]{subsection.5.2.2}{Spiellogik}{section.5.2}% 31

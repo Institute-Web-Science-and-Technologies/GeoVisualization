@@ -1,4 +1,4 @@
-\subsection{Server-Technologien}
+\subsection{Kommunikations-Technologien}
 
 %Die Kommunikation zwischen Client und Server kann als Push- oder Pull-Kommunikation realisiert werden. 
 %Bei der Pull-Kommunikation fordert der Client die benötigten Informationen vom Server an. Im Falle einer Echtzeitanwendung muss dies in regelmäßigen Abständen geschehen.
@@ -15,5 +15,6 @@
 %JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}}, eine Implementation von ZeroMQ in Java. 
 %Wir haben uns für JeroMQ entschieden, da es so möglich war, den Server in Java umzusetzen und so Server und Client in der selben Programmiersprache zu implementieren.
 
-Die Kommunikation zwischen mobilen Endgeräten kann sich als schwierig erweisen, da sich deren IP-Adresse jederzeit ändern kann. Die Einrichtung eines Servers, der die Kommunikation regelt ist also sinnvoll. 
-Um Nachrichten zwischen Clients austauschen zu können wurde sich in diesem Praktikum für \textit{message passing} mit Push-Kom\-mu\-ni\-ka\-tion entschieden. Zu beginn haben wir mit einem Node.js Server \footnote{\url{https://nodejs.org/}} und URLConnection \footnote{\url{http://developer.android.com/reference/java/net/URLConnection.html}} auf der Client-Seite experimentiert. Dies wurde jedoch aufgrund langer Antwortzeiten wieder verworfen. In einem weiterem Experiment wurde Nachrichtenaustausch-Bibliothek ZeroMQ verwendet. Hierbei wurde der Server in Java mit JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}} realisiert. Hier wurden weitaus kürzere Antwortzeiten erreicht, weshalb sich für diese Lösung entschieden wurde. Zudem ist es so möglich den Server ebenfalls in selben Programmiersprache wie den Client (Java) zu implementieren, was das arbeiten ein wenig angenehmer macht.
+Zu Beginn haben wir mit einem Node.js Server \footnote{\url{https://nodejs.org/}} und URLConnection \footnote{\url{http://developer.android.com/reference/java/net/URLConnection.html}} auf der Client-Seite experimentiert. Dies wurde jedoch aufgrund langer Antwortzeiten verworfen. 
+In einem weiterem Experiment wurde Nachrichtenaustausch-Bibliothek ZeroMQ verwendet. Hierbei wurde der Server in Java mit JeroMQ\footnote{\url{https://github.com/zeromq/jeromq}} realisiert. Hier wurden weitaus kürzere Antwortzeiten erreicht (mehrere tausend Nachrichten pro Sekunde in unseren Tests), weshalb sich für diese Lösung entschieden wurde. Zudem ist ZeroMQ äußerst einsteigerfreundlich und asynchron, d.h. es muss nicht auf eine Antwort warten, bevor es neue Nachrichten empfangen kann, was eine Bedingung für Spielen mit mehreren Spielern ist. Als Bonus macht es möglich, den Server wie denn Client in Java zu programmieren, was das arbeiten ein wenig angenehmer macht.
+%@Nils: pro contra für Node.js adden
