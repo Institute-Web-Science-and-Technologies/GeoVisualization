@@ -1,23 +1,15 @@
 Zwei der vorgestellten Spielideen werden mit Hilfe der benötigten Features als Android-App implementiert. Hierzu wird ein Framework entwickelt, das allgemein benötigte Funktionalitäten bereitstellt, und darauf aufbauend werden die beiden Beispielspiele umgesetzt.
 
-<<<<<<< HEAD
+
 
 \section{Allgemeines Framework}
 %\subsection{Spiellogik}
 Unser System besteht aus zwei Komponenten. Eine Android-App mit der gesamten Spiellogik und einem Server über den die Kommunikation zwischen den mobilen Endgeräten abläuft.
 
+
 \subsection*{Server}
-Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, über das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, über das die Nachrichten an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: einer Adresse, dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu übermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client, oder alle Clients die sich in einer Spielsession befinden, sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. Um mehrere Spielinstanzen gleichzeitig verwalten zu können, hält er aber eine Liste aller laufenden Spiele samt Informationen darüber, welcher Spieler an welchem Spiel teilnimmt. Wenn eine Nachricht vom Typ "`create\_game"' empfangen wird trägt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine entsprechende Nachricht anfragt.
-=======
-\section{Allgemein}
-\input{4-Technische_Loesungen/4-5-GUI/4-5.tex}
-
-\subsection{Spiellogik}
-Unser System besteht aus zwei Komponenten. Eine Android-App mit der gesamten Spiellogik und einem Server über den die Kommunikation zwischen den mobilen Endgeräten abläuft.
-
-\subsubsection{Server}
 Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, über das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, über das die Nachrichten an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: einer Adresse, dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu übermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client, oder alle Clients die sich in einer Spielsession befinden, sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. Auf dem Server befindet sich eine Liste von momentan aktiven Spielen. Wenn eine Nachricht vom Typ "`create\_game"' empfangen wird trägt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine entsprechende Nachricht anfragt. Dabei werden vorher Spiele aus der Liste gelöscht, bei denen in den letzten 5 Minuten keine Nachricht auf dem Server empfangen wurde.
->>>>>>> origin/master
+
 
 
 
@@ -32,17 +24,17 @@ Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunika
 %	\end{center}
 %\end{figure}
 
-<<<<<<< HEAD
+
 \subsection*{Client}
-Unsere Android-Applikation besteht aus drei Fragmenten zwischen denen man durch Wischen wechseln kann. Das erste Fragment ist ein Chat über den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden können.
-=======
-\subsubsection{Client}
+
 %Unsere Android-Applikation besteht aus drei Fragmenten zwischen denen man durch Wischen wechseln kann. Das erste Fragment ist ein Chat über den Spieler Textnachrichten an ihre Mitspieler im gleichen Spiel senden können.
->>>>>>> origin/master
+
 
 Im Hintergrund laufen zwei Threads für die Kommunikation. Der eine kümmert sich um den Empfang von Nachrichten und beinhaltet einen ZeroMQ-Subscriber-Socket. Dieser empfängt alle Nachrichten, die vom Publisher"=Socket auf dem Server direkt an die ID des Clients oder die ID des Spiels, in dem er sich befindet, adressiert sind. Der zweite Thread sendet Nachrichten an den Server. 
 Bei einem Spielbeitritt einer laufenden Session, wird über den Server eine Anfrage des aktuellen Status des Spiels an alle momentanen Mitspieler gesendet, welche den Zustand des Spiels alle an den anfragenden Client zurücksenden. Dieser beachtet nur die erste Nachricht und verwirft den Rest.
 Des weiteren läuft ein LocationClient, welcher immer die aktuelle Position als Nachricht an alle Spieler der selben Spielinstanz weiterschickt. 
+
+\input{4-Technische_Loesungen/4-5-GUI/4-5.tex}
 
 
 %Das zweite Fragment ist die Karte auf der wir unser Spiel darstellen.  

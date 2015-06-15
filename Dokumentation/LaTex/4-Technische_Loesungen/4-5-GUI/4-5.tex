@@ -1,10 +1,10 @@
-\subsection{GUI}\label{gui}
+\subsection*{GUI}\label{gui}
 
 %Die GUI (\textit{graphical user interface}) wurde mit Android und den GooglePlay Services (einschließlich Google Maps) umgesetzt. Die für den Benutzer sichtbaren Bildschirme werden in der Entwicklung mit Android in Activities\footnote{\url{https://developer.android.com/guide/components/activities.html}} organisiert. Diese enthalten Informationen über das Layout, sowie Funktionalitäten des Bildschirms.Die mitgelieferten Mög\-lich\-kei\-ten des Android SDK sind für die GUI-Umsetzung dieses Projektes vollkommen zufriedenstellend. 
 
 Die GUI setzt sich aus einem Login-Screen und einem Swipe-Screen zusammen, welcher entsprechend dem erstelltem oder beigetretenem Spiel geladen wird.
 
-\subsubsection*{Login-Screen}
+\paragraph{Login-Screen:}
 Diese Activity wird zuerst aufgerufen und zeigt einen Bildschirm auf dem der Spieler einen Benutzernamen eingibt und danach mit dem
 "`Start"' Button zur nächsten Activity wechselt, welche das eigentliche Spiel zeigt (siehe Abbildung \ref{fig:chat}).
 %Bild wird unter swipe-screen angezeigt
@@ -16,14 +16,14 @@ Diese Activity wird zuerst aufgerufen und zeigt einen Bildschirm auf dem der Spi
 \end{figure}
 
 
-\subsubsection*{Swipe-Screen}
+\paragraph{Swipe-Screen:}
 Schon in der sehr frühen Entwicklungsphase war festzustellen, das die verschiedenen Elemente der GUI, wie im Folgenden weiter erläutert, zu zahlreich sind, um sie auf einen Bildschirm umzusetzen. Die eigentliche Kartendarstellung wäre sonst zu klein gewesen. Also wurde entschieden die verschiedenen Elemente auf weitere Bildschirme zu verteilen. In den ersten Entwürfen geschah dies über einzelne Activities, also mehrere Voll\-bild-Fens\-ter. Um gewisse Android Kom\-fort-Funk\-tio\-nen und Gesten dem Nutzer zur Verfügung zu stellen, wurden die zunächst eigenständigen Activites zu Fragments \footnote{\url{https://developer.android.com/guide/components/fragments.html}} umgebaut. Fragments kann man als "`Sub-Activity"' verstehen. Diese verfügen jeweils über ein eigenes Layout und können eigene Funktionalitäten enthalten, müssen aber bei Verwendung immer einer Activity zugewiesen werden. Anschließend wurden sie in einem so genannten "`Swipe-Screen"' zusammengefasst. In diesem wurden die Fragments als Tabs organisiert. Der User kann nun entweder durch "`wischen"' (\textit{swipe}) oder durch klicken auf die Tabs durch die GUI Navigieren. 
 
 Ein weiterer Vorteil ist ebenfalls, dass benachbarte Tabs jeweils vorgeladen (Laden der Widgets) und noch im Speicher behalten werden. Es wird so sichergestellt, dass der Tab-Wechsel durch Wischen "`geschmeidig"' abläuft. Dadurch ergeben sich auch geringere Ladezeiten zwischen den einzelnen Bildschirmen. Zudem ist die  "`Wiederverwendbarkeit"' von Fragments als UI (\textit{user interface}) ebenfalls nützlich, wenn weitere ähnliche Spiele umgesetzt werden sollen. Der Swipe-Screen umfasst drei Tabs: Der Map-Screen zeigt den aktuellen Spielzustand, über den Chat-Screen können sich Spieler einer Spielinstanz austauschen und der Game-Screen erlaubt es, eine neue Spielinstanz zu erstellen oder einer bestehenden Spielinstanz beizutreten. 
 
 Für jeden Spiel-Modus ist ein separater SwipeScreen vorgesehen. Falls möglich werden Fragmente, an denen nichts geändert werden muss, geladen (z.B. Chat-Screen-Fragment oder Game-Screen-Fragment). Im Fall des Map-Screen-Fragment wird ein Komplett neues Fragment mit angepasstem Layout (z.B. weitere Buttons oder Anzeigen) geladen.  
 
-\subsubsection*{Chat-Screen}
+\paragraph{Chat-Screen:}
 %erklär IRC, das kommt aus dem Nichts
 In diesem Fragment wird die der Chat (\textit{um kurze Textnachrichten anderen Spielern zu senden bzw. von ihnen zu empfangen}) dargestellt (siehe Abbildung \ref{fig:chat}). Die grafische Umsetzung des Chats ist simpel gewählt um möglichst viele Nachrichten anzeigen zu können. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld, (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}) das wiederum in einem scrollbarem Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}) liegt. Hierdurch ist es möglich den Nachrichtenverlauf zu durchsuchen. Wird eine Chat-Nachricht  empfangen, wird diese an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Dabei muss eine geringe Über\-tra\-gungs\-ver\-zö\-ge\-rung in Kauf genommen werden, jedoch ist die korrekte Reihenfolge der Nachrichten ge\-währ\-leis\-tet.
 
@@ -35,11 +35,11 @@ In diesem Fragment wird die der Chat (\textit{um kurze Textnachrichten anderen S
          \label{fig:game}
 \end{figure}
 
-\subsubsection*{Map-Screen}
+\paragraph{Map-Screen:}
 In diesem Fragment wird die Karte der näheren Umgebung des Spielers dargestellt (siehe Abbildung \ref{fig:game}). Auf der Karte werden alle virtuellen Objekte und Mitspieler angezeigt, die in der aktuellen Spielinstanz vorhandenen sind und für den Spieler sichtbar sein sollen. Je nachdem welches Spiel gespielt wird sind eventuell zusätzliche In\-ter\-ak\-tions\-mög\-lich\-kei\-ten und Anzeigefelder vorhanden, wie beispielsweise die Anzeige des Punktestands der Teams.
 
 
-\subsubsection*{Game-Screen}
+\paragraph{Game-Screen:}
 In diesem Fragment werden momentan aktive Spielinstanzen angezeigt (siehe Abbildung \ref{fig:game}). Auch ist es möglich neue Spiele zu erstellen. Die Anzeige der Liste der Spiele erfolgt in einer scrollbaren Liste (ListView). Diese wird regelmäßig aktualisiert. Die Listen-Elemente sind interaktiv: Ein Klick auf das entsprechende Spiel startet den Beitritt. Um ein neues Spiel eines gewissen Typs zu erstellen wählt man in einen Drop\-down-Menü (bei Android Spinner) den entsprechenden Modus aus und klickt auf \glqq Create\grqq. Man selbst betritt dieses Spiel und der Eintrag in der Spiele-Liste wird vorgenommen. 
 
 %\subsection*{Haptisches Feedback}
