@@ -24,7 +24,7 @@ public class Player {
 	private boolean hasFlag;
 	private long lastMarkedAt;
 	private float speed;
-	//private Circle posMarker;
+	// private Circle posMarker;
 	private final Team team;
 	private long lastScannedAt;
 	private Marker posMarker;
@@ -33,44 +33,63 @@ public class Player {
 		this.lastScannedAt = lastScannedAt;
 	}
 
-	public Player(Team team, String name){
-		this.team=team;
+	public Player(Team team2, String name2) {
+		this.team = team2;
 		final SwipeScreen activity = team.getGame().getActivity();
-		this.name=name;
-		//id="0";
-		speed= 0;
+		this.name = name2;
+		// id="0";
+		speed = 0;
 		hasFlag = false;
 		lastMarkedAt = 0;
-		lastScannedAt=0;
-		team.getGame().getActivity().runOnUiThread(new Runnable(){
+		lastScannedAt = 0;
+		team.getGame().getActivity().runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				MapScreenFragment msf = (MapScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-				posMarker = msf.initMarker(240, new LatLng(50.4768685,7.7396053), "me");
+				MapScreenFragment msf = (MapScreenFragment) activity
+						.getSupportFragmentManager().findFragmentByTag(
+								"android:switcher:" + R.id.pager + ":1");
+				if (team.color == Color.BLUE) {
+					posMarker = msf.initMarker(240, new LatLng(50.4768685,
+							7.7396053), name);
 
-
+				}
+				else{
+					posMarker = msf.initMarker(0, new LatLng(50.4768685,
+							7.7396053), name);
+				}
 			}
 		});
-		//posMarker.setFillColor(team.color);
+		// posMarker.setFillColor(team.color);
 	}
-	
-	public Player(Team team, String name, LatLng pos, float speed, long lastMarkedAt, boolean playerInTeam){
-		this.team= team;
+
+	public Player(Team team2, String name2, LatLng pos, float speed,
+			long lastMarkedAt, boolean playerInTeam) {
+		this.team = team2;
 		final SwipeScreen activity = team.getGame().getActivity();
-		this.name = name;
+		this.name = name2;
 		this.speed = 0;
 		this.lastMarkedAt = lastMarkedAt;
-		team.getGame().getActivity().runOnUiThread(new Runnable(){
+		team.getGame().getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				MapScreenFragment msf = (MapScreenFragment) activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.pager + ":1");
-				posMarker = msf.initMarker(240, new LatLng(50.4768685,7.7396053), "me");
+				MapScreenFragment msf = (MapScreenFragment) activity
+						.getSupportFragmentManager().findFragmentByTag(
+								"android:switcher:" + R.id.pager + ":1");
+				if (team.color == Color.BLUE) {
+					posMarker = msf.initMarker(240, new LatLng(50.4768685,
+							7.7396053), name);
+
+				}
+				else{
+					posMarker = msf.initMarker(0, new LatLng(50.4768685,
+							7.7396053), name);
+				}
 			}
 		});
-		//posMarker.setFillColor(team.color);
-		updatePlayer(speed,pos,playerInTeam,false);
+		// posMarker.setFillColor(team.color);
+		updatePlayer(speed, pos, playerInTeam, false);
 	}
 
 	public String getName() {
@@ -117,92 +136,96 @@ public class Player {
 		return speed;
 	}
 
-	/*public Circle getPosMarker() {
-		return posMarker;
-	}
-
-	public void setPosMarker(Circle posMarker) {
-		this.posMarker = posMarker;
-	}*/
+	/*
+	 * public Circle getPosMarker() { return posMarker; }
+	 * 
+	 * public void setPosMarker(Circle posMarker) { this.posMarker = posMarker;
+	 * }
+	 */
 
 	public Team getTeam() {
 		return team;
 	}
 
-	public boolean isVisible(){
+	public boolean isVisible() {
 		long time = new Date().getTime();
-		return (((time - lastMarkedAt) < Const.markedInms) || speed > Const.maxspeed || (time - lastScannedAt) < Const.scannerDuration);
+		return (((time - lastMarkedAt) < Const.markedInms)
+				|| speed > Const.maxspeed || (time - lastScannedAt) < Const.scannerDuration);
 	}
 
-	public void setSpeed(float speed){
-		this.speed=speed;
+	public void setSpeed(float speed) {
+		this.speed = speed;
 	}
 
-	public void updatePlayer(float speed, LatLng pos, boolean userInTeam,boolean isUser) {
+	public void updatePlayer(float speed, LatLng pos, boolean userInTeam,
+			boolean isUser) {
 		position = pos;
-		this.speed= speed;
-		if(isUser && !team.enemyFlagPickedUp){
-			if(Functions.distance(pos, team.getEnemyFlag()) < Const.flagPickupRadius){
+		this.speed = speed;
+		if (isUser && !team.enemyFlagPickedUp) {
+			if (Functions.distance(pos, team.getEnemyFlag()) < Const.flagPickupRadius) {
 				JeroMQQueue jmqq = JeroMQQueue.getInstance();
-				if(team.color == Color.BLUE)
-					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos, "teamBlue", team.getGame().gameID);
+				if (team.color == Color.BLUE)
+					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos,
+							"teamBlue", team.getGame().gameID);
 				else
-					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos, "teamRed", team.getGame().gameID);
+					jmqq.sendMsg(TransferObject.TYPE_PICKUP_FLAG, pos,
+							"teamRed", team.getGame().gameID);
 			}
 		}
-		if (hasFlag){
+		if (hasFlag) {
 			team.changeEnemyFlagPosition(pos);
-			if (Functions.distance(pos, team.getBase()) < Const.gainPointRadius){
+			if (Functions.distance(pos, team.getBase()) < Const.gainPointRadius) {
 				JeroMQQueue jmqq = JeroMQQueue.getInstance();
-				if(team.color == Color.BLUE){
-					jmqq.sendToServer(TransferObject.TYPE_DELIVER_FLAG, team.getGame().getTeamRed().getBase(), "teamBlue", team.getGame().gameID);
+				if (team.color == Color.BLUE) {
+					jmqq.sendToServer(TransferObject.TYPE_DELIVER_FLAG, team
+							.getGame().getTeamRed().getBase(), "teamBlue",
+							team.getGame().gameID);
+				} else {
+					jmqq.sendToServer(TransferObject.TYPE_DELIVER_FLAG, team
+							.getGame().getTeamBlue().getBase(), "teamRed",
+							team.getGame().gameID);
 				}
-				else {
-					jmqq.sendToServer(TransferObject.TYPE_DELIVER_FLAG, team.getGame().getTeamBlue().getBase(), "teamRed", team.getGame().gameID);
-				}	
 			}
-			}
-		if (userInTeam){
-			//posMarker.setCenter(pos);
+		}
+		if (userInTeam) {
+			// posMarker.setCenter(pos);
 			final LatLng position1 = pos;
-			team.getGame().getActivity().runOnUiThread(new Runnable(){
+			team.getGame().getActivity().runOnUiThread(new Runnable() {
 
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					posMarker.setPosition(position1);
 					posMarker.setVisible(true);
-					
+
 				}
-				
+
 			});
-			
-		}
-		else if (isVisible()){
-			//posMarker.setCenter(pos);
+
+		} else if (isVisible()) {
+			// posMarker.setCenter(pos);
 			final LatLng position1 = pos;
-			team.getGame().getActivity().runOnUiThread(new Runnable(){
+			team.getGame().getActivity().runOnUiThread(new Runnable() {
 
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					posMarker.setPosition(position1);
 					posMarker.setVisible(true);
-					
+
 				}
-				
+
 			});
-		}
-		else {
-			team.getGame().getActivity().runOnUiThread(new Runnable(){
+		} else {
+			team.getGame().getActivity().runOnUiThread(new Runnable() {
 
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					posMarker.setVisible(false);
-					
+
 				}
-				
+
 			});
 		}
 

@@ -61,6 +61,7 @@ public class Team {
 	}
 	public void changeEnemyFlagPosition (LatLng flag){
 		this.enemyFlag = flag;
+		if (flagMarker != null)
 		game.getActivity().runOnUiThread(new Runnable(){
 			@Override
 			public void run(){
@@ -92,6 +93,17 @@ public class Team {
 			
 			
 			//flagMarker.setIcon(icon);
+		}
+		else {
+			game.getActivity().runOnUiThread(new Runnable(){
+
+				@Override
+				public void run() {
+					flagMarker.setPosition(enemyFlag);
+				}
+				
+			});
+			
 		}
 		
 		

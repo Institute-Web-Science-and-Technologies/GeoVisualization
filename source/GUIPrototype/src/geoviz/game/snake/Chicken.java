@@ -1,7 +1,9 @@
 package geoviz.game.snake;
 
 import com.example.fragments.MapScreenFragment;
+import com.example.guiprototype.R;
 import com.example.guiprototype.SwipeScreen;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
@@ -33,6 +35,7 @@ public class Chicken {
 			@Override
 			public void run() {
 				marker = MapScreenFragment.getMSF().initMarker(240, pos, "Chicken");
+				marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.chicken));
 				
 			}});
 		this.id=id;

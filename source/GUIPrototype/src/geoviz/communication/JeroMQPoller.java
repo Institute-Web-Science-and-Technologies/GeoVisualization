@@ -149,7 +149,7 @@ public class JeroMQPoller {
 
 			private void handleDeliverFlag(String msg) {
 				TransferToServerObject ttso = gson.fromJson(msg, TransferToServerObject.class);
-				TransferObject t =new TransferObject(TransferObject.TYPE_FLAGCARRIER_SHOT, ttso.team, null,
+				TransferObject t =new TransferObject(TransferObject.TYPE_DELIVER_FLAG, ttso.team, null,
 				null, null, new LatLng(ttso.latitude,ttso.longitude), null);
 				game.update(t);
 				

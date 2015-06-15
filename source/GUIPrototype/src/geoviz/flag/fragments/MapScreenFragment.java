@@ -50,6 +50,7 @@ public class MapScreenFragment extends Fragment {
 	public static FragmentManager fragmentManager;
 	MapView mapView;
 	public GoogleMap mMap;
+	
 	static final LatLng KOBLENZ = new LatLng(50.3511528, 7.5951959);
 	static final LatLng UNI = new LatLng(50.363417, 7.558432);
 	
@@ -111,6 +112,7 @@ public class MapScreenFragment extends Fragment {
 	
 	public void setUpMapIfNeeded() {
 		if (this.mMap == null) this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		//mMap.setMyLocationEnabled(true);
 		setUpMap();
 	}
 	public TransferObject testMSF (String userID, String userName, LatLng location){

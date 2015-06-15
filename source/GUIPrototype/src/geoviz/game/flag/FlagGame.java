@@ -200,7 +200,8 @@ public class FlagGame extends Game {
 				}
 
 			}
-			if (o.msg.contentEquals("teamBLue") && teamRed.userInTeam) {
+			Log.d("flagpickedup", "user: "+ o.senderName + "team :"+ o.msg+ "user is in teamRed? :" +teamRed.userInTeam + "user is in teamBlue?" + teamBlue.userInTeam);
+			if (o.msg.contentEquals("teamBlue") && teamRed.userInTeam) {
 				Vibrator v = (Vibrator) this.getActivity().getSystemService(
 						Context.VIBRATOR_SERVICE);
 				v.vibrate(Const.vibrateTimeInMs);
@@ -216,6 +217,8 @@ public class FlagGame extends Game {
 								.getSupportFragmentManager()
 								.findFragmentByTag(
 										"android:switcher:" + R.id.pager + ":1");
+						Log.d("mapscreenfragment",""+(msf!=null));
+						Log.d("position",""+(position!=null));
 						flagMarker = msf.initMarker(position);
 						flagMarker.setIcon(BitmapDescriptorFactory
 								.fromResource(R.drawable.red_flag));
@@ -250,6 +253,8 @@ public class FlagGame extends Game {
 								.getSupportFragmentManager()
 								.findFragmentByTag(
 										"android:switcher:" + R.id.pager + ":1");
+						Log.d("mapscreenfragment",""+(msf!=null));
+						Log.d("position",""+(position!=null));
 						flagMarker = msf.initMarker(position);
 						flagMarker.setIcon(BitmapDescriptorFactory
 								.fromResource(R.drawable.blue_flag));

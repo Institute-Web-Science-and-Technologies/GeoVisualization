@@ -25,6 +25,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
+import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -91,14 +92,13 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		currentGame = ((FlagGame) Game.getGame());
 		currentGame.setTeam(team);
 		/*
-		JeroMQQueue jmqq = JeroMQQueue.getInstance();
-		jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM, team,
-				intent.getStringExtra(MainActivity.EXTRA_GAMEID));
+		 * JeroMQQueue jmqq = JeroMQQueue.getInstance();
+		 * jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM, team,
+		 * intent.getStringExtra(MainActivity.EXTRA_GAMEID));
 		 */
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		magnetometer = sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-
 	}
 
 	public void toogleMark(View view) {
@@ -128,10 +128,12 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		this.mCurrentLocation = location;
 		LatLng latLng = new LatLng(location.getLatitude(),
 				location.getLongitude());
-		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(latLng);
 
-		if (location.getAccuracy() < MIN_GPS_QUALITY)
+		if (location.getAccuracy() < MIN_GPS_QUALITY) {
+			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(latLng);
+			MapScreenFragment.getMSF().mMap.animateCamera(cameraUpdate);
 			gps_quality_reached = true;
+		}
 
 		if (gps_quality_reached)
 			JeroMQQueue.getInstance()
@@ -139,7 +141,8 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 							TransferObject.TYPE_COORD,
 							new LatLng(location.getLatitude(), location
 									.getLongitude()), location.getSpeed(),
-							Game.getGame().gameID, currentGame.getTeamRed().userInTeam);
+							Game.getGame().gameID,
+							currentGame.getTeamRed().userInTeam);
 	}
 
 	public void markPlayer(View view) {
@@ -148,9 +151,13 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 			Log.d("marker", "marker used");
 			float orientationAngle = (float) Math
 					.toDegrees(orientationValues[0]);
-			if (orientationAngle < 0)
-				orientationAngle = 360f - orientationAngle;
-			Log.d("marker", "orientationangle = "+orientationAngle);
+			GeomagneticField geoField = new GeomagneticField(
+					(float) mCurrentLocation.getLatitude(),
+					(float) mCurrentLocation.getLongitude(),
+					(float) mCurrentLocation.getAltitude(),
+					System.currentTimeMillis());
+			orientationAngle += geoField.getDeclination();
+			Log.d("marker", "orientationangle = " + orientationAngle);
 			FlagGame flaggame = (FlagGame) Game.getGame();
 			if (flaggame.getTeamBlue().userInTeam) {
 				for (Player player : flaggame.getTeamRed().players) {
@@ -158,15 +165,26 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						pl.setLatitude(player.getPosition().latitude);
 						pl.setLongitude(player.getPosition().longitude);
-						Log.d("marker","redplayer at lat: "+ pl.getLatitude()+" long: "+pl.getLongitude());
-						Log.d("marker","redplayer distance: "+Functions.distance(this.getOwnLocation(), player.getPosition()));
-						Log.d("marker","redplayer bearingAngle: "+mCurrentLocation.bearingTo(pl));
+						Log.d("marker",
+								"player lat: " + mCurrentLocation.getLatitude()
+										+ " long: "
+										+ mCurrentLocation.getLongitude());
+						Log.d("marker", "redplayer at lat: " + pl.getLatitude()
+								+ " long: " + pl.getLongitude());
+						Log.d("marker",
+								"redplayer distance: "
+										+ Functions.distance(
+												this.getOwnLocation(),
+												player.getPosition()));
+						Log.d("marker", "redplayer bearingAngle: "
+								+ mCurrentLocation.bearingTo(pl));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.markerRange
-								&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
-										- (Const.markerAngleInDegree / 2) && mCurrentLocation
-										.bearingTo(pl) <= orientationAngle
-										+ (Const.markerAngleInDegree / 2))) {
+								&& withInAngle(orientationAngle,
+										mCurrentLocation.bearingTo(pl),
+										Const.markerAngleInDegree,
+										Functions.distance(this.getOwnLocation(),
+												player.getPosition()))) {
 							JeroMQQueue jmqq = JeroMQQueue.getInstance();
 							if (!player.hasFlag())
 								jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
@@ -180,20 +198,33 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					}
 				}
 			} else {
-				for (Player player : flaggame.getTeamRed().players) {
+				for (Player player : flaggame.getTeamBlue().players) {
 					Location pl = new Location("pl");
 					if (player.getPosition() != null) {
 						pl.setLatitude(player.getPosition().latitude);
 						pl.setLongitude(player.getPosition().longitude);
-						Log.d("marker","blueplayer at lat: "+ pl.getLatitude()+" long: "+pl.getLongitude());
-						Log.d("marker","blueplayer distance: "+Functions.distance(this.getOwnLocation(), player.getPosition()));
-						Log.d("marker","blueplayer bearingAngle: "+mCurrentLocation.bearingTo(pl));
+						Log.d("marker",
+								"player lat: " + mCurrentLocation.getLatitude()
+										+ " long: "
+										+ mCurrentLocation.getLongitude());
+						Log.d("marker",
+								"blueplayer at lat: " + pl.getLatitude()
+										+ " long: " + pl.getLongitude());
+						Log.d("marker",
+								"blueplayer distance: "
+										+ Functions.distance(
+												this.getOwnLocation(),
+												player.getPosition()));
+						Log.d("marker", "blueplayer bearingAngle: "
+								+ mCurrentLocation.bearingTo(pl));
+
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.markerRange
-								&& (mCurrentLocation.bearingTo(pl) >= orientationAngle
-										- (Const.markerAngleInDegree / 2) && mCurrentLocation
-										.bearingTo(pl) <= orientationAngle
-										+ (Const.markerAngleInDegree / 2))) {
+								&& withInAngle(orientationAngle,
+										mCurrentLocation.bearingTo(pl),
+										Const.markerAngleInDegree,
+										Functions.distance(this.getOwnLocation(),
+												player.getPosition()))) {
 							JeroMQQueue jmqq = JeroMQQueue.getInstance();
 							if (!player.hasFlag())
 								jmqq.sendMsg(TransferObject.TYPE_PLAYER_MARKED,
@@ -208,8 +239,8 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 				}
 
 			}
-			markIsReady = false;
-			startMarkCooldown();
+			// markIsReady = false;
+			// startMarkCooldown();
 		} else {
 			// Feedback that mark isn't Ready
 		}
@@ -218,7 +249,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 
 	public void scan(View view) {
 		if (scanIsReady == true) {
-			Log.d("scanner","scanner used");
+			Log.d("scanner", "scanner used");
 			FlagGame flaggame = (FlagGame) Game.getGame();
 
 			if (flaggame.getTeamBlue().userInTeam) {
@@ -226,10 +257,16 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						Location pl = new Location("pl");
 						pl.setLatitude(player.getPosition().latitude);
-						Log.d("scanner", "teamRedPlayer "+player.getName() +" lat: "+ pl.getLatitude());
+						Log.d("scanner", "teamRedPlayer " + player.getName()
+								+ " lat: " + pl.getLatitude());
 						pl.setLongitude(player.getPosition().longitude);
-						Log.d("scanner", "teamRedPlayer "+player.getName() +" long:" +pl.getLongitude());
-						Log.d("scanner", "teamRedPlayer distance; "+ Functions.distance(this.getOwnLocation(), player.getPosition()));
+						Log.d("scanner", "teamRedPlayer " + player.getName()
+								+ " long:" + pl.getLongitude());
+						Log.d("scanner",
+								"teamRedPlayer distance; "
+										+ Functions.distance(
+												this.getOwnLocation(),
+												player.getPosition()));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.scannerRange) {
 							player.setLastScannedAt(new Date().getTime());
@@ -241,10 +278,16 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 					if (player.getPosition() != null) {
 						Location pl = new Location("pl");
 						pl.setLatitude(player.getPosition().latitude);
-						Log.d("scanner", "teamBluePlayer "+player.getName() +" lat: "+ pl.getLatitude());
+						Log.d("scanner", "teamBluePlayer " + player.getName()
+								+ " lat: " + pl.getLatitude());
 						pl.setLongitude(player.getPosition().longitude);
-						Log.d("scanner", "teamBluePlayer "+player.getName() +" long:" +pl.getLongitude());
-						Log.d("scanner", "teamBluePlayer distance; "+ Functions.distance(this.getOwnLocation(), player.getPosition()));
+						Log.d("scanner", "teamBluePlayer " + player.getName()
+								+ " long:" + pl.getLongitude());
+						Log.d("scanner",
+								"teamBluePlayer distance; "
+										+ Functions.distance(
+												this.getOwnLocation(),
+												player.getPosition()));
 						if (Functions.distance(this.getOwnLocation(),
 								player.getPosition()) <= Const.scannerRange) {
 							player.setLastScannedAt(new Date().getTime());
@@ -320,7 +363,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		Game.init(new FlagGame(gameID, this, this.userName));
 		JeroMQQueue jmqq = JeroMQQueue.getInstance();
 		if (poller != null)
-		poller.addSubscription(gameID);
+			poller.addSubscription(gameID);
 		// jmqq.sendMsg(TransferObject.TYPE_JOIN_TEAM,this.team, gameID);
 		jmqq.sendMsg(TransferObject.TYPE_JOIN_GAME, gameID);
 		// if (gameID.startsWith("0"))
@@ -328,6 +371,24 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 		// else
 		// Game.init(new FlagGame(gameID,this));
 
+	}
+
+	private boolean withInAngle(float orientation, float bearing, int maxdegree, float distance) {
+		int degree = maxdegree;
+		if (distance < 25)
+			degree = 75;
+		if (distance < 10)
+			degree = 120;
+		if (orientation + degree / 2 > bearing
+				&& orientation - degree / 2 < bearing)
+			return true;
+		if (orientation + 360 + degree / 2 > bearing
+				&& orientation + 360 - degree / 2 < bearing)
+			return true;
+		if (orientation + degree / 2 > bearing + 360
+				&& orientation - degree / 2 < bearing + 360)
+			return true;
+		return false;
 	}
 
 	public void startMarkCooldown() {
