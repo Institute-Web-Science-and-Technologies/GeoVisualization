@@ -1,12 +1,16 @@
 
 
-\subsection{Serverseitige und clientseitige Logik}
+\subsection*{Serverseitige und clientseitige Logik}
 
 
 Um den Zustand der einzelnen mobilen Geräte zu synchronisieren und Chat-Nachrichten zu übertragen, ist ein Server nötig. Die Kommunikation ausschließlich zwischen mobilen Endgeräten kann sich sonst als schwierig erweisen, da sich deren IP-Adresse jederzeit ändern kann. Die Einrichtung eines Servers, der die Kommunikation regelt ist folglich sinnvoll. 
 
 Hierzu bieten sich zwei unterschiedliche Modelle an.
+<<<<<<< HEAD
+Eine Möglichkeit wäre eine serverlastige Server-Client-Architektur. Hierbei übernimmt der Server einen Großteil der Berechnungen und Logik. Bei den Clients kann man von Thin-Clients sprechen. In einer möglichen Implementation hält der Server einen zentralen, im gültigen, Status.
+=======
 Eine Möglichkeit wäre eine serverlastige Server-Client-Architektur. Hierbei übernehmen die Clients einen möglichst geringen Teil der Berechnungen und Logik, man spricht hier von Thin-Clients, den Großteil übernimmt der Server. In einer theoretischen Implementation hält der Server einen zentralen, gültigen Status.
+>>>>>>> origin/master
 Die Thin-Clients übertragen die Nutzereingaben und Sensordaten an den Server, der daraus einen neuen Zustand ermittelt und diesen den Clients mitteilt.
 
 Alternativ kann man Berechnungen und Logik vorrangig clientlastig implementieren, im Folgenden Fat-Clients. 
@@ -14,13 +18,31 @@ Alternativ kann man Berechnungen und Logik vorrangig clientlastig implementieren
 Aktuelle Smartphones könnten die entwickelte Anwendung jedoch mühelos ausführen.
 Eine clientlastige  Implementation hätte außerdem den Vorteil, dass bei vielen Nutzern die Rechenleistung hauptsächlich auf die Clients verteilt werden und dementsprechend der Server weniger leistungsstark sein muss. 
 %Diese haben sich als genügend leistungsfähig erwiesen.
+<<<<<<< HEAD
+Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik auf jedem Client vorliegt. Ein Nachteil von clientlastigen Lösungen ist, dass sie schwieriger zu warten, skalieren und erweitern sind. Da die Implementation definitiv eine Internetverbindung benötigt, wäre es möglich den Server mit einer Updatefunktionalität zu versehen. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
+=======
 Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktualisieren, da die Programmlogik auf jedem Client vorliegt. Eine clientlastige Implementation verringert theoretisch Wartbarkeit und Erweiterbarkeit. Da die Implementation definitiv eine Internetverbindung benötigt, könnte theoretisch der Server mit einer Update-Funktionalität versehen werden. Auch könnte dieses Problem, bei entsprechender Produktreife, über die Aktualisierungsmöglichkeit von App-Stores gelöst werden. In Mehrspieleranwendungen kommt zusätzlich hinzu, dass es keinen definitiven, zentralen Zustand gibt und auf verschiedenen Clients zum gleichen Zeitpunkt unterschiedliche Zustände vorliegen können. Da diese Zustände für Berechnungen genutzt werden, kann dies zu Unklarheiten und Fehlern führen, die abgefangen werden müssen.
+>>>>>>> origin/master
 %Wir haben abgeschätzt, dass wir mit Fat-Clients Internet-Bandbreite sparen können, da kleinere Daten übertragen werden müssen. 
 
 \begin{center}
 \begin{tabular}{l|l}
 	Thin-Client & Fat-Client \\
 	\hline
+<<<<<<< HEAD
+	 \,--\, Zustand doppelt modelliert & + Server-Zustand nicht nötig \\
+	 + zentraler, definitiver Zustand &  \,--\, verteilter Zustand \\
+	 + Wartbarkeit & \,--\, Wartbarkeit \\
+	 + Erweiterbarkeit & \,--\, Erweiterbarkeit \\
+	 \,--\, Spielgeschwindigkeit & + Spielgeschwindigkeit \\
+\end{tabular}
+\end{center}
+
+\subsection*{Publish-Subscribe-Pattern}
+Das Publish-Subscribe-Pattern ist ein Entwurfsmuster für Server-Client -Kommunikation. Es gleicht dem Beobachter-Muster (\textit{observer pattern}).
+Die Kommunikation zwischen Server und Client wird dabei als Push"=Kommunikation umgesetzt:
+Die Clients nehmen die Rolle des Subscribers ein. Jeder Client meldet sich beim Server, der in der Rolle des Publishers fungiert, für bestimmte Typen von Nachrichten an. Tritt ein bestimmtes Ereignis auf, beispielsweise eine Änderung des Server-Zustands, informiert der Server aktiv alle Clients, die diese Art Ereignis abonniert haben, und schickt jedem eine Nachricht \cite{xmpp, eugster}.
+=======
 	 - Zustand doppelt modelliert & + Server-Zustand nicht nötig \\
 	 + zentraler, definitiver Zustand &  - verteilter Zustand \\
 	 - hohe Serverlast & + niedrige Serverlast \\
@@ -30,6 +52,7 @@ Bei fast jeder Änderung muss jeder Client seinen Zustand selbst\-stän\-dig aktua
 \end{tabular}
 \end{center}
 
+>>>>>>> origin/master
 
 
 \subsection{Push- versus Pull Kommunikation}

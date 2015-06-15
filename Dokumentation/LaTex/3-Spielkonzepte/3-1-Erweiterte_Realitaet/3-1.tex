@@ -4,7 +4,7 @@ Um die oben genannten Spiele um einen virtuellen Teil erweitern zu können werden
 Features, die explizit die Realität erweitern und dadurch einen Mehrwert zum Spiel beitragen.
 
 
-\subsubsection{Integration virtueller Objekte in die physische Umgebung}\label{sec:integration-virtueller-objekte-in-die-physische-umgebung}
+\subsection*{Integration virtueller Objekte in die physische Umgebung}\label{sec:integration-virtueller-objekte-in-die-physische-umgebung}
 Um ein virtuelles Spiel in die physische Umgebung integrieren zu können, müssen auch alle Objekte des virtuellen Spieles in die physische Umgebung gebracht werden. Dies kann z.B. auf einer virtuellen Karte, die die Wirklichkeit widerspiegelt, geschehen.
 
 Beispiele für solche Objekte sind z.B. die Items bei unserem Spiel Snake, die es einzusammeln gilt und die auf einer Karte auf dem Smartphone dargestellt und in unserem Fall zufällig innerhalb eines erreichbaren Radius um unsere Spieler platziert werden. Ein anderes Beispiel sind feste Spieler-Basen, die bei Spielen wie unserer Capture-the-Flag-Abwandlung zum Einsatz kommen. Virtuelle Objekte können auch Startpunkte für Teams sein. 
@@ -15,7 +15,7 @@ Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden. Die Kar
 
 %Die Positionsabfrage wird unter anderem dafür benötigt um sicherzustellen, dass das Objekt in der Nähe des Spielers erstellt wird. (s. \ref{positionsermittlung}).
 
-\subsubsection{Darstellung der physischen und virtuellen Umgebung}\label{sec:darstellung-der-physischen-und-virtuellen-umgebung}
+\subsection*{Darstellung der physischen und virtuellen Umgebung}\label{sec:darstellung-der-physischen-und-virtuellen-umgebung}
 
 Die physische Welt in eine virtuelle Umgebung zu übertragen kann einen enormen Mehrwert des Spiels darstellen.
 Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw. außerhalb des Spielfelds befindet. Des weiteren kann mit den heutigen Smartphones auch wie in  Abbildung \ref{fig:aug01} gezeigt eine Augmented Reality geschaffen werden, die die Darstellung der realen Welt um etwa die Beschriftung der zu sehenden Geschäfte erweitert.
@@ -30,13 +30,13 @@ Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich inne
 \end{figure}
  Hierfür werden Kartendarstellung (s. \ref{kartendarstellung}) und Positionsermittlung (s. \ref{positionsermittlung}) benötigt.
 
-\subsubsection{Kollision virtueller Objekte}\label{sec:kollision-virtueller-objekte}
+\subsection*{Kollision virtueller Objekte}\label{sec:kollision-virtueller-objekte}
 Treffen zwei virtuelle Objekte aufeinander kann ein Event ausgelöst werden. Wird bei Snake z.B. der eigene Schwanz berührt, was laut der Regeln nicht erlaubt ist, muss dies dem Spieler mitgeteilt werden und evtl. weitere Ereignisse ausgeführt werden.
 
 Dazu werden die Kollisionsabfrage (s. \ref{kollisionsabfrage}) und die  Positionsermittlung (s. \ref{positionsermittlung}) gebraucht.
 
 
-\subsubsection{Einsammeln von Objekten}\label{sec:einsammeln-von-objekten}
+\subsection*{Einsammeln von Objekten}\label{sec:einsammeln-von-objekten}
 Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal gegeben werden.
 
  Erreicht werden kann dies durch die Positionsermittlung (s. \ref{positionsermittlung}) und die Kollisionsabfrage (s. \ref{kollisionsabfrage}). 

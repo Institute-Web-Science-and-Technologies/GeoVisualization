@@ -1,4 +1,4 @@
-\subsection{Evaluation der Genauigkeit der Positionsermittlung mit unterschiedlichen Diensten}
+\subsection*{Evaluation der Genauigkeit der Positionsermittlung mit unterschiedlichen Diensten}
 
   \begin{figure}[h]
     \begin{center}
@@ -27,7 +27,7 @@ Die Auswertung der Daten ergab, dass die Genauigkeit des LocationManagers in sec
 
 Mit mobilen Endgeräten erzeugte Positionsdaten haben meist eine Genauigkeit von 2 bis 15 Metern. Dabei sind die Ergebnisse in offenem Gelände besser, als in engen Gassen \cite{gpsacc}. Befindet sich das Gerät innerhalb eines Gebäudes sind die Ergebnisse unbrauchbar. Beides wurde durch die im Zuge der Evaluation durchgeführten Experimente bestätigt. Zusätzlich hat auch die Witterung Einfluss auf die Genauigkeit der GPS-Positionen. Da beim Testen der entwickelten Anwendungen Ungenauigkeiten von fünf oder mehr Metern als extrem störend empfunden wurden, können solche Spiele nur auf einem genügend großen, offenen Gelände gespielt werden. Die Updategeschwindigkeit von etwa einem Update pro Sekunde hat sich als ausreichend erwiesen, falls sich alle Mitspieler mit Schrittgeschwindigkeit bewegt haben. Gleichzeitig konnten die Spieler sich nicht schnell bewegen, da sie in regelmäßigen Abständen auf ihr Handy schauen mussten.
 
-\subsection{Entscheidung}
+\subsection*{Entscheidung}
 Genauigkeit ist in diesem Projekt ein wichtiger Faktor, vor allem im Bezug auf Kollisionen mit anderen Spielern und virtuellen Objekten. Da in diesem Projekt Mehrspieler-Spiele realisiert wurden, ist auch die Updategeschwindigkeit berücksichtigt worden. 
 %Die Versuche haben gezeigt, dass bezüglich der Genauigkeit zwischen den beiden Dienste kein statistisch signifikanter Unterschied festgestellt werden kann. 
 Da die im Zuge dieses Projekts entwickelten Anwendungen zur Umgebungsdarstellung auf GoogleMaps zu\-rück\-grei\-fen (siehe Abschnitt \ref{kartendarstellung}), das sowohl Google-Play-Services, als auch eine konstante Internetverbindung benötigt, kann der LocationClient ohne Bedenken wegen dieser Abhängigkeiten und fehlender Abwärts\-kom\-pa\-ti\-bi\-li\-tät eingesetzt werden.

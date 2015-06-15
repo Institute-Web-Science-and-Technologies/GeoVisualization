@@ -3,41 +3,39 @@
 \contentsline {chapter}{\numberline {2}Spielideen}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}Umsetzung virtueller Spiele in der physischen Welt}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}Integration einer virtuellen Welt in Bewegungsspiele}{7}{section.2.2}
-\contentsline {subsubsection}{Verstecken}{7}{section*.6}
-\contentsline {subsubsection}{Fangen}{7}{section*.7}
-\contentsline {subsubsection}{Topfschlagen}{7}{section*.8}
 \contentsline {section}{\numberline {2.3}Related Work}{8}{section.2.3}
-\contentsline {subsubsection}{Ingress}{8}{section*.9}
-\contentsline {subsubsection}{Pacman auf Google-maps}{8}{section*.11}
-\contentsline {subsubsection}{Twinkomplex}{10}{section*.13}
-\contentsline {subsubsection}{Geocaching}{10}{section*.15}
 \contentsline {chapter}{\numberline {3}Spielfeatures}{11}{chapter.3}
 \contentsline {section}{\numberline {3.1}Erweiterte Realit\"at}{11}{section.3.1}
-\contentsline {subsubsection}{Integration virtueller Objekte in die physische Umgebung}{11}{section*.16}
-\contentsline {subsubsection}{Darstellung der physischen und virtuellen Umgebung}{12}{section*.17}
-\contentsline {subsubsection}{Kollision virtueller Objekte}{12}{section*.19}
-\contentsline {subsubsection}{Einsammeln von Objekten}{13}{section*.20}
 \contentsline {section}{\numberline {3.2}Benutzer Interface}{13}{section.3.2}
-\contentsline {subsubsection}{Richtungsangabe}{13}{section*.21}
-\contentsline {subsubsection}{Akustische und haptische Orientierungshilfen}{13}{section*.23}
-\contentsline {subsubsection}{Geschwindigkeitsmessung}{14}{section*.24}
-\contentsline {subsubsection}{Mensch-Maschine-Kommunikation}{14}{section*.25}
 \contentsline {section}{\numberline {3.3}Mehrspieler-Features}{14}{section.3.3}
-\contentsline {subsubsection}{Synchronisation zwischen mobilen Endger\"aten}{14}{section*.26}
-\contentsline {subsubsection}{Chat}{14}{section*.27}
 \contentsline {chapter}{\numberline {4}Technische L\"osungen}{16}{chapter.4}
 \contentsline {section}{\numberline {4.1}Positionsermittlung}{16}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Dienste zur Positionsermittlung}{16}{subsection.4.1.1}
-\contentsline {subsubsection}{LocationManager}{16}{section*.28}
-\contentsline {subsubsection}{LocationClient}{17}{section*.29}
-\contentsline {subsection}{\numberline {4.1.2}Evaluation der Genauigkeit der Positionsermittlung mit unterschiedlichen Diensten}{17}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Entscheidung}{19}{subsection.4.1.3}
 \contentsline {section}{\numberline {4.2}Kollisionsabfrage}{19}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Kollisionsabfrage \"uber Abstandsmessung}{19}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Kollisionsabfrage \"uber Linienintersektion }{20}{subsection.4.2.2}
-\contentsline {subsubsection}{Entscheidung}{20}{section*.32}
 \contentsline {section}{\numberline {4.3}Kartendarstellung mit Android}{21}{section.4.3}
 \contentsline {section}{\numberline {4.4}Server-Client-Kommunikation}{22}{section.4.4}
+<<<<<<< HEAD
+\contentsline {section}{\numberline {4.5}GUI}{25}{section.4.5}
+\contentsline {section}{\numberline {4.6}Sensorik}{29}{section.4.6}
+\contentsline {chapter}{\numberline {5}Implementation von Beispielapps}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Allgemeines Framework}{31}{section.5.1}
+\contentsline {section}{\numberline {5.2}Snake}{32}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Spielidee}{32}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Spiellogik}{33}{subsection.5.2.2}
+\contentsline {paragraph}{Darstellung der Schlange:}{33}{section*.55}
+\contentsline {paragraph}{Objekte aufsammeln:}{33}{section*.56}
+\contentsline {paragraph}{Kollision:}{34}{section*.57}
+\contentsline {subsection}{\numberline {5.2.3}Umgesetzte Features}{34}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Flaggenspiel}{34}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Spielidee}{34}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Spiellogik}{35}{subsection.5.3.2}
+\contentsline {paragraph}{Markieren:}{37}{section*.61}
+\contentsline {paragraph}{Scannen:}{37}{section*.62}
+\contentsline {paragraph}{Geschwindigkeits\"uberpr\"ufung:}{37}{section*.63}
+\contentsline {paragraph}{Basen- und Flaggenplatzierung:}{37}{section*.64}
+\contentsline {chapter}{\numberline {6}Fazit}{39}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ausblick}{40}{chapter.7}
+\contentsline {chapter}{\numberline {A}Messergebnisse}{41}{appendix.A}
+=======
 \contentsline {subsection}{\numberline {4.4.1}Serverseitige und clientseitige Logik}{22}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Push- versus Pull Kommunikation}{23}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}Kommunikations-Technologien}{23}{subsection.4.4.3}
@@ -64,3 +62,4 @@
 \contentsline {chapter}{\numberline {6}Fazit}{38}{chapter.6}
 \contentsline {chapter}{\numberline {7}Ausblick}{39}{chapter.7}
 \contentsline {chapter}{\numberline {A}Messergebnisse}{40}{appendix.A}
+>>>>>>> origin/master
