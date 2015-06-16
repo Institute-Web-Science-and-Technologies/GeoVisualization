@@ -3,16 +3,17 @@
 Unter einem virtuellen Spiel verstehen wir jene, die sich ausschließlich  auf einem Computer spielen lassen.
 Es folgen eine Reihe virtueller Spiele, die sich für die Integration in die physische Welt eignen.
 \subsection*{Snake}
-Ein absoluter Klassiker, der früher auf keinem Handy fehlen durfte. 
+Ein absoluter Klassiker, der früher auf keinem Handy fehlen durfte (siehe Abbildung \ref{fig:snake}). 
 %Gerade wegen der Popularität und Einfachheit recht interessant es in die physische Welt zu integrieren. 
 In einem begrenzten Areal gilt es eine Schlange geschickt zu steuern. Es müssen Items eingesammelt werden, wodurch die Schlange wächst. Außerdem muss darauf geachtet werden, dass weder der Rand des Areals noch die eigene Schlange berührt wird.
 
 
-\begin{figure}[htbp]
+\begin{figure} %[htbp]
   \centering
     \includegraphics[width=0.5\textwidth]{2-Spielideen/2-1-Umsetzung_virtueller_Spiele_in_der_physischen_Welt/snake.png}
      \caption{Snake auf dem Nokia 3310 
 		(Quelle: \url{http://nixtv.de/wp-content/uploads/2014/09/snake.jpg}) }
+		\label{fig:snake}
 \end{figure}
 
 Snake ist vielen nur als Einzelspieler-Spiel bekannt. Da in diesem Projekt Bewegungsspiele mit in erster Linie mit GPS-Sensor umgesetzt werden, haben wir Snake als Outdoor-Bewegungsspiel umgesetzt.
@@ -21,7 +22,7 @@ Es unüblich ist diese alleine zu spielen, deshalb haben  wir entschieden Snake i
 \subsection*{Capture the Flag}
 Das Spiel ist nicht nur als virtuelles Spiel geeignet, wurde als solches aber erst richtig bekannt. Der relativ einfacher Spielmechanismus erleichtert den  Einsatz in der physischen Welt. Zwei Teams treten gegeneinander an. Jedes Team besitzt eine Basis mit einer Flagge, dessen Standort für das gegnerische Team bekannt ist. Es wird versucht die Flagge des jeweils anderen Teams zur eigenen Basis zu bringen. Gelingt dies während die eigene Flagge nicht vom gegnerischen Team "`entführt"' wurde, erhält das eigene Team Punkte. Wird eine gewisse Punktzahl erreicht, gilt das Spiel als gewonnen.
 
-Problematisch im Falle einer Umsetzung ist, dass man in der Regel gegnerische Spieler "`ausschalten"' kann und diese dann in die eigene Basis zurückgesetzt werden. Dies muss im Fall einer Umsetzung anders realisiert werden, wie z.B in unserer Implementation (s. \ref{flaggame})
+Problematisch im Falle einer Umsetzung ist, dass man in der Regel gegnerische Spieler "`ausschalten"' kann und diese dann in die eigene Basis zurückgesetzt werden. Dies muss im Fall einer Umsetzung anders realisiert werden, wie z.B in unserer Implementation (siehe Abschnitt \ref{flaggame}).
 
 Hilfreich bei der Integration in die physische Welt wären zum einen eine Richtungsangabe der Basis des gegnerischen Teams oder gar eine Karte, auf der die Basis angezeigt wird (eventuell auch die Position der eigenen Flagge, Position der Mitspieler, etc.), zum anderen der aktuelle Punktestand der Teams (eventuell mit Highscore).
 
