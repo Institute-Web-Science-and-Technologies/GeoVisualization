@@ -149,16 +149,22 @@ public class FlagGame extends Game {
 										.get(i), teamBlue.userInTeam));
 					}
 				}
-				if (tfg2.teamBlueBase != null)
+				if (tfg2.teamBlueBase != null){
 					teamBlue.setBase(tfg2.teamBlueBase);
-				if (tfg2.teamRedBase != null)
+					Log.d("setBlueBase", "blueBase: " + teamBlue.getBase() + " redBase: " +teamRed.getBase());
+				}
+					
+				if (tfg2.teamRedBase != null){
 					teamRed.setBase(tfg2.teamRedBase);
-				// flags in tfg2 are marked by from which team class they came
+					Log.d("setBaseCodeReached", "blueBase: " + teamBlue.getBase() + " redBase: " +teamRed.getBase());
+				}
+					// flags in tfg2 are marked by from which team class they came
 				// from atm
 				if (tfg2.teamBlueFlag != null)
 					teamBlue.setNewEnemyFlag(tfg2.teamBlueFlag);
 				if (tfg2.teamRedFlag != null)
 					teamRed.setNewEnemyFlag(tfg2.teamRedFlag);
+				
 				teamBlue.setPoints(tfg2.teamBluePoints);
 				teamRed.setPoints(tfg2.teamRedPoints);
 
