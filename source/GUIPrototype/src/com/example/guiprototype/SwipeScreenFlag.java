@@ -193,7 +193,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 								jmqq.sendToServer(
 										TransferObject.TYPE_FLAGCARRIER_SHOT,
 										flaggame.getTeamRed().getBase(),
-										"teamBlue", flaggame.gameID);
+										"teamRed", flaggame.gameID);
 						}
 					}
 				}
@@ -233,7 +233,7 @@ public class SwipeScreenFlag extends SwipeScreen implements SensorEventListener 
 								jmqq.sendToServer(
 										TransferObject.TYPE_FLAGCARRIER_SHOT,
 										flaggame.getTeamBlue().getBase(),
-										"teamRed", flaggame.gameID);
+										"teamBlue", flaggame.gameID);
 						}
 					}
 				}

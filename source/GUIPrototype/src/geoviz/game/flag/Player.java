@@ -187,7 +187,7 @@ public class Player {
 				}
 			}
 		}
-		if (userInTeam) {
+		if (userInTeam && !name.contentEquals(team.getGame().userName)) {
 			// posMarker.setCenter(pos);
 			final LatLng position1 = pos;
 			team.getGame().getActivity().runOnUiThread(new Runnable() {
@@ -202,7 +202,7 @@ public class Player {
 
 			});
 
-		} else if (isVisible()) {
+		} else if (isVisible() && !name.contentEquals(team.getGame().userName)) {
 			// posMarker.setCenter(pos);
 			final LatLng position1 = pos;
 			team.getGame().getActivity().runOnUiThread(new Runnable() {

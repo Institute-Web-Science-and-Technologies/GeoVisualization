@@ -4,11 +4,16 @@ import geoviz.communication.JeroMQQueue;
 import geoviz.communication.TransferObject;
 import geoviz.game.Functions;
 import geoviz.game.Game;
+import geoviz.game.snake.Const;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import android.content.Context;
+import android.os.Vibrator;
+import android.widget.Toast;
 
 import com.example.fragments.MapScreenFragment;
 import com.example.guiprototype.SwipeScreen;
@@ -77,6 +82,7 @@ public class Player {
 	public void snakeDied(Date timeOfDeath){
 		max_length=Const.SNAKE_START_LENGTH;
 		invincibilityStart=timeOfDeath.getTime();
+		
 	}
 
 	/**
@@ -108,6 +114,7 @@ public class Player {
 	 * @return true iff collision happened
 	 */
 	boolean collides(Chicken chicken) {
+		
 		return Functions.distance(chicken.pos, head()) < chicken.radius;
 	}
 	
@@ -165,6 +172,9 @@ public class Player {
 			if (collides(p)) {
 				final JeroMQQueue jmqq = JeroMQQueue.getInstance();
 				jmqq.sendMsg(TransferObject.TYPE_SNAKE_DIED, Game.getGame().gameID);
+				
+				Toast.makeText(SwipeScreen.getInstance(), "Connected", Toast.LENGTH_SHORT).show();
+				
 				//MapScreenFragment.getMSF().initMarker(120, head(), "Collision "+name);
 				}
 			}
@@ -177,6 +187,11 @@ public class Player {
 				if (max_length < Const.SNAKE_MAX_LENGTH){
 					jmqq.sendMsg(TransferObject.TYPE_KILL_CHICKEN,  chicken.id, Game.getGame().gameID);
 					jmqq.sendMsg(TransferObject.TYPE_MSG, "gained point", Game.getGame().gameID);
+					
+					Vibrator v = (Vibrator) SwipeScreen.getInstance().getSystemService(
+							Context.VIBRATOR_SERVICE);
+					v.vibrate(Const.vibrateTimeInMs);
+					
 				}
 				else {
 					jmqq.sendMsg(TransferObject.TYPE_SNAKE_WINS, Game.getGame().gameID);

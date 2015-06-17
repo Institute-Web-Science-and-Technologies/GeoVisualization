@@ -222,20 +222,21 @@ public class FlagGame extends Game {
 						flagMarker = msf.initMarker(position);
 						flagMarker.setIcon(BitmapDescriptorFactory
 								.fromResource(R.drawable.red_flag));
+						new CountDownTimer(Const.flagVisibilityTimerInMs, 1000) {
+
+							public void onTick(long millisUntilFinished) {
+
+							}
+
+							public void onFinish() {
+								flagMarker.remove();
+							}
+						}.start();
 					}
 
 				});
 
-				new CountDownTimer(Const.flagVisibilityTimerInMs, 1000) {
-
-					public void onTick(long millisUntilFinished) {
-
-					}
-
-					public void onFinish() {
-						flagMarker.remove();
-					}
-				}.start();
+				
 			}
 			if (o.msg.contentEquals("teamRed") && teamBlue.userInTeam) {
 				Vibrator v = (Vibrator) this.getActivity().getSystemService(

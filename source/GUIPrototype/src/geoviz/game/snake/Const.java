@@ -9,4 +9,5 @@ public class Const {
 	static final float SNAKE_MAX_LENGTH = 38;
 	static final int CHICKEN_MAX_NUMBER = 10;
 	static final int CHICKEN_SPAWN_CHANCE = 10; //real chicken spawn chance = 1/CHICKEN_SPAWN_CHANCE 
+	public static final long vibrateTimeInMs = 1000;
 }

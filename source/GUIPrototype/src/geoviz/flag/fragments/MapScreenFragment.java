@@ -112,7 +112,7 @@ public class MapScreenFragment extends Fragment {
 	
 	public void setUpMapIfNeeded() {
 		if (this.mMap == null) this.mMap = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-		//mMap.setMyLocationEnabled(true);
+		mMap.setMyLocationEnabled(true);
 		setUpMap();
 	}
 	public TransferObject testMSF (String userID, String userName, LatLng location){
