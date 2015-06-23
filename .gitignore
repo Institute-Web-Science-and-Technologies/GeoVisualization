@@ -215,3 +215,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+source/GUIPrototype/gen/com/google/android/gms/R.java
