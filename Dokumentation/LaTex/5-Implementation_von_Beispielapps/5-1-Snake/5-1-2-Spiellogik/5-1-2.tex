@@ -7,8 +7,8 @@
 		\caption{Map-Screen von Snake}
 	\end{center}
 \end{wrapfigure}
-Das erste Spiel, das wir umsetzen, ist das schon mehrfach erwähnte Snake. Die Grundregeln von Snake sind nahezu jedem bekannt, da es auf nahezu allen Nokia-Handys der 90er Jahre mitgeliefert wurde.
-In der implementierten Beispielapplikation verkörpert jeder Spieler  eine Schlange. Der Kopf der virtuellen Schlange befindet sich auf der Spielerposition. Sobald der Spieler sich anfängt zu bewegen, zieht er einen Schwanz hinter sich her, der aus mehreren Gliedern besteht. Die Länge des Schwanzes skaliert dem Punktestand des Spielers. Der Spieler muss versuchen, mit dem Kopf zufällig platzierte Bonusobjekte (Hühner/ Chickens) einzusammeln und muss gleichzeitig vermeiden mit seinem eigenen Schwanz oder einer anderen Schlange zu kollidieren. Wenn dies geschieht wird der eigene Punktestand und die Länge der Schlange zurückgesetzt. Ziel des Spiels ist es schneller als die gegnerischen Schlangen eine einstellbare Anzahl von Punkten zu erreichen.
+Das erste Spiel, das wir umsetzen, ist das schon mehrfach erwähnte Snake. Die Grundregeln von Snake sind der Mehrheit bekannt, da es auf nahezu allen Nokia-Handys der 90er Jahre mitgeliefert wurde.
+In der implementierten Beispielapplikation verkörpert jeder Spieler  eine Schlange. Der Kopf der virtuellen Schlange befindet sich auf der Spielerposition. Sobald der Spieler sich anfängt zu bewegen, zieht er einen Schwanz hinter sich her, der aus mehreren Gliedern besteht. Die Länge des Schwanzes skaliert den Punktestand des Spielers. Der Spieler muss versuchen mit dem Kopf zufällig platzierte Bonusobjekte (Hühner/ Chickens) einzusammeln und es gleichzeitig vermeiden mit seinem eigenen Schwanz oder einer anderen Schlange zu kollidieren. Wenn dies dennoch geschieht wird der eigene Punktestand und die Länge der Schlange zurückgesetzt. Ziel des Spiels ist es schneller als die gegnerischen Schlangen eine einstellbare Anzahl von Punkten zu erreichen.
 
 
 %Des weiteren lässt sich das Spiel relativ leicht aus der virtuellen Landschaft in die physische Welt übertragen, da die Steuerung nur auf der Bewegung des Kopfes der Schlange basiert. Dies kann in der Realität durch die Bewegung des Spielers selbst gesteuert werden. Wir haben uns für eine Mehrspieler Variante entschieden bei der in einem Spiel mehrere Zielpunkte (Chickens) gleichzeitig angezeigt werden, die beim (virtuellen) Einsammeln den Punktestand des Spielers erhöhen und die Schlange vergrößern. Ziel des Spiels ist es schneller als die gegnerischen Schlangen eine einstellbare Anzahl von Punkten zu erreichen. Wenn man mit sich selbst oder einer anderen Schlange kollidiert wird der eigene Punktestand und die Länge der Schlange zurückgesetzt.
@@ -19,7 +19,7 @@ In der implementierten Beispielapplikation verkörpert jeder Spieler  eine Schlan
 %\subsubsection*{Server}
 %Der implementierte Server arbeitet mit Java und ZeroMQ. Er öffnet zwei Kommunikationskanäle mit dem Client. Der erste ist ein ZeroMQ-Request-Reply-Socket-Paar, über das die Endgeräte Nachrichten an den Server senden. Der zweite ist ein Publish-Subscribe-Socket-Paar, über das die Nachrichten an Gruppen von Endgeräten weitergeleitet werden. Eine Nachricht besteht aus drei Teilen: einer Adresse, dem Nachrichtentyp und einem serialisierten Objekt vom Typ TransferObject (siehe Abbildung \ref{fig:transfer}). Die Adresse ist entweder die ID eines Spielers oder die ID einer Spielinstanz. Wir nutzen ZeroMQs Multipart-Message-Feature um diese Teile voneinander getrennt bei der Kommunikation zu übermitteln. Der Server sendet eingehende Nachrichten an bestimmte Clients weiter. Das kann entweder ein einzelner Client, oder alle Clients die sich in einer Spielsession befinden, sein. Der Server kennt dabei den Zustand der einzelnen Spiele nicht. , Um mehrere Spielinstanzen gleichzeitig verwalten zu können, hält er aber eine Liste aller laufenden Spiele samt Informationen darüber, welcher Spieler an welchem Spiel teilnimmt. Wenn eine Nachricht vom Typ \glqq create\_game\grqq empfangen wird trägt der Server die ID des Spiels in eine Liste ein. Diese Liste wird einem Client gesendet wenn er sie über eine entsprechende Nachricht anfragt.
 %
-Der Server dient hier nur zur Weiterleitung der Nachrichten
+Der Server dient bei dieser Implementation nur zur Weiterleitung der Nachrichten.
 
 %\begin{figure}
 %\begin{center}
@@ -47,14 +47,14 @@ Der Server dient hier nur zur Weiterleitung der Nachrichten
 
 
 \paragraph{Darstellung der Schlange:}
-Die Schlange wird als Polygonzug (eine Menge von Punkten zwischen denen Linien gezeichnet werden) dargestellt. Hierfür wird eine Polyline\footnote{\url{https://developers.google.com/android/reference/com/google/android/gms/maps/model/Polyline}} verwendet. Der Polygonzug hat jeweils nur eine bestimmte Länge, die von den erreichten Punkten des Spielers abhängt. Es wird jeweils die neue Position des Spielers am Anfang des Polygonzugs (Kopf)  eingetragen. Entsprechend der erlaubten Länge, werden die letzten Punkte gelöscht.
+Die Schlange wird als Polygonzug (eine Menge von Punkten zwischen denen Linien gezeichnet werden) dargestellt. Hierfür wird eine Polyline\footnote{\url{https://developers.google.com/android/reference/com/google/android/gms/maps/model/Polyline}} verwendet. Der Polygonzug eines jeden Spielers hat eine bestimmte Länge, die von den erreichten Punkten abhängt. Es wird jeweils die neue Position des Spielers am Anfang des Polygonzugs (Kopf)  eingetragen. Entsprechend der erreichten Länge, werden die letzten Punkte gelöscht.
 
 \paragraph{Objekte aufsammeln:}
 Jeder Client überprüft nur für sich selbst, ob er nahe genug an einem Objekt ist, um diesen aufzusammeln und sendet diese Information weiter an alle Mitspieler inklusive sich selbst. Erst beim Empfang dieser Nachricht wird die Länge der Schlange verändert und das Objekt von der Karte entfernt.
-Die Objekte werden zufällig in de Nähe der Spieler erzeugt. Wenn sich die Anzahl der Objekte durch einsammeln reduziert, werden neue generiert.
+Die Objekte werden zufällig in der Nähe der Spieler erzeugt. Wenn sich die Anzahl durch einsammeln reduziert, werden neue Objekte generiert.
 
 \paragraph{Kollision:}
-Die Kollision wird durch Abstandsmessung realisiert (siehe Abschnitt \ref{abstandsmessung}). Hierbei wird bei jedem Positionsupdate die Distanz zu allen kollisionsrelevanten Punkten (Eigener Schwanz, komplette Schlangen anderer Spieler) gemessen. Unterschreitet die Distanz einen gewissen Wert, wird eine Kollision ausgelöst. Aufgrund der schwankenden Positionsupdatefrequenz und Bewegungsgeschwindigkeit der Spieler, wird bei der Eigenkollision die ersten 4 Meter der Schlange ignoriert. Im Falle des Spielstartes oder "`Tod"' der Schlange wird jegliche Kollision für einen kurzen Zeitraum deaktiviert.
+Die Kollision wird durch Abstandsmessung realisiert (siehe Abschnitt \ref{abstandsmessung}). Hierbei wird bei jedem Positionsupdate die Distanz zu allen kollisionsrelevanten Punkten (Eigener Schwanz, komplette Schlangen anderer Spieler) gemessen. Unterschreitet die Distanz einen gewissen Wert, wird eine Kollision ausgelöst. Aufgrund der schwankenden Positionsupdatefrequenz und Bewegungsgeschwindigkeit der Spieler, wird bei der Eigenkollision die ersten 4 Meter der Schlange ignoriert. Bei einem Spielstart oder dem "`Tod"' der Schlange wird jegliche Kollision für einen kurzen Zeitraum deaktiviert.
 
 
 

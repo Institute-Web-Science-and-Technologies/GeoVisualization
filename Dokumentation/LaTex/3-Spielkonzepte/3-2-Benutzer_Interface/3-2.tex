@@ -2,7 +2,7 @@
 
 
 
-Konzepte, die hauptsächlich dazu dienen mit dem Spieler zu interagieren und sehr abhängig von seinen Entscheidungen sind.
+Konzepte, die hauptsächlich dazu dienen mit dem Spieler zu interagieren und hauptsächlich abhängig von seinen Entscheidungen sind.
 
 
 %\subsection*{Richtungsangabe}
@@ -15,11 +15,11 @@ Konzepte, die hauptsächlich dazu dienen mit dem Spieler zu interagieren und sehr
  % \end{center}
 %\end{wrapfigure}
 
+\subsection*{Richtungsangabe}\label{sec:richtungsangabe}
 Eine Richtungsangabe kann eine Karte ersetzen. Sei es um bei „Capture the Flag“ die Richtung der Fahne des Gegners anzuzeigen oder für „Snake“ das nächste einzusammelnde Item. Auch ein Kompass dient als Richtungsangabe und findet beim oben erwähnten "`Geocaching"' teilweise seinen Einsatz.
 Die technischen Lösungen für eine Richtungsangabe sind unter Positionsermittlung (siehe Abschnitt \ref{positionsermittlung}), GUI (siehe Abschnitt \ref{gui}) und Andere Sensorik (siehe Abschnitt \ref{sensorik}) beschrieben.
 
 \subsection*{Akustische und haptische Orientierungshilfen}
-
 Akustische oder haptische Signale können ebenso Hinweise auf in der Nähe
 befindliche Interessengebiete geben (z.B. ertönen eines Signals oder Vibration beim Erreichen eines bestimmtem Umkreises eines Items). 
 Akustische oder haptische Signale können aber auch als Bestätigung eingesetzt
@@ -29,11 +29,11 @@ Zur Bestätigung einer Kollision wird die Kollisionsabfrage (siehe Abschnitt \ref
 
 \subsection*{Geschwindigkeitsmessung}
 \label{sec:geschwindigkeitsmessung}
-Um das Spielgeschehen besser zu kontrollieren zu können, kann eine Messung der
+Um das Spielgeschehen besser kontrollieren zu können, kann eine Messung der
 Geschwindigkeit von Vorteil sein. Möchten wir z.B. bei Capture the Flag dem Fahnenträger nicht erlauben eine gewisse Geschwindigkeit zu überschreiten, ist eine Geschwindigkeitsmessung unabdingbar.
 Um diese umsetzen zu können wird entweder der Accelerometer-Sensor oder der GPS-Sensor benötigt. (siehe Abschnitt \ref{geschwindigkeitsmessung})
 
 
 \subsection*{Mensch-Maschine-Kommunikation}\label{sec:mensch-maschine-kommunikation}
-Das komplette Spielgeschehen funktioniert nur durch die Kommunikation zwischen Mensch und Maschine mit Hilfe von mobilen Endgeräten. Zum Beispiel kann man eine Richtungsanzeige (Maschine) verwenden, damit der Spieler (Mensch) weiß, dass er sich in eine bestimmte Richtung drehen soll, während das Spiel (Maschine) mit Magnetfeld-Sensor und Accelerometer Spieler-Bewegung erfasst und darauf reagiert. Oder man löst Kämpfe oder das Aufsammeln von Objekten, indem man Buttons auf dem Smartphone anzeigt, die von den Spielern gedrückt werden müssen.
+Das komplette Spielgeschehen funktioniert nur durch die Kommunikation zwischen Mensch und Maschine mit Hilfe von mobilen Endgeräten. Zum Beispiel kann man eine Richtungsanzeige (Maschine) verwenden, damit der Spieler (Mensch) weiß, dass er sich in eine bestimmte Richtung drehen soll, während das Spiel (Maschine) mit Magnetfeld-Sensor und Accelerometer Spieler-Bewegung erfasst und darauf reagiert. Oder es werden Buttons in die Applikation eingefügt, die gedrückt werden müssen um bestimmte Ereignisse auszulösen.
 Dafür wird die GUI (siehe Abschnitt \ref{gui}) bzw. die Kartendarstellung (siehe Abschnitt \ref{kartendarstellung}) benötigt.

@@ -7,21 +7,21 @@ Features, die explizit die Realität erweitern und dadurch einen Mehrwert zum Spi
 \subsection*{Integration virtueller Objekte in die physische Umgebung}\label{sec:integration-virtueller-objekte-in-die-physische-umgebung}
 Um ein virtuelles Spiel in die physische Umgebung integrieren zu können, müssen auch alle Objekte des virtuellen Spieles in die physische Umgebung gebracht werden. Dies kann z.B. auf einer virtuellen Karte, die die Wirklichkeit widerspiegelt, geschehen.
 
-Beispiele für solche Objekte sind z.B. die Items bei unserem Spiel Snake, die es einzusammeln gilt und die auf einer Karte auf dem Smartphone dargestellt und in unserem Fall zufällig innerhalb eines erreichbaren Radius um unsere Spieler platziert werden. Ein anderes Beispiel sind feste Spieler-Basen, die bei Spielen wie unserer Capture-the-Flag-Abwandlung zum Einsatz kommen. Virtuelle Objekte können auch Startpunkte für Teams sein. 
-Dabei bietet sich an, diese auf eine relativ freie Fläche zu setzen. Generell sollte darauf geachtet werden, dass die Objekte nicht innerhalb eines Gebäudes platziert werden, da der GPS-Sensor in Gebäuden nur sehr ungenaue bis gar keine Ergebnisse liefert und Objekte in nicht zugänglichen Räumen/Gebäuden nicht erreicht werden können, außer indem man die Reichweite der Interaktion sehr groß setzt. Das gilt auch für anderes unerreichbares Terrain wie Berge, Seen, Meere oder einfach gesperrte Bereiche wie Vorgärten oder Truppenübungsplätze.
-Dies kann mit Hilfe der folgenden technischen Lösungen umgesetzt werden. Die Kartendarstellung (siehe Abschnitt \ref{kartendarstellung}) hilft enorm die Objekte in die physische Welt einzuarbeiten, da sie lediglich auf der Karte eingefügt werden müssen. Mit der Kollisionsabfrage (siehe Abschnitt \ref{kollisionsabfrage}) kann eine Kollision zweier Objekte, zum Beispiel eine "`Snake"' mit einem "`Item"', verwirklicht werden. 
+Beispiele für solche Objekte sind z.B. die Items bei unserem Spiel Snake, die es einzusammeln gilt. Sie werden auf einer Karte auf dem Smartphone dargestellt und in unserem Fall zufällig innerhalb eines erreichbaren Radius um unsere Spieler platziert. Ein anderes Beispiel sind feste Spieler-Basen, die bei Spielen wie unserer Capture-the-Flag-Abwandlung zum Einsatz kommen. Virtuelle Objekte können auch Startpunkte für Teams sein. 
+Dabei bietet sich an, diese auf eine relativ freie Fläche zu setzen. Generell sollte darauf geachtet werden, dass die Objekte nicht innerhalb eines Gebäudes platziert werden, da der GPS-Sensor in Gebäuden nur sehr ungenaue bis gar keine Ergebnisse liefert und Objekte in nicht zugänglichen Räumen/Gebäuden nicht erreicht werden können. Das gilt auch für anderes unerreichbares Terrain wie Berge, Seen, Meere oder abgesperrte Bereiche.
+Die Integration virtueller Objekte kann leicht umgesetzt werden. Die Kartendarstellung (siehe Abschnitt \ref{kartendarstellung}) hilft dabei enorm virtuelle Objekte in die physische Welt einzuarbeiten, da sie lediglich auf der Karte eingefügt werden müssen. Mit der Kollisionsabfrage (siehe Abschnitt \ref{kollisionsabfrage}) kann eine Kollision zweier Objekte, zum Beispiel eine "`Snake"' mit einem "`Item"', verwirklicht werden. 
 
 %Die Positionsabfrage wird unter anderem dafür benötigt um sicherzustellen, dass das Objekt in der Nähe des Spielers erstellt wird. (s. \ref{positionsermittlung}).
 
 \subsection*{Darstellung der physischen und virtuellen Umgebung}\label{sec:darstellung-der-physischen-und-virtuellen-umgebung}
 
-Die physische Welt in eine virtuelle Umgebung zu übertragen kann einen enormen Mehrwert des Spiels darstellen.
+Die physische Welt in eine virtuelle Umgebung zu übertragen trägt zum Spielvergnügen bei.
 Sei es in einer Karte als Übersicht oder lediglich eine Anzeige ob man sich innerhalb bzw. außerhalb des Spielfelds befindet. Des weiteren kann mit den heutigen Smartphones auch wie in  Abbildung \ref{fig:aug01} gezeigt eine Augmented Reality geschaffen werden, die die Darstellung der realen Welt um etwa die Beschriftung der zu sehenden Geschäfte erweitert.
 \begin{figure}[htbp]
   \centering
     \includegraphics[width=0.9\textwidth]{3-Spielkonzepte/3-1-Erweiterte_Realitaet/map01.png}
     
-		\caption{Handyscreen um die zu sehenden Geschäfte, Hotels, etc. erweitert
+		\caption{Handyscreen um die Namen der zu auf dem Bildschirm befindlichen Geschäfte, Hotels, etc. erweitert
 	(Quelle: \url{http://blogs.bing.com/maps/wp-content/uploads/sites/3/2013/06/clip_5F00_image006_5F00_thumb_5F00_4AEFDB0C.png})
 		}
 		\label{fig:aug01} 
@@ -34,7 +34,7 @@ Dazu werden die Kollisionsabfrage (siehe Abschnitt \ref{kollisionsabfrage}) und 
 
 
 \subsection*{Einsammeln von Objekten}\label{sec:einsammeln-von-objekten}
-Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass etwas eingesammelt wurde, kann nun wiederum ein akustisches oder haptisches Signal gegeben werden.
- Erreicht werden kann dies durch die Positionsermittlung (siehe Abschnitt \ref{positionsermittlung}) und die Kollisionsabfrage (siehe Abschnitt \ref{kollisionsabfrage}). 
+Eine Variante der Kollision mit virtuellen Objekten ist das Einsammeln. Wenn ein Spieler in Reichweite eines Items ist, das es einzusammeln gilt, kann dies entweder automatisch passieren oder über eine Aufforderung auf dem mobilen Gerät. Zur Bestätigung, dass etwas eingesammelt wurde, ist es möglich ein akustisches oder haptisches Signal wiederzugeben.
+ Das Einsammeln von Objekten wird durch die Positionsermittlung (siehe Abschnitt \ref{positionsermittlung}) und die Kollisionsabfrage (siehe Abschnitt \ref{kollisionsabfrage}) ermöglicht. 
  
  %Für weitere Bestätigungssignale sind auch andere Sensorik (s. \ref{sensorik}) von Vorteil.

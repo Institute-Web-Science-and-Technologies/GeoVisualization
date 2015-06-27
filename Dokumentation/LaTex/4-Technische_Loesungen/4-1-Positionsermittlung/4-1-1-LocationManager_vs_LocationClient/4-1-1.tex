@@ -5,7 +5,7 @@ Im folgenden werden zwei mögliche Dienste zur Positionsermittlung verglichen. De
 
 \subsection*{LocationManager}\label{locationManager}
 
-Der LocationManager ist ein von Android bereitgestellter Dienst, der über den GPS Sensor die Position des Smartphones ermittelt, außerdem werden die Positionen mit Geschwindigkeitswerten versehen.
+Der LocationManager ist ein von Android bereitgestellter Dienst, der über den GPS Sensor die Position des Smartphones ermittelt. Außerdem werden die Positionen mit Geschwindigkeitswerten versehen.
 Ein Vorteil dieses Dienstes ist, dass er im Gegensatz zum LocationClient nicht an von Google bereitgestellte Standardbibliotheken, wie beispielsweise Google-Play-Services, gebunden ist. Der LocationManager kann daher problemlos auf vielen Android-Geräten verwendet werden, auf denen die Installation der für den LocationClient benötigten Bibliotheken unmöglich oder zu aufwendig ist.
 Da der LocationManager zur Positionsbestimmung ausschließlich vom GPS-Sensor bereitgestellte Daten verwendet, funktioniert er ohne Internetverbindung. Er ist älter als der LocationClient und wird somit auch von älteren Android-Versionen unterstützt.
 %Nachteilig wird in einer Forendiskussion \footnote{\url{http://stackoverflow.com/questions/20908822/android-difference-between-locationmanager-addproximityalert-locationclien }} der hohe Akku verbrauch genannt.
@@ -16,7 +16,7 @@ Die entwickelten Anwendungen werden aber nur kurzfristig für einzelne Spiele ver
 
 Der LocationClient ist ein in den Google-Play-Services enthaltener Dienst, der die Position des mobilen Endgerätes ermittelt. Dazu verwendet er diverse Quellen, z.B. die Positionen von WLAN-Netzen in der näheren Umgebung, die Google bekannt sind, sowie den Dienst des LocationManagers.
 %Ein weiterer Vorteil dieses Dienstes ist - wie auch oben bereits erwähnt - , das dieser Dienst Akku-schonender und zuverlässiger ist. 
-Die weiteren Quellen zur Positionsermittlung können zu einer genauen Positionsermittlung beitragen, wenn es Übertragungsprobleme zum GPS-Satelliten gibt.
+Die weiteren Quellen zur Positionsermittlung können dazu beitragen eine Position zu bestimmen, wenn Übertragungsprobleme zum GPS-Satelliten vorhanden sind.
 Nachteilig an diesem Dienst ist, dass der Endnutzer ein gültiges Google-Konto benötigt, welches für das Verwenden von Google-Play-Services vorausgesetzt wird. Zudem stehen die Google-Play-Services erst ab Android Version 2.2 zur Verfügung.
 
 
