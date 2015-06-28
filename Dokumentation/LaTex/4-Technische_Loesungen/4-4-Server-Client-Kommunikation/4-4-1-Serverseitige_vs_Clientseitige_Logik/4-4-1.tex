@@ -40,8 +40,8 @@ Die Clients nehmen die Rolle des Subscribers ein. Jeder Client meldet sich beim 
 Bei der Push-Kommunikation sendet der Server von sich aus Informationen. Zum Beispiel wenn ein Update bereitsteht. Im Fall unserer Implementation würde der Server ein Positionsupdate eines Spielers erhalten und dieses sofort an alle anderen Spieler weiterleiten. Dies hat den Vorteil, dass die Informationen so zeitnah wie möglich an alle Spieler übertragen werden. Dadurch kann bei Spielen in Echtzeit sichergestellt werden, dass bei jeder Spielerhandlung alle anderen Clients möglichst schnell aktualisiert werden.
 
 Im Gegensatz dazu wird bei der Pull-Kommunikation der Server ausschließlich auf Anfrage eines Clients aktiv. Falls der Client nicht bloß einzelne Berechnungen auf den Server auslagern soll, sondern Informationen über externe Ereignisse braucht, muss er in regelmäßigen Abständen diese Informationen beim Server anfragen.
-Bei sinnvoller Implementation hat man deutlich weniger Updates als bei der Push Kommunikation und benötigt daher weniger Bandbreite. 
-Da für unsere Echtzeit-Spiele update-Geschwindigkeit enorm wichtig ist und wir so zeitnah Updates schicken wollten wie möglich, haben wir uns für die Push-Kommunikation entschieden. Wir realisieren diese Push-Kommunikation mit einem Entwurfsmuster für Server-Client-Kommunikation, dem Publish-Subscribe-Pattern (siehe vorheriger Abschnitt).
+Bei sinnvoller Implementation hat man deutlich weniger Aktualisierungen als bei der Push Kommunikation und benötigt daher weniger Bandbreite. 
+Da für unsere Echtzeit-Spiele Aktualisierungsgeschwindigkeit enorm wichtig ist und wir so zeitnah Updates schicken wollten wie möglich, haben wir uns für die Push-Kommunikation entschieden. Wir realisieren diese Push-Kommunikation mit einem Entwurfsmuster für Server-Client-Kommunikation, dem Publish-Subscribe-Pattern (siehe vorherigen Abschnitt).
 
 %Verlgeich mit Observerpattern
 

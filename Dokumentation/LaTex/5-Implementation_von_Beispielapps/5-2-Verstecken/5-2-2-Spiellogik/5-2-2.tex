@@ -7,11 +7,11 @@ Der Server wird hier noch mit einer Zusatzfunktion ausgestattet. Er generiert na
 Auf der Client-Seite wird die Sichtbarkeit der Spieler und Objekte (Flaggen und Basen) gehandhabt.
 
 \paragraph{Markieren:}
- Die Positionen aller mit Spieler sind allen Geräten bekannt, aber nicht alle sichtbar. Damit verbunden sind auch die Funktionalitäten des Markieren und Scannens. Für das Markieren werden jeweils die beiden Koordinaten des Markierenden (A) und des Markierten (B), sowie den Sichtkegel von A und eine Reichweite benötigt. 
-Für den Sichtkegel benötigt man einen Orientierungswinkel ($\alpha$), welcher mittels der Sensoren für Orientierung (siehe Abschnitt \ref{orientierung}) ermittelt wird, und einen vorher festgelegten Winkel für den Sichtbereich ($\beta$). Nun wird der Winkel der beiden Punkte A und B ($\gamma$) bestimmt (siehe Abschnitt \ref{abstandsmessung}).
+ Die Positionen aller Mitspieler sind allen Geräten bekannt, werden aber nicht allen Spielern angezeigt. Damit verbunden sind auch die Funktionalitäten Markieren und Scannen. Für das Markieren werden jeweils die beiden Koordinaten des Markierenden A und des Markierten B, sowie den Sichtkegel von A und eine Reichweite benötigt. 
+Für den Sichtkegel benötigt man einen Orientierungswinkel $\alpha$, welcher mittels der Sensoren für Orientierung (siehe Abschnitt \ref{orientierung}) ermittelt wird, und einen vorher festgelegten Winkel für den Sichtbereich $\beta$. Nun wird der Winkel $\gamma$ der beiden Punkte A und B bestimmt (siehe Abschnitt \ref{abstandsmessung}).
 
 
-Liegt $\gamma$ im Intervall $[ \alpha - \frac{\beta}{2}; \alpha + \frac{\beta}{2}]$ und ist die Distanz zwischen A und B innerhalb der Reichweite, so gilt B als markiert. Über eine Nachricht wird den anderen Teammitgliedern mitgeteilt, dass B jetzt markiert und somit für eine gewisse Zeit sichtbar ist. A kann nach Benutzung (auch wenn niemand markiert wird) für eine vordefinierte Zeit keine weiteren Gegner markieren.
+Liegt $\gamma$ im Intervall $[ \alpha - \frac{\beta}{2}; \alpha + \frac{\beta}{2}]$ und ist die Distanz zwischen A und B innerhalb der Reichweite, so gilt B als markiert. Über eine Nachricht wird den anderen Teammitgliedern mitgeteilt, dass B jetzt markiert und somit für eine gewisse Zeit sichtbar ist. A kann nach der Benutzung dieses Features (auch wenn niemand markiert wird) für eine vordefinierte Zeit keine weiteren Gegner markieren.
 
 \paragraph{Scannen:}
 

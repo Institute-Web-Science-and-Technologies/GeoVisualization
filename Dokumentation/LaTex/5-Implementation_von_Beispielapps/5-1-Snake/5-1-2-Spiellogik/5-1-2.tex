@@ -1,14 +1,17 @@
 %\newpage
 \section{Snake}
 \subsection*{Spielidee}
-\begin{wrapfigure}{r}{0.5\textwidth}
-	\begin{center}
-		\includegraphics[width=0.48\textwidth]{5-Implementation_von_Beispielapps/5-1-Snake/Data/map_screen_snake.png}
-		\caption{Map-Screen von Snake}
-	\end{center}
-\end{wrapfigure}
+%\begin{wrapfigure}{r}{0.5\textwidth}
+%	\begin{center}
+%		\includegraphics[width=0.48\textwidth]{5-Implementation_von_Beispielapps/5-1-Snake/Data/map_screen_snake.png}
+%		\caption{Map-Screen von Snake}
+%	\end{center}
+%\end{wrapfigure}
 Das erste Spiel, das wir umsetzen, ist das schon mehrfach erwähnte Snake. Die Grundregeln von Snake sind der Mehrheit bekannt, da es auf nahezu allen Nokia-Handys der 90er Jahre mitgeliefert wurde.
-In der implementierten Beispielapplikation verkörpert jeder Spieler  eine Schlange. Der Kopf der virtuellen Schlange befindet sich auf der Spielerposition. Sobald der Spieler sich anfängt zu bewegen, zieht er einen Schwanz hinter sich her, der aus mehreren Gliedern besteht. Die Länge des Schwanzes skaliert den Punktestand des Spielers. Der Spieler muss versuchen mit dem Kopf zufällig platzierte Bonusobjekte (Hühner/ Chickens) einzusammeln und es gleichzeitig vermeiden mit seinem eigenen Schwanz oder einer anderen Schlange zu kollidieren. Wenn dies dennoch geschieht wird der eigene Punktestand und die Länge der Schlange zurückgesetzt. Ziel des Spiels ist es schneller als die gegnerischen Schlangen eine einstellbare Anzahl von Punkten zu erreichen.
+In der implementierten Beispielapplikation verkörpert jeder Spieler  eine Schlange. Der Kopf der virtuellen Schlange befindet sich auf der Spielerposition. Sobald der Spieler sich anfängt zu bewegen, zieht er einen Schwanz hinter sich her, der aus mehreren Gliedern besteht. Die Länge des Schwanzes skaliert den Punktestand des Spielers. Der Spieler muss versuchen mit dem Kopf zufällig platzierte Bonusobjekte (Hühner/ Chickens) einzusammeln und es gleichzeitig vermeiden mit seinem eigenen Schwanz oder einer anderen Schlange zu kollidieren. Wenn dies dennoch geschieht wird der eigene Punktestand und die Länge der Schlange zurückgesetzt. 
+%Ziel des Spiels ist es schneller als die gegnerischen Schlangen eine einstellbare Anzahl von Punkten zu erreichen.
+
+%Gibt doch gar keine Teams?
 
 
 %Des weiteren lässt sich das Spiel relativ leicht aus der virtuellen Landschaft in die physische Welt übertragen, da die Steuerung nur auf der Bewegung des Kopfes der Schlange basiert. Dies kann in der Realität durch die Bewegung des Spielers selbst gesteuert werden. Wir haben uns für eine Mehrspieler Variante entschieden bei der in einem Spiel mehrere Zielpunkte (Chickens) gleichzeitig angezeigt werden, die beim (virtuellen) Einsammeln den Punktestand des Spielers erhöhen und die Schlange vergrößern. Ziel des Spiels ist es schneller als die gegnerischen Schlangen eine einstellbare Anzahl von Punkten zu erreichen. Wenn man mit sich selbst oder einer anderen Schlange kollidiert wird der eigene Punktestand und die Länge der Schlange zurückgesetzt.
@@ -54,7 +57,7 @@ Jeder Client überprüft nur für sich selbst, ob er nahe genug an einem Objekt ist
 Die Objekte werden zufällig in der Nähe der Spieler erzeugt. Wenn sich die Anzahl durch einsammeln reduziert, werden neue Objekte generiert.
 
 \paragraph{Kollision:}
-Die Kollision wird durch Abstandsmessung realisiert (siehe Abschnitt \ref{abstandsmessung}). Hierbei wird bei jedem Positionsupdate die Distanz zu allen kollisionsrelevanten Punkten (Eigener Schwanz, komplette Schlangen anderer Spieler) gemessen. Unterschreitet die Distanz einen gewissen Wert, wird eine Kollision ausgelöst. Aufgrund der schwankenden Positionsupdatefrequenz und Bewegungsgeschwindigkeit der Spieler, wird bei der Eigenkollision die ersten 4 Meter der Schlange ignoriert. Bei einem Spielstart oder dem "`Tod"' der Schlange wird jegliche Kollision für einen kurzen Zeitraum deaktiviert.
+Die Kollision wird durch Abstandsmessung realisiert (siehe Abschnitt \ref{abstandsmessung}). Hierbei wird bei jedem Positionsupdate die Distanz zu allen kollisionsrelevanten Punkten (Eigener Schwanz, komplette Schlangen anderer Spieler) gemessen. Unterschreitet die Distanz einen gewissen Wert, wird eine Kollision ausgelöst. Aufgrund der schwankenden Positionsupdatefrequenz und Bewegungsgeschwindigkeit der Spieler, wird bei der Eigenkollision die ersten vier Meter der Schlange ignoriert. Bei einem Spielstart oder dem "`Tod"' der Schlange wird jegliche Kollision für einen kurzen Zeitraum deaktiviert.
 
 
 

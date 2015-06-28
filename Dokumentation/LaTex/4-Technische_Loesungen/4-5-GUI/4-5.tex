@@ -8,7 +8,8 @@ Die GUI setzt sich aus einem Login-Screen und einem Swipe-Screen zusammen, welch
 Diese Activity wird zuerst aufgerufen und zeigt einen Bildschirm auf dem der Spieler einen Benutzernamen eingibt und danach mit dem
 "`Start"' Button zur nächsten Activity wechselt, welche das eigentliche Spiel zeigt (siehe Abbildung \ref{fig:chat}).
 %Bild wird unter swipe-screen angezeigt
-\begin{figure}
+
+\begin{figure}[t]
     \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/login_screen.png}
     \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/chat_screen.png}
      \caption{Login-Screen (links) und Chat-Screen (rechts)}
@@ -25,13 +26,14 @@ Für jeden Spiel-Modus ist ein separater SwipeScreen vorgesehen. Falls möglich we
 
 \paragraph{Chat-Screen:}
 %erklär IRC, das kommt aus dem Nichts
-In diesem Fragment wird der Chat (\textit{um kurze Textnachrichten anderen Spielern zu senden bzw. von ihnen zu empfangen}) dargestellt (siehe Abbildung \ref{fig:chat}). Die grafische Umsetzung des Chats ist simpel gewählt um möglichst viele Nachrichten anzeigen zu können. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}), das wiederum in einem scrollbarem Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}) liegt. Hierdurch ist es möglich den Nachrichtenverlauf zu durchsuchen. Wird eine Chat-Nachricht  empfangen, wird diese an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Dabei muss eine geringe Über\-tra\-gungs\-ver\-zö\-ge\-rung in Kauf genommen werden, jedoch ist die korrekte Reihenfolge der Nachrichten ge\-währ\-leis\-tet.
+In diesem Fragment wird der Chat  dargestellt, um kurze Textnachrichten anderen Spielern zu senden oder von ihnen zu empfangen (siehe Abbildung \ref{fig:chat}). Die grafische Umsetzung des Chats ist simpel gewählt um möglichst viele Nachrichten anzeigen zu können. Es wird der jeweilige Benutzername, Uhrzeit und die eigentliche Nachricht angezeigt. Die Eingabe der Chat-Nachricht erfolgt in einem Text-Eingabe-Feld. Die Anzeige der Chat-Nachrichten erfolgt in einem einfachen Textanzeige-Feld (TextView\footnote{{\url{http://developer.android.com/reference/android/widget/TextView.html}}}), das wiederum in einem scrollbarem Feld (SrcollView\footnote{\url{http://developer.android.com/reference/android/widget/ScrollView.html}}) liegt. Hierdurch ist es möglich den Nachrichtenverlauf zu durchsuchen. Wird eine Chat-Nachricht  empfangen, wird diese an das Textfeld angehängt. Hierbei ist zu beachten, dass die selbst verschickten Nachrichten erst an den Server gesendet werden und dann jeweils an die entsprechenden Nutzer. Dabei muss eine geringe Über\-tra\-gungs\-ver\-zö\-ge\-rung in Kauf genommen werden, jedoch ist die korrekte Reihenfolge der Nachrichten ge\-währ\-leis\-tet.
 
 
-\begin{figure}
-    \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/map_screen_snake.png}
+\begin{figure}[t]
+    %\includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/map_screen_snake.png}
+    \includegraphics[width=0.5\textwidth]{5-Implementation_von_Beispielapps/5-1-Snake/Data/map_screen_snake.png}
     \includegraphics[width=0.5\textwidth]{4-Technische_Loesungen/4-5-GUI/Data/game_screen.png}
-         \caption{Map-Screen (links) und Game-Screen (rechts)}
+         \caption{Map-Screen des Spiels Snake (links) und Game-Screen (rechts)}
          \label{fig:game}
 \end{figure}
 
