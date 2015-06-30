@@ -57,7 +57,7 @@ Jeder Client überprüft nur für sich selbst, ob er nahe genug an einem Objekt ist
 Die Objekte werden zufällig in der Nähe der Spieler erzeugt. Wenn sich die Anzahl durch einsammeln reduziert, werden neue Objekte generiert.
 
 \paragraph{Kollision:}
-Die Kollision wird durch Abstandsmessung realisiert (siehe Abschnitt \ref{abstandsmessung}). Hierbei wird bei jedem Positionsupdate die Distanz zu allen kollisionsrelevanten Punkten (Eigener Schwanz, komplette Schlangen anderer Spieler) gemessen. Unterschreitet die Distanz einen gewissen Wert, wird eine Kollision ausgelöst. Aufgrund der schwankenden Positionsupdatefrequenz und Bewegungsgeschwindigkeit der Spieler, wird bei der Eigenkollision die ersten vier Meter der Schlange ignoriert. Bei einem Spielstart oder dem "`Tod"' der Schlange wird jegliche Kollision für einen kurzen Zeitraum deaktiviert.
+Die Kollision wird durch Abstandsmessung realisiert (siehe Abschnitt \ref{abstandsmessung}). Hierbei wird bei jedem Positionsupdate die Distanz zu allen kollisionsrelevanten Punkten (Eigener Schwanz, komplette Schlangen anderer Spieler) gemessen. Unterschreitet die Distanz einen gewissen Wert, wird eine Kollision ausgelöst. Aufgrund der schwankenden Positionsupdatefrequenz und Bewegungsgeschwindigkeit der Spieler, werden bei der Eigenkollision die ersten vier Meter der Schlange ignoriert. Bei einem Spielstart oder dem "`Tod"' der Schlange wird jegliche Kollision für einen kurzen Zeitraum deaktiviert.
 
 
 
